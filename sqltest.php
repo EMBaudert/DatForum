@@ -1,6 +1,6 @@
 <html>
 
-   
+   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 
    <head>
       <title>Forum</title>
@@ -32,9 +32,9 @@
       
       function showLI($args){
          $args = func_get_args();
-         echo "<ul>";  
+         echo "<ul class=\"list-group\">";  
          foreach($args as $t){
-            echo "<li>".$t."</li>";
+            echo "<li class=\"list-group-item\">".$t."</li>";
          }
          echo "</ul>";  
          
