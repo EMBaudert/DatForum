@@ -77,11 +77,12 @@
             
             if($back == 0){
                
-               createMenuPointBack($row['FK_menu']);
+               createMenuPointBack($row['title']);
                $back = 1;
                
             }
             
+            echo $row['FK_menu'];
             
             //get number of sub entries
             $count = $pdo->query("SELECT COUNT(FK_menu) as cnt FROM menu WHERE FK_menu = ".$row['PKID_menu']);
