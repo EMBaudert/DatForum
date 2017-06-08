@@ -20,80 +20,113 @@
       
       //GET gets previous menu point, for main menu number is 0
          if($_GET['menu'] == "0"){
-            $sqlString= "SELECT PKID_menu, title FROM menu WHERE FK_menu IS NULL";
+            $sqlString= "SELECT * FROM menu WHERE FK_menu IS NULL";
          }else{
-            $sqlString = "SELECT PKID_menu, title FROM menu WHERE FK_menu  = ".$_GET['menu'];
+            $sqlString = "SELECT * FROM menu WHERE FK_menu  = ".$_GET['menu'];
          }
       }else{
-         $sqlString= "SELECT PKID_menu, title FROM menu WHERE FK_menu IS NULL";
+         $sqlString= "SELECT * FROM menu WHERE FK_menu IS NULL";
       }
   
    
+      
       $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
       
 
-      
-      createMenu($pdo, $sqlString);
+      //check if thread true, dann createThreadOverview()
+      createMenu($sqlString);
       
 
 
-      function createMenuPoint($title, $count, $nextPoint){
+      function createMenuPoint($title, $count, $nextPoint, $threads){
+         global $pdo;
+      
          echo "<li class=\"list-group-item\">";
          echo "<div class=\"container\">
-            <div class=\"row\">
-               <div class=\"col-xs-12 col-sm-12 col-md-9 col-lg-9\"><a href=\"sqltest.php/?menu=".$nextPoint."\">".$title."</a></div>
-               <div class=\"col-xs-12 col-sm-12 col-md-3 col-lg-3\">".$count."</div>
-            </div>
-         </div>";
+                  <div class=\"row\">
+                     <div class=\"col-xs-12 col-sm-12 col-md-10 col-lg-10\"><a href=\"sqltest.php?menu=".$nextPoint."\">".$title."</a></div>";
+         
+         if($threads){
+            echo        "<div class=\"col-xs-12 col-sm-12 col-md-2 col-lg-2\">Threads: ".checkThread($nextPoint)."</div>";
+         }else{
+            echo       "<div class=\"col-xs-12 col-sm-12 col-md-2 col-lg-2\">Unterpunkte: ".$count."</div>";
+        }
+         
+         echo     "</div>
+               </div>";
          
          echo "</li>";
       } 
       
-      function createMenuPointBack($upperMenu){
+      function createMenuPointBack($sqlString,$fk_menu){
+         global $pdo;
+      
+      
+         if (strpos($sqlString, 'NULL') !== false)
+            return;
+  
+         $tempMenu = $pdo->query("SELECT FK_menu FROM menu WHERE PKID_menu=".$fk_menu);
+         $tempMenu->execute();
+         $upperMenu = $tempMenu->fetch();
+
+         if($upperMenu['FK_menu'] == NULL)
+            $upperMenu['FK_menu'] = 0;
+         
          echo "<li class=\"list-group-item\">";
          echo "<div class=\"container\">
             <div class=\"row\">
-               <div class=\"col-xs-12 col-sm-12 col-md-9 col-lg-9\"><a href=\"sqltest.php/?menu=".$upperMenu."\">...</a></div>
+               <div class=\"col-xs-12 col-sm-12 col-md-9 col-lg-9\"><a href=\"sqltest.php?menu=".$upperMenu['FK_menu']."\">...</a></div>
             </div>
          </div>";
          
          echo "</li>";
       }
       
-      function createMenu($pdo, $sqlString) {
-
-         if (strpos($sqlString, 'NULL') !== false) {
-            $back = -1;
-         }else{
-            $back=0;
-            }
+      function createMenu($sqlString) {
+         global $pdo;
          
+         echo "<div class=\"container\"><ul class=\"list-group\">";
          
-
+         $back = 1;
          
-         
-         //for each menu entry is null (means main entry)
          foreach ($pdo->query($sqlString) as $row) {
+            if($back){
+               createMenuPointBack($sqlString,$row['FK_menu']);
+               $back=0;
+            }    
+           
             
-            if($back == 0){
-               
-               createMenuPointBack($row['title']);
-               $back = 1;
-               
-            }
-            
-            echo $row['FK_menu'];
-            
-            //get number of sub entries
+//get number of sub entries
             $count = $pdo->query("SELECT COUNT(FK_menu) as cnt FROM menu WHERE FK_menu = ".$row['PKID_menu']);
             $count->execute();
             $number = $count->fetch();            
 
-            createMenuPoint($row['title'],$number['cnt'], $row['PKID_menu']);
+            createMenuPoint($row['title'],$number['cnt'], $row['PKID_menu'],$row['threads']);
 
          }
          echo "</div></ul>";
-      }    
+      } 
+      
+      function checkThread($PKID){
+         global $pdo;
+      
+         $temp=$pdo->query("SELECT COUNT(PKID_thread) as num FROM thread WHERE FK_menu = ".$PKID);
+         $temp->execute();
+         $tempNr = $temp->fetch();
+         return $tempNr['num'];
+      }
+      
+      
+      
+      function createThreadOverview($id){
+         global $pdo;
+         
+      }
+      
+      function createThreadEntry(){
+         
+         
+      }
       
    ?>
    
