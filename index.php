@@ -15,6 +15,7 @@
 			
 			
 			<div id="content">
+			<h1>Startseite</h1>
 			</div>
 			
 			<!--
