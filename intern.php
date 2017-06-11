@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?PHP
+session_start();
+include 'func/phpfunc.php';
+?>
 	<html>
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -8,28 +12,43 @@
 		</head>
 		<body>
 			<div id="topbar">
-				<div id="toplogo"></div>
-				<div id="search"></div>
-				<div id="loginbox"><a href="intern.php?p=login">Login</a>  &nbsp; <a href="intern.php?p=register">Registrieren</a>  &nbsp;</div>
+				<a href="index.php"><div id="toplogo"></div></a>
+				<div id="search"></div> 
+				<div id="loginbox"><a style="color:white;" href=<?PHP if(isset($_SESSION["logged"])&&$_SESSION["logged"]){ ?>"intern.php?p=logout">Logout<?PHP } else{ ?>"intern.php?p=login">Login</a>  &nbsp; <a style="color:white;" href="intern.php?p=register">Registrieren<?PHP } ?></a>  &nbsp;</div>
 			</div>
 			<div id="content">
 			<?PHP
 				if(!isset($_GET["p"])){
 					echo "Keine bekannte Seite!";
 				}elseif($_GET["p"]=="login"){
-					if(!isset($_POST["password"])||$_POST["password"]!="testpass1"){
-						include 'inc/login.txt';
-					} else{
-						echo "angemeldet";	#Profil anzeigen
+					if(isset($_POST["password"])&&checklogin($_POST["username"],hash('sha512',$_POST["password"]))){
+						$_SESSION["logged"]=TRUE;
+						?>
+							<meta http-equiv="refresh" content="0; URL=index.php" />
+						<?PHP
 					}
+					if(!isset($_SESSION["logged"])||!$_SESSION["logged"]){
+						include 'inc/login.php';
+					} else{
+						echo "<h1>angemeldet</h1>";	#Profil anzeigen
+					}
+				}elseif($_GET["p"]=="logout"){
+					session_destroy();
+					?>
+						<meta http-equiv="refresh" content="0; URL=index.php" />
+					<?PHP
 				}elseif($_GET["p"]=="register"){
-					if(!isset($_POST["password"])||$_POST["password"]!=$_POST["password2"]){
-						if(isset($_POST["password"])){
-							echo "Passwörter stimmen nicht überein!";
-						}
-						include 'inc/register.txt';
+					if(isset($_SESSION["logged"])&&$_SESSION["logged"]){
+						echo "<h1>Sie sind schon registriert</h1>";
+					}elseif(!isset($_POST["submit"])||!checkusername()||!checkname()||!checkemail()||!checkpass()){
+						include 'inc/register.php';							
 					}else{
-						echo "Registrieren erfolgreich!"; #Hier geht es dann weiter
+						echo "<h1>Registrieren erfolgreich!</h1>"; #Hier geht es dann weiter(Daten eintragen und so)
+						newuser();
+						$_SESSION["logged"]=TRUE;
+						?>
+							<meta http-equiv="refresh" content="0; URL=index.php" />
+						<?PHP
 					}
 				}else{
 					echo "Keine Ahnung, was hier passieren soll^^!";

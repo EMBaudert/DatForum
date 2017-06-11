@@ -1,6 +1,12 @@
 <html>
+   <!-- Das neueste kompilierte und minimierte CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-   
+   <!-- Optionales Theme -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+   <!-- Das neueste kompilierte und minimierte JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
    <head>
       <title>Forum</title>
@@ -9,39 +15,87 @@
    <body>
    
    <?php
+   
+      if(isset($_GET['menu'])){
+      
+      //GET gets previous menu point, for main menu number is 0
+         if($_GET['menu'] == "0"){
+            $sqlString= "SELECT PKID_menu, title FROM menu WHERE FK_menu IS NULL";
+         }else{
+            $sqlString = "SELECT PKID_menu, title FROM menu WHERE FK_menu  = ".$_GET['menu'];
+         }
+      }else{
+         $sqlString= "SELECT PKID_menu, title FROM menu WHERE FK_menu IS NULL";
+      }
+  
+   
       $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
       
-      $sql = "SELECT * FROM user";
-      
-      foreach ($pdo->query($sql) as $row) {
-         
-         anzeigen($row['vorname'],$row['nachname'],$row['username']);
 
+      
+      createMenu($pdo, $sqlString);
+      
+
+
+      function createMenuPoint($title, $count, $nextPoint){
+         echo "<li class=\"list-group-item\">";
+         echo "<div class=\"container\">
+            <div class=\"row\">
+               <div class=\"col-xs-12 col-sm-12 col-md-9 col-lg-9\"><a href=\"sqltest.php/?menu=".$nextPoint."\">".$title."</a></div>
+               <div class=\"col-xs-12 col-sm-12 col-md-3 col-lg-3\">".$count."</div>
+            </div>
+         </div>";
+         
+         echo "</li>";
+      } 
+      
+      function createMenuPointBack($upperMenu){
+         echo "<li class=\"list-group-item\">";
+         echo "<div class=\"container\">
+            <div class=\"row\">
+               <div class=\"col-xs-12 col-sm-12 col-md-9 col-lg-9\"><a href=\"sqltest.php/?menu=".$upperMenu."\">...</a></div>
+            </div>
+         </div>";
+         
+         echo "</li>";
       }
+      
+      function createMenu($pdo, $sqlString) {
 
-      
-      
-      
-      function anzeigen($vorname, $nachname, $username){
-         echo "<h1>".$username."</h1>"."<br>";
+         if (strpos($sqlString, 'NULL') !== false) {
+            $back = -1;
+         }else{
+            $back=0;
+            }
          
-         showLI($nachname, $username);
+         
+
+         
+         
+         //for each menu entry is null (means main entry)
+         foreach ($pdo->query($sqlString) as $row) {
             
-       
-      }
-      
-      function showLI($args){
-         $args = func_get_args();
-         echo "<ul>";  
-         foreach($args as $t){
-            echo "<li>".$t."</li>";
+            if($back == 0){
+               
+               createMenuPointBack($row['FK_menu']);
+               $back = 1;
+               
+            }
+            
+            
+            //get number of sub entries
+            $count = $pdo->query("SELECT COUNT(FK_menu) as cnt FROM menu WHERE FK_menu = ".$row['PKID_menu']);
+            $count->execute();
+            $number = $count->fetch();            
+
+            createMenuPoint($row['title'],$number['cnt'], $row['PKID_menu']);
+
          }
-         echo "</ul>";  
-         
-      }
-      
+         echo "</div></ul>";
+      }    
       
    ?>
    
    
    </body>
+</html>
