@@ -20,7 +20,7 @@
 <td>Passwort wiederholen:</td><td><input type="password" name="password2"></td>
 </tr>
 <tr>
-<td></td><td><br><input type="submit" value="Registrieren"></td>
+<td></td><td><br><input name="submit" type="submit" value="Registrieren"></td>
 </tr>
 </table>
 </form>

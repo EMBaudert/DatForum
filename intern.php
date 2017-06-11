@@ -12,9 +12,9 @@ include 'func/phpfunc.php';
 		</head>
 		<body>
 			<div id="topbar">
-				<div id="toplogo"></div>
+				<a href="index.php"><div id="toplogo"></div></a>
 				<div id="search"></div> 
-				<div id="loginbox"><a style="color:white;" href=<?PHP if(isset($_SESSION["logged"])&&$_SESSION["logged"]){ ?>"intern.php?p=logout">Logout<?PHP } else{ ?>"intern.php?p=login">Login<?PHP } ?></a>  &nbsp; <a style="color:white;" href="intern.php?p=register">Registrieren</a>  &nbsp;</div>
+				<div id="loginbox"><a style="color:white;" href=<?PHP if(isset($_SESSION["logged"])&&$_SESSION["logged"]){ ?>"intern.php?p=logout">Logout<?PHP } else{ ?>"intern.php?p=login">Login</a>  &nbsp; <a style="color:white;" href="intern.php?p=register">Registrieren<?PHP } ?></a>  &nbsp;</div>
 			</div>
 			<div id="content">
 			<?PHP
@@ -40,41 +40,15 @@ include 'func/phpfunc.php';
 				}elseif($_GET["p"]=="register"){
 					if(isset($_SESSION["logged"])&&$_SESSION["logged"]){
 						echo "<h1>Sie sind schon registriert</h1>";
-					}elseif(!isset($_POST["password"])||$_POST["password"]!=$_POST["password2"]||!checkusername()||!checkemail()||!checkpass()){
-						if(isset($_SESSION["active"])){
-							if(isset($_POST["firstname"])){
-								$_SESSION["firstname"]=$_POST["firstname"];	
-							}else{
-								echo "<p>Kein Vorname eingegeben!</p>";
-							}
-							if(isset($_POST["secondname"])){
-								$_SESSION["secondname"]=$_POST["secondname"];	
-							}else{
-								echo "<p>Kein Nachname eingegeben!</p>";
-							}
-							if(isset($_POST["username"])&&checkusername()){
-								$_SESSION["username"]=$_POST["username"];	
-							}
-							if(isset($_POST["email"])&&checkemail()){
-								$_SESSION["email"]=$_POST["email"];	
-							}
-							if(isset($_POST["password"])&&$_POST["password"]!=$_POST["password2"]){
-								echo "<p>Die eingegebenen Passwörter stimmen nicht überein!</p>";
-							}
-							
-							include 'inc/register.php';
-						} else{
-							include 'inc/register.php';
-							$_SESSION["active"]=TRUE;
-							
-						}
+					}elseif(!isset($_POST["submit"])||!checkusername()||!checkname()||!checkemail()||!checkpass()){
+						include 'inc/register.php';							
 					}else{
-						echo "Registrieren erfolgreich!"; #Hier geht es dann weiter(Daten eintragen und so)
+						echo "<h1>Registrieren erfolgreich!</h1>"; #Hier geht es dann weiter(Daten eintragen und so)
+						newuser();
 						$_SESSION["logged"]=TRUE;
 						?>
 							<meta http-equiv="refresh" content="0; URL=index.php" />
 						<?PHP
-						newuser();
 					}
 				}else{
 					echo "Keine Ahnung, was hier passieren soll^^!";
