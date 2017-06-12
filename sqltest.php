@@ -15,6 +15,8 @@
    <body>
    
    <?php
+         $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
+   
    
       if(isset($_GET['menu'])){
       
@@ -24,33 +26,45 @@
          }else{
             $sqlString = "SELECT * FROM menu WHERE FK_menu  = ".$_GET['menu'];
          }
+               createBreadcrumb($_GET['menu']);
       }else{
          $sqlString= "SELECT * FROM menu WHERE FK_menu IS NULL";
       }
   
    
       
-      $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
-      
 
+      
+      
       //check if thread true, dann createThreadOverview()
-      createMenu($sqlString);
+      if(isset($_GET['thread'])){
+         createThreadOverview($_GET['thread']);
+      }else {
+         createMenu($sqlString);         
+      }
+   
       
 
 
       function createMenuPoint($title, $count, $nextPoint, $threads){
          global $pdo;
+         if($threads){
+            $c = "Threads: ".checkThread($nextPoint);
+            $count = $c;
+            $ausgabe = "menu=".$nextPoint."&thread=".$nextPoint;
+         }else{
+            $ausgabe = "menu=".$nextPoint;
+            $count = "Unterpunkte: " . $count; 
+        }
+         
       
          echo "<li class=\"list-group-item\">";
          echo "<div class=\"container\">
                   <div class=\"row\">
-                     <div class=\"col-xs-12 col-sm-12 col-md-10 col-lg-10\"><a href=\"sqltest.php?menu=".$nextPoint."\">".$title."</a></div>";
+                     <div class=\"col-xs-12 col-sm-12 col-md-10 col-lg-10\"><a href=\"sqltest.php?".$ausgabe."\">".$title."</a></div>";
          
-         if($threads){
-            echo        "<div class=\"col-xs-12 col-sm-12 col-md-2 col-lg-2\">Threads: ".checkThread($nextPoint)."</div>";
-         }else{
-            echo       "<div class=\"col-xs-12 col-sm-12 col-md-2 col-lg-2\">Unterpunkte: ".$count."</div>";
-        }
+          echo     "<div class=\"col-xs-12 col-sm-12 col-md-2 col-lg-2\">".$count."</div>";
+        
          
          echo     "</div>
                </div>";
@@ -58,20 +72,19 @@
          echo "</li>";
       } 
       
-      function createMenuPointBack($sqlString,$fk_menu){
-         global $pdo;
       
-      
-         if (strpos($sqlString, 'NULL') !== false)
-            return;
-  
-         $tempMenu = $pdo->query("SELECT FK_menu FROM menu WHERE PKID_menu=".$fk_menu);
-         $tempMenu->execute();
-         $upperMenu = $tempMenu->fetch();
-
-         if($upperMenu['FK_menu'] == NULL)
-            $upperMenu['FK_menu'] = 0;
+      function createMenuPointBack(){
          
+         if($_GET['menu']==0){
+            return;
+         }
+         
+         $upperMenu = SQLQuery("SELECT FK_menu FROM menu WHERE PKID_menu=".$_GET['menu']);;
+         
+         if($upperMenu['FK_menu']==NULL){
+            $upperMenu['FK_menu']=0;
+         }
+
          echo "<li class=\"list-group-item\">";
          echo "<div class=\"container\">
             <div class=\"row\">
@@ -80,6 +93,8 @@
          </div>";
          
          echo "</li>";
+         
+         
       }
       
       function createMenu($sqlString) {
@@ -87,19 +102,12 @@
          
          echo "<div class=\"container\"><ul class=\"list-group\">";
          
-         $back = 1;
+         createMenuPointBack();
          
          foreach ($pdo->query($sqlString) as $row) {
-            if($back){
-               createMenuPointBack($sqlString,$row['FK_menu']);
-               $back=0;
-            }    
-           
             
 //get number of sub entries
-            $count = $pdo->query("SELECT COUNT(FK_menu) as cnt FROM menu WHERE FK_menu = ".$row['PKID_menu']);
-            $count->execute();
-            $number = $count->fetch();            
+            $number = SQLQuery("SELECT COUNT(FK_menu) as cnt FROM menu WHERE FK_menu = ".$row['PKID_menu']);            
 
             createMenuPoint($row['title'],$number['cnt'], $row['PKID_menu'],$row['threads']);
 
@@ -108,25 +116,92 @@
       } 
       
       function checkThread($PKID){
-         global $pdo;
       
-         $temp=$pdo->query("SELECT COUNT(PKID_thread) as num FROM thread WHERE FK_menu = ".$PKID);
-         $temp->execute();
-         $tempNr = $temp->fetch();
-         return $tempNr['num'];
+         $temp= SQLQuery("SELECT COUNT(PKID_thread) as num FROM thread WHERE FK_menu = ".$PKID);
+         return $temp['num'];
       }
       
       
       
       function createThreadOverview($id){
          global $pdo;
+ 
+         echo "<div class=\"container\"><ul class=\"list-group\">";
+         
+         createMenuPointBack();
+         
+         foreach($pdo->query("SELECT * FROM thread WHERE FK_menu = ".$id)as $row){
+            createThreadEntry($row['PKID_thread'], $row['theme'], $row['FK_creator']); 
+         }
+         
+         echo "</div></ul>";         
          
       }
       
-      function createThreadEntry(){
+      function createThreadEntry($PKID, $title, $creator){
+      
+         $username = SQLQuery("SELECT username FROM user WHERE PKID_user = ".$creator);;
+         
+         echo "<li class=\"list-group-item\">
+            <div class=\"container\">
+               <div class=\"row\">
+               
+                  <div class=\"col-xs-12 col-sm-12 col-md-8 col-lg-8\"><a href=\"sqltest.php?menu=".$PKID."\">".$title."</a></div>
+                  <div class=\"col-xs-6 col-sm-6 col-md-2 col-lg-2\"><a href=\"user.php?user=".$creator."\">".$username['username']."</a></div>
+                  <div class=\"col-xs-6 col-sm-6 col-md-2 col-lg-2\">Beitr&auml;ge: ".getPostNumber($PKID)."</div>
+               </div>
+            </div>
+            </li>";
+         
+      }
+      
+      function getPostNumber($id){
+         
+         $tempNr = SQLQuery("SELECT COUNT(PKID_post) as num FROM post WHERE FK_thread = ".$id);
+         return $tempNr['num'];
+      }
+      
+      function createBreadcrumb($id){
+      
+         echo "<div class=\"container\">
+         <ol class=\"breadcrumb\">
+         <li><a href=\"sqltest.php?menu=0\">Main menu</a></li>";
+         recursiveBreadCrumb($id,1);
+         
+         echo "</ol></div>";
+         
+      }
+      
+      function recursiveBreadCrumb($id, $first){
+
+         $tempQuery = SQLQuery("SELECT * FROM menu WHERE PKID_menu = ".$id);
+         
+
+         
+         if($tempQuery['FK_menu']==NULL){
+            echo "<li><a href=\"sqltest.php?menu=".$tempQuery['PKID_menu']."\">".$tempQuery['title']."</a></li>";
+            return;
+         }
+         
+         recursiveBreadCrumb($tempQuery['FK_menu'],0);
+         if($first = 0){
+            echo "<li><a href=\"sqltest.php?menu=".$tempQuery['PKID_menu']."\">".$tempQuery['title']."</a></li>";
+         }else{
+            echo "<li class=\"active\"><a href=\"sqltest.php?menu=".$tempQuery['PKID_menu']."\">".$tempQuery['title']."</a></li>";
+         }
+         
+      }
+      
+      function SQLQuery($query){
+         global $pdo;
+         
+         $temp=$pdo->query($query);
+         $temp->execute();
+         return $temp->fetch();
          
          
       }
+      
       
    ?>
    
