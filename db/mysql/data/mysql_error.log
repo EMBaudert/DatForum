@@ -563,3 +563,24 @@ Version: '10.1.19-MariaDB'  socket: ''  port: 3306  mariadb.org binary distribut
 2017-06-08 13:12:33 6348 [Note] InnoDB: Online DDL : Start building index `PRIMARY` (1 / 1), estimated cost : 30.0000
 2017-06-08 13:12:33 6348 [Note] InnoDB: Online DDL : End of building index `PRIMARY` (1 / 1)
 2017-06-08 13:12:33 6348 [Note] InnoDB: Online DDL : Completed
+2017-06-13  8:18:35 15980 [Note] InnoDB: Online DDL : Start
+2017-06-13  8:18:35 15980 [Note] InnoDB: Online DDL : Start reading clustered index of the table and create temporary files
+2017-06-13  8:18:35 15980 [Note] InnoDB: Online DDL : End of reading clustered index of the table and create temporary files
+2017-06-13  8:18:35 15980 [Note] InnoDB: Online DDL : Completed
+2017-06-13  8:19:09 17912 [Note] InnoDB: Online DDL : Start
+2017-06-13  8:19:09 17912 [Note] InnoDB: Online DDL : Start reading clustered index of the table and create temporary files
+2017-06-13  8:19:09 17912 [Note] InnoDB: Online DDL : End of reading clustered index of the table and create temporary files
+2017-06-13  8:19:09 17912 [Note] InnoDB: Online DDL : Completed
+2017-06-13  8:26:49 15980 [Note] InnoDB: Online DDL : Start
+2017-06-13  8:26:49 15980 [Note] InnoDB: Online DDL : Start reading clustered index of the table and create temporary files
+2017-06-13  8:26:49 15980 [Note] InnoDB: Online DDL : End of reading clustered index of the table and create temporary files
+2017-06-13  8:26:49 15980 [Note] InnoDB: Online DDL : Start merge-sorting index `PRIMARY` (1 / 2), estimated cost : 13.3333
+2017-06-13  8:26:49 15980 [Note] InnoDB: Online DDL : End of  merge-sorting index `PRIMARY` (1 / 2)
+2017-06-13  8:26:49 15980 [Note] InnoDB: Online DDL : Start building index `PRIMARY` (1 / 2), estimated cost : 20.0000
+2017-06-13  8:26:49 15980 [Note] InnoDB: Online DDL : End of building index `PRIMARY` (1 / 2)
+2017-06-13  8:26:49 15980 [Note] InnoDB: Online DDL : Completed
+2017-06-13  8:26:49 15980 [Note] InnoDB: Online DDL : Start merge-sorting index `Username` (2 / 2), estimated cost : 13.3333
+2017-06-13  8:26:49 15980 [Note] InnoDB: Online DDL : End of  merge-sorting index `Username` (2 / 2)
+2017-06-13  8:26:49 15980 [Note] InnoDB: Online DDL : Start building index `Username` (2 / 2), estimated cost : 20.0000
+2017-06-13  8:26:49 15980 [Note] InnoDB: Online DDL : End of building index `Username` (2 / 2)
+2017-06-13  8:26:49 15980 [Note] InnoDB: Online DDL : Completed

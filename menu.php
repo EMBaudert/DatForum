@@ -4,6 +4,7 @@
 
    <!-- Optionales Theme -->
    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+   <link rel="stylesheet" href="style.css">
 
    <!-- Das neueste kompilierte und minimierte JavaScript -->
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -42,12 +43,31 @@
       //check if thread true, dann createThreadOverview()
       $checkThread = SQLQuery("SELECT threads FROM menu WHERE PKID_menu = ". $_GET['menu']);
       if($checkThread['threads']){
-      
+         create2ndRow(1);
          createThreadOverview($_GET['menu']);
+         create2ndRow(1);
       }else {
-         createMenu($sqlString);         
+         create2ndRow(0);
+         createMenu($sqlString);    
+         create2ndRow(0)     
       }
 
+      function create2ndRow($param){
+         echo "<div class=\"row\">
+            <div class=\"col-xs-12 col-sm-12 col-md-10 col-lg-10\">";
+               if($param){
+                  echo"<div class=\"btn-group pull-right pag-offset\" role=\"group\">
+                              <div type=\"button\" class=\"btn btn-default \">
+                                 Neuer Beitrag
+                              </div>
+                           </div>";  
+               }
+            echo "</div>
+            <div class=\"col-xs-12 col-sm-12 col-md-2 col-lg-2\">";
+               echo createPagination($param);
+            echo "</div>
+         </div>";
+      }
 
       function createMenuPoint($title, $count, $nextPoint, $threads){
          global $pdo;
@@ -63,16 +83,14 @@
         }
          
       
-         echo "<li class=\"list-group-item\">";
-         echo "<div class=\"container\">
+         echo "<li class=\"list-group-item\">
                   <div class=\"row\">
-                     <div class=\"col-xs-12 col-sm-12 col-md-10 col-lg-10\"><a href=\"sqltest.php?".$ausgabe."\">".$title."</a></div>";
+                     <div class=\"col-xs-12 col-sm-12 col-md-10 col-lg-10\"><a href=\"menu.php?".$ausgabe."\">".$title."</a></div>";
          
           echo     "<div class=\"col-xs-12 col-sm-12 col-md-2 col-lg-2\">".$count."</div>";
         
          
-         echo     "</div>
-               </div>";
+         echo     "</div>";
          
          echo "</li>";
       } 
@@ -87,12 +105,10 @@
             $upperMenu['FK_menu']=0;
          }
 
-         echo "<li class=\"list-group-item\">";
-         echo "<div class=\"container\">
+         echo "<li class=\"list-group-item\">
             <div class=\"row\">
-               <div class=\"col-xs-12 col-sm-12 col-md-9 col-lg-9\"><a href=\"sqltest.php?menu=".$upperMenu['FK_menu']."&page=1\">...</a></div>
-            </div>
-         </div>";
+               <div class=\"col-xs-12 col-sm-12 col-md-9 col-lg-9\"><a href=\"menu.php?menu=".$upperMenu['FK_menu']."&page=1\">...</a></div>
+            </div>";
          
          echo "</li>";
          
@@ -102,9 +118,7 @@
       function createMenu($sqlString) {
          global $pdo;
          
-         createPagination(0);
-         
-         echo "<div class=\"container\"><ul class=\"list-group\">";
+         echo "<ul class=\"list-group\">";
          
          if($_GET['menu']!="0"){
             createMenuPointBack();
@@ -121,7 +135,7 @@
             }
             $i++;            
          }
-         echo "</div></ul>";
+         echo "</ul>";
       } 
       
       function checkThread($PKID){
@@ -133,14 +147,13 @@
       function createThreadOverview($id){
          global $pdo;
          
-         createPagination(1);
- 
-         echo "<div class=\"container\"><ul class=\"list-group\">";
+         echo "<ul class=\"list-group\">";
          
          createMenuPointBack();
          
+         
          $i=0;
-         foreach($pdo->query("SELECT * FROM thread WHERE FK_menu = ".$id)as $row){
+;         foreach($pdo->query("SELECT * FROM thread WHERE FK_menu = ".$id) as $row){
          
      //    echo $i;
       //   echo ($_GET['page']-1*MAX_ENTRY_NUMBER);
@@ -153,24 +166,22 @@
             $i++;
          }
          
-         echo "</div></ul>";         
+         echo "</ul>";         
          
       }
       
       function createThreadEntry($PKID, $title, $creator){
       
+      
          $username = SQLQuery("SELECT username FROM user WHERE PKID_user = ".$creator);
-         $title = SQLQuery("SELECT title FROM thread WHERE PKID = ".$PKID);
          
          echo "<li class=\"list-group-item\">
-            <div class=\"container\">
                <div class=\"row\">
                
                   <div class=\"col-xs-12 col-sm-12 col-md-8 col-lg-8\"><a href=\"thread.php?thread=".$PKID."&page=1\">".$title."</a></div>
                   <div class=\"col-xs-6 col-sm-6 col-md-2 col-lg-2\"><a href=\"user.php?user=".$creator."\">".$username['username']."</a></div>
                   <div class=\"col-xs-6 col-sm-6 col-md-2 col-lg-2\">Beitr&auml;ge: ".getPostNumber($PKID)."</div>
                </div>
-            </div>
             </li>";
          
       }
@@ -183,12 +194,11 @@
       
       function createBreadcrumb($id){
       
-         echo "<div class=\"container\">
-         <ol class=\"breadcrumb\">
-         <li><a href=\"sqltest.php?menu=0&page=1\">Main menu</a></li>";
+         echo "<ol class=\"breadcrumb\">
+         <li><a href=\"menu.php?menu=0&page=1\">Main menu</a></li>";
          recursiveBreadCrumb($id,1);
          
-         echo "</ol></div>";
+         echo "</ol>";
          
       }
       
@@ -197,14 +207,14 @@
          $tempQuery = SQLQuery("SELECT * FROM menu WHERE PKID_menu = ".$id);
          
          if($tempQuery['FK_menu']==NULL){
-            echo "<li><a href=\"sqltest.php?menu=".$tempQuery['PKID_menu']."&page=1\">".$tempQuery['title']."</a></li>";
+            echo "<li><a href=\"menu.php?menu=".$tempQuery['PKID_menu']."&page=1\">".$tempQuery['title']."</a></li>";
             return;
          }
          
          recursiveBreadCrumb($tempQuery['FK_menu'],0);
          //If first
          if($first == 0){
-            echo "<li><a href=\"sqltest.php?menu=".$tempQuery['PKID_menu']."&page=1\">".$tempQuery['title']."</a></li>";
+            echo "<li><a href=\"menu.php?menu=".$tempQuery['PKID_menu']."&page=1\">".$tempQuery['title']."</a></li>";
          }else{
             echo "<li class=\"active\">".$tempQuery['title']."</li>";
          }
@@ -234,8 +244,7 @@
             }
          }
     //     echo $pageNumber['cnt'];
-         echo "<div class=\"container\">
-               <nav aria-label=\"pagination\">
+         echo "<nav aria-label=\"pagination\">
                <ul class=\"pagination\">";          
          
             //calculate needed pages
@@ -245,27 +254,27 @@
             if($_GET['page'] == 1){
                   echo "<li class=\"disabled\"><a href=\"\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
                }else{
-                  echo "<li><a href=\"sqltest.php?menu=".$_GET['menu']."&page=".($_GET['page']-1)."\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
+                  echo "<li><a href=\"menu.php?menu=".$_GET['menu']."&page=".($_GET['page']-1)."\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
             }
 
             //show all pages
             for($i=1;$i<$pa+1; $i++){
                if($_GET['page']==$i){
-                  echo "<li class=\"active\"><a href=\"sqltest.php?menu=".$_GET['menu']."&page=".$i."\">".$i."</a></li>";   
+                  echo "<li class=\"active\"><a href=\"menu.php?menu=".$_GET['menu']."&page=".$i."\">".$i."</a></li>";   
                }else{
-                  echo "<li><a href=\"sqltest.php?menu=".$_GET['menu']."&page=".$i."\">".$i."</a></li>";   
+                  echo "<li><a href=\"menu.php?menu=".$_GET['menu']."&page=".$i."\">".$i."</a></li>";   
                }
                $maxPages=$i;
             }
             
             //last button, if last site is selected buttons get deactivated
-            if($_GET['page'] == $pa){
+            if($_GET['page'] == ceil($pa)){
                   echo "<li class=\"disabled\"><a href=\"\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
                }else{
-                  echo "<li><a href=\"sqltest.php?menu=".$_GET['menu']."&page=".($_GET['page']+1)."\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
+                  echo "<li><a href=\"menu.php?menu=".$_GET['menu']."&page=".($_GET['page']+1)."\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
             }
          
-         echo "</ul></nav></div>";
+         echo "</ul></nav>";
          
       }
       
