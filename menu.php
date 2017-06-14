@@ -49,7 +49,7 @@
       }else {
          create2ndRow(0);
          createMenu($sqlString);    
-         create2ndRow(0)     
+         create2ndRow(0);     
       }
 
       function create2ndRow($param){
