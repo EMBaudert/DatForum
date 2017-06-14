@@ -18,6 +18,7 @@ session_start();
 			
 			<div id="content">
 			<h1>Startseite</h1>
+         <h2><a href="intern.php?p=profile">Profil</a></h2>
 			</div>
 			
 			<!--

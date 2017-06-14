@@ -50,6 +50,8 @@ include 'func/phpfunc.php';
 							<meta http-equiv="refresh" content="0; URL=index.php" />
 						<?PHP
 					}
+				}elseif($_GET["p"]=="profile"){
+					include 'inc/profile.php';
 				}else{
 					echo "Keine Ahnung, was hier passieren soll^^!";
 				}
