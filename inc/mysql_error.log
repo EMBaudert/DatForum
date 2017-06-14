@@ -1,0 +1,221 @@
+2017-06-07 11:52:34 1fe4 InnoDB: Warning: Using innodb_additional_mem_pool_size is DEPRECATED. This option may be removed in future releases, together with the option innodb_use_sys_malloc and with the InnoDB's internal memory allocator.
+2017-06-07 11:52:34 8164 [Note] InnoDB: innodb_empty_free_list_algorithm has been changed to legacy because of small buffer pool size. In order to use backoff, increase buffer pool at least up to 20MB.
+
+2017-06-07 11:52:34 8164 [Note] InnoDB: Using mutexes to ref count buffer pool pages
+2017-06-07 11:52:34 8164 [Note] InnoDB: The InnoDB memory heap is disabled
+2017-06-07 11:52:34 8164 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2017-06-07 11:52:34 8164 [Note] InnoDB: _mm_lfence() and _mm_sfence() are used for memory barrier
+2017-06-07 11:52:34 8164 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2017-06-07 11:52:34 8164 [Note] InnoDB: Using generic crc32 instructions
+2017-06-07 11:52:34 8164 [Note] InnoDB: Initializing buffer pool, size = 16.0M
+2017-06-07 11:52:34 8164 [Note] InnoDB: Completed initialization of buffer pool
+2017-06-07 11:52:34 8164 [Note] InnoDB: Highest supported file format is Barracuda.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'forum/beitr@0kge'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"forum"."beiträge"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'forum/men@1opunkte'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"forum"."menüpunkte"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'forum/menueverknuepfung'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"forum"."menueverknuepfung"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'forum/passwort'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"forum"."passwort"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'forum/tag'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"forum"."tag"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'forum/thread'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"forum"."thread"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'forum/user'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"forum"."user"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'mysql/gtid_slave_pos'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"mysql"."gtid_slave_pos"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'mysql/innodb_index_stats'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"mysql"."innodb_index_stats"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'mysql/innodb_table_stats'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"mysql"."innodb_table_stats"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'mysql/slave_master_info'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"mysql"."slave_master_info"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'mysql/slave_relay_log_info'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"mysql"."slave_relay_log_info"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'mysql/slave_worker_info'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"mysql"."slave_worker_info"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__bookmark'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__bookmark"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__central_columns'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__central_columns"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__column_info'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__column_info"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__designer_settings'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__designer_settings"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__export_templates'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__export_templates"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__favorite'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__favorite"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__history'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__history"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__navigationhiding'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__navigationhiding"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__pdf_pages'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__pdf_pages"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__recent'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__recent"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__relation'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__relation"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__savedsearches'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__savedsearches"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__table_coords'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__table_coords"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__table_info'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__table_info"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__table_uiprefs'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__table_uiprefs"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__tracking'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__tracking"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__userconfig'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__userconfig"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__usergroups'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__usergroups"', ignored.
+2017-06-07 11:52:34 1fe4  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+InnoDB: If you are installing InnoDB, remember that you must create
+InnoDB: directories yourself, InnoDB does not create them.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Could not find a valid tablespace file for 'phpmyadmin/pma__users'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [ERROR] InnoDB: Tablespace open failed for '"phpmyadmin"."pma__users"', ignored.
+2017-06-07 11:52:34 8164 [Note] InnoDB: 128 rollback segment(s) are active.
+2017-06-07 11:52:34 8164 [Note] InnoDB: Waiting for purge to start
+2017-06-07 11:52:34 2100 [ERROR] InnoDB: Failed to find tablespace for table '"mysql"."innodb_index_stats"' in the cache. Attempting to load the tablespace with space id 2.
+2017-06-07 11:52:34 834  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+2017-06-07 11:52:34 2100 [ERROR] InnoDB: Could not find a valid tablespace file for 'mysql/innodb_index_stats'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 2100 [ERROR] InnoDB: Failed to find tablespace for table '"mysql"."innodb_table_stats"' in the cache. Attempting to load the tablespace with space id 1.
+2017-06-07 11:52:34 834  InnoDB: Operating system error number 3 in a file operation.
+InnoDB: The error means the system cannot find the path specified.
+2017-06-07 11:52:34 2100 [ERROR] InnoDB: Could not find a valid tablespace file for 'mysql/innodb_table_stats'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2017-06-07 11:52:34 8164 [Note] InnoDB:  Percona XtraDB (http://www.percona.com) 5.6.32-79.0 started; log sequence number 15603849
+2017-06-07 11:52:34 4280 [Note] InnoDB: Dumping buffer pool(s) not yet started
+2017-06-07 11:52:34 8164 [Note] Plugin 'FEEDBACK' is disabled.
+2017-06-07 11:52:34 8164 [ERROR] Could not open mysql.plugin table. Some plugins may be not loaded
+2017-06-07 11:52:34 8164 [ERROR] Can't open and lock privilege tables: Table 'mysql.servers' doesn't exist
+2017-06-07 11:52:34 8164 [Note] Server socket created on IP: '::'.
+2017-06-07 11:52:34 8164 [ERROR] Fatal error: Can't open and lock privilege tables: Table 'mysql.user' doesn't exist
