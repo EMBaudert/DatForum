@@ -3,12 +3,13 @@
 function checklogin($user,$pass){
 	$pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
       
-	$sql = "SELECT password FROM user WHERE username='".$user."'";
+	$sql = "SELECT * FROM user WHERE username='".$user."'";
 	
 	$temppass = $pdo->query($sql);
 	$temppass->execute();
 	$login=$temppass->fetch();
 	if(isset($login["password"])&&$pass==$login["password"]){
+      $_SESSION["PKID"]=$login["PKID_user"];
 		return TRUE;
 	} 
 	else{
