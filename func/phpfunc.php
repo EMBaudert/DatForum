@@ -103,6 +103,11 @@ function newuser(){
 	$sql = "INSERT INTO user (username, firstname, secondname, email, password) VALUES ('".$_SESSION["username"]."', '".$_SESSION["firstname"]."','".$_SESSION["secondname"]."','".$_SESSION["email"]."','".$PASS."')";
 	$statement = $pdo->prepare($sql);
 	$statement->execute();   
+   $sql = "SELECT PKID_user FROM user WHERE username='".$_SESSION["username"]."'";
+	$tempID = $pdo->query($sql);
+	$tempID->execute();
+	$ID=$tempID->fetch();
+   $_SESSION["PKID"]=$ID["PKID_user"];
 }
 
 function checkname(){
@@ -142,6 +147,18 @@ function checkname(){
        return FALSE;
    }
 	return TRUE;
+}
+
+function checkID($ID){
+   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
+   $sql = "SELECT PKID_user FROM user WHERE PKID_user='".$ID."'";
+	$tempID = $pdo->query($sql);
+	$tempID->execute();
+	$existID=$tempID->fetch();
+   if(!isset($existID["PKID_user"])){
+      return FALSE;
+   }
+   return TRUE;
 }
 
 ?>

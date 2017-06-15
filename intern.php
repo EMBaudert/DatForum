@@ -14,7 +14,7 @@ include 'func/phpfunc.php';
 			<div id="topbar">
 				<a href="index.php"><div id="toplogo"></div></a>
 				<div id="search"></div> 
-				<div id="loginbox"><a style="color:white;" href=<?PHP if(isset($_SESSION["logged"])&&$_SESSION["logged"]){ ?>"intern.php?p=logout">Logout<?PHP } else{ ?>"intern.php?p=login">Login</a>  &nbsp; <a style="color:white;" href="intern.php?p=register">Registrieren<?PHP } ?></a>  &nbsp;</div>
+				<div id="loginbox"><a href=<?PHP if(isset($_SESSION["logged"])&&$_SESSION["logged"]){ ?>"intern.php?p=profile&uid=<?PHP echo $_SESSION["PKID"]; ?>">Profil</a> &nbsp; <a href="intern.php?p=logout">Logout<?PHP } else{ ?>"intern.php?p=login">Login</a>  &nbsp; <a href="intern.php?p=register">Registrieren<?PHP } ?></a>  &nbsp;</div>
 			</div>
 			<div id="content">
 			<?PHP
