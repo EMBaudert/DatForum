@@ -58,7 +58,7 @@ a:active {color:#FFFFFF;}
 	top:40px;
 	padding:0px;
 	margin-bottom:10px;
-	height:2000px;
+	height:90%;
 	width:90%;
 	left:5%;
 	background-color:#ffffff;
@@ -75,4 +75,11 @@ a:active {color:#FFFFFF;}
 	left: 5%;
 	z-index:5;
 	color:white;
+}
+
+#profile {
+   position: absolute;
+   top:100px;
+   width:70%;
+   left: 10%;
 }
