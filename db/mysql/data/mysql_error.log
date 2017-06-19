@@ -1133,3 +1133,13 @@ Version: '10.1.22-MariaDB'  socket: ''  port: 3306  mariadb.org binary distribut
 2017-06-19 11:35:48 2760 [Note] Server socket created on IP: '::'.
 2017-06-19 11:35:48 2760 [Note] c:\xampp\mysql\bin\mysqld.exe: ready for connections.
 Version: '10.1.22-MariaDB'  socket: ''  port: 3306  mariadb.org binary distribution
+2017-06-19 14:12:30 5672 [Note] InnoDB: Online DDL : Start
+2017-06-19 14:12:30 5672 [Note] InnoDB: Online DDL : Start reading clustered index of the table and create temporary files
+2017-06-19 14:12:30 5672 [Note] InnoDB: Online DDL : End of reading clustered index of the table and create temporary files
+2017-06-19 14:12:30 5672 [Note] InnoDB: Online DDL : Completed
+2017-06-19 14:12:30 5672 [Note] InnoDB: Online DDL : Completed
+2017-06-19 14:14:11 2288 [Note] InnoDB: Online DDL : Start
+2017-06-19 14:14:11 2288 [Note] InnoDB: Online DDL : Start reading clustered index of the table and create temporary files
+2017-06-19 14:14:11 2288 [Note] InnoDB: Online DDL : End of reading clustered index of the table and create temporary files
+2017-06-19 14:14:11 2288 [Note] InnoDB: Online DDL : Completed
+2017-06-19 14:14:11 2288 [Note] InnoDB: Online DDL : Completed
