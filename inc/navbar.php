@@ -32,7 +32,7 @@
 
                      }else{
    							echo "<li class=\"dropdown\">
-   								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-plus-sign\"></span> Register <span class=\"caret\"></span></a>
+   								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-plus-sign\"></span> Register </span></a>
    								<ul class=\"dropdown-menu\">
    									<li>";
                         include 'inc/register.php';
@@ -40,7 +40,7 @@
    								</ul>
    							</li>
    							<li class=\"dropdown\">
-   								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-log-in\"></span> Login <span class=\"caret\"></span></a>
+   								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-log-in\"></span> Login </a>
    								<ul class=\"dropdown-menu\">
    									<li>";
                         include 'inc/login.php';
