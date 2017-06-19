@@ -1,7 +1,7 @@
 <?php	
- session_start();
-$_SESSION['logged'] = true;
-$_SESSION['PKID'] = 1;
+ session_start(); 
+//$_SESSION['logged'] = true;
+//$_SESSION['PKID'] = 1;
 ?>
 
 			<nav class="navbar navbar-inverted">
@@ -30,10 +30,24 @@ $_SESSION['PKID'] = 1;
    									<li><a href=\"#\">Posts</a></li>
    								</ul>
    							</li>
-                        <li><a href=\"intern.php?p=logout\"><span class=\"glyphicon glyphicon-log-in\"> Logout</span> </a></li>";
+                        <li><a href=\"intern.php?p=logout\"><span class=\"glyphicon glyphicon-log-out\"></span> Logout </a></li>";
                      }else{
-   							echo "<li><a href=\"intern.php?p=register\"><span class=\"glyphicon glyphicon-user\"></span> Register</a></li>
-   							<li><a href=\"intern.php?p=login\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>";
+   							echo "<li class=\"dropdown\">
+   								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-plus-sign\"></span> Register <span class=\"caret\"></span></a>
+   								<ul class=\"dropdown-menu\">
+   									<li>";
+                        include 'inc/register.php';
+                        echo "</li>
+   								</ul>
+   							</li>
+   							<li class=\"dropdown\">
+   								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-log-in\"></span> Login <span class=\"caret\"></span></a>
+   								<ul class=\"dropdown-menu\">
+   									<li>";
+                        include 'inc/login.php';
+                        echo "</li>
+   								</ul>
+   							</li>";
                      }
                      ?>
 						</ul>
