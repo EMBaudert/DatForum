@@ -23,14 +23,14 @@ $_SESSION['PKID'] = 1;
                      <?php
                      if(isset($_SESSION['logged'])&&$_SESSION['logged']==true){
                         echo "<li class=\"dropdown\">
-   								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"intern.php?p=profile&uid=\"".$_SESSION['PKID'].
-                           "\"><span class=\"glyphicon glyphicon-user\"></span> Profile <span class=\"caret\"></span></a>
+   								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">
+                           <span class=\"glyphicon glyphicon-user\"></span> Profile <span class=\"caret\"></span></a>
    								<ul class=\"dropdown-menu\">
-   									<li><a href=\"#\">Profile</a></li>
+   									<li><a href=\"intern.php?p=profile&uid=".$_SESSION['PKID']."\">Profile</a></li>
    									<li><a href=\"#\">Posts</a></li>
    								</ul>
    							</li>
-                        <li><a href=\"intern.php?p=logout\"><span class=\"glyphicon glyphicon-log-in\"> Logout</span> </a></li>";
+                        <li><a href=\"intern.php?p=logout\"><span class=\"glyphicon glyphicon-log-in\"></span>  Logout</a></li>";
                      }else{
    							echo "<li><a href=\"intern.php?p=register\"><span class=\"glyphicon glyphicon-user\"></span> Register</a></li>
    							<li><a href=\"intern.php?p=login\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>";
