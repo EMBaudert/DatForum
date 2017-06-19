@@ -26,7 +26,7 @@
       <div class="container">
    
       <?php
-         require 'func/navbar.php';
+         require 'inc/navbar.php';
          const MAX_ENTRY_NUMBER = 5;
          $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
       
@@ -48,6 +48,6 @@
 	  }
 	  </script>
    
-      <?php include_once('func/footer.html'); ?>
+      <?php include_once('inc/footer.html'); ?>
    </body>
 </html>
