@@ -11,12 +11,8 @@
    <!-- Optionales Theme -->
    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
 
-   <link rel="stylesheet" href="style.css">
-
-   <!-- Das neueste kompilierte und minimierte JavaScript   
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
-   
-   
+   <link rel="stylesheet" href="layout/style.css">
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>    
 
    <head>
       <title>Thread</title>
@@ -26,7 +22,7 @@
       <div class="container">
    
       <?php
-         require 'func/navbar.php';
+         require 'inc/navbar.php';
          const MAX_ENTRY_NUMBER = 5;
          $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
       
@@ -48,6 +44,6 @@
 	  }
 	  </script>
    
-      <?php include_once('func/footer.html'); ?>
+      <?php include_once('inc/footer.html'); ?>
    </body>
 </html>
