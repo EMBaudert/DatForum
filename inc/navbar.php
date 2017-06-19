@@ -1,10 +1,8 @@
 <?php	
  session_start();
-$_SESSION['logged'] = true;
-$_SESSION['PKID'] = 1;
 ?>
 
-			<nav class="navbar navbar-inverted">
+			<nav class="navbar navbar-default">
 				<div class="container-fluid">
 					<div class="navbar-header">
 					  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -16,7 +14,7 @@ $_SESSION['PKID'] = 1;
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Home</a></li>
+							<li class="active"><a href="index.php">Home</a></li>
                   </ul>
 						<ul class="nav navbar-nav navbar-right">
                   
