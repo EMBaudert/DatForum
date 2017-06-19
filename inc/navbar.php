@@ -1,10 +1,8 @@
 <?php	
- session_start(); 
-//$_SESSION['logged'] = true;
-//$_SESSION['PKID'] = 1;
+ session_start();
 ?>
 
-			<nav class="navbar navbar-inverted">
+			<nav class="navbar navbar-default">
 				<div class="container-fluid">
 					<div class="navbar-header">
 					  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -16,21 +14,22 @@
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Home</a></li>
+							<li class="active"><a href="index.php">Home</a></li>
                   </ul>
 						<ul class="nav navbar-nav navbar-right">
                   
                      <?php
                      if(isset($_SESSION['logged'])&&$_SESSION['logged']==true){
                         echo "<li class=\"dropdown\">
-   								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"intern.php?p=profile&uid=\"".$_SESSION['PKID'].
-                           "\"><span class=\"glyphicon glyphicon-user\"></span> Profile <span class=\"caret\"></span></a>
+   								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">
+                           <span class=\"glyphicon glyphicon-user\"></span> Profile <span class=\"caret\"></span></a>
    								<ul class=\"dropdown-menu\">
-   									<li><a href=\"#\">Profile</a></li>
+   									<li><a href=\"intern.php?p=profile&uid=".$_SESSION['PKID']."\">Profile</a></li>
    									<li><a href=\"#\">Posts</a></li>
    								</ul>
-   							</li>
-                        <li><a href=\"intern.php?p=logout\"><span class=\"glyphicon glyphicon-log-out\"></span> Logout </a></li>";
+   							  </li>
+                <li><a href=\"intern.php?p=logout\"><span class=\"glyphicon glyphicon-log-out\"></span> Logout </a></li>";
+
                      }else{
    							echo "<li class=\"dropdown\">
    								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-plus-sign\"></span> Register <span class=\"caret\"></span></a>

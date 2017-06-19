@@ -1,7 +1,7 @@
 <html>
 
    <?php
-      require_once 'func/menufunc.php'
+      require_once 'func/menufunc.php';
    ?>
 
    <!-- Das neueste kompilierte und minimierte CSS -->
@@ -9,7 +9,7 @@
 
    <!-- Optionales Theme -->
    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="layout/style.css">
 
    <!-- Latest compiled and minified JavaScript -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -61,12 +61,12 @@
          createMenu($sqlString);    
          create2ndRow(0);     
       }
-      
-      include_once 'inc/footer.html'
    
    ?>
    
    </div>
+   
+         <?php include_once('inc/footer.html'); ?>
    
    </body>
 </html>
