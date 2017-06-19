@@ -101,7 +101,7 @@
          <div id="profile">
             <table width="100%">
                <tr>
-                  <td rowspan=3 colspan=2><img title="Profilbild" src="<?PHP echo $data["pb_path"]; ?>" width="200px" /></td>
+                  <td rowspan=4 colspan=2><img title="Profilbild" src="<?PHP echo $data["pb_path"]; ?>" width="200px" /></td>
                   <td>Benutzername:</td><td><?PHP if(isset($data["username"])){echo $data["username"]; }?></td>
                </tr>
                <tr>
@@ -111,8 +111,10 @@
                   <td>Nachname:</td><td><?PHP if(isset($data["secondname"])){echo $data["secondname"]; }?></td>
                </tr>
                <tr>
-                  <td colspan=2 title="Signatur"><?PHP if(isset($data["signature"])){echo $data["signature"]; }?></td>
                   <td>E-Mail Adresse:</td><td><?PHP if(isset($data["email"])){echo $data["email"]; }?></td>
+               </tr>
+               <tr>
+                  <td colspan=2 title="Signatur"><?PHP if(isset($data["signature"])){echo $data["signature"]; }?></td>
                </tr>
          </table>
          </div>

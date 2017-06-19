@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?PHP
 session_start();
-include 'func/phpfunc.php';
+include 'func/user.func.php';
 ?>
 	<html>
 		<head>
@@ -47,7 +47,7 @@ include 'func/phpfunc.php';
 						newuser();
 						$_SESSION["logged"]=TRUE;
 						?>
-							<meta http-equiv="refresh" content="0; URL=index.php" />
+							<meta http-equiv="refresh" content="0; URL=intern.php?p=profile&uid=<?PHP echo $_SESSION["PKID"]; ?>" />
 						<?PHP
 					}
 				}elseif($_GET["p"]=="profile"){
