@@ -52,7 +52,7 @@ require_once 'func/menufunc.php';
 						newuser();
 						$_SESSION["logged"]=TRUE;
 						?>
-							<meta http-equiv="refresh" content="0; URL=intern.php?p=profile&uid=<?PHP echo $_SESSION["PKID"]; ?>" />
+							<meta http-equiv="refresh" content="0; URL=intern.php?p=profile&uid=<?PHP echo $_SESSION['PKID']; ?>" />
 						<?PHP
 					}
 				}elseif($_GET["p"]=="profile"){

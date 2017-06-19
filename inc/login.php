@@ -1,6 +1,5 @@
-<h1>Login</h1>
 <form action="intern.php?p=login" method="POST"><br />
-<table>
+<table style="margin:10px;">
 <tr>
 <td>Benutzername:</td><td><input type="text" name="username" value="<?PHP if(isset($_POST["username"])){echo $_POST["username"]; }?>"></td>
 </tr>
@@ -8,7 +7,7 @@
 <td>Passwort:</td><td><input type="password" name="password"></td>
 </tr>
 <tr>
-<td></td><td><br><input type="submit" value="Anmelden"></td>
+<td></td><td align="right"><br><input type="submit" value="Anmelden"></td>
 </tr>
 </table>
 </form>

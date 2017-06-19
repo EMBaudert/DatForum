@@ -1,6 +1,5 @@
-<h1>Registrieren</h1>
 <form action="intern.php?p=register" method="POST"><br />
-<table>
+<table style="margin:10px;min-width:350px;">
 <tr>
 <td>Benutzername:</td><td><input type="text" name="username" value="<?PHP if(isset($_SESSION["username"])){echo $_SESSION["username"]; }?>"></td>
 </tr>
@@ -20,7 +19,7 @@
 <td>Passwort wiederholen:</td><td><input type="password" name="password2"></td>
 </tr>
 <tr>
-<td></td><td><br><input name="submit" type="submit" value="Registrieren"></td>
+<td></td><td align="right"><br><input name="submit" type="submit" value="Registrieren"></td>
 </tr>
 </table>
 </form>
