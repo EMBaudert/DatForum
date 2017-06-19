@@ -58,7 +58,7 @@
             			
                      <div class=\"row equal\">
                			<div class=\"col-xs-12 col-sm-12 col-md-2 col-lg-2 post-userinfo \">
-               				<p><a href=user.php?user=".$post['FK_user'].">".$user['username']."</a><br>"
+               				<p><a href=\"intern.php?p=profile&uid=".$post['FK_user']."\">".$user['username']."</a><br>" 
                				.$user['group']."</p>
                				<p>Bild</p>
                			
@@ -77,12 +77,12 @@
                            <div class=\"btn-group pull-right\" role=\"group\">";
 						   
 							if($user['PKID_user'] == $_SESSION["PKID"]){
-							echo "<a class =\"btn btn-default\" href=\"javascript:alert()\">Edit</a>";	
+							echo "<a class =\"btn btn-default\" href=\"javascript:alert()\"><span class=\"glyphicon glyphicon-edit\"></span></a>";	
 								
 							}
 						   
-							echo      "<a class =\"btn btn-default\" href=\"javascript:alert()\">Melden</a>
-                              <a class =\"btn btn-default\" href=\"javascript:alert()\">Zitieren</a>
+							echo      "<a class =\"btn btn-default\" href=\"javascript:alert()\"><span class=\"glyphicon glyphicon-edit\"></span> Melden</a>
+                              <a class =\"btn btn-default\" href=\"javascript:alert()\"><span class=\"glyphicon glyphicon-bullhorn\"></span> Zitieren</a>
 
                            </div>
                         </div>
@@ -176,4 +176,4 @@
             return $temp->fetch();
             
          }
-   ?>   
+      ?>
