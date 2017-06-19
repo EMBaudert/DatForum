@@ -1,4 +1,5 @@
 <?php
+
          function create2ndRow(){
          global $pdo;
             
@@ -8,7 +9,7 @@
                <div class=\"col-xs-12 col-sm-12 col-md-8 col-lg-8 pag-offset\">
                   <h3>".$title['theme']."</h3>
                </div>
-               <div class=\"col-xs-12 col-sm-12 col-md-2 col-lg-2 pag-offset\">
+               <div class=\"col-xs-6 col-sm-6 col-md-2 col-lg-2 pag-offset\">
                   <div class=\"btn-group\" role=\"group\">
                      <div type=\"button\" class=\"btn btn-default \">
                         <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span> Neuer Beitrag
@@ -46,7 +47,6 @@
          
             $user = SQLQuery("SELECT * FROM user WHERE PKID_user = ".$post['FK_user']);
             $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = ".$post['FK_thread']);
-            
 
  		//<hr class=\"colorline\">                  <div class=\".row\"></div>
             echo "
@@ -58,11 +58,21 @@
             			
                      <div class=\"row equal\">
                			<div class=\"col-xs-12 col-sm-12 col-md-2 col-lg-2 post-userinfo \">
-               				<p><a href=\"intern.php?p=profile&uid=".$post['FK_user']."\">".$user['username']."</a><br>" 
-               				.$user['group']."</p>
-               				<p>Bild</p>
-               			
-               			</div>
+                           <div class=\"hidden-xs hidden-sm post-userinfo\">
+                  			   <p><a href=\"intern.php?p=profile&uid=".$post['FK_user']."\">".$user['username']."</a><br>" 
+                  				.$user['usergroup']."</p>
+                  				<img src=\"".$user['pb_path']."\" class=\"profile-picture\">
+                  			</div>
+                           <div class=\"hidden-md hidden-lg post-userinfo\">
+                              <div class=\"col-xs-6 post-userinfo\">
+                  			     <p><a href=\"intern.php?p=profile&uid=".$post['FK_user']."\">".$user['username']."</a><br>"
+                  				  .$user['usergroup']."</p>
+                              </div>
+                              <div class=\"col-xs-6 post-userinfo\">
+                  				  <img src=\"".$user['pb_path']."\" class=\"profile-picture\">
+                              </div>
+                  			</div>
+                        </div>
                			<div class=\"col-xs-12 col-sm-12 col-md-10 col-lg-10 post-content\">
                				<p><b>".$title['theme']."</b></p>
                				<hr>
@@ -77,7 +87,7 @@
                            <div class=\"btn-group pull-right\" role=\"group\">";
 						   
 							if($user['PKID_user'] == $_SESSION["PKID"]){
-							echo "<a class =\"btn btn-default\" href=\"javascript:alert()\"><span class=\"glyphicon glyphicon-edit\"></span></a>";	
+							echo "<a class =\"btn btn-default\" href=\"javascript:alert()\"><span class=\"glyphicon glyphicon-edit\"></span> Edit</a>";	
 								
 							}
 						   
@@ -176,4 +186,5 @@
             return $temp->fetch();
             
          }
-      ?>
+
+?>

@@ -14,7 +14,7 @@
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="index.php">Home</a></li>
+							<li><a href="index.php">Home</a></li>
                   </ul>
 						<ul class="nav navbar-nav navbar-right">
                   
@@ -27,26 +27,11 @@
    									<li><a href=\"intern.php?p=profile&uid=".$_SESSION['PKID']."\">Profile</a></li>
    									<li><a href=\"#\">Posts</a></li>
    								</ul>
-   							  </li>
-                <li><a href=\"intern.php?p=logout\"><span class=\"glyphicon glyphicon-log-out\"></span> Logout </a></li>";
-
-                     }else{
-   							echo "<li class=\"dropdown\">
-   								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-plus-sign\"></span> Register <span class=\"caret\"></span></a>
-   								<ul class=\"dropdown-menu\">
-   									<li>";
-                        include 'inc/register.php';
-                        echo "</li>
-   								</ul>
    							</li>
-   							<li class=\"dropdown\">
-   								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-log-in\"></span> Login <span class=\"caret\"></span></a>
-   								<ul class=\"dropdown-menu\">
-   									<li>";
-                        include 'inc/login.php';
-                        echo "</li>
-   								</ul>
-   							</li>";
+                        <li><a href=\"intern.php?p=logout\"><span class=\"glyphicon glyphicon-log-in\"></span>  Logout</a></li>";
+                     }else{
+   							echo "<li><a href=\"intern.php?p=register\"><span class=\"glyphicon glyphicon-user\"></span> Register</a></li>
+   							<li><a href=\"intern.php?p=login\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>";
                      }
                      ?>
 						</ul>
