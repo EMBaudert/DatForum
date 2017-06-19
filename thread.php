@@ -1,3 +1,10 @@
+<?php
+	session_start();
+
+	$_SESSION["PKID"] = 1;
+?>
+
+
 <html>
 
    <!-- Das neueste kompilierte und minimierte CSS -->
@@ -48,7 +55,7 @@
                      </div>
                   </div>
                </div>
-               <div class=\"col-xs-6 col-sm-6 col-md-2 col-lg-2\">"; 
+               <div class=\"col-xs-6 col-sm-6 col-md-2 col-lg-2 pag-offset\">"; 
                   createPagination();
                echo "</div>
             </div>";
@@ -91,7 +98,7 @@
             			
                      <div class=\"row equal\">
                			<div class=\"col-xs-12 col-sm-12 col-md-2 col-lg-2 post-userinfo \">
-               				<p><a href=user.php?user=\"".$post['FK_user']."\">".$user['username']."</a><br>"
+               				<p><a href=user.php?user=".$post['FK_user'].">".$user['username']."</a><br>"
                				.$user['group']."</p>
                				<p>Bild</p>
                			
@@ -107,10 +114,16 @@
             			
             			<div class=\"panel-footer \">
                         <div class=\"row footer-color\">
-                           <div class=\"btn-group pull-right\" role=\"group\">
-                              <div type=\"button\" class=\"btn btn-default\">
-                                 Zitieren
-                              </div>
+                           <div class=\"btn-group pull-right\" role=\"group\">";
+						   
+							if($user['PKID_user'] == $_SESSION["PKID"]){
+							echo "<a class =\"btn btn-default\" href=\"javascript:alert()\">Edit</a>";	
+								
+							}
+						   
+							echo      "<a class =\"btn btn-default\" href=\"javascript:alert()\">Melden</a>
+                              <a class =\"btn btn-default\" href=\"javascript:alert()\">Zitieren</a>
+
                            </div>
                         </div>
             			</div>
@@ -207,6 +220,12 @@
       ?>
       
       </div>
+	  
+	  <script>
+	  function alert(){
+		  alert("test");
+	  }
+	  </script>
    
    </body>
 </html>

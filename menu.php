@@ -18,6 +18,9 @@
    <div class="container">
    
    <?php
+   
+      include ("navbar.php");
+      
       const MAX_ENTRY_NUMBER = 1;
    
       $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
@@ -25,11 +28,11 @@
    
       if(!isset($_GET['menu'])){
          $_GET['menu'] = "0";
+         echo $_GET['menu'];
       }
       if(!isset($_GET['page'])){
-         $_GET['page'] = "0";
+         $_GET['page'] = "1";
       }
-      
       createBreadcrumb($_GET['menu']);
   
   
@@ -53,17 +56,23 @@
       }
 
       function create2ndRow($param){
+      
+      $upperMenuName = SQLQuery("SELECT * FROM menu WHERE PKID_menu = " . $_GET['menu']);
+      
          echo "<div class=\"row\">
-            <div class=\"col-xs-12 col-sm-12 col-md-10 col-lg-10\">";
+            <div class=\"col-xs-12 col-sm-12 col-md-8 col-lg-8 pag-offset\">
+               <h3>".$upperMenuName['title']."</h3>   
+            </div>
+            <div class=\"col-xs-6 col-sm-6 col-md-2 col-lg-2 pag-offset\">";
                if($param){
-                  echo"<div class=\"btn-group pull-right pag-offset\" role=\"group\">
+                  echo"<div class=\"btn-group\" role=\"group\">
                               <div type=\"button\" class=\"btn btn-default \">
                                  Neuer Beitrag
                               </div>
                            </div>";  
                }
             echo "</div>
-            <div class=\"col-xs-12 col-sm-12 col-md-2 col-lg-2\">";
+            <div class=\"col-xs-6 col-sm-6 col-md-2 col-lg-2 pag-offset\">";
                echo createPagination($param);
             echo "</div>
          </div>";
@@ -118,10 +127,10 @@
       function createMenu($sqlString) {
          global $pdo;
          
-         echo "<ul class=\"list-group\">";
+         echo "<div class=\"row\"><ul class=\"hey list-group\">";
          
          if($_GET['menu']!="0"){
-            createMenuPointBack();
+           // createMenuPointBack();
          }
          
          
@@ -135,7 +144,7 @@
             }
             $i++;            
          }
-         echo "</ul>";
+         echo "</ul></div>";
       } 
       
       function checkThread($PKID){
@@ -193,12 +202,11 @@
       }
       
       function createBreadcrumb($id){
-      
-         echo "<ol class=\"breadcrumb\">
+         echo "<div class=\"row\"><ol class=\"breadcrumb\">
          <li><a href=\"menu.php?menu=0&page=1\">Main menu</a></li>";
          recursiveBreadCrumb($id,1);
          
-         echo "</ol>";
+         echo "</ol></div>";
          
       }
       
@@ -245,7 +253,7 @@
          }
     //     echo $pageNumber['cnt'];
          echo "<nav aria-label=\"pagination\">
-               <ul class=\"pagination\">";          
+               <ul class=\"pagination \">";          
          
             //calculate needed pages
             $pa = $pageNumber['cnt'] / MAX_ENTRY_NUMBER;
