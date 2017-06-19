@@ -44,13 +44,6 @@
       ?>
       
       </div>
-	  
-	  <script>
-	  function alert(){
-		  alert("test");
-	  }
-	  </script>
-   
       <?php include_once('inc/footer.html'); ?>
    </body>
 </html>

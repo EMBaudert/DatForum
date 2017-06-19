@@ -11,7 +11,7 @@
                </div>
                <div class=\"col-xs-6 col-sm-6 col-md-2 col-lg-2 pag-offset\">
                   <div class=\"btn-group\" role=\"group\">
-                     <div type=\"button\" class=\"btn btn-default \">
+                     <div type=\"button\" id=\"createPost\" onclick=\"test()\" class=\"btn btn-default \">
                         <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span> Neuer Beitrag
                      </div>
                   </div>
@@ -58,13 +58,13 @@
             			
                      <div class=\"row equal\">
                			<div class=\"col-xs-12 col-sm-12 col-md-2 col-lg-2 post-userinfo \">
-                           <div class=\"hidden-xs hidden-sm post-userinfo\">
+                           <div class=\"hidden-xs hidden-sm post-userinfo nospace\">
                   			   <p><a href=\"intern.php?p=profile&uid=".$post['FK_user']."\">".$user['username']."</a><br>" 
                   				.$user['usergroup']."</p>
                   				<img src=\"".$user['pb_path']."\" class=\"profile-picture\">
                   			</div>
-                           <div class=\"hidden-md hidden-lg post-userinfo\">
-                              <div class=\"col-xs-6 post-userinfo\">
+                           <div class=\"hidden-md hidden-lg post-userinfo nospace\">
+                              <div class=\"col-xs-6 post-userinfo nospace\">
                   			     <p><a href=\"intern.php?p=profile&uid=".$post['FK_user']."\">".$user['username']."</a><br>"
                   				  .$user['usergroup']."</p>
                               </div>
@@ -73,10 +73,10 @@
                               </div>
                   			</div>
                         </div>
-               			<div class=\"col-xs-12 col-sm-12 col-md-10 col-lg-10 post-content\">
+               			<div class=\"col-xs-12 col-sm-12 col-md-10 col-lg-10 post-content \">
                				<p><b>".$title['theme']."</b></p>
                				<hr>
-               				<p class=\"content\">".$post['text']."</p>
+               				<p class=\"content minheight\">".$post['text']."</p>
                				<hr>
                				<p>".$user['signature']."</p>
                			</div>
@@ -86,13 +86,13 @@
                         <div class=\"row footer-color\">
                            <div class=\"btn-group pull-right\" role=\"group\">";
 						   
-							if($user['PKID_user'] == $_SESSION["PKID"]){
+							if(isset($_SESSION["PKID"]) && $user['PKID_user'] == $_SESSION["PKID"]){
 							echo "<a class =\"btn btn-default\" href=\"javascript:alert()\"><span class=\"glyphicon glyphicon-edit\"></span> Edit</a>";	
 								
 							}
 						   
 							echo      "<a class =\"btn btn-default\" href=\"javascript:alert()\"><span class=\"glyphicon glyphicon-edit\"></span> Melden</a>
-                              <a class =\"btn btn-default\" href=\"javascript:alert()\"><span class=\"glyphicon glyphicon-bullhorn\"></span> Zitieren</a>
+                              <a class =\"btn btn-default\" id=\"target\"><span class=\"glyphicon glyphicon-bullhorn\"></span> Zitieren</a>
 
                            </div>
                         </div>
@@ -188,3 +188,8 @@
          }
 
 ?>
+
+<script>
+
+
+</script>
