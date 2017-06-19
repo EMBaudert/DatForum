@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <?PHP
-session_start();
 include 'func/user.func.php';
+require_once 'func/menufunc.php';
 ?>
 	<html>
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			<title>DatForum - Intern</title>
 			<link rel="SHORTCUT ICON" href="layout/icon.ico" />
-			<link rel="stylesheet" type="text/css" href="layout/style.css" />
+			<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+         <!-- Optionales Theme -->
+         <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+         <link rel="stylesheet" href="style.css">
+         <!-- Latest compiled and minified JavaScript -->
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      	
 		</head>
 		<body>
-			<div id="topbar">
-				<a href="index.php"><div id="toplogo"></div></a>
-				<div id="search"></div> 
-				<div id="loginbox"><a href=<?PHP if(isset($_SESSION["logged"])&&$_SESSION["logged"]){ ?>"intern.php?p=profile&uid=<?PHP echo $_SESSION["PKID"]; ?>">Profil</a> &nbsp; <a href="intern.php?p=logout">Logout<?PHP } else{ ?>"intern.php?p=login">Login</a>  &nbsp; <a href="intern.php?p=register">Registrieren<?PHP } ?></a>  &nbsp;</div>
-			</div>
-			<div id="content">
-			<?PHP
+			<div class="container">
+			<?php
+           require_once 'inc/navbar.php';
+     
 				if(!isset($_GET["p"])){
 					echo "Keine bekannte Seite!";
 				}elseif($_GET["p"]=="login"){
@@ -57,6 +62,8 @@ include 'func/user.func.php';
 				}
 			?>
 			</div>
-			<div id="bottombar">Copy &copy; und so</div>
+		<?php
+           include_once 'inc/footer.html';
+         ?>
 		</body>
 	</html>
