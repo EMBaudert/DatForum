@@ -27,7 +27,6 @@ h3{
    margin: 5px 0px;
 }
 
-
 .post-header{
    padding: 5px 20px 5px 20px;
    background-color: #525252;
@@ -65,7 +64,7 @@ h3{
 }
 
 .pagination{
-   margin: 10px 0px;
+   margin: 0px 0px;
 }
 
 .breadcrumb{
@@ -90,4 +89,12 @@ hr{
 
 p{
    margin: 10px 5px;
+}
+
+
+
+@media (min-width: 979px) {
+  ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+  }
 }
