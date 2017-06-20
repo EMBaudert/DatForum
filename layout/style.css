@@ -92,6 +92,11 @@ p{
    margin: 10px 5px;
 }
 
+.nospace{
+   margin: 0px 0px;
+   padding: 0px 0px;
+}
+
 .footer{
   position: fixed;
   bottom: 0px;
@@ -114,16 +119,16 @@ p{
    .profile-picture{
       width: 120px;
    }
+   .minheight{
+      min-height: 90px;
+   }
+   ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+   }
 }
 
 @media (max-width: 979px) {
    .profile-picture{
       width: 80px;
    }
-}
-
-@media (min-width: 979px) {
-  ul.nav li.dropdown:hover > ul.dropdown-menu {
-    display: block;
-  }
 }
