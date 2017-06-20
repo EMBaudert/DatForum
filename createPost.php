@@ -3,9 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>Summernote</title>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script> 
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+  
+  <!-- Das neueste kompilierte und minimierte CSS -->
+   <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
+
+   <!-- Optionales Theme -->
+   <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap-theme.min.css">
+
+   <link rel="stylesheet" href="layout/style.css">
+   <!-- Latest compiled and minified JavaScript -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <script src="bootstrap/less/dist/js/bootstrap.min.js" ></script>
+  
+  
   <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" rel="stylesheet">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
 </head>
@@ -42,7 +52,7 @@
   </script>
   
     <?php
-         include_once('inc/navbar.php');
+         include_once('inc/footer.html');
       ?>
 </body>
 </html>

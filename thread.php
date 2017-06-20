@@ -6,15 +6,15 @@
 <html>
 
    <!-- Das neueste kompilierte und minimierte CSS -->
-   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+   <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
 
    <!-- Optionales Theme -->
-   <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+   <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap-theme.min.css">
 
    <link rel="stylesheet" href="layout/style.css">
    <!-- Latest compiled and minified JavaScript -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+   <script src="bootstrap/less/dist/js/bootstrap.min.js" ></script>
 	
 
    <head>
@@ -33,7 +33,6 @@
             echo "<meta http-equiv=\"refresh\" content=\"0; URL=index.php\" />";
          }
          $thread = SQLQuery("SELECT FK_menu FROM thread WHERE PKID_thread = " .$_GET['thread']);
-         echo $thread['FK_menu']."hey";
          $menupoint = SQLQuery("SELECT * FROM menu WHERE PKID_menu = " .$thread['FK_menu']);
       
          createBreadcrumb($thread['FK_menu']);
@@ -43,7 +42,9 @@
          
       ?>
       
+      <?php include_once('inc/footer.html'); ?>         
+         
       </div>
-      <?php include_once('inc/footer.html'); ?>
+
    </body>
 </html>
