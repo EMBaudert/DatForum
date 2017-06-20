@@ -1,28 +1,26 @@
 <?php
-      
-      
 
       function create2ndRow($param){
       
-      $upperMenuName = SQLQuery("SELECT * FROM menu WHERE PKID_menu = " . $_GET['menu']);
+      $upperMenuName = SQLQuery("SELECT * FROM menu WHERE PKID_menu = ". $_GET['menu']);
       
-         echo "<div class=\"row\">
-            <div class=\"col-xs-12 col-sm-12 col-md-8 col-lg-8 pag-offset\">
-               <h3>".$upperMenuName['title']."</h3>   
+        echo '<div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pag-offset">
+               <h3>'.$upperMenuName['title'].'</h3>   
             </div>
-            <div class=\"col-xs-6 col-sm-6 col-md-2 col-lg-2 pag-offset\">";
+            <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 pag-offset">';
                if($param){
-                  echo"<div class=\"btn-group\" role=\"group\">
-                              <div type=\"button\" class=\"btn btn-default \">
+                  echo'<div class="btn-group" role="group">
+                              <div type="button" class="btn btn-default">
                                  Neuer Beitrag
                               </div>
-                           </div>";  
+                           </div>';  
                }
-            echo "</div>
-            <div class=\"col-xs-6 col-sm-6 col-md-2 col-lg-2 pag-offset\">";
+            echo '</div>
+            <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 pag-offset">';
                echo createPagination($param);
-            echo "</div>
-         </div>";
+            echo '</div>
+         </div>';
       }
 
       function createMenuPoint($title, $count, $nextPoint, $threads){
@@ -39,34 +37,30 @@
         }
          
       
-         echo "<li class=\"list-group-item\">
-                  <div class=\"row\">
-                     <div class=\"col-xs-12 col-sm-12 col-md-10 col-lg-10\"><a href=\"menu.php?".$ausgabe."\">".$title."</a></div>";
+         echo '<li class="list-group-item">
+                  <div class="row">
+                     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                     <span class="glyphicon glyphicon-th-list"></span><a href="menu.php?'.$ausgabe.'">  '.$title.'</a>
+                     </div>';
          
-          echo     "<div class=\"col-xs-12 col-sm-12 col-md-2 col-lg-2\">".$count."</div>";
-        
-         
-         echo     "</div>";
-         
-         echo "</li>";
+          echo     '<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">'.$count.'<div>
+                  </div>
+               </li>';
       } 
       
       function createMenuPointBack(){
-         
-         
-         
-         $upperMenu = SQLQuery("SELECT FK_menu FROM menu WHERE PKID_menu=".$_GET['menu']);;
+        
+        $upperMenu = SQLQuery("SELECT FK_menu FROM menu WHERE PKID_menu=".$_GET['menu']);;
          
          if($upperMenu['FK_menu']==NULL){
             $upperMenu['FK_menu']=0;
          }
 
-         echo "<li class=\"list-group-item\">
-            <div class=\"row\">
-               <div class=\"col-xs-12 col-sm-12 col-md-9 col-lg-9\"><a href=\"menu.php?menu=".$upperMenu['FK_menu']."&page=1\">...</a></div>
-            </div>";
-         
-         echo "</li>";
+         echo '<li class="list-group-item">
+            <div class="row">
+               <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9"><span class="glyphicon glyphicon-level-up"></span><a href="menu.php?menu='.$upperMenu['FK_menu'].'&page=1"> ...</a></div>
+            </div>
+            </li>';
          
          
       }
@@ -77,7 +71,7 @@
          echo "<div class=\"row\"><ul class=\"hey list-group\">";
          
          if($_GET['menu']!="0"){
-           // createMenuPointBack();
+            createMenuPointBack();
          }
          
          
@@ -103,7 +97,8 @@
       function createThreadOverview($id){
          global $pdo;
          
-         echo "<ul class=\"list-group\">";
+         echo '<div class="row">
+         <ul class="list-group">';
          
          createMenuPointBack();
          
@@ -122,7 +117,7 @@
             $i++;
          }
          
-         echo "</ul>";         
+         echo '</ul></div>';         
          
       }
       
@@ -131,14 +126,14 @@
       
          $username = SQLQuery("SELECT username FROM user WHERE PKID_user = ".$creator);
          
-         echo "<li class=\"list-group-item\">
-               <div class=\"row\">
+         echo '<li class="list-group-item">
+               <div class="row">
                
-                  <div class=\"col-xs-12 col-sm-12 col-md-8 col-lg-8\"><a href=\"thread.php?thread=".$PKID."&page=1\">".$title."</a></div>
-                  <div class=\"col-xs-6 col-sm-6 col-md-2 col-lg-2\"><a href=\"user.php?user=".$creator."\">".$username['username']."</a></div>
-                  <div class=\"col-xs-6 col-sm-6 col-md-2 col-lg-2\">Beitr&auml;ge: ".getPostNumber($PKID)."</div>
+                  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"><span class="glyphicon glyphicon-comment"></span><a href="thread.php?thread='.$PKID.'&page=1"> '.$title.'</a></div>
+                  <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2"><a href="user.php?user='.$creator.'">'.$username['username'].'</a></div>
+                  <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">Beitr&auml;ge: '.getPostNumber($PKID).'</div>
                </div>
-            </li>";
+            </li>';
          
       }
       

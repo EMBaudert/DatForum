@@ -10,12 +10,16 @@ require_once 'func/menufunc.php';
 			<link rel="SHORTCUT ICON" href="layout/icon.ico" />
 			<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 
+         <<!-- Das neueste kompilierte und minimierte CSS -->
+         <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
+
          <!-- Optionales Theme -->
-         <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+         <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap-theme.min.css">
+
          <link rel="stylesheet" href="layout/style.css">
          <!-- Latest compiled and minified JavaScript -->
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+         <script src="bootstrap/less/dist/js/bootstrap.min.js" ></script>
       	
 		</head>
 		<body>
@@ -60,10 +64,9 @@ require_once 'func/menufunc.php';
 				}else{
 					echo "Keine Ahnung, was hier passieren soll^^!";
 				}
+            
+            include_once 'inc/footer.html';
 			?>
 			</div>
-		<?php
-           include_once 'inc/footer.html';
-         ?>
 		</body>
 	</html>

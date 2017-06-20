@@ -1,5 +1,81 @@
 <?php
 
+   function createPostOverview(){
+      global $pdo;
+            
+      //createPagination(0);
+                  
+      echo '<div class="row"><ul class="list-group">';
+                  
+      $i=0;
+      foreach ($pdo->query("SELECT * FROM post WHERE FK_thread = ".$_GET['thread']) as $row) {
+                  
+         if($i>= ($_GET['page']-1*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
+                      
+            createPost($row);
+         }
+         $i++;            
+      }
+                  
+      echo '</ul></div>';
+   }    
+      
+   function createPost($post){
+         
+      $user = SQLQuery("SELECT * FROM user WHERE PKID_user = ".$post['FK_user']);
+      $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = ".$post['FK_thread']);
+
+ 		//<hr class="colorline">                  <div class='.row"></div>
+      echo '<div class="panel panel-primary">
+         <div class="panel-heading">
+            '.$post['date'].' '.$post['time'].'
+         </div>
+            			
+         <div class="row equal">
+            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 post-userinfo ">
+               <div class="hidden-xs hidden-sm post-userinfo nospace">
+                  <p><a href="intern.php?p=profile&uid='.$post['FK_user'].'">'.$user['username'].'</a><br>' 
+                     .$user['usergroup'].
+                  '</p>
+                  <img src="'.$user['pb_path'].'" class="profile-picture">
+               </div>
+               <div class="hidden-md hidden-lg post-userinfo nospace">
+                  <div class="col-xs-6 post-userinfo nospace">
+                     <p><a href="intern.php?p=profile&uid='.$post['FK_user'].'">'.$user['username'].'</a><br>'
+                  	  .$user['usergroup'].
+                     '</p>
+                  </div>
+                  <div class="col-xs-6 post-userinfo">
+                     <img src="'.$user['pb_path'].'" class="profile-picture">
+                  </div>
+               </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 post-content ">
+               <p><b>'.$title['theme'].'</b></p>
+               <hr>
+               <p class="content minheight">'.$post['text'].'</p>
+               <hr>
+               <p>'.$user['signature'].'</p>
+            </div>
+         </div>
+            			
+         <div class="panel-footer ">
+            <div class="row footer-color">
+               <div class="btn-group pull-right" role="group">';
+						   
+					if(isset($_SESSION["PKID"]) && $user['PKID_user'] == $_SESSION["PKID"]){
+					    echo  '<a class ="btn btn-default" href="javascript:alert()"><span class="glyphicon glyphicon-edit"></span> Edit</a>';	
+               }
+					    echo  '<a class ="btn btn-default" href="javascript:alert()"><span class="glyphicon glyphicon-edit"></span> Melden</a>
+                           <a class ="btn btn-default" id="target"><span class="glyphicon glyphicon-bullhorn"></span> Zitieren</a>
+               </div>
+            </div>
+         </div>
+         </div>';
+
+         }
+
+  
          function create2ndRow(){
          global $pdo;
             
@@ -23,84 +99,6 @@
                
          }
       
-         function createPostOverview(){
-            global $pdo;
-         
-               //createPagination(0);
-               
-               echo "<div class=\"row\"><ul class=\"list-group\">";
-               
-               $i=0;
-               foreach ($pdo->query("SELECT * FROM post WHERE FK_thread = ".$_GET['thread']) as $row) {
-               
-                  if($i>= ($_GET['page']-1*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
-                   
-                     createPost($row);
-                  }
-                  $i++;            
-               }
-               
-               echo "</ul></div>";
-         }    
-      
-         function createPost($post){
-         
-            $user = SQLQuery("SELECT * FROM user WHERE PKID_user = ".$post['FK_user']);
-            $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = ".$post['FK_thread']);
-
- 		//<hr class=\"colorline\">                  <div class=\".row\"></div>
-            echo "
-
-                  <div class=\"panel panel-primary\">
-                     <div class=\"panel-heading\">
-            				".$post['date']." ".$post['time']."
-            			</div>
-            			
-                     <div class=\"row equal\">
-               			<div class=\"col-xs-12 col-sm-12 col-md-2 col-lg-2 post-userinfo \">
-                           <div class=\"hidden-xs hidden-sm post-userinfo nospace\">
-                  			   <p><a href=\"intern.php?p=profile&uid=".$post['FK_user']."\">".$user['username']."</a><br>" 
-                  				.$user['usergroup']."</p>
-                  				<img src=\"".$user['pb_path']."\" class=\"profile-picture\">
-                  			</div>
-                           <div class=\"hidden-md hidden-lg post-userinfo nospace\">
-                              <div class=\"col-xs-6 post-userinfo nospace\">
-                  			     <p><a href=\"intern.php?p=profile&uid=".$post['FK_user']."\">".$user['username']."</a><br>"
-                  				  .$user['usergroup']."</p>
-                              </div>
-                              <div class=\"col-xs-6 post-userinfo\">
-                  				  <img src=\"".$user['pb_path']."\" class=\"profile-picture\">
-                              </div>
-                  			</div>
-                        </div>
-               			<div class=\"col-xs-12 col-sm-12 col-md-10 col-lg-10 post-content \">
-               				<p><b>".$title['theme']."</b></p>
-               				<hr>
-               				<p class=\"content minheight\">".$post['text']."</p>
-               				<hr>
-               				<p>".$user['signature']."</p>
-               			</div>
-               		</div>
-            			
-            			<div class=\"panel-footer \">
-                        <div class=\"row footer-color\">
-                           <div class=\"btn-group pull-right\" role=\"group\">";
-						   
-							if(isset($_SESSION["PKID"]) && $user['PKID_user'] == $_SESSION["PKID"]){
-							echo "<a class =\"btn btn-default\" href=\"javascript:alert()\"><span class=\"glyphicon glyphicon-edit\"></span> Edit</a>";	
-								
-							}
-						   
-							echo      "<a class =\"btn btn-default\" href=\"javascript:alert()\"><span class=\"glyphicon glyphicon-edit\"></span> Melden</a>
-                              <a class =\"btn btn-default\" id=\"target\"><span class=\"glyphicon glyphicon-bullhorn\"></span> Zitieren</a>
-
-                           </div>
-                        </div>
-            			</div>
-                  </div>";
-
-         }
-         
          function createPagination(){
             //getPagenumber
          
@@ -188,8 +186,3 @@
          }
 
 ?>
-
-<script>
-
-
-</script>

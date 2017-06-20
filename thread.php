@@ -1,5 +1,5 @@
 <?php
-   require 'func/threadfunc.php';
+   require 'func/thread.func.php';
 ?>
 
 
