@@ -35,7 +35,6 @@
    
       if(!isset($_GET['menu'])){
          $_GET['menu'] = "0";
-         echo $_GET['menu'];
       }
       if(!isset($_GET['page'])){
          $_GET['page'] = "1";

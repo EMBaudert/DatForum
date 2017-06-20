@@ -29,7 +29,11 @@
          const MAX_ENTRY_NUMBER = 5;
          $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
       
+         if(!isset($_GET['thread']) && !isset($_GET['page'])){
+            echo "<meta http-equiv=\"refresh\" content=\"0; URL=index.php\" />";
+         }
          $thread = SQLQuery("SELECT FK_menu FROM thread WHERE PKID_thread = " .$_GET['thread']);
+         echo $thread['FK_menu']."hey";
          $menupoint = SQLQuery("SELECT * FROM menu WHERE PKID_menu = " .$thread['FK_menu']);
       
          createBreadcrumb($thread['FK_menu']);
@@ -40,13 +44,6 @@
       ?>
       
       </div>
-	  
-	  <script>
-	  function alert(){
-		  alert("test");
-	  }
-	  </script>
-   
       <?php include_once('inc/footer.html'); ?>
    </body>
 </html>
