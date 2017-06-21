@@ -1,7 +1,7 @@
 <?php	
  session_start();
 ?>
-
+      <div class="row">
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
 					<div class="navbar-header">
@@ -20,33 +20,33 @@
                   
                      <?php
                      if(isset($_SESSION['logged'])&&$_SESSION['logged']==true){
-                        echo "<li class=\"dropdown\">
-   								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">
-                           <span class=\"glyphicon glyphicon-user\"></span> Profile <span class=\"caret\"></span></a>
-   								<ul class=\"dropdown-menu\">
-   									<li><a href=\"intern.php?p=profile&uid=".$_SESSION['PKID']."\">Profile</a></li>
-   									<li><a href=\"#\">Posts</a></li>
+                        echo '<li class="dropdown">
+   								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                           <span class="glyphicon glyphicon-user"></span> Profile <span class="caret"></span></a>
+   								<ul class="dropdown-menu">
+   									<li><a href="intern.php?p=profile&uid='.$_SESSION['PKID'].'">Profile</a></li>
+   									<li><a href="#">Posts</a></li>
    								</ul>
    							  </li>
-                <li><a href=\"intern.php?p=logout\"><span class=\"glyphicon glyphicon-log-out\"></span> Logout </a></li>";
+                <li><a href="intern.php?p=logout"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>';
 
                      }else{
-   							echo "<li class=\"dropdown\">
-   								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-plus-sign\"></span> Register </span></a>
-   								<ul class=\"dropdown-menu\">
-   									<li>";
+   							echo '<li class="dropdown">
+   								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-plus-sign"></span> Register </span></a>
+   								<ul class="dropdown-menu">
+   									<li>';
                         include 'inc/register.php';
-                        echo "</li>
+                        echo '</li>
    								</ul>
    							</li>
-   							<li class=\"dropdown\">
-   								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-log-in\"></span> Login </a>
-   								<ul class=\"dropdown-menu\">
-   									<li>";
+   							<li class="dropdown">
+   								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> Login </a>
+   								<ul class="dropdown-menu">
+   									<li>';
                         include 'inc/login.php';
-                        echo "</li>
+                        echo '</li>
    								</ul>
-   							</li>";
+   							</li>';
                      }
                      ?>
 						</ul>
@@ -63,5 +63,6 @@
 					</div>
 			  </div>
 			</nav>
+      </div>
 	  
 	  
