@@ -11,7 +11,7 @@
             <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
                if($param){
                   echo'<div class="btn-group" role="group">
-                              <div type="button" onclick="zeigeFenster()" class="btn btn-default">
+                              <div type="button" id="button" class="btn btn-default">
                                  Neuer Beitrag
                               </div>
                            </div>';  
@@ -144,8 +144,8 @@
       }
       
       function createBreadcrumb($id){
-         echo '<div class=\"row\"><ol class=\"breadcrumb\">
-         <li><a href=\"menu.php?menu=0&page=1\">Main menu</a></li>';
+         echo '<div class="row"><ol class="breadcrumb">
+         <li><a href="menu.php?menu=0&page=1">Main menu</a></li>';
          recursiveBreadCrumb($id,1);
          
          echo '</ol></div>';
@@ -235,26 +235,3 @@
       
    ?>
    
-   <dialog id="dialog"> <h2>Anmeldung</h2> <form method="post"> <label for="email">Bitte geben Sie Ihre Email-Adresse an: </label>
-   <input id="email" type="email" /> </form> 
-   <button id="Anmeldung">Anmelden</button> <button id="Abbruch">Abbrechen</button> </dialog>
-   <script>
-   
-    var dialog = document.getElementById('dialog'),
-	  Anmeldung = document.getElementById("Anmeldung"),
-	  Abbruch = document.getElementById("Abbruch");
-	  
-	  Anmeldung.addEventListener('click',schlieﬂeFenster);
-	  Abbruch.addEventListener('click',schlieﬂeFenster);
-
-	
-	function zeigeFenster() {
-	  alert("age");
-     dialog.showModal();
-	}
-
-    function schlieﬂeFenster(){
-	  dialog.close(); 
-    }
-   
-   </script>
