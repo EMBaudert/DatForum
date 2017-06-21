@@ -52,9 +52,9 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 post-content ">
                <p><b>'.$title['theme'].'</b></p>
-               <hr>
+               <hr class="hr-postcontent">
                <p class="content minheight">'.$post['text'].'</p>
-               <hr>
+               <hr class="hr-postcontent">
                <p>'.$user['signature'].'</p>
             </div>
          </div>

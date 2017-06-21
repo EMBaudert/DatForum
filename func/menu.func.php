@@ -206,6 +206,10 @@
                }else{
                   echo "<li><a href=\"menu.php?menu=".$_GET['menu']."&page=".($_GET['page']-1)."\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
             }
+            
+            if($pa == 0){
+               echo "<li class=\"active\"><a href=\"menu.php?menu=".$_GET['menu']."&page=1\">1</a></li>";   
+            }
 
             //show all pages
             for($i=1;$i<$pa+1; $i++){
@@ -218,7 +222,7 @@
             }
             
             //last button, if last site is selected buttons get deactivated
-            if($_GET['page'] == ceil($pa)){
+            if($_GET['page'] == ceil($pa) || $pa == 0){
                   echo "<li class=\"disabled\"><a href=\"\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
                }else{
                   echo "<li><a href=\"menu.php?menu=".$_GET['menu']."&page=".($_GET['page']+1)."\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
