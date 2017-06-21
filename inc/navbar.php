@@ -2,9 +2,9 @@
  session_start();
 ?>
       <div class="row">
-			<nav class="navbar navbar-default navbar-blue">
-				<div class="container-fluid navbar-blue">
-					<div class="navbar-header navbar-blue">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
 					  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -12,7 +12,7 @@
 					  </button>
 					  <a class="navbar-brand" href="menu.php?menu=0&page=1">Forum</a>
 					</div>
-					<div class="collapse navbar-collapse navbar-blue" id="myNavbar">
+					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
 							<li><a href="index.php">Home</a></li>
                   </ul>
@@ -51,9 +51,9 @@
                      ?>
 						</ul>
 						<form class="navbar-form navbar-left">
-							<div class="input-group navbar-blue">
+							<div class="input-group">
 								<input type="text" class="form-control" placeholder="Search">
-								<div class="input-group-btn navbar-blue">
+								<div class="input-group-btn">
 									<button class="btn btn-default" type="submit">
 										<i class="glyphicon glyphicon-search"></i>
 									</button>

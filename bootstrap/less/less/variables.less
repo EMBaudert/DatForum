@@ -7,6 +7,21 @@
 //
 //## Gray and brand colors for use across Bootstrap.
 
+@mydefault:             #337bb7;
+@mydefault-lighter:     #65a6db;
+@mydefault-lightest     #84b4db;
+@mydefault-darker:      #3f6889;
+@my-default-darkest:    #114877;
+
+@mycontrast:             #ffac3a;
+@mycontrast-lighter:     #ffc16b;
+@mycontrast-lightest     #ffd192;
+@mycontrast-darker:      #bf9050;
+@mycontrast-darkest:     #a66813;
+
+//@mydefault:             #56df32;
+//@mycontrast:    #f7384e;
+
 @gray-base:              #000;
 @gray-darker:            lighten(@gray-base, 13.5%); // #222
 @gray-dark:              lighten(@gray-base, 20%);   // #333
@@ -145,8 +160,8 @@
 @btn-font-weight:                normal;
 
 @btn-default-color:              #333;
-@btn-default-bg:                 #fff;
-@btn-default-border:             #ccc;
+@btn-default-bg:                 @mycontrast;
+@btn-default-border:             darken(@btn-default-bg, 5%);
 
 @btn-primary-color:              #fff;
 @btn-primary-bg:                 @brand-primary;
@@ -232,7 +247,7 @@
 //## Dropdown menu container and contents.
 
 //** Background for the dropdown menu.
-@dropdown-bg:                    #337bB7;
+@dropdown-bg:                    @mydefault;
 //** Dropdown menu `border-color`.
 @dropdown-border:                rgba(0,0,0,.15);
 //** Dropdown menu `border-color` **for IE8**.
@@ -365,27 +380,27 @@
 @navbar-collapse-max-height:       340px;
 
 @navbar-default-color:             #000;
-@navbar-default-bg:                #337bb7;
+@navbar-default-bg:                @mydefault;
 @navbar-default-border:            darken(@navbar-default-bg, 6.5%);
 
 // Navbar links
 @navbar-default-link-color:                #fff;
 @navbar-default-link-hover-color:          #fff;
-@navbar-default-link-hover-bg:             #65a5db;
-@navbar-default-link-active-color:         #65a5db;
+@navbar-default-link-hover-bg:             @mydefault-lighter;
+@navbar-default-link-active-color:         @mydefault-lighter;
 @navbar-default-link-active-bg:            darken(@navbar-default-bg, 6.5%);
-@navbar-default-link-disabled-color:       #65a5db;
+@navbar-default-link-disabled-color:       @mydefault-lighter;
 @navbar-default-link-disabled-bg:          transparent;
 
 // Navbar brand label
 @navbar-default-brand-color:               @navbar-default-link-color;
-@navbar-default-brand-hover-color:         #84d4db;//darken(@navbar-default-brand-color, 10%);
+@navbar-default-brand-hover-color:         @mydefault-lighter;//darken(@navbar-default-brand-color, 10%);
 @navbar-default-brand-hover-bg:            transparent;
 
 // Navbar toggle
-@navbar-default-toggle-hover-bg:           #2A2CEA;
-@navbar-default-toggle-icon-bar-bg:        #2A2CEA;
-@navbar-default-toggle-border-color:       #2A2CEA;
+@navbar-default-toggle-hover-bg:           @mydefault-darker;
+@navbar-default-toggle-icon-bar-bg:        @mydefault-darker;
+@navbar-default-toggle-border-color:       @mydefault-darker;
 
 
 //=== Inverted navbar
@@ -447,21 +462,21 @@
 //
 //##
 
-@pagination-color:                     @link-color;
+@pagination-color:                     #333;
 @pagination-bg:                        #fff;
-@pagination-border:                    #ddd;
+@pagination-border:                    @gray-lighter;
 
 @pagination-hover-color:               @link-hover-color;
-@pagination-hover-bg:                  @gray-lighter;
-@pagination-hover-border:              #ddd;
+@pagination-hover-bg:                  @mycontrast;
+@pagination-hover-border:              @gray-lighter;
 
-@pagination-active-color:              #fff;
-@pagination-active-bg:                 @brand-primary;
-@pagination-active-border:             @brand-primary;
+@pagination-active-color:              #333;
+@pagination-active-bg:                 @mycontrast;
+@pagination-active-border:             @gray-lighter;
 
 @pagination-disabled-color:            @gray-light;
 @pagination-disabled-bg:               #fff;
-@pagination-disabled-border:           #ddd;
+@pagination-disabled-border:           @gray-lighter;
 
 
 //== Pager
@@ -704,13 +719,13 @@
 
 @panel-bg:                    #fff;
 @panel-body-padding:          15px;
-@panel-heading-padding:       10px 15px;
+@panel-heading-padding:       10px 20px;
 @panel-footer-padding:        @panel-heading-padding;
 @panel-border-radius:         @border-radius-base;
 
 //** Border color for elements within panels
-@panel-inner-border:          #ddd;
-@panel-footer-bg:             #f5f5f5;
+@panel-inner-border:          @gray-light;
+@panel-footer-bg:             #ccc;
 
 @panel-default-text:          @gray-dark;
 @panel-default-border:        #ddd;
@@ -790,9 +805,9 @@
 @breadcrumb-padding-vertical:   8px;
 @breadcrumb-padding-horizontal: 15px;
 //** Breadcrumb background color
-@breadcrumb-bg:                 #f5f5f5;
+@breadcrumb-bg:                 #ccc;
 //** Breadcrumb text color
-@breadcrumb-color:              #ccc;
+@breadcrumb-color:              #969696;
 //** Text color of current page in the breadcrumb
 @breadcrumb-active-color:       @gray-light;
 //** Textual separator for between breadcrumb elements

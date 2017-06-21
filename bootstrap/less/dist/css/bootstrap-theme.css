@@ -3,6 +3,8 @@
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+@mydefault-lightest #84b4db;
+@mycontrast-lightest #ffd192;
 .btn-default,
 .btn-primary,
 .btn-success,
@@ -62,26 +64,26 @@ fieldset[disabled] .btn-danger {
   background-image: none;
 }
 .btn-default {
-  text-shadow: 0 1px 0 #fff;
-  background-image: -webkit-linear-gradient(top, #fff 0%, #e0e0e0 100%);
-  background-image:      -o-linear-gradient(top, #fff 0%, #e0e0e0 100%);
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e0e0e0));
-  background-image:         linear-gradient(to bottom, #fff 0%, #e0e0e0 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+  text-shadow: 0 1px 0 #ffac3a;
+  background-image: -webkit-linear-gradient(top, #ffac3a 0%, #fc9200 100%);
+  background-image:      -o-linear-gradient(top, #ffac3a 0%, #fc9200 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffac3a), to(#fc9200));
+  background-image:         linear-gradient(to bottom, #ffac3a 0%, #fc9200 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffac3a', endColorstr='#fffc9200', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-repeat: repeat-x;
-  border-color: #dbdbdb;
-  border-color: #ccc;
+  border-color: #f28c00;
+  border-color: #ffa121;
 }
 .btn-default:hover,
 .btn-default:focus {
-  background-color: #e0e0e0;
+  background-color: #fc9200;
   background-position: 0 -15px;
 }
 .btn-default:active,
 .btn-default.active {
-  background-color: #e0e0e0;
-  border-color: #dbdbdb;
+  background-color: #fc9200;
+  border-color: #f28c00;
 }
 .btn-default.disabled,
 .btn-default[disabled],
@@ -101,7 +103,7 @@ fieldset[disabled] .btn-default:active,
 .btn-default.disabled.active,
 .btn-default[disabled].active,
 fieldset[disabled] .btn-default.active {
-  background-color: #e0e0e0;
+  background-color: #fc9200;
   background-image: none;
 }
 .btn-primary {

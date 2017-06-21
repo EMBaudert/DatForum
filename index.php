@@ -1,5 +1,5 @@
 <?PHP
-require_once 'func/menufunc.php';
+require_once 'func/menu.func.php';
 ?>
 <!DOCTYPE html>
 	<html>
@@ -12,8 +12,6 @@ require_once 'func/menufunc.php';
 
          <!-- Optionales Theme -->
          <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap-theme.min.css">
-
-         <link rel="stylesheet" href="layout/style.css">
          <!-- Latest compiled and minified JavaScript -->
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
          <script src="bootstrap/less/dist/js/bootstrap.min.js" ></script>

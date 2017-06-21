@@ -4,11 +4,11 @@
       
       $upperMenuName = SQLQuery("SELECT * FROM menu WHERE PKID_menu = ". $_GET['menu']);
       
-        echo '<div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pag-offset">
+        echo '<div class="row marg-tb-5">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                <h3>'.$upperMenuName['title'].'</h3>   
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 pag-offset">';
+            <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
                if($param){
                   echo'<div class="btn-group" role="group">
                               <div type="button" class="btn btn-default">
@@ -17,7 +17,7 @@
                            </div>';  
                }
             echo '</div>
-            <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 pag-offset">';
+            <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
                echo createPagination($param);
             echo '</div>
          </div>';
@@ -195,7 +195,7 @@
          }
     //     echo $pageNumber['cnt'];
          echo "<nav aria-label=\"pagination\">
-               <ul class=\"pagination \">";          
+               <ul class=\"pagination pull-right\">";          
          
             //calculate needed pages
             $pa = $pageNumber['cnt'] / MAX_ENTRY_NUMBER;
