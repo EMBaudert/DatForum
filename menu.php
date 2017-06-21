@@ -11,8 +11,8 @@
    <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap-theme.min.css">
 
    <!-- Latest compiled and minified JavaScript -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-   <script src="bootstrap/less/dist/js/bootstrap.min.js" ></script>
+   <script src="bootstrap/jquery-3.2.1.min.js"></script>
+   <script src="bootstrap/less/dist/js/bootstrap.min.js"></script>
 
    <head>
       <title>Forum</title>
