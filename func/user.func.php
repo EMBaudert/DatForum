@@ -10,13 +10,14 @@ function checklogin($user,$pass){
 	$login=$temppass->fetch();
 	if(isset($login["password"])&&$pass==$login["password"]){
       $_SESSION["PKID"]=$login["PKID_user"];
+      $_SESSION["username"]=$user;
 		return TRUE;
 	} 
 	else{
 		if(!isset($login["password"])){
-			echo "Benutzername existiert nicht!";
+			echo "<p>Der Benutzername existiert nicht!</p>";
 		}else{
-			echo "Falsches Passwort!";
+			echo "<p>Falsches Passwort!</p>";
 		}
 		return FALSE;
 	}

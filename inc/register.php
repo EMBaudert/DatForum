@@ -1,5 +1,5 @@
 <form action="intern.php?p=register" method="POST">
-<div style="min-width:300px;">
+<div style="width:300px;">
    <div class="input-group" style="margin:10px;">
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Username</span>
      <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="username" 
@@ -29,7 +29,7 @@
      <input type="password" class="form-control" placeholder="Repeat Password" aria-describedby="basic-addon1" name="password2">
    </div>
    <div align="right">
-      <button style="margin:10px;align:right;" class="btn btn-default" type="submit" >
+      <button style="margin:10px;align:right;" class="btn btn-default" name="submit" type="submit" >
        <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Sign Up
       </button>
    </div>
