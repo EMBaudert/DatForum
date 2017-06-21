@@ -5485,7 +5485,7 @@ button.list-group-item-danger.active:focus {
 .panel-footer {
   padding: 10px 20px;
   background-color: #ccc;
-  border-top: 1px solid #777;
+  border-top: 1px solid #aaa;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
 }
@@ -5676,13 +5676,13 @@ button.list-group-item-danger.active:focus {
 }
 .panel-group .panel-heading + .panel-collapse > .panel-body,
 .panel-group .panel-heading + .panel-collapse > .list-group {
-  border-top: 1px solid #777;
+  border-top: 1px solid #aaa;
 }
 .panel-group .panel-footer {
   border-top: 0;
 }
 .panel-group .panel-footer + .panel-collapse .panel-body {
-  border-bottom: 1px solid #777;
+  border-bottom: 1px solid #aaa;
 }
 .panel-default {
   border-color: #ddd;
@@ -6784,13 +6784,13 @@ h3 {
 }
 .post-content {
   padding: 10px 20px 10px 20px;
-  border-left: 1px solid #777;
+  border-left: 1px solid #bbb;
 }
 .marg-tb-5 {
   margin-bottom: 10px;
 }
 .hr-postcontent {
-  background-color: #777;
+  border-color: #bbb;
 }
 hr {
   margin: 0 5px 0 5px;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?PHP
 include 'func/user.func.php';
-require_once 'func/menufunc.php';
+require_once 'func/menu.func.php';
 ?>
 	<html>
 		<head>
