@@ -50,12 +50,15 @@
                   </div>
                </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 post-content ">
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 post-content minheight">
                <p><b>'.$title['theme'].'</b></p>
                <hr class="hr-postcontent">
                <p class="content minheight">'.$post['text'].'</p>
-               <hr class="hr-postcontent">
-               <p>'.$user['signature'].'</p>
+
+               <div class="min-height-f">
+                  <hr class="hr-postcontent">
+                  <p>'.$user['signature'].'</p>
+               </diV>
             </div>
          </div>
             			
