@@ -1,5 +1,5 @@
 <?PHP
-require_once 'func/menufunc.php';
+require_once 'func/menu.func.php';
 require_once 'func/message.func.php';
 ?>
 <!DOCTYPE html>
@@ -9,11 +9,12 @@ require_once 'func/message.func.php';
 			<title>DatForum - Startseite</title>
 			<link rel="SHORTCUT ICON" href="layout/icon.ico" />
          <!-- Das neueste kompilierte und minimierte CSS -->
-         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+         <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
+         <link rel="stylesheet" href="layout/chat.css">
+         
 
          <!-- Optionales Theme -->
-         <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-         <link rel="stylesheet" href="layout/style.css">
+         <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap-theme.min.css">
 
          <!-- Latest compiled and minified JavaScript -->
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
