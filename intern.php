@@ -10,7 +10,7 @@ require_once 'func/menu.func.php';
 			<link rel="SHORTCUT ICON" href="layout/icon.ico" />
 			<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 
-         <<!-- Das neueste kompilierte und minimierte CSS -->
+         <!-- Das neueste kompilierte und minimierte CSS -->
          <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
 
          <!-- Optionales Theme -->
