@@ -57,7 +57,26 @@
 
      
          <form action="intern.php?p=profile&uid=<?PHP echo $_SESSION["PKID"]; ?>" method="POST" enctype="multipart/form-data"><br />
-            <div style="width:300px;">
+<div class="row">
+   <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"> 
+   <div align="left">
+      <img title="Profilbild" src="<?PHP echo $data["pb_path"]; ?>" class="img-rounded" width="200px" />
+   </div>
+   <div class="input-group" style="margin:10px;">
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Profile Picture</span>
+  
+         <label class="btn btn-default" style="width:160px;">
+            Choose new file <input class="form-control" type="file" name="datei" style="display:none;" />
+         </label>
+    </div>
+<div class="form-group">
+  <label for="comment">Signature:</label>
+  <textarea class="form-control" rows=5 cols=40 style="resize:none;max-width:350px;" name="signature" id="comment"><?PHP if(isset($data["signature"])){echo $data["signature"]; }?></textarea>
+</div>
+
+</div>
+
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
    <div class="input-group" style="margin:10px;">
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Username</span>
      <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="username" 
@@ -79,7 +98,7 @@
      <?PHP if(isset($data["email"])){?>value="<?PHP echo $data["email"]."\""; }?>>
    </div>
    <div class="dropup">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin:10px; width:280px;">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin:10px; width:320px;">
     Change Password
     <span class="caret"></span>
   </button>
@@ -107,36 +126,31 @@
    
    
   
-   <div align="right">
+   <div align="left">
       <button style="margin:10px;align:right;" class="btn btn-default" name="submit" type="submit" >
        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save changes
       </button>
    </div>
-   <div align="center">
-      <img title="Profilbild" src="<?PHP echo $data["pb_path"]; ?>" class="img-rounded" width="200px" />
    </div>
-   <div class="input-group" style="margin:10px;">
-     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Profile Picture</span>
-  
-         <label class="btn btn-default" style="width:160px;">
-            Choose new file <input class="form-control" type="file" name="datei" style="display:none;" />
-         </label>
-    </div>
-<div class="form-group">
-  <label for="comment">Signature:</label>
-  <textarea class="form-control" rows=5 cols=40 style="resize:none" name="signature" id="comment"><?PHP if(isset($data["signature"])){echo $data["signature"]; }?></textarea>
 </div>
-
-</div>
-
 
          
          </form>
 <?PHP  
       }else{
 ?>
+<div class="row">
+ <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+   <div align="left">
+      <img title="Profilbild" src="<?PHP echo $data["pb_path"]; ?>" class="img-rounded" width="200px" />
+   </div>
+<div class="form-group">
+  <label for="comment">Signature:</label>
+   <p><?PHP if(isset($data["signature"])){echo $data["signature"]; }?></p>
+</div>
 
-                     <div style="width:300px;">
+</div>
+                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
    <div class="input-group" style="margin:10px;">
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Username</span>
      <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="username" 
@@ -157,15 +171,8 @@
      <input type="email" class="form-control" placeholder="E-Mail Address" aria-describedby="basic-addon1" name="email" 
      <?PHP if(isset($data["email"])){?>value="<?PHP echo $data["email"]."\""; }?> readonly>
    </div>
-   
-   <div align="center">
-      <img title="Profilbild" src="<?PHP echo $data["pb_path"]; ?>" class="img-rounded" width="200px" />
    </div>
-<div class="form-group">
-  <label for="comment">Signature:</label>
-   <p><?PHP if(isset($data["signature"])){echo $data["signature"]; }?></p>
-</div>
-
+  
 </div>
 <?PHP
       }
