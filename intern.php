@@ -59,6 +59,8 @@ require_once 'func/menu.func.php';
 					}
 				}elseif($_GET["p"]=="profile"){
 					include 'inc/profile.php';
+				}elseif($_GET["p"]=="message"){
+					include 'inc/messages.php';
 				}else{
 					echo "Keine Ahnung, was hier passieren soll^^!";
 				}

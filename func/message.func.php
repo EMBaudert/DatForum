@@ -70,7 +70,6 @@ function getMessages($me,$you){
 }
 
 function addMessage($from,$to,$text){
-   echo "Message: From ".$from." To ".$to.": ".$text;
    
    $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
    $sql = "SELECT PKID_user FROM user WHERE username='".$from."'";
@@ -88,7 +87,7 @@ function addMessage($from,$to,$text){
 	$statement = $pdo->prepare($sql);
 	$statement->execute();
    
-   echo '<meta http-equiv="refresh" content="0; URL=test_chat.php?cp='.$to.'" />';
+   echo '<meta http-equiv="refresh" content="0; URL=intern.php?p=message&cp='.$to.'" />';
    return TRUE;
 }
 

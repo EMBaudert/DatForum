@@ -94,7 +94,7 @@
    </div>
    <div class="input-group" style="margin:10px;">
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">E-Mail</span>
-     <input type="email" class="form-control" placeholder="E-Mail Address" aria-describedby="basic-addon1" name="email" 
+     <input type="email" class="form-control" placeholder="E-Mail Adress" aria-describedby="basic-addon1" name="email" 
      <?PHP if(isset($data["email"])){?>value="<?PHP echo $data["email"]."\""; }?>>
    </div>
    <div class="dropup">
