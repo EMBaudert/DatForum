@@ -10,30 +10,30 @@
   }
 }
 
-//benötigt für 2nd Row
+//benÃ¶tigt fÃ¼r 2nd Row
 h3{
    margin: 5px 0px;
 }
 
-//für div dass Profilbild etc anzeigt
+//fÃ¼r div dass Profilbild etc anzeigt
 .post-userinfo{
    text-align: center;
    padding: 10px 20px 10px 20px;
    background-color: #ccc;
 }
 
-//für div dass inhalt anzeigt
+//fÃ¼r div dass inhalt anzeigt
 .post-content{
    padding: 10px 20px 10px 20px;
    border-left: 1px solid #bbb;
 }
 
-//benötigt für 2nd row
+//benÃ¶tigt fÃ¼r 2nd row
 .marg-tb-5{
    margin-bottom: 10px;
 }
 
-//benötigt für linien im post content
+//benÃ¶tigt fÃ¼r linien im post content
 .hr-postcontent{
    margin: 10px 0px;
    border-color: #bbb;
@@ -45,8 +45,6 @@ h3{
 }
 
 .footer{
-  /*position: fixed;*/
-  bottom: 0px;
   color:white;
   /* Set the fixed height of the footer here */
   height: 40px;
@@ -62,11 +60,18 @@ h3{
 
 
 @media (min-width: 979px) {
-   //profilbildgröße bei großen Displays
+
+p{
+   margin: 10px 5px;
+}
+
+@media (min-width: @screen-md) {
+
+   //profilbildgrÃ¶ÃŸe bei groÃŸen Displays
    .profile-picture{
       width: 120px;
    }
-   //für Postcontent, dass Signatur nicht zu viel Platz hat
+   //fÃ¼r Postcontent, dass Signatur nicht zu viel Platz hat
    .minheight{
       position:relative;
    }
@@ -76,16 +81,20 @@ h3{
       width: 100%;
       padding: 40px;
    }
-   //ab gewisser höher dropdown bei hover ausklappen
+   //ab gewisser hÃ¶her dropdown bei hover ausklappen
    ul.nav li.dropdown:hover > ul.dropdown-menu {
     display: block;
    }
+   
 }
-
-@media (max-width: 979px) {
-//profilbildgröße bei kleine Displays
+  
+@media (max-width: @screen-md) {
+//profilbildgrÃ¶ÃŸe bei kleine Displays
    .profile-picture{
       width: 80px;
    }
 }
 
+.container{
+   position: relative;
+}

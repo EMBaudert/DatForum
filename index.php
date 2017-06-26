@@ -1,5 +1,5 @@
 <?PHP
-require_once 'func/menu.func.php';
+require_once 'func/index.func.php';
 ?>
 <!DOCTYPE html>
 	<html>
@@ -21,10 +21,29 @@ require_once 'func/menu.func.php';
 			<div class="container">
 			<?php
            require_once 'inc/navbar.php';
-         ?>
-			   <h1>Startseite</h1>
-            <p><a href="menu.php">Menu</a></p>
-			<?php
+            if(isset($_SESSION['PKID'])){ 
+               echo '<h2> Hallo '.getUsername($_SESSION['PKID']);
+               if(checkMessages($_SESSION['PKID'])){
+                  echo ', du hast <a href="messages.php">ungelesene Nachrichten!</a></h2>';
+               }else{
+                  echo ', schau dir ein paar aktuelle Beitr&auml;ge an!</h2>';
+               }
+            }      
+            
+            echo '<div class="row">
+                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Zum Forum
+                        </div>
+                        <div class="panel-body">
+                           <span class="glyphicon glyphicon-list"></span> <a href="menu.php">Zur &Uuml;bersicht</a>
+                        </div>
+                     </div>';
+                        $d = getdate();
+               createTopPosts("Meist diskutiert","SELECT FK_thread, COUNT(*) FROM post WHERE date> '".$d['year']."-".$d['mon']."-".($d['mday']-1)."' GROUP BY FK_thread ORDER BY COUNT(*) DESC");
+               createTopPosts("Meiste Beitr&auml;ge","SELECT FK_thread, COUNT(*) FROM post GROUP BY FK_thread ORDER BY COUNT(*) DESC");
+               createTopPosts("Neueste Beitr&auml;ge","SELECT FK_thread, date, time  FROM post GROUP BY FK_thread ORDER BY date DESC, time DESC");
+            echo '</div>';
            include_once 'inc/footer.html';
          ?>
          </div>

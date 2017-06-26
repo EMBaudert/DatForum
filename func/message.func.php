@@ -20,6 +20,44 @@ function getOther(){
    }
 }
 
+function getChatPartners($user){
+  echo '<div class="list-group">';
+/*<a href="#" class="list-group-item active">Cras justo odio</a>
+  <a href="#" class="list-group-item"><span class="badge">14</span>Dapibus ac facilisis in</a>
+  <a href="#" class="list-group-item"><span class="badge">14</span>Morbi leo risus</a>
+  <a href="#" class="list-group-item"><span class="badge">14</span>Porta ac consectetur ac</a>
+  <a href="#" class="list-group-item"><span class="badge">14</span>Vestibulum at eros</a>
+*/
+   $activeChat=-1;
+   if(isset($_GET["cp"])){
+      $activeChat=$_GET["cp"];
+   }
+   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
+   $sql = "SELECT FK_from, FK_to FROM messages WHERE FK_from='".$user."' OR FK_to='".$user."' ORDER BY PKID_message DESC";
+	foreach($pdo->query($sql) as $row){
+      if($row["FK_from"]==$user){
+         $partner=$row["FK_to"];
+      }else{
+         $partner=$row["FK_from"];
+      }
+      if(!isset($chatpartners[$partner])||$chatpartners[$partner]==0){
+         $chatpartners[$partner]=1;
+         $sql2 = "SELECT username FROM user WHERE PKID_user='".$partner."'";
+         $tempuser = $pdo->query($sql2);
+	      $tempuser->execute();
+	      $partnername=$tempuser->fetch();
+         echo '<a class="list-group-item';
+         if($partner==$activeChat){
+            echo ' active';
+         }else{
+            echo '" href="intern.php?p=message&cp='.$partner;
+         }
+         echo '">'.$partnername["username"].'</a>';
+      }
+   }
+   echo '</div>';
+}
+
 function getMessages($me,$you){
    $text="";
    $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
@@ -37,12 +75,12 @@ function getMessages($me,$you){
    foreach($pdo->query($sql) as $row){
       if($row["FK_from"]==$from){
          $text .= '<li class="right clearfix"><span class="chat-img pull-right">
-                            <img src="'.$meID["pb_path"].'" alt="User Avatar" class="img-rounded" style="width:50px;" />
+                            <a href="intern.php?p=profile&uid='.$from.'"><img src="'.$meID["pb_path"].'" alt="User Avatar" class="img-rounded" style="width:50px;" /></a>
                         </span>
                             <div class="chat-body clearfix">
                                 <div class="header">
                                     <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>now</small>
-                                    <strong class="pull-right primary-font">'.$meID["username"].'</strong>
+                                     <a href="intern.php?p=profile&uid='.$from.'"><strong class="pull-right primary-font">'.$meID["username"].'</strong></a>
                                 </div>
                                 <p>
                                     '.$row["text"].'
@@ -51,11 +89,11 @@ function getMessages($me,$you){
                         </li>';
       }else{
          $text .= '<li class="left clearfix"><span class="chat-img pull-left">
-                            <img src="'.$youID["pb_path"].'" alt="User Avatar" class="img-rounded" style="width:50px;" />
+                             <a href="intern.php?p=profile&uid='.$to.'"><img src="'.$youID["pb_path"].'" alt="User Avatar" class="img-rounded" style="width:50px;" /></a>
                         </span>
                             <div class="chat-body clearfix">
                                 <div class="header">
-                                   <strong class="primary-font">'.$youID["username"].'</strong> <small class="pull-right text-muted">
+                                    <a href="intern.php?p=profile&uid='.$to.'"><strong class="primary-font">'.$youID["username"].'</strong></a> <small class="pull-right text-muted">
                                         <span class="glyphicon glyphicon-time"></span>now</small>
                                 </div>
                                 <p>
@@ -70,7 +108,6 @@ function getMessages($me,$you){
 }
 
 function addMessage($from,$to,$text){
-   echo "Message: From ".$from." To ".$to.": ".$text;
    
    $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
    $sql = "SELECT PKID_user FROM user WHERE username='".$from."'";
@@ -88,7 +125,8 @@ function addMessage($from,$to,$text){
 	$statement = $pdo->prepare($sql);
 	$statement->execute();
    
-   echo '<meta http-equiv="refresh" content="0; URL=test_chat.php?cp='.$to.'" />';
+   header('Location: '. $_SERVER['PHP_SELF'].'?p=message&cp='.$to);  
+   #echo '<meta http-equiv="refresh" content="0; URL=intern.php?p=message&cp='.$to.'" />';
    return TRUE;
 }
 

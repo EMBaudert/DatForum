@@ -8,9 +8,9 @@ require_once 'func/menu.func.php';
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			<title>DatForum - Intern</title>
 			<link rel="SHORTCUT ICON" href="layout/icon.ico" />
-			<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+			<link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
 
-         <<!-- Das neueste kompilierte und minimierte CSS -->
+         <!-- Das neueste kompilierte und minimierte CSS -->
          <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
 
          <!-- Optionales Theme -->
@@ -30,9 +30,9 @@ require_once 'func/menu.func.php';
 				}elseif($_GET["p"]=="login"){
 					if(isset($_POST["password"])&&checklogin($_POST["username"],hash('sha512',$_POST["password"]))){
 						$_SESSION["logged"]=TRUE;
-						?>
-							<meta http-equiv="refresh" content="0; URL=index.php" />
-						<?PHP
+						
+						echo	'<meta http-equiv="refresh" content="0; URL=intern.php?p=profile&uid='.$_SESSION["PKID"].'" />';
+						
 					}
 					if(!isset($_SESSION["logged"])||!$_SESSION["logged"]){
 						include 'inc/login.php';
@@ -59,6 +59,8 @@ require_once 'func/menu.func.php';
 					}
 				}elseif($_GET["p"]=="profile"){
 					include 'inc/profile.php';
+				}elseif($_GET["p"]=="message"){
+					include 'inc/messages.php';
 				}else{
 					echo "Keine Ahnung, was hier passieren soll^^!";
 				}

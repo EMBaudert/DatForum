@@ -74,7 +74,6 @@ function checkemail(){
 		return FALSE;
 	}
    
-   #Konventionen für E-Mail Adresse
    if (filter_var($emailadress, FILTER_VALIDATE_EMAIL)) { 
       $_SESSION["email"]=$emailadress;
 	   return TRUE;
@@ -91,16 +90,8 @@ function newuser(){
 	$_SESSION["username"]=$_POST["username"];	
 	$_SESSION["email"]=$_POST["email"];	
 	$PASS = hash('sha512',$_POST["password"]);
-	//$IDENT=15;
 	$pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
- /*  $sql = "SELECT PKID_user FROM user";
-   
-	foreach($pdo->query($sql) as $row){
-      $IDENT=$row["PKID_user"];
-	}
-   $IDENT=$IDENT+1;
- 
-   */
+
 	$sql = "INSERT INTO user (username, firstname, secondname, email, password) VALUES ('".$_SESSION["username"]."', '".$_SESSION["firstname"]."','".$_SESSION["secondname"]."','".$_SESSION["email"]."','".$PASS."')";
 	$statement = $pdo->prepare($sql);
 	$statement->execute();   

@@ -10,7 +10,7 @@
       	$user->execute();
       	$data=$user->fetch();
          
-         
+        echo " <h1>".$data["username"]."'s Profile</h1> "; 
       if(isset($_SESSION["logged"])&&$_SESSION["logged"]&&$_SESSION["PKID"]==$_GET["uid"]){
       
          $_SESSION["username"]=$data["username"];
@@ -55,69 +55,123 @@
          
 ?>
 
-         <h1>Profil bearbeiten</h1>
+     
          <form action="intern.php?p=profile&uid=<?PHP echo $_SESSION["PKID"]; ?>" method="POST" enctype="multipart/form-data"><br />
+<div class="row">
+   <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"> 
+   <div align="left">
+      <img title="Profilbild" src="<?PHP echo $data["pb_path"]; ?>" class="img-rounded" width="200px" />
+   </div>
+   <div class="input-group" style="margin:10px;">
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Profile Picture</span>
+  
+         <label class="btn btn-default" style="border-radius: 0px 5px 5px 0px;width:160px;">
+            Choose new file <input class="form-control" type="file" name="datei" style="display:none;" />
+         </label>
+    </div>
+<div class="form-group">
+  <label for="comment">Signature:</label>
+  <textarea class="form-control" rows=5 cols=40 style="resize:none;max-width:350px;" name="signature" id="comment"><?PHP if(isset($data["signature"])){echo $data["signature"]; }?></textarea>
+</div>
 
-            <div id="profile">
-               <table width="100%">
-                  <tr>
-                     <td rowspan=6><img title="Profilbild" src="<?PHP echo $data["pb_path"]; ?>" width="200px" /></td>
-                     <td>Benutzername:</td><td><?PHP if(isset($_SESSION["username"])){echo $_SESSION["username"]; }?></td>
-                  </tr>
-                  <tr>
-                     <td>Vorname:</td><td><input type="text" name="firstname" value="<?PHP if(isset($_SESSION["firstname"])){echo $_SESSION["firstname"]; }?>"></td>
-                  </tr>
-                  <tr>
-                     <td>Nachname:</td><td><input type="text" name="secondname" value="<?PHP if(isset($_SESSION["secondname"])){echo $_SESSION["secondname"]; }?>"></td>
-                  </tr>
-                  <tr>
-                     <td>E-Mail Adresse:</td><td><input type="text" name="email" value="<?PHP if(isset($_SESSION["email"])){echo $_SESSION["email"]; }?>"></td>
-                  </tr>
-                  <tr>
-                     <td>Altes Passwort:</td><td><input type="password" name="oldpassword"></td>
-                  </tr>
-                  <tr>
-                     <td>Neues Passwort:</td><td><input type="password" name="password"></td>
-                  </tr>
-                  <tr>
-                     <td>Signatur:</td>
-                     <td>Neues Passwort wiederholen:</td><td><input type="password" name="password2"></td>
-                  </tr>
-                  <tr>
-                     <td rowspan=2><textarea name="signature" rows=5 cols=40 style="resize:none"><?PHP if(isset($data["signature"])){echo $data["signature"]; }?></textarea></td>
-                     <td>Neues Profilbild:</td><td><input type="file" name="datei" /></td>
-                  </tr>
-                  <tr>
-                     <td></td><td><br><input name="submit" type="submit" value=" &Auml;nderungen speichern"></td>
-                  </tr>
-               </table>
-            </div>
+</div>
+
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+   <div class="input-group" style="margin:10px;">
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Username</span>
+     <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="username" 
+     <?PHP if(isset($data["username"])){?>value="<?PHP echo $data["username"]."\""; }?> readonly>
+   </div>
+   <div class="input-group" style="margin:10px;">
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">First Name</span>
+     <input type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1" name="firstname" 
+     <?PHP if(isset($data["firstname"])){?>value="<?PHP echo $data["firstname"]."\""; }?>>
+   </div>
+   <div class="input-group" style="margin:10px;">
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Second Name</span>
+     <input type="text" class="form-control" placeholder="Second Name" aria-describedby="basic-addon1" name="secondname" 
+     <?PHP if(isset($data["secondname"])){?>value="<?PHP echo $data["secondname"]."\""; }?>>
+   </div>
+   <div class="input-group" style="margin:10px;">
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">E-Mail</span>
+     <input type="email" class="form-control" placeholder="E-Mail Adress" aria-describedby="basic-addon1" name="email" 
+     <?PHP if(isset($data["email"])){?>value="<?PHP echo $data["email"]."\""; }?>>
+   </div>
+   <div class="dropup">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="collapse" data-target="#changepasswordthing" aria-haspopup="true" aria-expanded="false" style="margin:10px; width:320px;">
+    Change Password
+  </button>
+  <div class="collapse" id="changepasswordthing">
+    <div class="input-group" style="margin:10px;">
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Password</span>
+     <input type="password" class="form-control" placeholder="Old Password" aria-describedby="basic-addon1" name="oldpassword">
+   </div>
+    <div class="input-group" style="margin:10px;">
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Password</span>
+     <input type="password" class="form-control" placeholder="New Password" aria-describedby="basic-addon1" name="password">
+   </div>
+     <div class="input-group" style="margin:10px;">
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Password</span>
+     <input type="password" class="form-control" placeholder="Repeat New Password" aria-describedby="basic-addon1" name="password2">
+   </div>
+  </div>
+</div>
+   
+   
+  
+   <div align="left">
+      <button style="margin:10px;align:right;" class="btn btn-default" name="submit" type="submit" >
+       <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save changes
+      </button>
+   </div>
+   </div>
+</div>
+
+         
          </form>
 <?PHP  
       }else{
 ?>
-         <h1>Profil von <?PHP if(isset($data["username"])){echo $data["username"]; }?></h1>
+<div class="row">
+ <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+   <div align="left">
+      <img title="Profilbild" src="<?PHP echo $data["pb_path"]; ?>" class="img-rounded" width="200px" />
+   </div>
+<div class="form-group">
+  <label for="comment">Signature:</label>
+   <p id="comment"><?PHP if(isset($data["signature"])){echo $data["signature"]; }?></p>
+</div>
 
-         <div id="profile">
-            <table width="100%">
-               <tr>
-                  <td rowspan=4 colspan=2><img title="Profilbild" src="<?PHP echo $data["pb_path"]; ?>" width="200px" /></td>
-                  <td>Benutzername:</td><td><?PHP if(isset($data["username"])){echo $data["username"]; }?></td>
-               </tr>
-               <tr>
-                  <td>Vorname:</td><td><?PHP if(isset($data["firstname"])){echo $data["firstname"]; }?></td>
-               </tr>
-               <tr>
-                  <td>Nachname:</td><td><?PHP if(isset($data["secondname"])){echo $data["secondname"]; }?></td>
-               </tr>
-               <tr>
-                  <td>E-Mail Adresse:</td><td><?PHP if(isset($data["email"])){echo $data["email"]; }?></td>
-               </tr>
-               <tr>
-                  <td colspan=2 title="Signatur"><?PHP if(isset($data["signature"])){echo $data["signature"]; }?></td>
-               </tr>
-         </table>
-         </div>
+</div>
+                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
+   <div class="input-group" style="margin:10px;">
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Username</span>
+     <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="username" 
+     <?PHP if(isset($data["username"])){?>value="<?PHP echo $data["username"]."\""; }?> readonly>
+   </div>
+   <div class="input-group" style="margin:10px;">
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">First Name</span>
+     <input type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1" name="firstname" 
+     <?PHP if(isset($data["firstname"])){?>value="<?PHP echo $data["firstname"]."\""; }?> readonly>
+   </div>
+   <div class="input-group" style="margin:10px;">
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Second Name</span>
+     <input type="text" class="form-control" placeholder="Second Name" aria-describedby="basic-addon1" name="secondname" 
+     <?PHP if(isset($data["secondname"])){?>value="<?PHP echo $data["secondname"]."\""; }?> readonly>
+   </div>
+   <div class="input-group" style="margin:10px;">
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">E-Mail</span>
+     <input type="email" class="form-control" placeholder="E-Mail Address" aria-describedby="basic-addon1" name="email" 
+     <?PHP if(isset($data["email"])){?>value="<?PHP echo $data["email"]."\""; }?> readonly>
+   </div>
+      
+   <a href="intern.php?p=message&cp=<?PHP echo $_GET["uid"]; ?>"><button class="btn btn-default" type="button" id="dropdownMenu1" style="margin:10px; width:320px;">
+    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Write Message
+  </button></a>
+   </div>
+  
+</div>
 <?PHP
       }
       

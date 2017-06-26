@@ -78,29 +78,28 @@
 
          }
 
-  
-         function create2ndRow(){
-         global $pdo;
-            
-            $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = ".$_GET['thread']);
+   function create2ndRow(){
+      global $pdo;
          
-            echo '<div class="row marg-tb-5">
-               <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                  <h3>'.$title['theme'].'</h3>
+      $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = ".$_GET['thread']);
+         
+      echo '<div class="row marg-tb-5">
+         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <h3>'.$title['theme'].'</h3>
+         </div>
+         <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+            <div class="btn-group" role="group">
+               <div type="button" id="createPost" onclick="test()" class="btn btn-default">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neuer Beitrag
                </div>
-               <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-                  <div class="btn-group" role="group">
-                     <div type="button" id="createPost" onclick="test()" class="btn btn-default">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neuer Beitrag
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">'; 
-                  createPagination();
-               echo '</div>
+            </div>
+         </div>
+         <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">'; 
+            createPagination();
+         echo '</div>
             </div>';
                
-         }
+   }
       
          function createPagination(){
             //getPagenumber
@@ -146,11 +145,11 @@
          
          function createBreadcrumb($id){
       
-            echo "<div class=\"row\"><ol class=\"breadcrumb\">
-            <li><a href=\"menu.php?menu=0&page=1\">Main menu</a></li>";
+            echo '<div class="row"><ol class="breadcrumb">
+            <li><a href="menu.php?menu=0&page=1">Main menu</a></li>';
             recursiveBreadCrumb($id);
             $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = " .$_GET['thread']);
-            echo "<li class=\"active\">".$title['theme']."</li>";
+            echo '<li class="active">'.$title['theme'].'</li>';
             
             echo "</ol></div>";
             
@@ -161,18 +160,17 @@
             $tempQuery = SQLQuery("SELECT * FROM menu WHERE PKID_menu = ".$id);
             
             if($tempQuery['FK_menu']==NULL){
-               echo "<li><a href=\"menu.php?menu=".$tempQuery['PKID_menu']."&page=1\">".$tempQuery['title']."</a></li>";
+               echo '<li><a href="menu.php?menu='.$tempQuery['PKID_menu'].'&page=1">'.$tempQuery['title'].'</a></li>';
                return;
             }
             
             recursiveBreadCrumb($tempQuery['FK_menu']);
             
-               echo "<li><a href=\"menu.php?menu=".$tempQuery['PKID_menu']."&page=1\">".$tempQuery['title']."</a></li>";
+               echo '<li><a href="menu.php?menu='.$tempQuery['PKID_menu'].'&page=1">'.$tempQuery['title'].'</a></li>';
             
          }
          
          function createThema(){
-            global $pdo;
             
             $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = ".$_GET['thread']);
             
