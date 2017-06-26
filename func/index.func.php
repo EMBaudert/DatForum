@@ -22,9 +22,9 @@ function createThreadEntry($PKID, $title, $creator){
          
    echo '<li class="list-group-item">
       <div class="row">
-         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"><span class="glyphicon glyphicon-comment"></span><a href="thread.php?thread='.$PKID.'&page=1"> '.$title.'</a></div>
-         <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2"><a href="user.php?user='.$creator.'">'.$username['username'].'</a></div>
-         <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">Beitr&auml;ge: '.getPostNumber($PKID).'</div>
+         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"><span class="glyphicon glyphicon-file"></span> <a href="thread.php?thread='.$PKID.'&page=1">'.$title.'</a></div>
+         <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2"><span class="glyphicon glyphicon-user"></span> <a href="user.php?user='.$creator.'">'.$username['username'].'</a></div>
+         <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2"><span class="glyphicon glyphicon-comment"></span> Beitr&auml;ge: '.getPostNumber($PKID).'</div>
       </div>
       </li>';
          
@@ -38,6 +38,7 @@ function getPostNumber($id){
 
 function createTopPosts($head, $sqlString){
    global $pdo;
+   
     echo '<div class="panel panel-default">
     <div class="panel-heading">
                   '.$head.'

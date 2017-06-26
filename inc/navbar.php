@@ -26,6 +26,7 @@
    								<ul class="dropdown-menu">
    									<li><a href="intern.php?p=profile&uid='.$_SESSION['PKID'].'">Profile</a></li>
    									<li><a href="#">Posts</a></li>
+                              <li><a href="#">Messages <span class="badge">7</span></a></li>
    								</ul>
    							  </li>
                 <li><a href="intern.php?p=logout"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>';
