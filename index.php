@@ -21,19 +21,15 @@ require_once 'func/index.func.php';
 			<div class="container">
 			<?php
            require_once 'inc/navbar.php';
-           
-           //Soll nur angezeigt werden wenn man angemeldet ist
             if(isset($_SESSION['PKID'])){ 
                echo '<h2> Hallo '.getUsername($_SESSION['PKID']);
-               $msg_cnt = checkMessages($_SESSION['PKID']);
-               if($msg_cnt > 0){
-                  echo ', du hast <a href="messages.php">'.$msg_cnt.' ungelesene Nachrichten!</a></h2>';
+               if(checkMessages($_SESSION['PKID'])){
+                  echo ', du hast <a href="messages.php">ungelesene Nachrichten!</a></h2>';
                }else{
                   echo ', schau dir ein paar aktuelle Beitr&auml;ge an!</h2>';
                }
             }      
-            //Ab hier für alle anzeigen
-            // zuerst link zum Forum, danch mit php und SQL spezielle themen
+            
             echo '<div class="row">
                      <div class="panel panel-default">
                         <div class="panel-heading">
@@ -43,13 +39,10 @@ require_once 'func/index.func.php';
                            <span class="glyphicon glyphicon-list"></span> <a href="menu.php">Zur &Uuml;bersicht</a>
                         </div>
                      </div>';
-                     $d = getdate();
-               //Meisten neue Kommentare (seit 2 Tagen)         
-               createTopPosts("Meist diskutiert","SELECT FK_thread, COUNT(*) FROM post WHERE date> '".$d['year']."-".$d['mon']."-".($d['mday']-2)."' GROUP BY FK_thread ORDER BY COUNT(*) DESC");
-               // Meiste beträge generell
+                        $d = getdate();
+               createTopPosts("Meist diskutiert","SELECT FK_thread, COUNT(*) FROM post WHERE date> '".$d['year']."-".$d['mon']."-".($d['mday']-1)."' GROUP BY FK_thread ORDER BY COUNT(*) DESC");
                createTopPosts("Meiste Beitr&auml;ge","SELECT FK_thread, COUNT(*) FROM post GROUP BY FK_thread ORDER BY COUNT(*) DESC");
-               //Neueste Beiträge
-               createTopPosts("Neueste Themen","SELECT FK_thread, date, time  FROM post GROUP BY FK_thread ORDER BY date DESC, time DESC");
+               createTopPosts("Neueste Beitr&auml;ge","SELECT FK_thread, date, time  FROM post GROUP BY FK_thread ORDER BY date DESC, time DESC");
             echo '</div>';
            include_once 'inc/footer.html';
          ?>
