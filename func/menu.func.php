@@ -1,30 +1,35 @@
 <?php
+/*
+Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansicht, deshalb auch die Methodennamen mit Thread und menu
+*/
 
+//erstellt Zeile mit titel evtl. button und pagination
       function create2ndRow($param){
       
       $upperMenuName = SQLQuery("SELECT * FROM menu WHERE PKID_menu = ". $_GET['menu']);
-      
+         /*marg-5-tb nötig für passenden Abstand 
+         bei sm und xs bekommt der Titel eine eigene Zeile
+         */
         echo '<div class="row marg-tb-5">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                <h3>'.$upperMenuName['title'].'</h3>   
             </div>
             <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
-               if($param && isset($_SESSION['logged']) && $_SESSION['logged'] ==true){
+               if($param){
                   echo'<div class="btn-group" role="group">
-                              <a href="createPost.php?from=menu&id='.$_GET['menu'].'&creator='.$_SESSION['PKID'].'">
-                                 <div type="button" class="btn btn-default">
-                                    Neuer Beitrag
-                                 </div>
-                              </a>
-                           </div>';  
+                           <div type="button" class="btn btn-default">
+                              Neuer Beitrag
+                           </div>
+                        </div>';  
                }
             echo '</div>
-            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">';
+            <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
                echo createPagination($param);
             echo '</div>
          </div>';
       }
 
+//erstellt einen Menüpunkt
       function createMenuPoint($title, $count, $nextPoint, $threads){
          global $pdo;
          
@@ -32,9 +37,9 @@
          if($threads){
             $c = "Threads: ".checkThread($nextPoint);
             $count = $c;
-            $ausgabe = "menu=".$nextPoint.'&thread='.$nextPoint.'&page=1';
+            $ausgabe = "menu=".$nextPoint."&thread=".$nextPoint."&page=1";
          }else{
-            $ausgabe = "menu=".$nextPoint.'&page=1';
+            $ausgabe = "menu=".$nextPoint."&page=1";
             $count = "Unterpunkte: " . $count; 
         }
          
@@ -87,7 +92,7 @@
             }
             $i++;            
          }
-         echo '</ul></div>';
+         echo "</ul></div>";
       } 
       
       function checkThread($PKID){
@@ -130,6 +135,7 @@
          
          echo '<li class="list-group-item">
                <div class="row">
+               
                   <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"><span class="glyphicon glyphicon-file"></span><a href="thread.php?thread='.$PKID.'&page=1"> '.$title.'</a></div>
                   <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2"><span class="glyphicon glyphicon-user"></span> <a href="user.php?user='.$creator.'">'.$username['username'].'</a></div>
                   <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2"><span class="glyphicon glyphicon-comment"></span> Beitr&auml;ge: '.getPostNumber($PKID).'</div>
@@ -145,11 +151,11 @@
       }
       
       function createBreadcrumb($id){
-         echo '<div class="row"><ol class="breadcrumb">
-         <li><a href="menu.php?menu=0&page=1">Main menu</a></li>';
+         echo "<div class=\"row\"><ol class=\"breadcrumb\">
+         <li><a href=\"menu.php?menu=0&page=1\">Main menu</a></li>";
          recursiveBreadCrumb($id,1);
          
-         echo '</ol></div>';
+         echo "</ol></div>";
          
       }
       
@@ -158,26 +164,17 @@
          $tempQuery = SQLQuery("SELECT * FROM menu WHERE PKID_menu = ".$id);
          
          if($tempQuery['FK_menu']==NULL){
-            echo '<li><a href=\"menu.php?menu='.$tempQuery['PKID_menu'].'&page=1\">'.$tempQuery['title'].'</a></li>';
+            echo "<li><a href=\"menu.php?menu=".$tempQuery['PKID_menu']."&page=1\">".$tempQuery['title']."</a></li>";
             return;
          }
          
          recursiveBreadCrumb($tempQuery['FK_menu'],0);
          //If first
          if($first == 0){
-            echo '<li><a href=\"menu.php?menu='.$tempQuery['PKID_menu'].'&page=1\">'.$tempQuery['title'].'</a></li>';
+            echo "<li><a href=\"menu.php?menu=".$tempQuery['PKID_menu']."&page=1\">".$tempQuery['title']."</a></li>";
          }else{
-            echo '<li class=\"active\">'.$tempQuery['title'].'</li>';
+            echo "<li class=\"active\">".$tempQuery['title']."</li>";
          }
-         
-      }
-      
-      function SQLQuery($query){
-         global $pdo;
-         
-         $temp=$pdo->query($query);
-         $temp->execute();
-         return $temp->fetch();
          
       }
       
@@ -195,44 +192,43 @@
             }
          }
     //     echo $pageNumber['cnt'];
-         echo '<nav aria-label="pagination">
-               <ul class="pagination pull-right">';          
+         echo "<nav aria-label=\"pagination\">
+               <ul class=\"pagination pull-right\">";          
          
             //calculate needed pages
             $pa = $pageNumber['cnt'] / MAX_ENTRY_NUMBER;
 
             //Previous button, if page 1 is selected button gets deactivated
             if($_GET['page'] == 1){
-                  echo '<li class="disabled"><a href=""><span aria-hidden="true">&laquo;</span></a></li>';
+                  echo "<li class=\"disabled\"><a href=\"\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
                }else{
-                  echo '<li><a href="menu.php?menu='.$_GET['menu'].'&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
+                  echo "<li><a href=\"menu.php?menu=".$_GET['menu']."&page=".($_GET['page']-1)."\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
             }
             
             if($pa == 0){
-               echo '<li class="active"><a href="menu.php?menu='.$_GET['menu'].'&page=1">1</a></li>';   
+               echo "<li class=\"active\"><a href=\"menu.php?menu=".$_GET['menu']."&page=1\">1</a></li>";   
             }
 
             //show all pages
             for($i=1;$i<$pa+1; $i++){
                if($_GET['page']==$i){
-                  echo '<li class="active"><a href="menu.php?menu='.$_GET['menu'].'&page='.$i.'">'.$i.'</a></li>';   
+                  echo "<li class=\"active\"><a href=\"menu.php?menu=".$_GET['menu']."&page=".$i."\">".$i."</a></li>";   
                }else{
-                  echo '<li><a href="menu.php?menu='.$_GET['menu'].'&page='.$i.'">'.$i.'</a></li>';   
+                  echo "<li><a href=\"menu.php?menu=".$_GET['menu']."&page=".$i."\">".$i."</a></li>";   
                }
                $maxPages=$i;
             }
             
-            if($_GET['page'] ==ceil($pa)|| $pa == 0){
-                  echo '<li class="disabled"><a href=""><span aria-hidden="true">&raquo;</span></a></li>';
+            //last button, if last site is selected buttons get deactivated
+            if($_GET['page'] == ceil($pa) || $pa == 0){
+                  echo "<li class=\"disabled\"><a href=\"\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
                }else{
-                  
-                  echo '<li><a href="menu.php?menu='.$_GET['menu'].'&page='.($_GET['page']+1).'"><span aria-hidden=\"true\">&raquo;</span></a></li>';
+                  echo "<li><a href=\"menu.php?menu=".$_GET['menu']."&page=".($_GET['page']+1)."\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
             }
          
-         echo '</ul></nav>';
+         echo "</ul></nav>";
          
       }
       
       
    ?>
-   
