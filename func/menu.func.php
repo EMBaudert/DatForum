@@ -1,9 +1,15 @@
 <?php
+/*
+Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansicht, deshalb auch die Methodennamen mit Thread und menu
+*/
 
+//erstellt Zeile mit titel evtl. button und pagination
       function create2ndRow($param){
       
       $upperMenuName = SQLQuery("SELECT * FROM menu WHERE PKID_menu = ". $_GET['menu']);
-      
+         /*marg-5-tb nötig für passenden Abstand 
+         bei sm und xs bekommt der Titel eine eigene Zeile
+         */
         echo '<div class="row marg-tb-5">
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                <h3>'.$upperMenuName['title'].'</h3>   
@@ -11,10 +17,10 @@
             <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
                if($param){
                   echo'<div class="btn-group" role="group">
-                              <div type="button" class="btn btn-default">
-                                 Neuer Beitrag
-                              </div>
-                           </div>';  
+                           <div type="button" class="btn btn-default">
+                              Neuer Beitrag
+                           </div>
+                        </div>';  
                }
             echo '</div>
             <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
@@ -23,6 +29,7 @@
          </div>';
       }
 
+//erstellt einen Menüpunkt
       function createMenuPoint($title, $count, $nextPoint, $threads){
          global $pdo;
          
@@ -168,15 +175,6 @@
          }else{
             echo "<li class=\"active\">".$tempQuery['title']."</li>";
          }
-         
-      }
-      
-      function SQLQuery($query){
-         global $pdo;
-         
-         $temp=$pdo->query($query);
-         $temp->execute();
-         return $temp->fetch();
          
       }
       

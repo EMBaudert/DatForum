@@ -26,8 +26,8 @@
       <?php
          require 'inc/navbar.php';
          const MAX_ENTRY_NUMBER = 5;
-         $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
       
+      //wenn benötigte daten nicht gesetzt sind, zurück auf startseite
          if(!isset($_GET['thread']) && !isset($_GET['page'])){
             echo "<meta http-equiv=\"refresh\" content=\"0; URL=index.php\" />";
          }
