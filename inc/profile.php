@@ -65,7 +65,7 @@
    <div class="input-group" style="margin:10px;">
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Profile Picture</span>
   
-         <label class="btn btn-default" style="width:160px;">
+         <label class="btn btn-default" style="border-radius: 0px 5px 5px 0px;width:160px;">
             Choose new file <input class="form-control" type="file" name="datei" style="display:none;" />
          </label>
     </div>
@@ -98,30 +98,23 @@
      <?PHP if(isset($data["email"])){?>value="<?PHP echo $data["email"]."\""; }?>>
    </div>
    <div class="dropup">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin:10px; width:320px;">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="collapse" data-target="#changepasswordthing" aria-haspopup="true" aria-expanded="false" style="margin:10px; width:320px;">
     Change Password
-    <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li>
+  <div class="collapse" id="changepasswordthing">
     <div class="input-group" style="margin:10px;">
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Password</span>
      <input type="password" class="form-control" placeholder="Old Password" aria-describedby="basic-addon1" name="oldpassword">
    </div>
-    </li>
-    <li>
     <div class="input-group" style="margin:10px;">
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Password</span>
      <input type="password" class="form-control" placeholder="New Password" aria-describedby="basic-addon1" name="password">
    </div>
-   </li>
-    <li>
      <div class="input-group" style="margin:10px;">
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Password</span>
      <input type="password" class="form-control" placeholder="Repeat New Password" aria-describedby="basic-addon1" name="password2">
    </div>
-   </li>
-  </ul>
+  </div>
 </div>
    
    
@@ -146,11 +139,12 @@
    </div>
 <div class="form-group">
   <label for="comment">Signature:</label>
-   <p><?PHP if(isset($data["signature"])){echo $data["signature"]; }?></p>
+   <p id="comment"><?PHP if(isset($data["signature"])){echo $data["signature"]; }?></p>
 </div>
 
 </div>
                      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
    <div class="input-group" style="margin:10px;">
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Username</span>
      <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="username" 
@@ -171,6 +165,10 @@
      <input type="email" class="form-control" placeholder="E-Mail Address" aria-describedby="basic-addon1" name="email" 
      <?PHP if(isset($data["email"])){?>value="<?PHP echo $data["email"]."\""; }?> readonly>
    </div>
+      
+   <a href="intern.php?p=message&cp=<?PHP echo $_GET["uid"]; ?>"><button class="btn btn-default" type="button" id="dropdownMenu1" style="margin:10px; width:320px;">
+    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Write Message
+  </button></a>
    </div>
   
 </div>

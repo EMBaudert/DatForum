@@ -2,15 +2,12 @@
 require_once 'func/message.func.php';
 ?>
   <link rel="stylesheet" href="layout/chat.css">
+  <title>DatForum &ndash; Messages</title>
 <div class="row">
  <div class="col-xs-5 col-sm-4 col-md-3 col-lg-3" style="min-width:130px;">
-<div class="list-group">
-  <a href="#" class="list-group-item active">Cras justo odio</a>
-  <a href="#" class="list-group-item"><span class="badge">14</span>Dapibus ac facilisis in</a>
-  <a href="#" class="list-group-item"><span class="badge">14</span>Morbi leo risus</a>
-  <a href="#" class="list-group-item"><span class="badge">14</span>Porta ac consectetur ac</a>
-  <a href="#" class="list-group-item"><span class="badge">14</span>Vestibulum at eros</a>
-</div>
+<?PHP
+getChatPartners($_SESSION["PKID"]);
+?>
 </div>
                      <div class="col-xs-7 col-sm-8 col-md-9 col-lg-9">
                      <?PHP
@@ -36,10 +33,15 @@ require_once 'func/message.func.php';
                         
                     </ul>
                 </div>
+                
+       <script>
+            var objDiv = document.getElementById("scrollable_chat");
+            objDiv.scrollTop = objDiv.scrollHeight;
+         </script> 
                 <div class="panel-footer">
                         <form action="intern.php?p=message&cp=<?PHP echo $other["PKID"]; ?>" method="post">
                     <div class="input-group">
-                        <input id="btn-input" type="text" name="newMessage" class="form-control input-sm" placeholder="Type your message here..." />
+                        <input id="btn-input" type="text" name="newMessage" class="form-control input-sm" placeholder="Type your message here..." autocomplete="off" />
                         <span class="input-group-btn">
                             <button class="btn btn-warning btn-sm" type="submit" id="btn-chat">
                                 Send</button>
@@ -60,10 +62,6 @@ require_once 'func/message.func.php';
 
    </div>
   
-       <script>
-            var objDiv = document.getElementById("scrollable_chat");
-            objDiv.scrollTop = objDiv.scrollHeight;
-         </script> 
 <?PHP
 
 
