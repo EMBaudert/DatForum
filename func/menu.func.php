@@ -68,7 +68,7 @@
       function createMenu($sqlString) {
          global $pdo;
          
-         echo "<div class=\"row\"><ul class=\"hey list-group\">";
+         echo '<div class="row"><ul class="list-group">';
          
          if($_GET['menu']!="0"){
             createMenuPointBack();
