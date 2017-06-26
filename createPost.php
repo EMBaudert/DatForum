@@ -14,9 +14,10 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="bootstrap/less/dist/js/bootstrap.min.js" ></script>
      
+     <!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
      
-     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" rel="stylesheet">
-     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
      
    </head>
 
@@ -36,24 +37,59 @@
                 <a class ="btn btn-default" id="target"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>
             </div>
          </div>
+         
+         <?php
+            include_once('inc/footer.html');
+         ?>
       </div>
      
       <script>
         $(document).ready(function() {
             $('#summernote').summernote();
             
-             $('#target').button().click(function(){
+            $('#target').button().click(function(){
                 var markupStr = $('#summernote').summernote('code');
                 
-                alert(markupStr);
+                alert(getUrlVars()["from"]);
+                
+                if(getUrlVars()["from"] == "menu"){
+                     var query = "INSERT INTO `thread` (`PKID_thread`, `FK_menu`, `theme`, `FK_Creator`) VALUES (NULL, '"+getUrlVars()["id"]+"', '"+markupStr+"', '"+getUrlVars()["creator"]+"');"
+                     alert(query);
+                } else {
+                     
+                } 
+                
              });    
+             
+             
+              function getUrlVars()
+               {
+                   var vars = [], hash;
+                   var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                   for(var i = 0; i < hashes.length; i++)
+                   {
+                       hash = hashes[i].split('=');
+
+                       if($.inArray(hash[0], vars)>-1)
+                       {
+                           vars[hash[0]]+=","+hash[1];
+                       }
+                       else
+                       {
+                           vars.push(hash[0]);
+                           vars[hash[0]] = hash[1];
+                       }
+                   }
+
+                   return vars;
+               }
+             
+             
         });
         
        
       </script>
      
-      <?php
-         include_once('inc/footer.html');
-      ?>
+      
    </body>
 </html>

@@ -5,19 +5,21 @@
       $upperMenuName = SQLQuery("SELECT * FROM menu WHERE PKID_menu = ". $_GET['menu']);
       
         echo '<div class="row marg-tb-5">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                <h3>'.$upperMenuName['title'].'</h3>   
             </div>
             <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
-               if($param){
+               if($param && isset($_SESSION['logged']) && $_SESSION['logged'] ==true){
                   echo'<div class="btn-group" role="group">
-                              <div type="button" id="button" class="btn btn-default">
-                                 Neuer Beitrag
-                              </div>
+                              <a href="createPost.php?from=menu&id='.$_GET['menu'].'&creator='.$_SESSION['PKID'].'">
+                                 <div type="button" class="btn btn-default">
+                                    Neuer Beitrag
+                                 </div>
+                              </a>
                            </div>';  
                }
             echo '</div>
-            <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">';
                echo createPagination($param);
             echo '</div>
          </div>';
@@ -130,7 +132,7 @@
                <div class="row">
                
                   <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"><span class="glyphicon glyphicon-comment"></span><a href="thread.php?thread='.$PKID.'&page=1"> '.$title.'</a></div>
-                  <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2"><a href="user.php?user='.$creator.'">'.$username['username'].'</a></div>
+                  <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2"><a href="intern.php?p=user&uid='.$creator.'">'.$username['username'].'</a></div>
                   <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">Beitr&auml;ge: '.getPostNumber($PKID).'</div>
                </div>
             </li>';
@@ -216,16 +218,16 @@
                if($_GET['page']==$i){
                   echo '<li class="active"><a href="menu.php?menu='.$_GET['menu'].'&page='.$i.'">'.$i.'</a></li>';   
                }else{
-                  echo '<li><a href=\"menu.php?menu='.$_GET['menu'].'&page='.$i.'\">'.$i.'</a></li>';   
+                  echo '<li><a href="menu.php?menu='.$_GET['menu'].'&page='.$i.'">'.$i.'</a></li>';   
                }
                $maxPages=$i;
             }
             
-            //last button, if last site is selected buttons get deactivated
-            if($_GET['page'] == ceil($pa) || $pa == 0){
-                  echo '<li class=\"disabled\"><a href=\"\"><span aria-hidden=\"true\">&raquo;</span></a></li>';
+            if($_GET['page'] ==ceil($pa)|| $pa == 0){
+                  echo '<li class="disabled"><a href=""><span aria-hidden="true">&raquo;</span></a></li>';
                }else{
-                  echo '<li><a href=\"menu.php?menu='.$_GET['menu'].'&page='.($_GET['page']+1).'\"><span aria-hidden=\"true\">&raquo;</span></a></li>';
+                  
+                  echo '<li><a href="menu.php?menu='.$_GET['menu'].'&page='.($_GET['page']+1).'"><span aria-hidden=\"true\">&raquo;</span></a></li>';
             }
          
          echo '</ul></nav>';
