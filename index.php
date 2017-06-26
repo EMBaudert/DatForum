@@ -1,5 +1,5 @@
 <?PHP
-require_once 'func/menu.func.php';
+require_once 'func/index.func.php';
 ?>
 <!DOCTYPE html>
 	<html>
@@ -21,10 +21,20 @@ require_once 'func/menu.func.php';
 			<div class="container">
 			<?php
            require_once 'inc/navbar.php';
-         ?>
-			   <h1>Startseite</h1>
-            <p><a href="menu.php">Menu</a></p>
-			<?php
+            if(isset($_SESSION['PKID'])){ 
+               echo '<h2> Hallo '.getUsername($_SESSION['PKID']);
+               if(checkMessages($_SESSION['PKID'])){
+                  echo ', du hast <a href="messages.php">ungelesene Nachrichten!</a></h2>';
+               }else{
+                  echo ', schau dir ein paar aktuelle Beitr&auml;ge an!</h2>';
+               }
+            }      
+            
+            echo '<div class="row">';
+           createTopPosts("Meiste Antworten","SELECT FK_thread, COUNT(*) FROM post GROUP BY FK_thread ORDER BY COUNT(*) DESC");
+                  
+           createTopPosts("Neueste Beitr&auml;ge","SELECT FK_thread, date, time  FROM post GROUP BY FK_thread ORDER BY date DESC, time DESC");
+           echo '</div>';
            include_once 'inc/footer.html';
          ?>
          </div>
