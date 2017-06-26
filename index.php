@@ -30,11 +30,20 @@ require_once 'func/index.func.php';
                }
             }      
             
-            echo '<div class="row">';
-           createTopPosts("Meiste Antworten","SELECT FK_thread, COUNT(*) FROM post GROUP BY FK_thread ORDER BY COUNT(*) DESC");
-                  
-           createTopPosts("Neueste Beitr&auml;ge","SELECT FK_thread, date, time  FROM post GROUP BY FK_thread ORDER BY date DESC, time DESC");
-           echo '</div>';
+            echo '<div class="row">
+                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Zum Forum
+                        </div>
+                        <div class="panel-body">
+                           <span class="glyphicon glyphicon-list"></span> <a href="menu.php">Zur &Uuml;bersicht</a>
+                        </div>
+                     </div>';
+                        $d = getdate();
+               createTopPosts("Meist diskutiert","SELECT FK_thread, COUNT(*) FROM post WHERE date> '".$d['year']."-".$d['mon']."-".($d['mday']-1)."' GROUP BY FK_thread ORDER BY COUNT(*) DESC");
+               createTopPosts("Meiste Beitr&auml;ge","SELECT FK_thread, COUNT(*) FROM post GROUP BY FK_thread ORDER BY COUNT(*) DESC");
+               createTopPosts("Neueste Beitr&auml;ge","SELECT FK_thread, date, time  FROM post GROUP BY FK_thread ORDER BY date DESC, time DESC");
+            echo '</div>';
            include_once 'inc/footer.html';
          ?>
          </div>
