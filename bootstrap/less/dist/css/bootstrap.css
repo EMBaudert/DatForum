@@ -4703,7 +4703,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   display: inline-block;
 }
 .breadcrumb > li + li:before {
-  padding: 5 0;
+  padding: 0 5px;
   color: #969696;
   content: " /\00a0";
 }
@@ -4713,7 +4713,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination {
   display: inline-block;
   padding-left: 0;
-  margin: 0;
+  margin: 20px 0;
   border-radius: 4px;
 }
 .pagination > li {
@@ -4729,7 +4729,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   color: #333;
   text-decoration: none;
   background-color: #fff;
-  border: 1px solid #eee;
+  border: 1px solid #bbb;
 }
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
@@ -4749,7 +4749,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   z-index: 2;
   color: #23527c;
   background-color: #ffac3a;
-  border-color: #eee;
+  border-color: #bbb;
 }
 .pagination > .active > a,
 .pagination > .active > span,
@@ -4761,7 +4761,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   color: #333;
   cursor: default;
   background-color: #ffac3a;
-  border-color: #eee;
+  border-color: #bbb;
 }
 .pagination > .disabled > span,
 .pagination > .disabled > span:hover,
@@ -4772,7 +4772,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   color: #777;
   cursor: not-allowed;
   background-color: #fff;
-  border-color: #eee;
+  border-color: #bbb;
 }
 .pagination-lg > li > a,
 .pagination-lg > li > span {
@@ -4806,6 +4806,9 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
+.pagination {
+  margin: 0;
+}
 .pager {
   padding-left: 0;
   margin: 20px 0;
@@ -4820,7 +4823,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   display: inline-block;
   padding: 5px 14px;
   background-color: #fff;
-  border: 1px solid #eee;
+  border: 1px solid #bbb;
   border-radius: 15px;
 }
 .pager li > a:hover,
@@ -6756,9 +6759,6 @@ button.close {
     display: none !important;
   }
 }
-body {
-  background-color: white;
-}
 @media (min-width: 768px) {
   .row.equal {
     display: -webkit-box;
@@ -6790,13 +6790,8 @@ h3 {
   margin-bottom: 10px;
 }
 .hr-postcontent {
+  margin: 10px 0;
   border-color: #bbb;
-}
-hr {
-  margin: 0 5px 0 5px;
-}
-p {
-  margin: 10px 5px;
 }
 .nospace {
   padding: 0 0;
@@ -6812,12 +6807,21 @@ p {
   background-color: #337bb7;
   border-radius: 5px 5px 0 0;
 }
+.dropdown-form {
+  background-color: #65a6db;
+}
 @media (min-width: 979px) {
   .profile-picture {
     width: 120px;
   }
   .minheight {
-    min-height: 90px;
+    position: relative;
+  }
+  .min-height-f {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 40px;
   }
   ul.nav li.dropdown:hover > ul.dropdown-menu {
     display: block;
