@@ -11,7 +11,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          bei sm und xs bekommt der Titel eine eigene Zeile
          */
         echo '<div class="row marg-tb-5">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
                <h3>'.$upperMenuName['title'].'</h3>   
             </div>
             <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
@@ -25,7 +25,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
                         </div>';  
                }
             echo '</div>
-            <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">';
                echo createPagination($param);
             echo '</div>
          </div>';
@@ -198,7 +198,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
                <ul class=\"pagination pull-right\">";          
          
             //calculate needed pages
-            $pa = $pageNumber['cnt'] / MAX_ENTRY_NUMBER;
+            $pa = ceil($pageNumber['cnt'] / MAX_ENTRY_NUMBER);
 
             //Previous button, if page 1 is selected button gets deactivated
             if($_GET['page'] == 1){
@@ -206,30 +206,71 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
                }else{
                   echo "<li><a href=\"menu.php?menu=".$_GET['menu']."&page=".($_GET['page']-1)."\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
             }
-            
+            //if only one page is needed add this one custom
             if($pa == 0){
-               echo "<li class=\"active\"><a href=\"menu.php?menu=".$_GET['menu']."&page=1\">1</a></li>";   
+               echo '<li class="active"><a href="menu.php?menu='.$_GET['menu'].'&page=1">1</a></li>';   
             }
 
-            //show all pages
-            for($i=1;$i<$pa+1; $i++){
-               if($_GET['page']==$i){
-                  echo "<li class=\"active\"><a href=\"menu.php?menu=".$_GET['menu']."&page=".$i."\">".$i."</a></li>";   
+            if($pa > 7){
+               createSingleMenuPoint(1);
+               
+               if($_GET['page'] == 1){
+                  createSingleMenuPoint(2);
+                  createSingleMenuPoint(3);
+                  createSingleMenuPoint(4);  
+               }else if ($_GET['page'] == 2){
+                  createSingleMenuPoint(2);
+                  createSingleMenuPoint(3);
+                  createSingleMenuPoint(4);
+               }else if($_GET['page'] == $pa-1){
+                  createSingleMenuPoint($pa-3);
+                  createSingleMenuPoint($pa-2);
+                  createSingleMenuPoint($pa-1);
+               }else if($_GET['page'] == $pa){
+                  createSingleMenuPoint($pa-3);
+                  createSingleMenuPoint($pa-2);
+                  createSingleMenuPoint($pa-1);
                }else{
-                  echo "<li><a href=\"menu.php?menu=".$_GET['menu']."&page=".$i."\">".$i."</a></li>";   
+                  createSingleMenuPoint($_GET['page']-1);
+                  createSingleMenuPoint($_GET['page']);
+                  createSingleMenuPoint($_GET['page']+1);
                }
-               $maxPages=$i;
+               
+               
+               /*
+               if($_GET['page'] != $pa-1){
+                  echo '<li><a href="">...</a></li>';
+               }else if($_GET['page']== ($pa-2)){
+                  createSingleMenuPoint($pa-2);
+                  createSingleMenuPoint($pa-1);
+               } */
+               createSingleMenuPoint($pa);
+               
+               
+               
+            }else{
+               //show all pages
+               for($i=1;$i<$pa+1; $i++){
+                  createSingleMenuPoint($i);
+               }
             }
-            
             //last button, if last site is selected buttons get deactivated
             if($_GET['page'] == ceil($pa) || $pa == 0){
-                  echo "<li class=\"disabled\"><a href=\"\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
+                  echo '<li class="disabled"><span aria-hidden="true">&raquo;</span></li>';
                }else{
-                  echo "<li><a href=\"menu.php?menu=".$_GET['menu']."&page=".($_GET['page']+1)."\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
+                  echo '<li><a href="menu.php?menu='.$_GET['menu'].'&page='.($_GET['page']+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
             }
          
-         echo "</ul></nav>";
+         echo '</ul></nav>';
          
+      }
+      
+      function createSingleMenuPoint($nr){
+         if($_GET['page']==$nr){
+                  echo '<li class="active"><a href="menu.php?menu='.$_GET['menu'].'&page='.$nr.'">'.$nr.'</a></li>';   
+               }else{
+                  echo '<li><a href="menu.php?menu='.$_GET['menu'].'&page='.$nr.'">'.$nr.'</a></li>';   
+               }
       }
       
       

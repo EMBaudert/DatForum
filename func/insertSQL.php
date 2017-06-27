@@ -7,7 +7,6 @@
 
          execute($_POST['sql']);
          $id = SQLQuery("SELECT PKID_thread FROM thread WHERE theme='".$_POST['theme']."' AND FK_creator=".$_POST['creator']);
-         echo $_POST['sql'];
          echo $id['PKID_thread'];
       }else{
          execute($_POST['sql']);

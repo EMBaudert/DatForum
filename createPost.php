@@ -100,11 +100,11 @@
              
                function sendSQL(sql1, sql21, sql22) {
                   $.post("func/insertSQL.php",sql1, function(result){
-                     alert(result);
                      var query = sql21 + String(result) + sql22;
+                     alert(query);
                      var newStr= {sql: + query};
                      $.post("func/insertSQL.php", newStr);
-                     alert("fertig");
+                     $("#summernote").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+result+"&page=1"});
                   });
                }
              
