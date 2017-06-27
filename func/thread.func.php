@@ -89,9 +89,11 @@
          </div>
          <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
             <div class="btn-group" role="group">
+               <a href="createPost.php?id='.$_GET['thread'].'&creator='.$_SESSION['PKID'].'">
                <div type="button" id="createPost" onclick="test()" class="btn btn-default">
                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neuer Beitrag
                </div>
+               </a>
             </div>
          </div>
          <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">'; 
@@ -101,28 +103,20 @@
                
    }
       
-          function createPagination($thread){
+   function createPagination(){
          
-         //getPagenumber
+   //getPagenumber
+   $pageNumber = SQLQuery("SELECT COUNT(PKID_post) as cnt FROM post WHERE FK_thread = ".$_GET['thread']); 
+        
+   
+   echo "<nav aria-label=\"pagination\">
+      <ul class=\"pagination pull-right\">";          
          
-         if($thread){
-            $pageNumber = SQLQuery("SELECT COUNT(PKID_thread) as cnt FROM thread WHERE FK_Menu = ".$_GET['menu']);
-         }else{
-            if($_GET['menu']==0){
-               $pageNumber = SQLQuery("SELECT COUNT(PKID_menu) as cnt FROM menu WHERE FK_menu IS NULL");
-            }else{
-               $pageNumber = SQLQuery("SELECT COUNT(FK_menu) as cnt FROM menu WHERE FK_menu = ".$_GET['menu']);
-            }
-         }
-    //     echo $pageNumber['cnt'];
-         echo "<nav aria-label=\"pagination\">
-               <ul class=\"pagination pull-right\">";          
-         
-            //calculate needed pages
-            $pa = ceil($pageNumber['cnt'] / MAX_ENTRY_NUMBER);
+      //calculate needed pages
+      $pa = ceil($pageNumber['cnt'] / MAX_ENTRY_NUMBER);
 
-            //Previous button, if page 1 is selected button gets deactivated
-            if($_GET['page'] == 1){
+      //Previous button, if page 1 is selected button gets deactivated
+      if($_GET['page'] == 1){
                   echo "<li class=\"disabled\"><a href=\"\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
                }else{
                   echo "<li><a href=\"menu.php?menu=".$_GET['menu']."&page=".($_GET['page']-1)."\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
@@ -179,55 +173,58 @@
             if($_GET['page'] == ceil($pa) || $pa == 0){
                   echo '<li class="disabled"><span aria-hidden="true">&raquo;</span></li>';
                }else{
-                  echo '<li><a href="menu.php?menu='.$_GET['menu'].'&page='.($_GET['page']+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
+                  echo '<li><a href="thread.php?thread='.$_GET['thread'].'&page='.($_GET['page']+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
             }
          
          echo '</ul></nav>';
          
       }
       
-      function createSingleMenuPoint($nr){
-         if($_GET['page']==$nr){
-                  echo '<li class="active"><a href="menu.php?menu='.$_GET['menu'].'&page='.$nr.'">'.$nr.'</a></li>';   
-               }else{
-                  echo '<li><a href="menu.php?menu='.$_GET['menu'].'&page='.$nr.'">'.$nr.'</a></li>';   
-               }
-      }
+   function createSingleMenuPoint($nr){
+       if($_GET['page']==$nr){
+          echo '<li class="active"><a href="thread.php?thread='.$_GET['thread'].'&page='.$nr.'">'.$nr.'</a></li>';   
+       }else{
+          echo '<li><a href="thread.php?thread='.$_GET['thread'].'&page='.$nr.'">'.$nr.'</a></li>';   
+       }
+   }
          
-         function createBreadcrumb($id){
+   function createBreadcrumb($id){
       
-            echo '<div class="row"><ol class="breadcrumb">
-            <li><a href="menu.php?menu=0&page=1">Main menu</a></li>';
-            recursiveBreadCrumb($id);
-            $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = " .$_GET['thread']);
-            echo '<li class="active">'.$title['theme'].'</li>';
-            
-            echo "</ol></div>";
-            
-         }
-         
-         function recursiveBreadCrumb($id){
+    echo '<div class="row"><ol class="breadcrumb">
+    <li><a href="menu.php?menu=0&page=1">Main menu</a></li>';
+    recursiveBreadCrumb($id);
+    $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = " .$_GET['thread']);
+    echo '<li class="active">'.$title['theme'].'</li>';
 
-            $tempQuery = SQLQuery("SELECT * FROM menu WHERE PKID_menu = ".$id);
-            
-            if($tempQuery['FK_menu']==NULL){
-               echo '<li><a href="menu.php?menu='.$tempQuery['PKID_menu'].'&page=1">'.$tempQuery['title'].'</a></li>';
-               return;
-            }
-            
-            recursiveBreadCrumb($tempQuery['FK_menu']);
-            
-               echo '<li><a href="menu.php?menu='.$tempQuery['PKID_menu'].'&page=1">'.$tempQuery['title'].'</a></li>';
-            
-         }
+    echo "</ol></div>";
+
+ }
          
-         function createThema(){
-            
-            $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = ".$_GET['thread']);
-            
-            echo "<h3>".$title['theme']."</h3>";
-         }
+   function recursiveBreadCrumb($id){
+
+      $tempQuery = SQLQuery("SELECT * FROM menu WHERE PKID_menu = ".$id);
+
+      if($tempQuery['FK_menu']==NULL){
+         echo '<li><a href="menu.php?menu='.$tempQuery['PKID_menu'].'&page=1">'.$tempQuery['title'].'</a></li>';
+         return;
+      }
+
+      recursiveBreadCrumb($tempQuery['FK_menu']);
+
+         echo '<li><a href="menu.php?menu='.$tempQuery['PKID_menu'].'&page=1">'.$tempQuery['title'].'</a></li>';
+
+   }
          
-       
+   function createThema(){
+
+      $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = ".$_GET['thread']);
+
+      echo "<h3>".$title['theme']."</h3>";
+ }
+         
+   function getLastPage(){
+      $pageNumber = SQLQuery("SELECT COUNT(PKID_post) as cnt FROM post WHERE FK_thread = ".$_GET['thread']);
+      return ceil($pageNumber['cnt'] / MAX_ENTRY_NUMBER);  
+   }       
 
 ?>

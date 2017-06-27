@@ -31,8 +31,14 @@
             <h2>Thread erstellen</h2>
          </div>
          <div class="row">
+            <div class="input-group">
+               <span class="input-group-addon">Threadtitel</span>
+               <input type="text" class="form-control" id="threadtitle" placeholder="" aria-describedby="threadtitle">
+            </div>
+         </div>
+         <div class="row">
             <div id="summernote">
-               <p>Edit...</p>
+               <p>...</p>
             </div>
             
             <div class="btn-group pull-right" role="group">
@@ -48,15 +54,24 @@
       <script>
         $(document).ready(function() {
             $('#summernote').summernote();
-            var d = new Date();
             
             $('#target').button().click(function(){
-                  var markupStr = $('#summernote').summernote('code');
-                  var query =  "INSERT INTO `post` (`PKID_post`, `FK_user`, `FK_thread`, `date`, `time`, `text`) VALUES (NULL, '"+getUrlVars()["creator"]+"', '"
-                  +getUrlVars()["id"]+"', '"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"', '"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()+"', '"+markupStr+"');";
-                  var sql = {sql: query};
-                  $.post("func/insertSQL.php",sql);
-                  $("#summernote").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+getUrlVars()["id"]});
+                var markupStr = $('#summernote').summernote('code');
+                var d = new Date();
+                if(getUrlVars()["from"] == "menu"){
+                
+                     var query = {sql: "INSERT INTO `thread` (`PKID_thread`, `FK_menu`, `theme`, `FK_Creator`) VALUES (NULL, '"
+                                       +getUrlVars()["id"]+"', '"+ $('#threadtitle').val() +"', '"+getUrlVars()["creator"]+"');", 
+                                  type: "newThread",
+                                  theme: $('#threadtitle').val(),
+                                  creator: getUrlVars()["creator"]
+                                 };
+                     var query21 = "INSERT INTO `post` (`PKID_post`, `FK_user`, `FK_thread`, `date`, `time`, `text`) VALUES (NULL, '"+getUrlVars()["creator"]+"', '";
+                     var query22 = "', '"+d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+"', '"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()+"', '"+markupStr+"');";
+                     sendSQL(query, query21, query22);
+
+                } 
+                
              });    
              
              
@@ -83,7 +98,17 @@
                }
              
              
-               
+               function sendSQL(sql1, sql21, sql22) {
+                  $.post("func/insertSQL.php",sql1, function(result){
+                     var query = sql21 + String(result) + sql22;
+                     var newStr= {sql: query};
+                     alert(query);
+                     $.post("func/insertSQL.php", newStr);
+                     $("#summernote").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+result+"&page=1"});
+                  
+                  });
+                  
+               }
              
              
         });

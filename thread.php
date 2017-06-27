@@ -28,8 +28,11 @@
          const MAX_ENTRY_NUMBER = 5;
       
       //wenn benötigte daten nicht gesetzt sind, zurück auf startseite
-         if(!isset($_GET['thread']) && !isset($_GET['page'])){
+         if(!isset($_GET['thread'])){
             echo "<meta http-equiv=\"refresh\" content=\"0; URL=index.php\" />";
+         }
+         if(!isset($_GET['page'])){
+            $_GET['page'] = getLastPage();
          }
          $thread = SQLQuery("SELECT FK_menu FROM thread WHERE PKID_thread = " .$_GET['thread']);
          $menupoint = SQLQuery("SELECT * FROM menu WHERE PKID_menu = " .$thread['FK_menu']);

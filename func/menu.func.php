@@ -17,7 +17,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
             <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
                if($param){
                   echo'<div class="btn-group" role="group">
-                           <a href="createPost.php?from=menu&id='.$_GET['menu'].'&creator='.$_SESSION['PKID'].'">
+                           <a href="createThread.php?from=menu&id='.$_GET['menu'].'&creator='.$_SESSION['PKID'].'">
                            <div type="button" class="btn btn-default">
                               Neuer Beitrag
                            </div>
