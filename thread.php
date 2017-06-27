@@ -2,7 +2,7 @@
    require 'func/thread.func.php';
 ?>
 
-
+<!DOCTYPE html>
 <html>
 
    <!-- Das neueste kompilierte und minimierte CSS -->

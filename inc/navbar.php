@@ -52,7 +52,7 @@
    						echo '<li class="dropdown">
                               <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-plus-sign"></span> Register </span></a>
                               <ul class="dropdown-menu">
-   									   <li>';
+   									   <li class="dropdown-light">';
                            include 'inc/register.php';
                            echo '</li>
    								    </ul>
@@ -60,7 +60,7 @@
                            <li class="dropdown">
                               <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> Login </a>
                                  <ul class="dropdown-menu">
-   									      <li>';
+   									      <li class="dropdown-light">';
                         include 'inc/login.php';
                               echo '</li>
    								       </ul>
