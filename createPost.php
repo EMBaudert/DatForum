@@ -27,10 +27,18 @@
          <?php
             require_once('inc/navbar.php');
          ?>
-      
+         <div class="row">
+            <h2>Thread erstellen</h2>
+         </div>
+         <div class="row">
+            <div class="input-group">
+               <span class="input-group-addon">Threadtitel</span>
+               <input type="text" class="form-control" id="threadtitle" placeholder="" aria-describedby="threadtitle">
+            </div>
+         </div>
          <div class="row">
             <div id="summernote">
-               <p>Hello Summernote</p>
+               <p>...</p>
             </div>
             
             <div class="btn-group pull-right" role="group">
@@ -49,14 +57,19 @@
             
             $('#target').button().click(function(){
                 var markupStr = $('#summernote').summernote('code');
-                
-                alert(getUrlVars()["from"]);
-                
+                var d = new Date();
                 if(getUrlVars()["from"] == "menu"){
-                     var query = "INSERT INTO `thread` (`PKID_thread`, `FK_menu`, `theme`, `FK_Creator`) VALUES (NULL, '"+getUrlVars()["id"]+"', '"+markupStr+"', '"+getUrlVars()["creator"]+"');"
-                     alert(query);
-                } else {
-                     
+                
+                     var query = {sql: "INSERT INTO `thread` (`PKID_thread`, `FK_menu`, `theme`, `FK_Creator`) VALUES (NULL, '"
+                                       +getUrlVars()["id"]+"', '"+ $('#threadtitle').val() +"', '"+getUrlVars()["creator"]+"');", 
+                                  type: "newThread",
+                                  theme: $('#threadtitle').val(),
+                                  creator: getUrlVars()["creator"]
+                                 };
+                     var query21 = "INSERT INTO `post` (`PKID_post`, `FK_user`, `FK_thread`, `date`, `time`, `text`) VALUES (NULL, '"+getUrlVars()["creator"]+"', '";
+                     var query22 = "', '"+d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+"', '"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()+"', '"+markupStr+"');";
+                     sendSQL(query, query21, query22);
+
                 } 
                 
              });    
@@ -82,6 +95,17 @@
                    }
 
                    return vars;
+               }
+             
+             
+               function sendSQL(sql1, sql21, sql22) {
+                  $.post("func/insertSQL.php",sql1, function(result){
+                     alert(result);
+                     var query = sql21 + String(result) + sql22;
+                     var newStr= {sql: + query};
+                     $.post("func/insertSQL.php", newStr);
+                     alert("fertig");
+                  });
                }
              
              
