@@ -177,13 +177,6 @@
             echo "<h3>".$title['theme']."</h3>";
          }
          
-         function SQLQuery($query){
-            global $pdo;
-            
-            $temp=$pdo->query($query);
-            $temp->execute();
-            return $temp->fetch();
-            
-         }
+       
 
 ?>
