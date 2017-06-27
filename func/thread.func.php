@@ -101,47 +101,98 @@
                
    }
       
-         function createPagination(){
-            //getPagenumber
+          function createPagination($thread){
          
-
-            $pageNumber = SQLQuery("SELECT COUNT(PKID_post) as cnt FROM post WHERE FK_thread = ".$_GET['thread']);
-            
+         //getPagenumber
          
+         if($thread){
+            $pageNumber = SQLQuery("SELECT COUNT(PKID_thread) as cnt FROM thread WHERE FK_Menu = ".$_GET['menu']);
+         }else{
+            if($_GET['menu']==0){
+               $pageNumber = SQLQuery("SELECT COUNT(PKID_menu) as cnt FROM menu WHERE FK_menu IS NULL");
+            }else{
+               $pageNumber = SQLQuery("SELECT COUNT(FK_menu) as cnt FROM menu WHERE FK_menu = ".$_GET['menu']);
+            }
+         }
     //     echo $pageNumber['cnt'];
-              echo '<nav aria-label="pagination">
-              
-               <ul class="pagination pull-right">';          
+         echo "<nav aria-label=\"pagination\">
+               <ul class=\"pagination pull-right\">";          
          
             //calculate needed pages
-            $pa = $pageNumber['cnt'] / MAX_ENTRY_NUMBER;
+            $pa = ceil($pageNumber['cnt'] / MAX_ENTRY_NUMBER);
 
             //Previous button, if page 1 is selected button gets deactivated
             if($_GET['page'] == 1){
-                  echo '<li class="disabled"><a href=""><span aria-hidden="true">&laquo;</span></a></li>';
+                  echo "<li class=\"disabled\"><a href=\"\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
                }else{
-                  echo '<li><a href="thread.php?thread='.$_GET['thread'].'&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
+                  echo "<li><a href=\"menu.php?menu=".$_GET['menu']."&page=".($_GET['page']-1)."\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
+            }
+            //if only one page is needed add this one custom
+            if($pa == 0){
+               echo '<li class="active"><a href="menu.php?menu='.$_GET['menu'].'&page=1">1</a></li>';   
             }
 
-            //show all pages
-            for($i=1;$i<$pa+1; $i++){
-               if($_GET['page']==$i){
-                  echo '<li class="active"><a href="thread.php?thread='.$_GET['thread'].'&page='.$i.'">'.$i.'</a></li>';   
+            if($pa > 7){
+               createSingleMenuPoint(1);
+               
+               if($_GET['page'] == 1){
+                  createSingleMenuPoint(2);
+                  createSingleMenuPoint(3);
+                  createSingleMenuPoint(4);  
+               }else if ($_GET['page'] == 2){
+                  createSingleMenuPoint(2);
+                  createSingleMenuPoint(3);
+                  createSingleMenuPoint(4);
+               }else if($_GET['page'] == $pa-1){
+                  createSingleMenuPoint($pa-3);
+                  createSingleMenuPoint($pa-2);
+                  createSingleMenuPoint($pa-1);
+               }else if($_GET['page'] == $pa){
+                  createSingleMenuPoint($pa-3);
+                  createSingleMenuPoint($pa-2);
+                  createSingleMenuPoint($pa-1);
                }else{
-                  echo '<li><a href="thread.php?thread='.$_GET['thread'].'&page='.$i.'">'.$i.'</a></li>';   
+                  createSingleMenuPoint($_GET['page']-1);
+                  createSingleMenuPoint($_GET['page']);
+                  createSingleMenuPoint($_GET['page']+1);
                }
-               $maxPages=$i;
+               
+               
+               /*
+               if($_GET['page'] != $pa-1){
+                  echo '<li><a href="">...</a></li>';
+               }else if($_GET['page']== ($pa-2)){
+                  createSingleMenuPoint($pa-2);
+                  createSingleMenuPoint($pa-1);
+               } */
+               createSingleMenuPoint($pa);
+               
+               
+               
+            }else{
+               //show all pages
+               for($i=1;$i<$pa+1; $i++){
+                  createSingleMenuPoint($i);
+               }
             }
             //last button, if last site is selected buttons get deactivated
-            if($_GET['page'] == ceil($pa)){
-                  echo '<li class="disabled"><a href=""><span aria-hidden="true">&raquo;</span></a></li>';
+            if($_GET['page'] == ceil($pa) || $pa == 0){
+                  echo '<li class="disabled"><span aria-hidden="true">&raquo;</span></li>';
                }else{
-                  echo '<li><a href="thread.php?thread='.$_GET['thread'].'&page='.($_GET['page']+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
+                  echo '<li><a href="menu.php?menu='.$_GET['menu'].'&page='.($_GET['page']+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
             }
          
          echo '</ul></nav>';
          
-         }
+      }
+      
+      function createSingleMenuPoint($nr){
+         if($_GET['page']==$nr){
+                  echo '<li class="active"><a href="menu.php?menu='.$_GET['menu'].'&page='.$nr.'">'.$nr.'</a></li>';   
+               }else{
+                  echo '<li><a href="menu.php?menu='.$_GET['menu'].'&page='.$nr.'">'.$nr.'</a></li>';   
+               }
+      }
          
          function createBreadcrumb($id){
       
