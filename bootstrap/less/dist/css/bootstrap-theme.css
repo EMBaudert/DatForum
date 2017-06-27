@@ -318,12 +318,12 @@ fieldset[disabled] .btn-danger.active {
 }
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
-  background-color: #70a8d5;
-  background-image: -webkit-linear-gradient(top, #84b4db 0%, #70a8d5 100%);
-  background-image:      -o-linear-gradient(top, #84b4db 0%, #70a8d5 100%);
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#84b4db), to(#70a8d5));
-  background-image:         linear-gradient(to bottom, #84b4db 0%, #70a8d5 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff84b4db', endColorstr='#ff70a8d5', GradientType=0);
+  background-color: #265c89;
+  background-image: -webkit-linear-gradient(top, #2c6a9d 0%, #265c89 100%);
+  background-image:      -o-linear-gradient(top, #2c6a9d 0%, #265c89 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#2c6a9d), to(#265c89));
+  background-image:         linear-gradient(to bottom, #2c6a9d 0%, #265c89 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff2c6a9d', endColorstr='#ff265c89', GradientType=0);
   background-repeat: repeat-x;
 }
 .dropdown-menu > .active > a,
