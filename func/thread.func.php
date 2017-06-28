@@ -1,5 +1,6 @@
 <?php
 
+//
    function createPostOverview(){
       global $pdo;
             
@@ -66,11 +67,18 @@
             <div class="row">
                <div class="btn-group pull-right" role="group">';
 						   
-					if(isset($_SESSION["PKID"]) && $user['PKID_user'] == $_SESSION["PKID"]){
-					    echo  '<a class ="btn btn-default" href="javascript:alert()"><span class="glyphicon glyphicon-edit"></span> Edit</a>';	
+					 if(isset($_SESSION["PKID"])){
+                  $usergroup = SQLQuery("SELECT * FROM user WHERE PKID_user =".$_SESSION['PKID']);
+					    if($user['PKID_user'] == $_SESSION["PKID"]){
+                     echo  '<a class ="btn btn-default" href="createPost.php?type=edit&id='.$post['PKID_post'].'"><span class="glyphicon glyphicon-edit"></span> Edit</a>';	
+                   }
+                   if($usergroup['usergroup']=='admin' || $usergroup['usergroup']== 'moderator'){
+                     echo '<a class ="btn btn-default" href=""><span class="glyphicon glyphicon-edit"></span> L&ouml;schen</a>';
+                   }else {
+                     echo  '<a class ="btn btn-default" id="report"><span class="glyphicon glyphicon-edit"></span> Melden</a>';
+                   }
                }
-					    echo  '<a class ="btn btn-default" href="javascript:alert()"><span class="glyphicon glyphicon-edit"></span> Melden</a>
-                           <a class ="btn btn-default" id="target"><span class="glyphicon glyphicon-bullhorn"></span> Zitieren</a>
+					    echo '<a class ="btn btn-default" href="createPost.php?type=quote&id='.$_GET['thread'].'&quoteid='.$post['PKID_post'].'"><span class="glyphicon glyphicon-bullhorn"></span> Zitieren</a>
                </div>
             </div>
          </div>
@@ -87,15 +95,17 @@
          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
             <h3>'.$title['theme'].'</h3>
          </div>
-         <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-            <div class="btn-group" role="group">
+         <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
+         if(isset($_SESSION['logged'])){
+           echo '<div class="btn-group" role="group">
                <a href="createPost.php?id='.$_GET['thread'].'&creator='.$_SESSION['PKID'].'">
-               <div type="button" id="createPost" onclick="test()" class="btn btn-default">
+               <div type="button" class="btn btn-default">
                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neuer Beitrag
                </div>
                </a>
-            </div>
-         </div>
+            </div>';
+            }
+        echo ' </div>
          <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">'; 
             createPagination();
          echo '</div>
@@ -227,4 +237,6 @@
       return ceil($pageNumber['cnt'] / MAX_ENTRY_NUMBER);  
    }       
 
+
 ?>
+

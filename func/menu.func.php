@@ -15,7 +15,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
                <h3>'.$upperMenuName['title'].'</h3>   
             </div>
             <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
-               if($param){
+               if($param && isset($_SESSION['PKID'])){
                   echo'<div class="btn-group" role="group">
                            <a href="createThread.php?from=menu&id='.$_GET['menu'].'&creator='.$_SESSION['PKID'].'">
                            <div type="button" class="btn btn-default">
@@ -49,14 +49,14 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          echo '<li class="list-group-item">
                   <div class="row">
                      <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-                     <span class="glyphicon glyphicon-th-list"></span><a href="menu.php?'.$ausgabe.'">  '.$title.'</a>
+                     <span class="glyphicon glyphicon-th-list"></span> <a href="menu.php?'.$ausgabe.'">'.$title.'</a>
                      </div>';
          
           echo     '<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">'.$count.'<div>
                   </div>
                </li>';
       } 
-      
+//erstellt obersten Menüpunkt um ins Overmenu zu navigieren   
       function createMenuPointBack(){
         
         $upperMenu = SQLQuery("SELECT FK_menu FROM menu WHERE PKID_menu=".$_GET['menu']);;
@@ -73,7 +73,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          
          
       }
-      
+// erstellt das ganze Menu, ruft createMenuPoint auf
       function createMenu($sqlString) {
          global $pdo;
          
@@ -96,13 +96,13 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          }
          echo "</ul></div>";
       } 
-      
+// Gibt zurück wieviele Threads der Menupunkt hat
       function checkThread($PKID){
       
          $temp= SQLQuery("SELECT COUNT(PKID_thread) as num FROM thread WHERE FK_menu = ".$PKID);
          return $temp['num'];
       }
-      
+//Sind in einem menu keine Munepunkte mehr sondern Threads, werden diese andersa angezeigt
       function createThreadOverview($id){
          global $pdo;
          
@@ -129,7 +129,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          echo '</ul></div>';         
          
       }
-      
+//Erstellt einen Thread
       function createThreadEntry($PKID, $title, $creator){
       
       
@@ -145,13 +145,13 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
             </li>';
          
       }
-      
+// Gibt die Zahl der Posts in einem Thread zurück
       function getPostNumber($id){
          
          $tempNr = SQLQuery("SELECT COUNT(PKID_post) as num FROM post WHERE FK_thread = ".$id);
          return $tempNr['num'];
       }
-      
+//Erstellt die Breadcrumb navigation
       function createBreadcrumb($id){
          echo "<div class=\"row\"><ol class=\"breadcrumb\">
          <li><a href=\"menu.php?menu=0&page=1\">Main menu</a></li>";
@@ -160,7 +160,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          echo "</ol></div>";
          
       }
-      
+//Erstellt einzelne Breadcrumb punkte
       function recursiveBreadCrumb($id, $first){
 
          $tempQuery = SQLQuery("SELECT * FROM menu WHERE PKID_menu = ".$id);
@@ -179,7 +179,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          }
          
       }
-      
+//Erstellt Pagination
       function createPagination($thread){
          
          //getPagenumber
@@ -264,7 +264,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          echo '</ul></nav>';
          
       }
-      
+//Erstellt einzelnen Menupunkt 
       function createSingleMenuPoint($nr){
          if($_GET['page']==$nr){
                   echo '<li class="active"><a href="menu.php?menu='.$_GET['menu'].'&page='.$nr.'">'.$nr.'</a></li>';   

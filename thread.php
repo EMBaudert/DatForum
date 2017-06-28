@@ -25,15 +25,18 @@
    
       <?php
          require 'inc/navbar.php';
+         //gibt an wieviele threads auf eine Seite dürfen
          const MAX_ENTRY_NUMBER = 5;
       
-      //wenn benötigte daten nicht gesetzt sind, zurück auf startseite
+//Wenn id des Threads nicht gesetzt ist, gehe zurück auf index.php
          if(!isset($_GET['thread'])){
             echo "<meta http-equiv=\"refresh\" content=\"0; URL=index.php\" />";
          }
+         //Wenn page nicht gesetzt ist gehe auf letzte Seite
          if(!isset($_GET['page'])){
             $_GET['page'] = getLastPage();
          }
+         //bekeomme id des Menues fuer Breadcrum
          $thread = SQLQuery("SELECT FK_menu FROM thread WHERE PKID_thread = " .$_GET['thread']);
          $menupoint = SQLQuery("SELECT * FROM menu WHERE PKID_menu = " .$thread['FK_menu']);
       
@@ -47,6 +50,32 @@
       <?php include_once('inc/footer.html'); ?>         
          
       </div>
-
+      
+      <script>
+         $(document).ready(function() {
+            $('#report').button().click(function(){
+               var reason = prompt("Bitte Grund angeben: ", "");
+               
+               var queryPart1 = "INSERT INTO `reports` (`PKID_report`, `FK_user`, `reason`) VALUES (NULL, '";
+               var queryPart2 = "', '"+reason+"')";
+               
+               var sql = {
+                  type: 'report',
+                  query1: queryPart1,
+                  query2: queryPart2
+               }
+               
+               $.post("func/insertSQL.php",sql);
+               
+            });
+            
+            $('#delete').button().click(function(){
+               if (confirm('Wirklich löschen?')) {
+                  alert('gelöscht!');
+               }
+            });            
+         });
+      </script>
+      
    </body>
 </html>

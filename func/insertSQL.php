@@ -6,7 +6,9 @@
          execute($_POST['sql']);
          $id = SQLQuery("SELECT PKID_thread FROM thread WHERE theme='".$_POST['theme']."' AND FK_creator=".$_POST['creator']);
          echo $id['PKID_thread'];
-      }else{
+      }else if($_POST['type']== 'report'){
+         
+         execute($_POST['query1'].$_SESSION['PKID'].$_POST['query2']);
          
       }
       
