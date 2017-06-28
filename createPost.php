@@ -31,18 +31,31 @@
             <h2>Thread erstellen</h2>
          </div>
          <div class="row">
-            <div class="input-group">
-               <span class="input-group-addon">Threadtitel</span>
-               <input type="text" class="form-control" id="threadtitle" placeholder="" aria-describedby="threadtitle">
-            </div>
-         </div>
-         <div class="row">
             <div id="summernote">
-               <p>...</p>
+               <?php
+               if(isset($_GET['type'])){
+                  if($_GET['type'] =='edit'){
+                     $post = SQLQuery("SELECT * FROM post WHERE PKID_post =".$_GET['id']);
+                     echo '<p>'.$post['text'].'</p>';
+                  }else if($_GET['type']=='quote'){
+                     $post = SQLQuery("SELECT * FROM post WHERE PKID_post =".$_GET['quoteid']);
+                     $user = SQLQuery("SELECT * FROM user WHERE PKID_user =".$post['FK_user']);
+                     echo '<p><blockquote>'.$post['text'].'<footer><cite title="'.$user['username'].'">'.$user['username'].'</cite></footer></blockquote>...</p>';                     
+                  }
+                  
+               }
+               
+               ?>
             </div>
             
             <div class="btn-group pull-right" role="group">
-                <a class ="btn btn-default" id="target"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>
+               <?php
+                  if($_GET['type']=='edit'){
+                     echo '<a class ="btn btn-default" id="edit"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>';
+                  }else {
+                     echo '<a class ="btn btn-default" id="new"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>';                     
+                  }
+                ?>
             </div>
          </div>
          
@@ -54,26 +67,40 @@
       <script>
         $(document).ready(function() {
             $('#summernote').summernote();
+            var d = new Date();
             
-            $('#target').button().click(function(){
-                var markupStr = $('#summernote').summernote('code');
-                var d = new Date();
-                if(getUrlVars()["from"] == "menu"){
-                
-                     var query = {sql: "INSERT INTO `thread` (`PKID_thread`, `FK_menu`, `theme`, `FK_Creator`) VALUES (NULL, '"
-                                       +getUrlVars()["id"]+"', '"+ $('#threadtitle').val() +"', '"+getUrlVars()["creator"]+"');", 
-                                  type: "newThread",
-                                  theme: $('#threadtitle').val(),
-                                  creator: getUrlVars()["creator"]
-                                 };
-                     var query21 = "INSERT INTO `post` (`PKID_post`, `FK_user`, `FK_thread`, `date`, `time`, `text`) VALUES (NULL, '"+getUrlVars()["creator"]+"', '";
-                     var query22 = "', '"+d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+"', '"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()+"', '"+markupStr+"');";
-                     sendSQL(query, query21, query22);
-
-                } 
-                
-             });    
+            //Button für neuen Post
+            $('#new').button().click(function(){
+                  // Text wird gespeichert
+                  var markupStr = $('#summernote').summernote('code');
+                  
+                  //Einfügen in post wird erstellt
+                  var query =  "INSERT INTO `post` (`PKID_post`, `FK_user`, `FK_thread`, `date`, `time`, `text`) VALUES (NULL, '"+getUrlVars()["creator"]+"', '"
+                  +getUrlVars()["id"]+"', '"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"', '"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()+"', '"+markupStr+"');";
+                  
+                  //Post wird erstellt
+                  var sql = {sql: query};
+                  
+                  //post wird aufgerufen
+                  $.post("func/insertSQL.php",sql);
+                  $("#summernote").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+getUrlVars()["id"]});
+             });   
              
+             //Button für editieren 
+             $('#edit').button().click(function(){
+                 // Text wird gespeichert
+                 var markupStr = $('#summernote').summernote('code');
+                  
+                  //Einfügen in post wird erstellt
+                  var query = "UPDATE `post` SET `text` = '"+markupStr+"' WHERE `post`.`PKID_post` ="+getUrlVars()['id'];
+                  
+                  //Post wird erstellt
+                  var sql = {sql: query};
+                  
+                  //post wird aufgerufen
+                  $.post("func/insertSQL.php",sql);
+                  $("#summernote").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+getUrlVars()["id"]});
+             }); 
              
               function getUrlVars()
                {
@@ -98,15 +125,7 @@
                }
              
              
-               function sendSQL(sql1, sql21, sql22) {
-                  $.post("func/insertSQL.php",sql1, function(result){
-                     alert(result);
-                     var query = sql21 + String(result) + sql22;
-                     var newStr= {sql: + query};
-                     $.post("func/insertSQL.php", newStr);
-                     alert("fertig");
-                  });
-               }
+               
              
              
         });
