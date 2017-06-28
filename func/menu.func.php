@@ -87,7 +87,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          $i=0;
          foreach ($pdo->query($sqlString) as $row) {
          
-            if($i>= ($_GET['page']-1*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
+            if($i>= (($_GET['page']-1)*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
              
                $number=SQLQuery("SELECT COUNT(FK_menu) as cnt FROM menu WHERE FK_menu = ".$row['PKID_menu']);
                createMenuPoint($row['title'],$number['cnt'], $row['PKID_menu'], $row['threads']);

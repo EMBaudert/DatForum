@@ -4,14 +4,18 @@
    function createPostOverview(){
       global $pdo;
             
-      //createPagination(0);
-                  
+      if(isset($_GET['post'])){
+         $pageNumber = SQLQuery("SELECT COUNT(PKID_post) as cnt FROM post WHERE FK_thread = ".$_GET['thread']); 
+         $postNumber = SQLQuery("SELECT COUNT(PKID_post) as cnt FROM post WHERE FK_thread = ".$_GET['thread']." AND PKID_post < ".$_GET['post']); 
+         //calculate correct page
+         $_GET['page'] = ceil(($postNumber['cnt']/ MAX_ENTRY_NUMBER)+0.00001);
+      }
       echo '<div class="row"><ul class="list-group">';
                   
       $i=0;
       foreach ($pdo->query("SELECT * FROM post WHERE FK_thread = ".$_GET['thread']) as $row) {
                   
-         if($i>= ($_GET['page']-1*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
+         if($i>= (($_GET['page']-1)*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
                       
             createPost($row);
          }
@@ -27,7 +31,7 @@
       $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = ".$post['FK_thread']);
 
  		//<hr class="colorline">                  <div class='.row"></div>
-      echo '<div class="panel panel-primary">
+      echo '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
          <div class="panel-heading">
             '.$post['date'].' '.$post['time'].'
          </div>
@@ -129,7 +133,7 @@
       if($_GET['page'] == 1){
                   echo "<li class=\"disabled\"><a href=\"\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
                }else{
-                  echo "<li><a href=\"menu.php?menu=".$_GET['menu']."&page=".($_GET['page']-1)."\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
+                  echo '<li><a href="menu.php?menu='.$_GET['thread'].'&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
             }
             //if only one page is needed add this one custom
             if($pa == 0){
