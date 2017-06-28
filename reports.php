@@ -1,5 +1,5 @@
 <?PHP
-require_once 'func/index.func.php';
+require_once 'func/reports.func.php';
 ?>
 <!DOCTYPE html>
 	<html>
@@ -20,8 +20,8 @@ require_once 'func/index.func.php';
 		<body>
 			<div class="container">
 			<?php
-            
-         
+             require_once 'inc/navbar.php';
+             createReportsOverview();
          
          ?>
          </div>
