@@ -6,10 +6,14 @@
          execute($_POST['sql']);
          $id = SQLQuery("SELECT PKID_thread FROM thread WHERE theme='".$_POST['theme']."' AND FK_creator=".$_POST['creator']);
          echo $id['PKID_thread'];
+         
       }else if($_POST['type']== 'report'){
          
          execute($_POST['query1'].$_SESSION['PKID'].$_POST['query2']);
          
+      }else if($_POST['type']== 'reportdone'){
+         echo $_POST['query1'].$_SESSION['PKID'].$_POST['query2'];
+         execute($_POST['query1'].$_SESSION['PKID'].$_POST['query2']);
       }
       
    }else{
