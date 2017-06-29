@@ -16,8 +16,9 @@ getChatPartners($_SESSION["PKID"]);
            if(isset($_POST["newMessage"])){
                $temp=addMessage($me,$other["username"],$_POST["newMessage"]);
            }
-           $text=getMessages($me,$other["username"]);
            if(isset($other["username"])){
+           $text=getMessages($me,$other["username"]);
+           
                
           
          ?>
