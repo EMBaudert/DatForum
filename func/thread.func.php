@@ -77,7 +77,7 @@
                      echo  '<a class ="btn btn-default" href="createPost.php?type=edit&id='.$post['PKID_post'].'"><span class="glyphicon glyphicon-edit"></span> Edit</a>';	
                    }
                    if($usergroup['usergroup']=='admin' || $usergroup['usergroup']== 'moderator'){
-                     echo '<a class ="btn btn-default" onClick="delete(5)"><span class="glyphicon glyphicon-edit"></span> L&ouml;schen</a>';
+                     echo '<a class ="btn btn-default delete" id="'.$post['PKID_post'].'"><span class="glyphicon glyphicon-edit"></span> L&ouml;schen</a>';
                    }else {
                      echo  '<a class ="btn btn-default" id="report"><span class="glyphicon glyphicon-edit"></span> Melden</a>';
                    }

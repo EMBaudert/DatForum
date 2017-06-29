@@ -12,7 +12,6 @@
          execute($_POST['query1'].$_SESSION['PKID'].$_POST['query2']);
          
       }else if($_POST['type']== 'reportdone'){
-         echo $_POST['query1'].$_SESSION['PKID'].$_POST['query2'];
          execute($_POST['query1'].$_SESSION['PKID'].$_POST['query2']);
       }
       

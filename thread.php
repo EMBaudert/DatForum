@@ -69,16 +69,23 @@
                
             });
             
-            $('#delete').button().click(function(){
-               if (confirm('Wirklich l&oumlschen?')) {
-                  var query = "DELETE FROM `reports` WHERE `reports`.`PKID_report` = 1";
-                  alert('gel&oumlscht!');
-               }
+            $(".delete").click(
+               function()
+               {
+                  var query = "DELETE FROM `post` WHERE `post`.`PKID_post` = "+$(this).attr("id");
+                  alert(query);
+                  var sql = {
+                     sql: query
+                  }
+                  $.post("func/insertSQL.php",sql, function(result){
+                     alert(result);
+                  });;
             });
             
-            function(id){
+            
+            /*function delete(id){
                alert(id);
-            }
+            }*/
          });
       </script>
       
