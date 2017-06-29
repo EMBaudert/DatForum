@@ -55,7 +55,8 @@ getChatPartners($_SESSION["PKID"]);
     <?PHP
      }else{
      
-         echo '<h1 readonly>Bitte w&auml;hlen Sie einen Chat aus!</h1>';
+         echo '<h1 readonly>Please choose a chat!</h1>';
+         
      }
      ?>
 </div>

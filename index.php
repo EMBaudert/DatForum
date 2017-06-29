@@ -6,7 +6,7 @@ require_once 'func/index.func.php';
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			<title>DatForum - Startseite</title>
-			<link rel="SHORTCUT ICON" href="layout/icon.ico" />
+			<link rel="SHORTCUT ICON" href="layout/favicon.ico" />
          <!-- Das neueste kompilierte und minimierte CSS -->
          <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
 

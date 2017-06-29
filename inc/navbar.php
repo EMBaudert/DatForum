@@ -1,5 +1,21 @@
 <?php	
  session_start();
+ require_once 'func/user.func.php';
+ require_once 'func/message.func.php';
+ if(!isset($_SESSION["logged"])){
+   $retval=checkCookieLogin(); 
+   if($retval&&!isset($_SESSION["logged"])){
+      addMessage("SystemOfADoom",$_COOKIE["username"],"Jemand hat versucht, über COOKIE-Manipulation Ihren Account zu hacken, wir konnten dies jedoch erfolgreich verhindern!");
+   }
+ }
+  if(isset($_GET["p"])&&$_GET["p"]=="login" && isset($_POST["password"])&&checklogin($_POST["username"],hash('sha512',$_POST["password"]))){
+						$_SESSION["logged"]=TRUE;
+						if(isset($_POST["remember"])){
+                     rememberLogin($_POST["username"],substr(hash('sha512',$_POST["password"]),0,20));
+		            }else if(isset($_COOKIE["UID"])){
+                     forgetLogin();
+		            }
+            }
 ?>
       <div class="row">
 			<nav class="navbar navbar-default">
@@ -35,7 +51,7 @@
       							<ul class="dropdown-menu">
          						   <li><a href="intern.php?p=profile&uid='.$_SESSION['PKID'].'">Profile</a></li>
          							<li><a href="#">Posts</a></li>
-                              <li><a href="#">Messages ';
+                              <li><a href="intern.php?p=message">Messages ';
                               //Wenn ungelesene nachrichten vorhanden sind iwrd die anzahl angezeigt
                               if ($messages['unread_messages']>0){
                                  echo '<span class="badge">'.$messages['unread_messages'].'</span>';
@@ -50,7 +66,7 @@
                      }else{
                      //wenn niemand angemeldet ist dropdowns in dennen registrations und anmeldeformulare sind
    						echo '<li class="dropdown">
-                              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-plus-sign"></span> Register </span></a>
+                              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-plus-sign"></span> Register </a>
                               <ul class="dropdown-menu">
    									   <li class="dropdown-light">';
                            include 'inc/register.php';
@@ -61,7 +77,7 @@
                               <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> Login </a>
                                  <ul class="dropdown-menu">
    									      <li class="dropdown-light">';
-                        include 'inc/login.php';
+                           include 'inc/login.php';
                               echo '</li>
    								       </ul>
    							     </li>';

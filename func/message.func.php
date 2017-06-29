@@ -59,6 +59,8 @@ function getChatPartners($user){
 }
 
 function getMessages($me,$you){
+   date_default_timezone_set('Europe/Berlin');
+   $date = date('Y-m-d', time());
    $text="";
    $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
    $sql = "SELECT * FROM user WHERE username='".$me."'";
@@ -79,7 +81,11 @@ function getMessages($me,$you){
                         </span>
                             <div class="chat-body clearfix">
                                 <div class="header">
-                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>now</small>
+                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>';
+         if($date!=$row["date"]){
+            $text .= $row["date"].' um ';
+         }
+         $text .= $row["time"].' Uhr</small>
                                      <a href="intern.php?p=profile&uid='.$from.'"><strong class="pull-right primary-font">'.$meID["username"].'</strong></a>
                                 </div>
                                 <p>
@@ -94,7 +100,11 @@ function getMessages($me,$you){
                             <div class="chat-body clearfix">
                                 <div class="header">
                                     <a href="intern.php?p=profile&uid='.$to.'"><strong class="primary-font">'.$youID["username"].'</strong></a> <small class="pull-right text-muted">
-                                        <span class="glyphicon glyphicon-time"></span>now</small>
+                                        <span class="glyphicon glyphicon-time"></span>';
+         if($date!=$row["date"]){
+            $text .= $row["date"].' um ';
+         }
+         $text .= $row["time"].' Uhr</small>
                                 </div>
                                 <p>
                                     '.$row["text"].'
@@ -108,7 +118,9 @@ function getMessages($me,$you){
 }
 
 function addMessage($from,$to,$text){
-   
+   date_default_timezone_set('Europe/Berlin');
+   $date = date('Y-m-d', time());
+   $daytime = date('H:i:s', time());
    $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
    $sql = "SELECT PKID_user FROM user WHERE username='".$from."'";
 	$tempID = $pdo->query($sql);
@@ -121,7 +133,7 @@ function addMessage($from,$to,$text){
 	$ID=$tempID->fetch();
    $to=$ID["PKID_user"];
    
-   $sql = "INSERT INTO messages (text,FK_from,FK_to) VALUES ('".$text."', '".$from."','".$to."')";
+   $sql = "INSERT INTO messages (text,FK_from,FK_to,date,time) VALUES ('".$text."', '".$from."','".$to."', '".$date."','".$daytime."')";
 	$statement = $pdo->prepare($sql);
 	$statement->execute();
    

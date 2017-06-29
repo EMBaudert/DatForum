@@ -153,4 +153,33 @@ function checkID($ID){
    return TRUE;
 }
 
+function checkCookieLogin(){
+   if(isset($_COOKIE["UID"])){
+       $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
+       $sql = "SELECT * FROM user WHERE PKID_user='".$_COOKIE["UID"]."'";
+	    $tempuser = $pdo->query($sql);
+	    $tempuser->execute();
+	    $user=$tempuser->fetch();
+       $passpart=substr($user["password"],0,20);
+       if($_COOKIE["username"]==$user["username"]&&$_COOKIE["pspt"]==$passpart){
+         $_SESSION["logged"]=true;
+         $_SESSION["PKID"]=$user["PKID_user"];
+       }
+       return TRUE;
+   }
+   return FALSE;
+}
+
+function rememberLogin($user,$passpart){
+   setcookie("username",$user,time()+(3600*24*100));
+   setcookie("UID",$_SESSION["PKID"],time()+(3600*24*100));
+   setcookie("pspt",$passpart,time()+(3600*24*100));
+}
+
+function forgetLogin(){
+   setcookie("username","",time()-3600);
+   setcookie("UID","",time()-3600);
+   setcookie("pspt","",time()-3600);
+}
+
 ?>

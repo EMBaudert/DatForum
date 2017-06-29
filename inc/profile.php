@@ -137,10 +137,11 @@
    <div align="left">
       <img title="Profilbild" src="<?PHP echo $data["pb_path"]; ?>" class="img-rounded" width="200px" />
    </div>
+   <?PHP if(isset($data["signature"])){echo '
 <div class="form-group">
   <label for="comment">Signature:</label>
-   <p id="comment"><?PHP if(isset($data["signature"])){echo $data["signature"]; }?></p>
-</div>
+   <p id="comment">'.$data["signature"].'</p>
+</div>';} ?>
 
 </div>
                      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
