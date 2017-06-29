@@ -77,7 +77,7 @@
                      echo  '<a class ="btn btn-default" href="createPost.php?type=edit&id='.$post['PKID_post'].'"><span class="glyphicon glyphicon-edit"></span> Edit</a>';	
                    }
                    if($usergroup['usergroup']=='admin' || $usergroup['usergroup']== 'moderator'){
-                     echo '<a class ="btn btn-default" href=""><span class="glyphicon glyphicon-edit"></span> L&ouml;schen</a>';
+                     echo '<a class ="btn btn-default" onClick="delete(5)"><span class="glyphicon glyphicon-edit"></span> L&ouml;schen</a>';
                    }else {
                      echo  '<a class ="btn btn-default" id="report"><span class="glyphicon glyphicon-edit"></span> Melden</a>';
                    }
@@ -143,19 +143,11 @@
             if($pa > 7){
                createSingleMenuPoint(1);
                
-               if($_GET['page'] == 1){
+               if($_GET['page'] == 1||$_GET['page'] == 2){
                   createSingleMenuPoint(2);
                   createSingleMenuPoint(3);
                   createSingleMenuPoint(4);  
-               }else if ($_GET['page'] == 2){
-                  createSingleMenuPoint(2);
-                  createSingleMenuPoint(3);
-                  createSingleMenuPoint(4);
-               }else if($_GET['page'] == $pa-1){
-                  createSingleMenuPoint($pa-3);
-                  createSingleMenuPoint($pa-2);
-                  createSingleMenuPoint($pa-1);
-               }else if($_GET['page'] == $pa){
+               }else if($_GET['page'] == $pa-1||$_GET['page'] == $pa){
                   createSingleMenuPoint($pa-3);
                   createSingleMenuPoint($pa-2);
                   createSingleMenuPoint($pa-1);
@@ -165,17 +157,7 @@
                   createSingleMenuPoint($_GET['page']+1);
                }
                
-               
-               /*
-               if($_GET['page'] != $pa-1){
-                  echo '<li><a href="">...</a></li>';
-               }else if($_GET['page']== ($pa-2)){
-                  createSingleMenuPoint($pa-2);
-                  createSingleMenuPoint($pa-1);
-               } */
                createSingleMenuPoint($pa);
-               
-               
                
             }else{
                //show all pages

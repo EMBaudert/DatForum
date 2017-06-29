@@ -70,10 +70,15 @@
             });
             
             $('#delete').button().click(function(){
-               if (confirm('Wirklich löschen?')) {
-                  alert('gelöscht!');
+               if (confirm('Wirklich l&oumlschen?')) {
+                  var query = "DELETE FROM `reports` WHERE `reports`.`PKID_report` = 1";
+                  alert('gel&oumlscht!');
                }
-            });            
+            });
+            
+            function(id){
+               alert(id);
+            }
          });
       </script>
       
