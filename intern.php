@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?PHP
-include 'func/user.func.php';
+require_once 'func/user.func.php';
 require_once 'func/menu.func.php';
 ?>
 	<html>
@@ -44,10 +44,10 @@ require_once 'func/menu.func.php';
 				}elseif($_GET["p"]=="register"){
 					if(isset($_SESSION["logged"])&&$_SESSION["logged"]){
 						echo "<h1>Sie sind schon registriert</h1>";
-					}elseif(!isset($_POST["submit"])||!checkusername()||!checkname()||!checkemail()||!checkpass()){
+					}elseif(!isset($_POST["submit"])||!checkusername()||!checkname()||!checkemail()||!checkpass()||!checksecquest($_POST["questnumb"])){
 						include 'inc/register.php';							
 					}else{
-						echo "<h1>Registrieren erfolgreich!</h1>"; #Hier geht es dann weiter(Daten eintragen und so)
+						echo "<h1>Registrieren erfolgreich!</h1>";
 						newuser();
 						$_SESSION["logged"]=TRUE;
 						?>

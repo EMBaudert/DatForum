@@ -182,4 +182,35 @@ function forgetLogin(){
    setcookie("pspt","",time()-3600);
 }
 
+function checksecquest($number){
+   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
+   $sql = "SELECT answer FROM security_questions WHERE PKID_question='".$number."'";
+   $tempquest = $pdo->query($sql);
+   $tempquest->execute();
+   $solution=$tempquest->fetch();
+   if(isset($_POST["secQuest"])&&$_POST["secQuest"]==$solution["answer"]){
+      return TRUE;
+   }
+   return FALSE;
+}
+
+function selectsecquest(){
+   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
+   $sql = "SELECT * FROM security_questions";
+   $max=0;
+   $question[0]="Failed to load Question!";
+   foreach($pdo->query($sql) as $row){
+      $max=$row["PKID_question"];
+      $question[$max]=$row["question"];
+   }
+   if($max!=0){
+     $quest=rand(1,$max); 
+   }else{
+      $quest=0;
+   }
+   
+   
+   return $quest."".$question[$quest];
+}
+
 ?>
