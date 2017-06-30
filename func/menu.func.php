@@ -211,7 +211,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
                echo '<li class="active"><a href="menu.php?menu='.$_GET['menu'].'&page=1">1</a></li>';   
             }
 
-            if($pa > 7){
+            if($pa > 5){
                createSingleMenuPoint(1);
                
                if($_GET['page'] == 1){

@@ -1,10 +1,8 @@
+<?php
+   require_once 'func/menu.func.php';
+?>
+<!DOCTYPE html>
 <html>
-
-   <?php
-      require_once 'func/menu.func.php';
-   ?>
-
-   
       <!-- Das neueste kompilierte und minimierte CSS -->
       <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
 
@@ -14,8 +12,6 @@
       <!-- Latest compiled and minified JavaScript -->
       <script src="bootstrap/jquery-3.2.1.min.js"></script>
       <script src="bootstrap/less/dist/js/bootstrap.min.js"></script>
-      
-      
       
    <head>
       <title>Forum</title>
