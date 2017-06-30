@@ -37,13 +37,21 @@
                   
                      <?php
                      
-                       $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
-                     
+                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
+                        
                      // if logged in showuser infos, otherwise the log in an dregister
                      if(isset($_SESSION['logged'])&&$_SESSION['logged']==true){
                         $messages = SQLQuery("SELECT unread_messages FROM user WHERE PKID_user=".$_SESSION['PKID']);
-                     
+                        $reports = SQLQuery("SELECT COUNT(PKID_report) as 'cnt' FROM reports WHERE done=0");
+                        $usergroup = SQLQuery("SELECt usergroup FROM user WHERE PKID_user=".$_SESSION['PKID']);
                         //drop down mit Profile, Posts und Messages
+                        
+                        if($usergroup['usergroup']=='admin' || $usergroup['usergroup']=='moderator'){
+                           echo '<li>
+                                    <a href="reports.php">Reports <span class="badge">'.$reports['cnt'].'</span></a> 
+                                 </li>';
+                        }
+                        
                         echo '<li class="dropdown">
       						   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                               <span class="glyphicon glyphicon-user"></span> Profile <span class="caret"></span>

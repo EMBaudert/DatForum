@@ -69,11 +69,23 @@
                
             });
             
-            $('#delete').button().click(function(){
-               if (confirm('Wirklich löschen?')) {
-                  alert('gelöscht!');
-               }
-            });            
+            $(".delete").click(
+               function()
+               {
+                  var query = "DELETE FROM `post` WHERE `post`.`PKID_post` = "+$(this).attr("id");
+                  alert(query);
+                  var sql = {
+                     sql: query
+                  }
+                  $.post("func/insertSQL.php",sql, function(result){
+                     alert(result);
+                  });;
+            });
+            
+            
+            /*function delete(id){
+               alert(id);
+            }*/
          });
       </script>
       

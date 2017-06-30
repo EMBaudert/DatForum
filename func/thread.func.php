@@ -77,7 +77,7 @@
                      echo  '<a class ="btn btn-default" href="createPost.php?type=edit&id='.$post['PKID_post'].'"><span class="glyphicon glyphicon-edit"></span> Edit</a>';	
                    }
                    if($usergroup['usergroup']=='admin' || $usergroup['usergroup']== 'moderator'){
-                     echo '<a class ="btn btn-default" href=""><span class="glyphicon glyphicon-edit"></span> L&ouml;schen</a>';
+                     echo '<a class ="btn btn-default delete" id="'.$post['PKID_post'].'"><span class="glyphicon glyphicon-edit"></span> L&ouml;schen</a>';
                    }else {
                      echo  '<a class ="btn btn-default" id="report"><span class="glyphicon glyphicon-edit"></span> Melden</a>';
                    }
@@ -102,7 +102,7 @@
          <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
          if(isset($_SESSION['logged'])){
            echo '<div class="btn-group" role="group">
-               <a href="createPost.php?id='.$_GET['thread'].'&creator='.$_SESSION['PKID'].'">
+               <a href="createPost.php?type=new&id='.$_GET['thread'].'&creator='.$_SESSION['PKID'].'">
                <div type="button" class="btn btn-default">
                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neuer Beitrag
                </div>
@@ -143,19 +143,11 @@
             if($pa > 7){
                createSingleMenuPoint(1);
                
-               if($_GET['page'] == 1){
+               if($_GET['page'] == 1||$_GET['page'] == 2){
                   createSingleMenuPoint(2);
                   createSingleMenuPoint(3);
                   createSingleMenuPoint(4);  
-               }else if ($_GET['page'] == 2){
-                  createSingleMenuPoint(2);
-                  createSingleMenuPoint(3);
-                  createSingleMenuPoint(4);
-               }else if($_GET['page'] == $pa-1){
-                  createSingleMenuPoint($pa-3);
-                  createSingleMenuPoint($pa-2);
-                  createSingleMenuPoint($pa-1);
-               }else if($_GET['page'] == $pa){
+               }else if($_GET['page'] == $pa-1||$_GET['page'] == $pa){
                   createSingleMenuPoint($pa-3);
                   createSingleMenuPoint($pa-2);
                   createSingleMenuPoint($pa-1);
@@ -165,17 +157,7 @@
                   createSingleMenuPoint($_GET['page']+1);
                }
                
-               
-               /*
-               if($_GET['page'] != $pa-1){
-                  echo '<li><a href="">...</a></li>';
-               }else if($_GET['page']== ($pa-2)){
-                  createSingleMenuPoint($pa-2);
-                  createSingleMenuPoint($pa-1);
-               } */
                createSingleMenuPoint($pa);
-               
-               
                
             }else{
                //show all pages
