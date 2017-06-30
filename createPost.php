@@ -41,6 +41,8 @@
                      $post = SQLQuery("SELECT * FROM post WHERE PKID_post =".$_GET['quoteid']);
                      $user = SQLQuery("SELECT * FROM user WHERE PKID_user =".$post['FK_user']);
                      echo '<p><blockquote>'.$post['text'].'<footer><cite title="'.$user['username'].'">'.$user['username'].'</cite></footer></blockquote>...</p>';                     
+                  }else if($_GET['type'] == 'new') {
+                     echo '<p>...</p>';   
                   }
                   
                }
@@ -82,7 +84,17 @@
                   var sql = {sql: query};
                   
                   //post wird aufgerufen
+                  
                   $.post("func/insertSQL.php",sql);
+                  
+                  //update number of posts
+                  var query = "UPDATE user SET numberposts = numberposts+1 WHERE PKID_user = "+getUrlVars()["creator"];
+                  var sql2= {
+                     sql:  query
+                  };
+                  $.post("func/insertSQL.php",sql2);
+                  
+                  
                   $("#summernote").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+getUrlVars()["id"]});
              });   
              
@@ -91,12 +103,8 @@
                  // Text wird gespeichert
                  var markupStr = $('#summernote').summernote('code');
                   
-                  //Einfügen in post wird erstellt
-                  var query = "UPDATE `post` SET `text` = '"+markupStr+"' WHERE `post`.`PKID_post` ="+getUrlVars()['id'];
-                  
                   //Post wird erstellt
                   var sql = {sql: query};
-                  
                   //post wird aufgerufen
                   $.post("func/insertSQL.php",sql);
                   $("#summernote").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+getUrlVars()["id"]});

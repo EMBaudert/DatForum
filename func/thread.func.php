@@ -102,7 +102,7 @@
          <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
          if(isset($_SESSION['logged'])){
            echo '<div class="btn-group" role="group">
-               <a href="createPost.php?id='.$_GET['thread'].'&creator='.$_SESSION['PKID'].'">
+               <a href="createPost.php?type=new&id='.$_GET['thread'].'&creator='.$_SESSION['PKID'].'">
                <div type="button" class="btn btn-default">
                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neuer Beitrag
                </div>

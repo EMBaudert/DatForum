@@ -69,6 +69,14 @@
                      var query21 = "INSERT INTO `post` (`PKID_post`, `FK_user`, `FK_thread`, `date`, `time`, `text`) VALUES (NULL, '"+getUrlVars()["creator"]+"', '";
                      var query22 = "', '"+d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+"', '"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()+"', '"+markupStr+"');";
                      sendSQL(query, query21, query22);
+                     
+                     //update number of posts
+                     var query = "UPDATE user SET numberposts = numberposts+1 WHERE PKID_user = "+getUrlVars()["creator"];
+                     var sql = {
+                        sql: query
+                     }
+                     $.post("func/insertSQL.php", sql);
+                     
 
                 } 
                 
@@ -102,7 +110,6 @@
                   $.post("func/insertSQL.php",sql1, function(result){
                      var query = sql21 + String(result) + sql22;
                      var newStr= {sql: query};
-                     alert(query);
                      $.post("func/insertSQL.php", newStr);
                      $("#summernote").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+result+"&page=1"});
                   

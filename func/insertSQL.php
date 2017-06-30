@@ -16,7 +16,7 @@
       }
       
    }else{
-      echo ($_POST['sql']);
+      //echo ($_POST['sql']);
       execute($_POST['sql']);
    }
       
