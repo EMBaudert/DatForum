@@ -1,8 +1,10 @@
-<html>
 
    <?php
       require_once 'func/menu.func.php';
    ?>
+<!DOCTYPE html>
+<html>
+
 
    
       <!-- Das neueste kompilierte und minimierte CSS -->

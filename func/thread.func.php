@@ -140,7 +140,8 @@
                echo '<li class="active"><a href="menu.php?menu='.$_GET['menu'].'&page=1">1</a></li>';   
             }
 
-            if($pa > 7){
+            if($pa > 5){
+            
                createSingleMenuPoint(1);
                
                if($_GET['page'] == 1||$_GET['page'] == 2){
@@ -165,6 +166,7 @@
                   createSingleMenuPoint($i);
                }
             }
+            
             //last button, if last site is selected buttons get deactivated
             if($_GET['page'] == ceil($pa) || $pa == 0){
                   echo '<li class="disabled"><span aria-hidden="true">&raquo;</span></li>';
