@@ -123,17 +123,17 @@
    $pageNumber = SQLQuery("SELECT COUNT(PKID_post) as cnt FROM post WHERE FK_thread = ".$_GET['thread']); 
         
    
-   echo "<nav aria-label=\"pagination\">
-      <ul class=\"pagination pull-right\">";          
+    echo '<nav aria-label="pagination">
+      <ul class="pagination pull-right">';     
          
       //calculate needed pages
       $pa = ceil($pageNumber['cnt'] / MAX_ENTRY_NUMBER);
 
       //Previous button, if page 1 is selected button gets deactivated
       if($_GET['page'] == 1){
-                  echo "<li class=\"disabled\"><a href=\"\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
+                   echo '<li class="disabled"><a href=""><span aria-hidden="true">&laquo;</span></a></li>';
                }else{
-                  echo '<li><a href="menu.php?menu='.$_GET['thread'].'&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
+                  echo '<li><a href="thread.php?thread='.$_GET['thread'].'&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
             }
             //if only one page is needed add this one custom
             if($pa == 0){

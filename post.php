@@ -1,5 +1,5 @@
 <?php
-   require_once 'func/menu.func.php';
+   require_once 'func/posts.func.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,7 +21,11 @@
     
       <div class="container">
          <?php
-      
+             require 'inc/navbar.php';
+         //gibt an wieviele threads auf eine Seite dürfen
+         const MAX_ENTRY_NUMBER = 2;
+            create2ndRow();
+            createPostOverview();
          ?>
     
       </div>

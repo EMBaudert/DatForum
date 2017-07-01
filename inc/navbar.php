@@ -58,7 +58,7 @@
                            </a>
       							<ul class="dropdown-menu">
          						   <li><a href="intern.php?p=profile&uid='.$_SESSION['PKID'].'">Profile</a></li>
-         							<li><a href="#">Posts</a></li>
+         							<li><a href="post.php?page=1">Posts</a></li>
                               <li><a href="intern.php?p=message">Messages ';
                               //Wenn ungelesene nachrichten vorhanden sind iwrd die anzahl angezeigt
                               if ($messages['unread_messages']>0){
