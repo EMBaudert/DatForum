@@ -56,6 +56,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
                   </div>
                </li>';
       } 
+
 //erstellt obersten Menüpunkt um ins Overmenu zu navigieren   
       function createMenuPointBack(){
         
@@ -73,6 +74,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          
          
       }
+
 // erstellt das ganze Menu, ruft createMenuPoint auf
       function createMenu($sqlString) {
          global $pdo;
@@ -86,7 +88,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          
          $i=0;
          foreach ($pdo->query($sqlString) as $row) {
-         
+            
             if($i>= (($_GET['page']-1)*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
              
                $number=SQLQuery("SELECT COUNT(FK_menu) as cnt FROM menu WHERE FK_menu = ".$row['PKID_menu']);
@@ -94,14 +96,16 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
             }
             $i++;            
          }
-         echo "</ul></div>";
+         echo '</ul></div>';
       } 
+
 // Gibt zurück wieviele Threads der Menupunkt hat
       function checkThread($PKID){
       
          $temp= SQLQuery("SELECT COUNT(PKID_thread) as num FROM thread WHERE FK_menu = ".$PKID);
          return $temp['num'];
       }
+
 //Sind in einem menu keine Munepunkte mehr sondern Threads, werden diese andersa angezeigt
       function createThreadOverview($id){
          global $pdo;
@@ -129,6 +133,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          echo '</ul></div>';         
          
       }
+
 //Erstellt einen Thread
       function createThreadEntry($PKID, $title, $creator){
       
@@ -145,12 +150,14 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
             </li>';
          
       }
+
 // Gibt die Zahl der Posts in einem Thread zurück
       function getPostNumber($id){
          
          $tempNr = SQLQuery("SELECT COUNT(PKID_post) as num FROM post WHERE FK_thread = ".$id);
          return $tempNr['num'];
       }
+
 //Erstellt die Breadcrumb navigation
       function createBreadcrumb($id){
          echo "<div class=\"row\"><ol class=\"breadcrumb\">
@@ -160,6 +167,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          echo "</ol></div>";
          
       }
+
 //Erstellt einzelne Breadcrumb punkte
       function recursiveBreadCrumb($id, $first){
 
@@ -179,6 +187,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          }
          
       }
+
 //Erstellt Pagination
       function createPagination($thread){
          
@@ -264,6 +273,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          echo '</ul></nav>';
          
       }
+
 //Erstellt einzelnen Menupunkt 
       function createSingleMenuPoint($nr){
          if($_GET['page']==$nr){
@@ -272,6 +282,5 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
                   echo '<li><a href="menu.php?menu='.$_GET['menu'].'&page='.$nr.'">'.$nr.'</a></li>';   
                }
       }
-      
-      
+
    ?>

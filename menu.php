@@ -24,9 +24,7 @@
          <?php
          
          require_once 'inc/navbar.php';
-         
-         const MAX_ENTRY_NUMBER = 1;
-      
+               
          $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
       
       

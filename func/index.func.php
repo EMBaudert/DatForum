@@ -44,7 +44,7 @@
    function createTopPosts($head, $sqlString){
       global $pdo;
       
-       echo '<div class="panel panel-default">
+       echo '<div class="row"><div class="panel panel-default">
                <div class="panel-heading">
                      '.$head.'
                </div>';
@@ -59,12 +59,14 @@
          //maximal 3 Einträge sollen angezeigt werden
          $i++;
          if($i== 3){
+            echo '</ul>
+            </div></div>';
             return;
          }
       }
       
       echo '</ul>
-      </div>';
+      </div></div>';
    }
 
    
