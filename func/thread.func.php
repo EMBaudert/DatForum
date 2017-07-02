@@ -1,6 +1,5 @@
 <?php
 
-//
    function createPostOverview(){
       global $pdo;
             
@@ -96,7 +95,7 @@
       $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = ".$_GET['thread']);
          
       echo '<div class="row marg-tb-5">
-         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
             <h3>'.$title['theme'].'</h3>
          </div>
          <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
@@ -110,7 +109,7 @@
             </div>';
             }
         echo ' </div>
-         <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">'; 
+         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">'; 
             createPagination();
          echo '</div>
             </div>';
@@ -137,7 +136,7 @@
             }
             //if only one page is needed add this one custom
             if($pa == 0){
-               echo '<li class="active"><a href="menu.php?menu='.$_GET['menu'].'&page=1">1</a></li>';   
+               echo '<li class="active"><a href="thread.php?thread='.$_GET['thread'].'&page=1">1</a></li>';   
             }
 
             if($pa > 5){

@@ -25,8 +25,6 @@
    
       <?php
          require 'inc/navbar.php';
-         //gibt an wieviele threads auf eine Seite dürfen
-         const MAX_ENTRY_NUMBER = 2;
       
 //Wenn id des Threads nicht gesetzt ist, gehe zurück auf index.php
          if(!isset($_GET['thread'])){
@@ -45,10 +43,9 @@
          createPostOverview();
          create2ndRow();
          
+         include_once('inc/footer.html');
       ?>
       
-      <?php include_once('inc/footer.html'); ?>         
-         
       </div>
       
       <script>
