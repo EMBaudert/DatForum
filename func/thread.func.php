@@ -40,15 +40,21 @@
                <div class="hidden-xs hidden-sm nospace">
                   <p><a href="intern.php?p=profile&uid='.$post['FK_user'].'">'.$user['username'].'</a><br>' 
                      .$user['usergroup'].
-                  '</p>
-                  <img src="'.$user['pb_path'].'" class="profile-picture">
+                  '</p>';
+                  if(isset($_SESSION['PKID']) && $_SESSION['PKID'] != $user['PKID_user']){
+                     echo '<a style="margin-bottom: 5px" class="btn btn-default btn-xs" href="intern.php?p=message&cp='.$user['PKID_user'].'"><span class="glyphicon glyphicon-envelope"></span> Nachricht</a>';
+                  }
+                  echo '<img src="'.$user['pb_path'].'" class="profile-picture">
                </div>
                <div class="hidden-md hidden-lg nospace">
                   <div class="col-xs-6 nospace">
                      <p><a href="intern.php?p=profile&uid='.$post['FK_user'].'">'.$user['username'].'</a><br>'
                   	  .$user['usergroup'].
-                     '</p>
-                  </div>
+                     '</p>';
+                     if(isset($_SESSION['PKID']) && $_SESSION['PKID'] != $user['PKID_user']){
+                        echo '<a style="margin-bottom: 5px" class="btn btn-default btn-xs" href="intern.php?p=message&cp='.$user['PKID_user'].'"><span class="glyphicon glyphicon-envelope"></span> Nachricht</a>';
+                     }
+                  echo '</div>
                   <div class="col-xs-6 ">
                      <img src="'.$user['pb_path'].'" class="profile-picture">
                   </div>
@@ -67,8 +73,8 @@
          </div>
             			
          <div class="panel-footer ">
-            <div class="row">
-               <div class="btn-group pull-right" role="group">';
+            <div class="row">';
+               echo '<div class="btn-group pull-right" role="group">';
 						   
 					 if(isset($_SESSION["PKID"])){
                   $usergroup = SQLQuery("SELECT * FROM user WHERE PKID_user =".$_SESSION['PKID']);
@@ -80,9 +86,10 @@
                    }else {
                      echo  '<a class ="btn btn-default" id="report"><span class="glyphicon glyphicon-edit"></span> Melden</a>';
                    }
+                   echo '<a class ="btn btn-default" href="createPost.php?type=quote&id='.$_GET['thread'].'&quoteid='.$post['PKID_post'].'"><span class="glyphicon glyphicon-bullhorn"></span> Zitieren</a>';
                }
-					    echo '<a class ="btn btn-default" href="createPost.php?type=quote&id='.$_GET['thread'].'&quoteid='.$post['PKID_post'].'"><span class="glyphicon glyphicon-bullhorn"></span> Zitieren</a>
-               </div>
+					    
+               echo '</div>
             </div>
          </div>
          </div>';
