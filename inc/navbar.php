@@ -103,13 +103,14 @@
                      ?>
 						</ul>
                   <!-- Searchbar -->
-						<form class="navbar-form navbar-left" action="search.php" method="GET">
+						<form class="navbar-form navbar-left" action="search.php?page=1" method="GET">
 							<div class="input-group">
 								<input type="text" class="form-control" placeholder="Search" name="search" id="search">
 								<div class="input-group-btn">
 									<button class="btn btn-default" type="submit">
 										<i class="glyphicon glyphicon-search"></i>
 									</button>
+                           <input type="hidden" id="page" name="page" value="1">
 								</div>
 							</div>
 						</form>

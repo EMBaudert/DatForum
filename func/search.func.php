@@ -3,6 +3,8 @@
    function createSearchOverview(){
       global $pdo;
       
+      
+      
       echo '<div class="row">
          <div class="panel-group">
             <div class="panel panel-default">
@@ -49,7 +51,7 @@
       
    function createPagination(){
          
-   //getPagenumber
+   //GETPagenumber
    $pageNumber = SQLQuery("SELECT COUNT(PKID_thread) as cnt FROM thread WHERE theme LIKE '%".$_GET['search']."%'"); 
         
    
@@ -59,7 +61,7 @@
       //calculate needed pages
       $pa = ceil($pageNumber['cnt'] / MAX_ENTRY_NUMBER);
 
-      //Previous button, if page 1 is selected button gets deactivated
+      //Previous button, if page 1 is selected button GETs deactivated
       if($_GET['page'] == 1){
                    echo '<li class="disabled"><a href=""><span aria-hidden="true">&laquo;</span></a></li>';
                }else{
@@ -97,7 +99,7 @@
                }
             }
             
-            //last button, if last site is selected buttons get deactivated
+            //last button, if last site is selected buttons GET deactivated
             if($_GET['page'] == ceil($pa) || $pa == 0){
                   echo '<li class="disabled"><span aria-hidden="true">&raquo;</span></li>';
                }else{

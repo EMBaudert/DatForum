@@ -43,10 +43,9 @@
          createPostOverview();
          create2ndRow();
          
+         include_once('inc/footer.html');
       ?>
       
-      <?php include_once('inc/footer.html'); ?>         
-         
       </div>
       
       <script>

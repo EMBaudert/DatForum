@@ -124,7 +124,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
         // echo ($_GET['page']*MAX_ENTRY_NUMBER);
          
          //if shows
-            if($i>= ($_GET['page']-1*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
+            if($i>= (($_GET['page']-1)*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
                createThreadEntry($row['PKID_thread'], $row['theme'], $row['FK_creator']); 
             }
             $i++;
