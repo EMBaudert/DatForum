@@ -34,6 +34,12 @@ $securequestion = substr($securequestion,1);
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Password</span>
      <input type="password" class="form-control" placeholder="Repeat Password" aria-describedby="basic-addon1" name="password2">
    </div>
+    <div class="input-group" style=" width:280px;margin:10px;">
+      <span class="input-group-addon">
+        <input type="checkbox" name="readit" aria-label="...">
+      </span>
+      <p>Ich habe die Hinweise zu Richtlinien und Datenschutzbestimmungen gelesen und akzeptiere Diese.</p>
+    </div>
    <div class="input-group" style=" width:280px;margin:10px;">
      <h4><span class="label label-default">Sicherheitsfrage</span></h4>
    </div>
