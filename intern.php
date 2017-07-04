@@ -25,6 +25,7 @@ require_once 'func/menu.func.php';
 			<?php
            
             require_once 'inc/navbar.php';
+            if(isset($_SESSION["PKID"])){
      ?>
      <script type="text/javascript">
             $(document).ready(function(){
@@ -35,6 +36,7 @@ require_once 'func/menu.func.php';
             });
          </script>
          <?PHP
+         }
 				if(!isset($_GET["p"])){
 					echo "Keine bekannte Seite!";
 				}elseif($_GET["p"]=="login"){
@@ -53,7 +55,7 @@ require_once 'func/menu.func.php';
 				}elseif($_GET["p"]=="register"){
 					if(isset($_SESSION["logged"])&&$_SESSION["logged"]){
 						echo "<h1>Sie sind schon registriert</h1>";
-					}elseif(!isset($_POST["submit"])||!checkusername()||!checkname()||!checkemail()||!checkpass()||!checksecquest($_POST["questnumb"])){
+					}elseif(!isset($_POST["submit"])||!checkusername()||!checkname()||!checkemail()||!checkpass()||!checkdata()||!checksecquest($_POST["questnumb"])){
 						include 'inc/register.php';							
 					}else{
 						echo "<h1>Registrieren erfolgreich!</h1>";
@@ -70,7 +72,9 @@ require_once 'func/menu.func.php';
 				}else{
 					echo "Keine Ahnung, was hier passieren soll^^!";
 				}
-            echo '<div id="refresh" style="text-align: center;">'.$_SESSION["PKID"].'</div>';
+            if(isset($_SESSION["PKID"])){
+                  echo '<div id="refresh" style="text-align: center;">'.$_SESSION["PKID"].'</div>';
+            }
             include_once 'inc/footer.html';
 			?>
 			</div>

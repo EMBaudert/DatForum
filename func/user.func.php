@@ -67,6 +67,14 @@ function checkusername(){
 	return FALSE;
 }
 
+function checkdata(){
+   if(isset($_POST["readit"])&&$_POST["readit"]=="on"){
+      return TRUE;
+   }
+   echo "Bitte akzeptieren Sie die Datenschutzvereinbarung!";
+   return FALSE;
+}
+
 function checkemail(){
 	$emailadress=$_POST["email"];
    if(!isset($emailadress)||$emailadress==""){
@@ -192,6 +200,7 @@ function checksecquest($number){
    if(isset($_POST["secQuest"])&&$_POST["secQuest"]==$solution["answer"]){
       return TRUE;
    }
+   echo "Die Sicherheitsfrage wurde falsch beantwortet!";
    return FALSE;
 }
 
