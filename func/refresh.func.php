@@ -13,12 +13,10 @@ if(isset($_GET["uid"])&&($temp=detectNewMessage($_GET["uid"]))){
    
          document.getElementById("scrollable_chat").innerHTML = "'.$text.'" ;*/
    echo '<script>
-                  if(document.getElementById("menuMessages")!=null&&parseInt(document.getElementById("menuMessages").innerHTML)!='.$temp.'){                   
-                     document.getElementById("menuMessages").class = "badge";
-                     document.getElementById("menuMessages").innerHTML = "'.$temp.'";
+                  if(document.getElementById("menuMessages")!=null&&parseInt(document.getElementById("menuMessages").innerHTML)!='.$temp.'){    
+                     document.getElementById("menuMessages").innerHTML = "<span class="badge">'.$temp.'</span>";
                      }
                   if(0=='.$temp.'){
-                     document.getElementById("menuMessages").class = "";
                      document.getElementById("menuMessages").innerHTML = "";
                   }
                   

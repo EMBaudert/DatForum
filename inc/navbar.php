@@ -36,7 +36,7 @@
 						<ul class="nav navbar-nav navbar-right">
                   
                      <?php
-                        const MAX_ENTRY_NUMBER = 2;
+                     
                         $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
                         
                      // if logged in showuser infos, otherwise the log in an dregister
@@ -58,12 +58,12 @@
                            </a>
       							<ul class="dropdown-menu">
          						   <li><a href="intern.php?p=profile&uid='.$_SESSION['PKID'].'">Profile</a></li>
-         							<li><a href="post.php?page=1">Posts</a></li>
+         							<li><a href="#">Posts</a></li>
                               <li><a href="intern.php?p=message">Messages ';
                               //Wenn ungelesene nachrichten vorhanden sind iwrd die anzahl angezeigt
-                              echo '<span class="badge" id="menuMessages">';
+                              echo '<span id="menuMessages">';
                               if ($messages['unread_messages']>0){
-                                 echo $messages['unread_messages'];
+                                 echo '<span class="badge">'.$messages['unread_messages'].'</span>';
                               }
                               echo '
                               </span>
@@ -106,14 +106,13 @@
                      ?>
 						</ul>
                   <!-- Searchbar -->
-						<form class="navbar-form navbar-left" action="search.php?page=1" method="GET">
+						<form class="navbar-form navbar-left">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search" name="search" id="search">
+								<input type="text" class="form-control" placeholder="Search">
 								<div class="input-group-btn">
 									<button class="btn btn-default" type="submit">
 										<i class="glyphicon glyphicon-search"></i>
 									</button>
-                           <input type="hidden" id="page" name="page" value="1">
 								</div>
 							</div>
 						</form>
