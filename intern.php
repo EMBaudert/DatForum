@@ -20,12 +20,21 @@ require_once 'func/menu.func.php';
          <script src="bootstrap/less/dist/js/bootstrap.min.js" ></script>
       	
 		</head>
-		<body>
+		<body> 
 			<div class="container">
 			<?php
            
             require_once 'inc/navbar.php';
-     
+     ?>
+     <script type="text/javascript">
+            $(document).ready(function(){
+               $('#refresh').load("func/refresh.func.php?uid=<?PHP if(isset($_SESSION["PKID"])) {echo $_SESSION["PKID"];} if(isset($_GET["p"])){echo '&p='.$_GET["p"];} ?>");
+               var refreshId = setInterval(function(){
+                  $('#refresh').load("func/refresh.func.php?uid=<?PHP if(isset($_SESSION["PKID"])) {echo $_SESSION["PKID"];} if(isset($_GET["p"])){echo '&p='.$_GET["p"];} if(isset($_GET["cp"])){echo '&cp='.$_GET["cp"];} ?>");
+               }, 1000);
+            });
+         </script>
+         <?PHP
 				if(!isset($_GET["p"])){
 					echo "Keine bekannte Seite!";
 				}elseif($_GET["p"]=="login"){
@@ -61,7 +70,7 @@ require_once 'func/menu.func.php';
 				}else{
 					echo "Keine Ahnung, was hier passieren soll^^!";
 				}
-            
+            echo '<div id="refresh" style="text-align: center;">'.$_SESSION["PKID"].'</div>';
             include_once 'inc/footer.html';
 			?>
 			</div>

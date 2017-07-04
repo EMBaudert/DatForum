@@ -61,10 +61,13 @@
          							<li><a href="post.php?page=1">Posts</a></li>
                               <li><a href="intern.php?p=message">Messages ';
                               //Wenn ungelesene nachrichten vorhanden sind iwrd die anzahl angezeigt
+                              echo '<span class="badge" id="menuMessages">';
                               if ($messages['unread_messages']>0){
-                                 echo '<span class="badge" id="menuMessages">'.$messages['unread_messages'].'</span>';
+                                 echo $messages['unread_messages'];
                               }
-                              echo '</a></li>
+                              echo '
+                              </span>
+                              </a></li>
                            </ul>
    						   </li>
                         <li>
