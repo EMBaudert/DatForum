@@ -162,6 +162,7 @@ function checkCookieLogin(){
 	    $user=$tempuser->fetch();
        $passpart=substr($user["password"],0,20);
        if($_COOKIE["username"]==$user["username"]&&$_COOKIE["pspt"]==$passpart){
+         $_SESSION["username"]=$_COOKIE["username"];
          $_SESSION["logged"]=true;
          $_SESSION["PKID"]=$user["PKID_user"];
        }

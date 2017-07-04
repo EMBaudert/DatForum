@@ -4,7 +4,7 @@ require_once 'func/message.func.php';
   <link rel="stylesheet" href="layout/chat.css">
   <title>DatForum &ndash; Messages</title>
 <div class="row">
- <div class="col-xs-5 col-sm-4 col-md-3 col-lg-3" style="min-width:130px;">
+ <div id="chatPartners" class="col-xs-5 col-sm-4 col-md-3 col-lg-3" style="min-width:130px;">
 <?PHP
 getChatPartners($_SESSION["PKID"]);
 ?>
