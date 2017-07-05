@@ -64,6 +64,11 @@
             return;
          }
       }
+      if($i==0){
+         echo '<li class="list-group-item">
+                  <span class="glyphicon glyphicon-info-sign"></span> Momentan leider keine TopPosts verf&uuml;gbar.
+         </li>';
+      }
       
       echo '</ul>
       </div></div>';
