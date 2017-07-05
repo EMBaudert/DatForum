@@ -43,14 +43,24 @@ require_once 'func/menu.func.php';
 					if(!isset($_SESSION["logged"])||!$_SESSION["logged"]){
 						include 'inc/login.php';
 					} else{
-                  echo '<meta http-equiv="refresh" content="0; URL=intern.php?p=profile&uid='.$_SESSION["PKID"].'" />';
+                  if(isset($_SESSION["url"])){
+                     $link= $_SESSION["url"];
+                  }else{
+                     $link= 'intern.php?p=profile&uid='.$_SESSION["PKID"];
+                  }
+                  echo '<meta http-equiv="refresh" content="0; URL='.$link.'" />';
 					}
 				}elseif($_GET["p"]=="logout"){
-					session_destroy();
-                if(isset($_COOKIE["username"])){
+               if(isset($_COOKIE["username"])){
                   forgetLogin();
-                }
-					echo '<meta http-equiv="refresh" content="0; URL=index.php" />';
+               }
+					if(isset($_SESSION["url"])){
+                  $link= $_SESSION["url"];
+               }else{
+                  $link= 'intern.php?p=profile&uid='.$_SESSION["PKID"];
+               }
+					session_destroy();
+               echo '<meta http-equiv="refresh" content="0; URL='.$link.'" />';
 				
 				}elseif($_GET["p"]=="register"){
 					if(isset($_SESSION["logged"])&&$_SESSION["logged"]){
@@ -61,9 +71,12 @@ require_once 'func/menu.func.php';
 						echo "<h1>Registrieren erfolgreich!</h1>";
 						newuser();
 						$_SESSION["logged"]=TRUE;
-						?>
-							<meta http-equiv="refresh" content="0; URL=intern.php?p=profile&uid=<?PHP echo $_SESSION['PKID']; ?>" />
-						<?PHP
+						if(isset($_SESSION["url"])){
+                     $link= $_SESSION["url"];
+                  }else{
+                     $link= 'intern.php?p=profile&uid='.$_SESSION["PKID"];
+                  }
+                  echo '<meta http-equiv="refresh" content="0; URL='.$link.'" />';
 					}
 				}elseif($_GET["p"]=="profile"){
 					include 'inc/profile.php';
@@ -73,7 +86,7 @@ require_once 'func/menu.func.php';
 					echo "Keine Ahnung, was hier passieren soll^^!";
 				}
             if(isset($_SESSION["PKID"])){
-                  echo '<div id="refresh" style="text-align: center;">'.$_SESSION["PKID"].'</div>';
+                  echo '<div id="refresh" style="text-align: center;"></div>';
             }
             include_once 'inc/footer.html';
 			?>

@@ -9,7 +9,7 @@ $securequestion = substr($securequestion,1);
    <div class="input-group" style="margin:10px;">
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Username</span>
      <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="username" 
-     <?PHP if(isset($_POST["username"])){ echo 'value="'.$_POST["username"].'"'; }?>>
+     <?PHP if(isset($_SESSION["username"])){ echo 'value="'.$_SESSION["username"].'"'; }?>>
    </div> 
    <div class="input-group" style="margin:10px;">
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">First Name</span>

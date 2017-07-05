@@ -121,4 +121,17 @@
 			</nav>
       </div>
 	  
-	  
+	  <?PHP
+     if(!isset($_GET["p"])||($_GET["p"]!="login"&&$_GET["p"]!="register"&&$_GET["p"]!="logout")){
+         $_SESSION["url"]= $_SERVER["PHP_SELF"];
+        foreach($_GET as $key=>$val){
+        if(!isset($vars)){
+            $vars=0;
+            $_SESSION["url"] .="?";
+        }else{
+            $_SESSION["url"] .="&";
+        }
+         $_SESSION["url"] .= $key."=".$val;
+        }
+     }
+     ?>
