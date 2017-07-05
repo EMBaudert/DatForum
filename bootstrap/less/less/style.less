@@ -33,11 +33,24 @@ h3{
    border-left: 1px solid #bbb;
 }
 
+// kein negatives margin im content block eines posts
+.post-content > .row{
+   margin:0px;
+}
 
 //benoetigt fuer linien im post content
-.hr-postcontent{
-   margin: 10px 0px;
+.hr-postcontent-top{
+   margin: -5px -10px 10px -10px;
    border-color: #bbb;
+}
+
+.hr-postcontent-bot{
+   margin: 10px -10px -5px -10px;
+   border-color: #bbb;
+}
+
+.margin-bot{
+   margin-bottom: 10px;
 }
 
 .nospace{
@@ -49,13 +62,34 @@ h3{
   color:white;
   /* Set the fixed height of the footer here */
   height: 40px;
-  z-index: 1000;
   border-radius: 5px 5px 0px 0px;
   background-color: @mydefault;
 }
 
+.button-textfield{
+   button-radius-top:0px;
+}
+
 .dropdown-menu{
    background-color: @mydefault-lighter;
+}
+/* für back to top button*/
+#myBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 20px; /* Place the button 30px from the right */
+    z-index: 999; /* Make sure it does not overlap */
+    border: #000; /* Remove borders */
+    outline: none; /* Remove outline */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+}
+
+#myBtn:hover {
+    background-color: #555; /* Add a dark-grey background on hover */
 }
 
 @media (min-width: 979px) {
@@ -73,17 +107,9 @@ h3{
    }
    //fuer Postcontent, dass Signatur nicht zu viel Platz hat
    .minheight{
-      position:relative;
+      min-height: 120px;
    }
-   .min-height-f{
-      position: absolute;
-      bottom: 0;
-      width: 96%;
-      margin-right: 40px;
-   }
-   .hr-postcontent{
-   }
-   /*
+  /*
    //ab gewisser hoeher dropdown bei hover ausklappen
    ul.nav li.dropdown:hover > ul.dropdown-menu {
     display: block;
