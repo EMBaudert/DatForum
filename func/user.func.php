@@ -11,21 +11,22 @@ function checklogin($user,$pass){
 	if(isset($login["password"])&&$pass==$login["password"]){
       $_SESSION["PKID"]=$login["PKID_user"];
       $_SESSION["username"]=$user;
-		return TRUE;
+		return "1";
 	} 
 	else{
 		if(!isset($login["password"])){  
-      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+      $error = '<div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Error!</strong> The username doesn&apos;t exist.
              </div>';
 		}else{
-      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+      $_SESSION["username"]=$user;
+      $error = '<div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Error!</strong> You entered the wrong password.
              </div>';
 		}
-		return FALSE;
+		return "0".$error;
 	}
 }
 

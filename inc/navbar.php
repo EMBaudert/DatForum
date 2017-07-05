@@ -8,7 +8,7 @@
       addMessage("SystemOfADoom",$_COOKIE["username"],"Jemand hat versucht, über COOKIE-Manipulation Ihren Account zu hacken, wir konnten dies jedoch erfolgreich verhindern!");
    }
  }
-  if(isset($_GET["p"])&&$_GET["p"]=="login" && isset($_POST["password"])&&checklogin($_POST["username"],hash('sha512',$_POST["password"]))){
+  if(isset($_GET["p"])&&$_GET["p"]=="login" && isset($_POST["password"])&&substr($error=checklogin($_POST["username"],hash('sha512',$_POST["password"])),0,1)!="0"){
 						$_SESSION["logged"]=TRUE;
 						if(isset($_POST["remember"])){
                      rememberLogin($_POST["username"],substr(hash('sha512',$_POST["password"]),0,20));
@@ -133,5 +133,8 @@
         }
          $_SESSION["url"] .= $key."=".$val;
         }
+     }
+     if(isset($error)){
+      echo substr($error,1);
      }
      ?>
