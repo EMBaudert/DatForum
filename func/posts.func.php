@@ -22,57 +22,79 @@
       
       echo '<div class="row">';
       
-      $i = 0;
-      
+      $i = -1;
+      $nextPost = 0;
       foreach($pdo->query("SELECT * FROM post WHERE FK_user = ".$_SESSION['PKID']." ORDER BY FK_thread") as $row){
       
          $thread = SQLQuery("SELECT * FROM thread WHERE PKID_thread = ".$row['FK_thread']);
       
-         if(strlen($row['text']) > 250){
-            $text = substr($row['text'],1,250)."...";
-            
+         $text = $row['text'];
+      
+            if($nextPost == ($_GET['page']-1)*MAX_ENTRY_NUMBER){
+               $nextPost++;
+               $i++;
+               if($i>= (($_GET['page']-1)*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
+                  echo  '<div class="panel-group">
+                     <div class="panel panel-default">
+                       <div role="heading" class="panel-heading">
+                         <a data-toggle="collapse" href="#collapse'.$i.'">
+                           <h4 class="panel-title"><span class="caret"></span> '.$thread['theme'].'</h4>
+                         </a>
+                       </div>
+                       <div role="complementary" id="collapse'.$i.'" class="panel-collapse collapse">
+                         <ul class="list-group">
+                           <li class="list-group-item"><a href="thread.php?thread='.$row['FK_thread'].'&post='.$row['PKID_post'].'#'.$row['PKID_post'].'">'.$text.'</a></li>';
+               }
+            } else if($threadnumber != $row['FK_thread']){
+               $i++;
+               $nextPost++;
+               if($i>= (($_GET['page']-1)*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
+                  echo '</ul>
+                       </div>
+                     </div>
+                  </div>
+                  <div class="panel-group">
+                     <div class="panel panel-default">
+                       <div role="heading" class="panel-heading">
+                         <a data-toggle="collapse" href="#collapse'.$i.'">
+                           <h4 class="panel-title"><span class="caret"></span> '.$thread['theme'].'</h4>
+                         </a>
+                       </div>
+                       <div role="complementary" id="collapse'.$i.'" class="panel-collapse collapse">
+                         <ul class="list-group">
+                           <li class="list-group-item"><a href="thread.php?thread='.$row['FK_thread'].'&post='.$row['PKID_post'].'#'.$row['PKID_post'].'">'.$text.'</a></li>';
+               }
+            }else {
+               if($i>= (($_GET['page']-1)*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
+                  echo '<li class="list-group-item"><a href="thread.php?thread='.$row['FK_thread'].'&post='.$row['PKID_post'].'#'.$row['PKID_post'].'">'.$text.'</a></li>';
+               }
+            }
+            $threadnumber = $row['FK_thread'];
+         
+      }
+      
+            echo '</ul></div></div></div>';
+      
+   }
+   
+   function cut_str($row){
+      if(strlen($row['text']) > 250){
+            $text = substr($row['text'],0,250)."...";
+            if(strpos($text, '<cite>')!== false & strpos($text, '</cite>') === false){
+               $text = $text.'</cite></footer></blockquote>';
+            }else if(strpos($text, '<footer>')!== false & strpos($text, '</footer>') === false){
+               $text = $text.'</footer></blockquote>';
+            }else if(strpos($text, '<blockquote>')!== false & strpos($text, '</blockquote>') === false){
+               $text = $text.'</blockquote>';
+            }
+            if(strpos($text, '<a')!== false & strpos($text, '</a>') === false){
+               $text = $text.'</a>';
+            }
          }else{
             $text = $row['text'];
          }
       
-         //if($i>= ($_GET['page']-1*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
-            if($threadnumber == 0){
-               echo  '<div class="panel-group">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <a data-toggle="collapse" href="#collapse'.$i.'">
-                        <h4 class="panel-title"><span class="caret"></span> '.$thread['theme'].'</h4>
-                      </a>
-                    </div>
-                    <div id="collapse'.$i.'" class="panel-collapse collapse">
-                      <ul class="list-group">
-                        <li class="list-group-item"><a href="thread.php?thread='.$row['FK_thread'].'&post='.$row['PKID_post'].'#'.$row['PKID_post'].'">'.$text.'</a></li>';
-            } else if($threadnumber != $row['FK_thread']){
-               echo '</ul>
-                    </div>
-                  </div>
-               </div>
-               <div class="panel-group">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <a data-toggle="collapse" href="#collapse'.$i.'">
-                        <h4 class="panel-title"><span class="caret"></span> '.$thread['theme'].'</h4>
-                      </a>
-                    </div>
-                    <div id="collapse'.$i.'" class="panel-collapse collapse">
-                      <ul class="list-group">
-                        <li class="list-group-item"><a href="thread.php?thread='.$row['FK_thread'].'&post='.$row['PKID_post'].'#'.$row['PKID_post'].'">'.$text.'</a></li>';
-            }else {
-               echo '<li class="list-group-item"><a href="thread.php?thread='.$row['FK_thread'].'&post='.$row['PKID_post'].'#'.$row['PKID_post'].'">'.$text.'</a></li>';
-            }
-            $threadnumber = $row['FK_thread'];
-            $i++;
-         //}
-         
-      }
-      
-            echo '<ul></div></div></div>';
-      
+         return "<p>".$text."</p>";
    }
    
       function createPagination(){
