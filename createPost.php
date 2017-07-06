@@ -2,7 +2,7 @@
 <html>
    <head>
      <meta charset="UTF-8">
-     <title>Neuer Post</title>
+     <title>Post bearbeiten</title>
      
      <!-- Das neueste kompilierte und minimierte CSS -->
       <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
@@ -25,13 +25,48 @@
       
          <?php
             require_once('inc/navbar.php');
+            
+            $title;
+            if(isset($_GET['type'])){
+            if($_GET['type'] =='edit'){
+               $post = SQLQuery("SELECT * FROM post WHERE PKID_post =".$_GET['id']);
+               $title = 'Post bearbeiten';
+               echo '<script> var text= "'.escape($post['text']).'";</script>';
+            }else if($_GET['type']=='quote'){
+               $post = SQLQuery("SELECT * FROM post WHERE PKID_post =".$_GET['quoteid']);
+               $user = SQLQuery("SELECT * FROM user WHERE PKID_user =".$post['FK_user']);
+               $title = 'Post zitieren';
+               echo '<script> var text= "<blockquote>'.escape($post['text']).'<footer><cite title="'.escape($user['username']).'">'.escape($user['username']).'</cite></footer></blockquote>...";</script>';                     
+            }else if($_GET['type'] == 'new') {
+               $title = 'Post erstellen';
+               echo '<script> var text= "";</script>';
+            }
+         }
          ?>
          <div class="row">
-            <h2>Thread erstellen</h2>
-         </div>
+            <h2><?php echo $title?></h2>
+            </div>
          <div class="row">
          
-         <trix-editor></trix-editor>
+         <?php
+         
+         
+         ?>
+         
+            
+
+         <?php         
+         function escape($string){
+         $string = str_replace('<div>','',$string);
+         $string = str_replace('</div>','',$string);
+            return str_replace('"','\"',$string);
+         }
+         
+         
+         ?>
+         
+         
+         <trix-editor id="trix"></trix-editor>
          
          </div>
          
@@ -54,9 +89,10 @@
      
       <script>
       
+         
          document.addEventListener("trix-initialize", function(event) {
             var element = document.querySelector("trix-editor");
-            element.editor.insertString("Hello");
+            element.editor.insertString(text);
           });
       
       
@@ -66,7 +102,7 @@
             
             //Button für neuen Post
             $('#new').button().click(function(){
-            
+                  
                   var text = $('#trix').val();
             
                   //Einfügen in post wird erstellt
@@ -95,12 +131,12 @@
              $('#edit').button().click(function(){
                  // Text wird gespeichert
                  var text = $('#trix').val();
-                  
+                  var query = "UPDATE post SET text = '"+text+"' WHERE PKID_post = "+getUrlVars()["id"];
                   //Post wird erstellt
                   var sql = {sql: query};
                   //post wird aufgerufen
                   $.post("func/insertSQL.php",sql);
-                  $("#summernote").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+getUrlVars()["id"]});
+                  $("#trix").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+getUrlVars()["id"]});
              }); 
              
               function getUrlVars()
