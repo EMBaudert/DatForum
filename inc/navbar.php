@@ -18,7 +18,7 @@
             }
 ?>
 <noscript>
-  <META HTTP-EQUIV="Refresh" CONTENT="0;URL=ShowErrorPage.html">
+  <META HTTP-EQUIV="Refresh" CONTENT="0;URL=errors/noJS.php">
 </noscript>
       <div class="row">
 			<nav class="navbar navbar-default">
