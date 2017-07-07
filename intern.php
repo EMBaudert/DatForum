@@ -42,6 +42,25 @@ require_once 'func/menu.func.php';
 				}elseif($_GET["p"]=="login"){
 					if(!isset($_SESSION["logged"])||!$_SESSION["logged"]){
 						include 'inc/login.php';
+                  echo '<script type="text/javascript">
+                                    function setunabled(){
+                                       $(".buttonlogin").prop("disabled",true);
+                                       $(".buttonlogin").prop("title","Please wait!");
+                                       $(".timeleft").html(5);
+                                       var interv = setInterval(function(){
+                                             temp = parseInt($(".timeleft").html());
+                                             temp--;
+                                             $(".timeleft").html(temp); 
+                                             if(temp==0){
+                                                clearInterval(interv);
+                                                $(".timeleft").html(""); 
+                                             }
+                                          },1000); 
+                                       setTimeout(function(){$(".buttonlogin").prop("disabled",false); $(".buttonlogin").prop("title","");},5000);
+                                       
+                                    }
+                                    setunabled();
+                        </script>';
 					} else{
                   if(isset($_SESSION["url"])){
                      $link= $_SESSION["url"];

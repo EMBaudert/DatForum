@@ -15,8 +15,9 @@
       </span>
       <input type="text" class="form-control" aria-label="..." value="Remember my login" readonly />
     </div>
+    
    <div align="right">
-      <button style="margin:10px;align:right;" class="btn btn-default" name="submit" type="submit" >
+      <span class="timeleft"></span><button id="buttonlogin" style="margin:10px;align:right;" class="buttonlogin btn btn-default" name="submit" type="submit" >
        <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Login
       </button>
    </div>

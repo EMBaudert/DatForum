@@ -26,6 +26,7 @@ function checklogin($user,$pass){
             <strong>Error!</strong> You entered the wrong password.
              </div>';
 		}
+      
 		return "0".$error;
 	}
 }
