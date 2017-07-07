@@ -6814,8 +6814,14 @@ h3 {
   background-color: #337bb7;
   border-radius: 5px 5px 0 0;
 }
-.button-textfield {
-  button-radius-top: 0;
+.btn-textfield {
+  border-radius: 0 0 4px 4px;
+}
+.input-group {
+  margin-bottom: 20px;
+}
+#trix {
+  border-radius: 3px 3px 0 3px;
 }
 .dropdown-menu {
   background-color: #65a6db;

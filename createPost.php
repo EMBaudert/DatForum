@@ -42,36 +42,21 @@
                echo '<script> var text= "";</script>';
             }
          }
+         function escape($string){
+              $string = str_replace('<div>','',$string);
+              $string = str_replace('</div>','',$string);
+                 return str_replace('"','\"',$string);
+         }
+         
          ?>
          <div class="row">
             <h2><?php echo $title?></h2>
-            </div>
+         </div>
          <div class="row">
-         
-         <?php
-         
-         
-         ?>
-         
-            
-
-         <?php         
-         function escape($string){
-         $string = str_replace('<div>','',$string);
-         $string = str_replace('</div>','',$string);
-            return str_replace('"','\"',$string);
-         }
-         
-         
-         ?>
-         
-         
-         <trix-editor id="trix"></trix-editor>
-         
+            <trix-editor id="trix"></trix-editor>
          </div>
          
          <div class="row">
-            <div class="btn-group pull-right" role="group">
                <?php
                   if($_GET['type']=='edit'){
                      echo '<a class ="btn btn-default btn-textfield" id="edit"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>';
@@ -79,7 +64,6 @@
                      echo '<a class ="btn btn-default btn-textfield" id="new"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>';                     
                   }
                 ?>
-            </div> 
          </div>
          
          <?php

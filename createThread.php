@@ -2,7 +2,7 @@
 <html lang="en">
    <head>
      <meta charset="UTF-8">
-     <title>Summernote</title>
+     <title>Create Thread</title>
      
      <!-- Das neueste kompilierte und minimierte CSS -->
       <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
@@ -14,9 +14,8 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="bootstrap/less/dist/js/bootstrap.min.js" ></script>
      
-     <!-- include summernote css/js-->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
+     <link rel="stylesheet" type="text/css" href="trix/trix.css">
+     <script type="text/javascript" src="trix/trix.js"></script>
      
      
    </head>
@@ -37,13 +36,10 @@
             </div>
          </div>
          <div class="row">
-            <div id="summernote">
-               <p>...</p>
-            </div>
-            
-            <div class="btn-group pull-right" role="group">
-                <a class ="btn btn-default" id="target"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>
-            </div>
+            <trix-editor id="trix"></trix-editor>
+         </div>
+         <div class="row">
+            <a class ="btn btn-default btn-textfield pull-right" id="target"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>
          </div>
          
          <?php
@@ -53,10 +49,10 @@
      
       <script>
         $(document).ready(function() {
-            $('#summernote').summernote();
             
             $('#target').button().click(function(){
-                var markupStr = $('#summernote').summernote('code');
+            
+               var text = $('#trix').val();
                 var d = new Date();
                 if(getUrlVars()["from"] == "menu"){
                 
@@ -67,7 +63,7 @@
                                   creator: getUrlVars()["creator"]
                                  };
                      var query21 = "INSERT INTO `post` (`PKID_post`, `FK_user`, `FK_thread`, `date`, `time`, `text`) VALUES (NULL, '"+getUrlVars()["creator"]+"', '";
-                     var query22 = "', '"+d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+"', '"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()+"', '"+markupStr+"');";
+                     var query22 = "', '"+d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+"', '"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()+"', '"+text+"');";
                      sendSQL(query, query21, query22);
                      
                      //update number of posts
@@ -111,7 +107,7 @@
                      var query = sql21 + String(result) + sql22;
                      var newStr= {sql: query};
                      $.post("func/insertSQL.php", newStr);
-                     $("#summernote").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+result+"&page=1"});
+                     $("#trix").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+result+"&page=1"});
                   
                   });
                   
