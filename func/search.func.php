@@ -32,7 +32,7 @@
         
          $text = str_replace($final,'<b>'.$final.'</b>',$row['theme']);
          echo '<li class="list-group-item">
-            <a href="thread.php?thread='.$row['PKID_thread'].'">'.$text.'</a>
+            <a href="thread.php?thread='.$row['PKID_thread'].'&page=1">'.$text.'</a>
          </li>';
    }
 

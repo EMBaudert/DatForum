@@ -56,7 +56,9 @@ function getChatPartners($user){
             echo '" href="intern.php?p=message&cp='.$partner;
          }
          echo '">'.$partnername["username"];
-         echo '<span class="badge" id="newMessages'.$partner.'"></span>';
+         if($unread[$partner]!=0){
+            echo '<span class="badge" id="newMessages'.$partner.'">'.$unread[$partner].'</span>';
+         }
          echo '</a>';
       }
       foreach($unread as $partner => $value){
@@ -142,91 +144,6 @@ function getMessages($me,$you){
       }
       #echo $row["FK_from"].$row["FK_to"].$row["text"];
    }
-   return $text;
-}
-
-function detectNewMessage($user){
-   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
-   $sql = "SELECT unread_messages FROM user WHERE PKID_user='".$user."'";
-	$tempUnread = $pdo->query($sql);
-	$tempUnread->execute();
-	$unread=$tempUnread->fetch();
-   #echo $unread["unread_messages"];
-   if($unread["unread_messages"]!=0){
-      $sql = "SELECT * FROM messages WHERE FK_to='".$user."' AND unread='1' ORDER BY PKID_message DESC";
-      $count[]=0;
-      $text="";
-   	foreach($pdo->query($sql) as $row){
-         if(!isset($count[$row["FK_from"]])){
-            $count[$row["FK_from"]]=0;
-         }
-         $count[$row["FK_from"]]++;
-   	}
-      foreach($count as $key => $value){
-         if($value!=0){
-            echo '<script>if(document.getElementById("newMessages'.$key.'")!=null){
-                     document.getElementById("newMessages'.$key.'").innerHTML = "'.$value.'";
-                     document.getElementById("newMessages'.$key.'").class = "badge";
-                  }</script>';
-         }else{
-            echo '<script>if(document.getElementById("newMessages'.$key.'")!=null){
-                     document.getElementById("newMessages'.$key.'").innerHTML = "";
-                     document.getElementById("newMessages'.$key.'").class = "";
-                  }</script>';
-         }
-         
-      }
-   }
-   return $unread["unread_messages"];   
-}
-
-function getLatestMessage($user){
-   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
-   $sql = "SELECT * FROM messages WHERE FK_to='".$user."' AND unread='1' ORDER BY PKID_message DESC";
-   $count=0;
-   $text="";
-	foreach($pdo->query($sql) as $row){
-      if(!isset($partner)){
-         $importantMessage=$row;
-         $partner = $row["FK_from"];
-      }
-      if($row["FK_from"]==$partner){
-         $count++;
-      }
-	}
- /*  if(isset($_GET["cp"])&&$_GET["cp"]==$partner){
-   
-      date_default_timezone_set('Europe/Berlin');
-      $date = date('Y-m-d', time());
-      $sql = "SELECT * FROM user WHERE PKID_user='".$partner."'";
-   	$tempID = $pdo->query($sql);
-   	$tempID->execute();
-   	$youID=$tempID->fetch();
-      $newEntrie= '<li class=\"left clearfix\"><span class=\"chat-img pull-left\">
-                             <a href=\"intern.php?p=profile&uid='.$partner.'\"><img src=\"'.$youID["pb_path"].'\" alt=\"User Avatar\" class=\"img-rounded\" style=\"width:50px;\" /></a>
-                        </span>
-                            <div class=\"chat-body clearfix\">
-                                <div class=\"header\">
-                                    <a href=\"intern.php?p=profile&uid='.$partner.'\"><strong class=\"primary-font\">'.$youID["username"].'</strong></a> <small class=\"pull-right text-muted\">
-                                        <span class=\"glyphicon glyphicon-time\"></span>';
-         if($date!=$row["date"]){
-            $newEntrie .= $row["date"].' um ';
-         }
-         $newEntrie .= $row["time"].' Uhr</small>
-                                </div>
-                                <p>
-                                    '.$row["text"].'
-                                </p>
-                            </div>
-                        </li>';
-      $text .= '<script>
-                  var temptext = document.getElementById("scrollable_chat").innerHTML+"<li class=\"left clearfix\"><span class=\"chat-img pull-left\"> </li>"  ;
-                  document.getElementById("scrollable_chat").innerHTML = temptext ;</script>';
-   }*/
-   $text .= '<script>if(document.getElementById("newMessages'.$partner.'")!=null){
-                     document.getElementById("newMessages'.$partner.'").innerHTML = "'.$count.'";
-                     document.getElementById("newMessages'.$partner.'").class = "badge";
-                  }</script>';
    return $text;
 }
 
