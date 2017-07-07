@@ -37,6 +37,9 @@
             $imageFileType = pathinfo(basename($_FILES['datei']['name']),PATHINFO_EXTENSION);
             $filename=$data["pb_path"];
             if(strlen($imageFileType)>1){
+               if($imageFileType!="gif"){
+                  $imageFileType="png";
+               }
                $filename="pic/pb_".$_SESSION["PKID"].".".$imageFileType;
                move_uploaded_file($_FILES['datei']['tmp_name'], $filename);
             }
@@ -66,8 +69,8 @@
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Profile Picture</span>
   
          <label class="btn btn-default" style="border-radius: 0px 5px 5px 0px;width:160px;">
-            Choose new file <input class="form-control" type="file" name="datei" style="display:none;" />
-         </label>
+            Choose new file <input id="fileToUpload" class="form-control" type="file" name="datei" style="display:none;" />
+         </label><span id="filechosen"></span>
     </div>
 <div class="form-group">
   <label for="comment">Signature:</label>
@@ -129,6 +132,14 @@
 
          
          </form>
+         <script>
+            $('#fileToUpload').click(function() {
+               //$('#fileToUpload').show();
+               $('#fileToUpload').change(function() {
+                        $('#filechosen').html("  <span class='glyphicon glyphicon-ok' aria-hidden='true'></span>");
+                    });
+               });
+         </script>
 <?PHP  
       }else{
 ?>

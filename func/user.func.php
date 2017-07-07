@@ -19,7 +19,9 @@ function checklogin($user,$pass){
 		}else{
 			echo "<p>Falsches Passwort!</p>";
 		}
-		return FALSE;
+
+		return "0".$error;
+
 	}
 }
 
@@ -33,7 +35,7 @@ function checkpass(){
       echo "<p>Die Passworte sind nicht gleich!</p>";
       return FALSE;
    }
-   #Hier Konventionen für Passwörter
+   #Hier Konventionen fÃ¼r PasswÃ¶rter
 	return TRUE;
 }
 
@@ -52,7 +54,7 @@ function checkusername(){
       echo "<p>Der Benutzername existiert schon!</p>";
       return FALSE;
    }
-   //Ab hier Konventionen für den Benutzernamen!
+   //Ab hier Konventionen fÃ¼r den Benutzernamen!
    
    for ($i = 0; $i < strlen($username);)
    {
@@ -62,7 +64,7 @@ function checkusername(){
        }
        $i += 1;
    }
-   //Testet, ob ein Zeichen außer Leerzeichen im Username steht
+   //Testet, ob ein Zeichen auÃŸer Leerzeichen im Username steht
    echo "<p>Der Benutzername entspricht nicht den Konventionen!</p>";
 	return FALSE;
 }
@@ -113,7 +115,7 @@ function checkname(){
       echo "<p>Bitte geben Sie einen Nachnamen ein!</p>";
       return FALSE;
    }
-   //Ab hier Konventionen für den Namen!
+   //Ab hier Konventionen fÃ¼r den Namen!
    
    for ($i = 0; $i < strlen($firstname);)
    {
@@ -129,7 +131,7 @@ function checkname(){
        }
        $i += 1;
    }
-   //Testet, ob ein Zeichen außer Leerzeichen im Namen steht
+   //Testet, ob ein Zeichen auÃŸer Leerzeichen im Namen steht
    if(!isset($_SESSION["firstname"])){
        echo "<p>Dies ist kein Vorname!</p>";
        return FALSE;

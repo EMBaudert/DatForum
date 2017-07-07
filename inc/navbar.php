@@ -17,6 +17,9 @@
 		            }
             }
 ?>
+<noscript>
+  <META HTTP-EQUIV="Refresh" CONTENT="0;URL=ShowErrorPage.html">
+</noscript>
       <div class="row">
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
