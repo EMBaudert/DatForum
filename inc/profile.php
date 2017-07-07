@@ -40,8 +40,13 @@
                if($imageFileType!="gif"){
                   $imageFileType="png";
                }
-               $filename="pic/pb_".$_SESSION["PKID"].".".$imageFileType;
-               move_uploaded_file($_FILES['datei']['tmp_name'], $filename);
+               $picdata = getimagesize($_FILES['datei']['tmp_name']);
+               if($picdata[1]>$picdata[0]){
+                  echo '<script>alert("Das Profilbild darf nicht hoeher als breit sein!");</script>';
+               }else{
+                  $filename="pic/pb_".$_SESSION["PKID"].".".$imageFileType;
+                  move_uploaded_file($_FILES['datei']['tmp_name'], $filename);
+               }
             }
             #echo "<script>alert('Der Upload war erfolgreich!')</script>";
          	$sql = "UPDATE user SET firstname='".$_SESSION["firstname"]."', secondname='".$_SESSION["secondname"]."', email='".$_SESSION["email"]."', password='".$PASS."', pb_path='".$filename."', signature='".$_POST["signature"]."' WHERE PKID_user=".$_SESSION["PKID"];
@@ -136,6 +141,7 @@
             $('#fileToUpload').click(function() {
                //$('#fileToUpload').show();
                $('#fileToUpload').change(function() {
+                        
                         $('#filechosen').html("  <span class='glyphicon glyphicon-ok' aria-hidden='true'></span>");
                     }); 
                });
