@@ -137,7 +137,7 @@
                //$('#fileToUpload').show();
                $('#fileToUpload').change(function() {
                         $('#filechosen').html("  <span class='glyphicon glyphicon-ok' aria-hidden='true'></span>");
-                    });
+                    }); 
                });
          </script>
 <?PHP  
