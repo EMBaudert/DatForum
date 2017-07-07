@@ -47,7 +47,13 @@ function checkpass(){
              </div>';
       return FALSE;
    }
-   #Hier Konventionen für Passwörter
+   if(strlen($username)<6){
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The password should contain at least 6 characters.
+             </div>';     
+      return FALSE; 
+   }
 	return TRUE;
 }
 
@@ -72,22 +78,25 @@ function checkusername(){
              </div>';
       return FALSE;
    }
-   //Ab hier Konventionen für den Benutzernamen!
    
-   for ($i = 0; $i < strlen($username);)
-   {
-       if(substr($username, $i, 1)!=" "){
-            $_SESSION["username"]=$username;
-            return TRUE;
-       }
-       $i += 1;
-   }
-   //Testet, ob ein Zeichen außer Leerzeichen im Username steht
+   if(!preg_match("/^[a-zA-Z0-9_]*$/",$username)){
       echo '<div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Error!</strong> The username is not okay.
-             </div>';
-	return FALSE;
+            <strong>Error!</strong> The username may only contain letters, numbers and "_".
+             </div>';     
+      return FALSE; 
+   }
+   //Ab hier Konventionen für den Benutzernamen!
+   if(strlen($username)<6||strlen($username)>25){
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The username must have between 6 and 25 characters.
+             </div>';     
+      return FALSE; 
+   }
+   
+   $_SESSION["username"]=$username;
+	return TRUE;
 }
 
 function checkdata(){
@@ -112,6 +121,13 @@ function checkemail(){
 	}
    
    if (filter_var($emailadress, FILTER_VALIDATE_EMAIL)) { 
+      if(strlen($emailadress)>50){
+         echo '<div class="alert alert-danger alert-dismissible" role="alert">
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <strong>Error!</strong> The entered E-Mail adress is to long. Max. 50 chars
+                </div>';     
+         return FALSE; 
+      }
       $_SESSION["email"]=$emailadress;
 	   return TRUE;
    }
@@ -151,6 +167,19 @@ function checkname(){
             <strong>Error!</strong> Please enter a first name.
              </div>';
       return FALSE;
+   }else if(!preg_match("/^[a-zA-Z][a-zA-Z ]*$/",$firstname)){
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> You didn\'t enter an accepted fist name.
+             </div>';
+      return FALSE;      
+   }
+   if(strlen($firstname)>25){
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The first name(s) can\'t contain more than 25 characters.
+             </div>';     
+      return FALSE; 
    }
    if(!isset($secondname)){
       echo '<div class="alert alert-danger alert-dismissible" role="alert">
@@ -158,24 +187,21 @@ function checkname(){
             <strong>Error!</strong> Please enter a second name.
              </div>';
       return FALSE;
+   }else if(!preg_match("/^[a-zA-Z]*$/",$secondname)){
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> You didn\'t enter an accepted second name.
+             </div>';
+      return FALSE;      
    }
-   //Ab hier Konventionen für den Namen!
+   if(strlen($firstname)>25){
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The second name can\'t contain more than 25 characters.
+             </div>';     
+      return FALSE; 
+   }
    
-   for ($i = 0; $i < strlen($firstname);)
-   {
-       if(substr($firstname, $i, 1)!=" "){
-            $_SESSION["firstname"]=$firstname;
-       }
-       $i += 1;
-   }
-   for ($i = 0; $i < strlen($secondname);)
-   {
-       if(substr($secondname, $i, 1)!=" "){
-            $_SESSION["secondname"]=$secondname;
-       }
-       $i += 1;
-   }
-   //Testet, ob ein Zeichen außer Leerzeichen im Namen steht
    if(!isset($_SESSION["firstname"])){
       echo '<div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -190,6 +216,8 @@ function checkname(){
              </div>';
        return FALSE;
    }
+   $_SESSION["firstname"]=$firstname;
+   $_SESSION["secondname"]=$secondname;
 	return TRUE;
 }
 

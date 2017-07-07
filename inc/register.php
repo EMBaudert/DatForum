@@ -12,8 +12,8 @@ $securequestion = substr($securequestion,1);
      <?PHP if(isset($_SESSION["username"])){ echo 'value="'.$_SESSION["username"].'"'; }?>>
    </div> 
    <div class="input-group" style="margin:10px;">
-     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">First Name</span>
-     <input type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1" name="firstname" 
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">First Name(s)</span>
+     <input type="text" class="form-control" placeholder="First Name(s)" aria-describedby="basic-addon1" name="firstname" 
      <?PHP if(isset($_POST["firstname"])){ echo 'value="'.$_POST["firstname"].'"'; }?>>
    </div>
    <div class="input-group" style="margin:10px;">
