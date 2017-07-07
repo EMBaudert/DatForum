@@ -30,7 +30,7 @@
       Die Anzahl geteilt durch die maximale anzahl an Beiträgen + ien kleiner Zusatz (um geraden zahlen zu entgehen)
       ergibt die Zahl der Seite*/
          if(isset($_GET['post'])){
-            $postNumber = SQLQuery("SELECT COUNT(PKID_post) as cnt FROM post WHERE FK_thread = ".$_GET['thread']." AND PKID_post < ".$_GET['post']); 
+            $postNumber = SQLQuery("SELECT COUNT(PKID_post) as cnt FROM post WHERE FK_thread = 0 AND PKID_post < 1",$_GET['thread'],$_GET['post']); 
             $_GET['page'] = ceil(($postNumber['cnt']/ MAX_ENTRY_NUMBER)+0.00001);
             
          }else if(!isset($_GET['page'])){
@@ -47,8 +47,8 @@
          
          
          //bekeomme id des Menues fuer Breadcrum
-         $thread = SQLQuery("SELECT FK_menu FROM thread WHERE PKID_thread = " .$_GET['thread']);
-         $menupoint = SQLQuery("SELECT * FROM menu WHERE PKID_menu = " .$thread['FK_menu']);
+         $thread = SQLQuery("SELECT FK_menu FROM thread WHERE PKID_thread = 0", $_GET['thread']);
+         $menupoint = SQLQuery("SELECT * FROM menu WHERE PKID_menu = 0", $thread['FK_menu']);
          
          
          

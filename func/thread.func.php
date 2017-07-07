@@ -11,7 +11,11 @@
       $j benötigt als id für jeden post der angezeigt wird --> wird deshalb im if erhöht*/
       $i=0;
       $j=0;
-      foreach ($pdo->query("SELECT * FROM post WHERE FK_thread = ".$_GET['thread']) as $row) {
+      
+      $statement = $pdo->prepare("SELECT * FROM post WHERE FK_thread = 0");
+      $statement->execute($_GET['thread']);   
+      
+      while ($row = $statement->fetch()) {
                 
           // Wenn der Post innerhalb des Bereiches ist der angezeigt wird, wird createPost aufgerufen  
          if($i>= (($_GET['page']-1)*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
@@ -28,8 +32,8 @@
 /* Erstellt einen einzelnen Post */
    function createPost($post, $j){
          
-      $user = SQLQuery("SELECT * FROM user WHERE PKID_user = ".$post['FK_user']);
-      $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = ".$post['FK_thread']);
+      $user = SQLQuery("SELECT * FROM user WHERE PKID_user = 0", $post['FK_user']);
+      $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = 0", $post['FK_thread']);
 
 /* einzelner post */
       
@@ -98,7 +102,7 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
       /* buttons werden generell nur angezeigt wenn man angemeldet ist */
 					 if(isset($_SESSION["PKID"])){
       /* Wenn der Beitrag vom angemeldeten nutzer ist, kann er dn Text editieren */
-                  $usergroup = SQLQuery("SELECT * FROM user WHERE PKID_user =".$_SESSION['PKID']);
+                  $usergroup = SQLQuery("SELECT * FROM user WHERE PKID_user = 0", $_SESSION['PKID']);
 					    if($user['PKID_user'] == $_SESSION["PKID"]){
                      echo  '<a class ="btn btn-default" href="createPost.php?type=edit&id='.$post['PKID_post'].'"><span class="glyphicon glyphicon-edit"></span> Edit</a>';	
                    }
@@ -123,7 +127,7 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
    function create2ndRow(){
       global $pdo;
          
-      $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = ".$_GET['thread']);
+      $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = 0", $_GET['thread']);
          
    /* einzelne row mit eigenem nargin um alles gleich zu halten*/
       echo '<div class="row marg-tb-5">
@@ -154,7 +158,7 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
    function createPagination(){
          
    //getPagenumber
-      $pageNumber = SQLQuery("SELECT COUNT(PKID_post) as cnt FROM post WHERE FK_thread = ".$_GET['thread']); 
+      $pageNumber = SQLQuery("SELECT COUNT(PKID_post) as cnt FROM post WHERE FK_thread = 0", $_GET['thread']); 
         
    //berechnet benötigte seitenanzahl. Teilt alle Beiträge durch die festgelegte Maximalanzahl
       $pa = ceil($pageNumber['cnt'] / MAX_ENTRY_NUMBER);
@@ -232,7 +236,7 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
     echo '<div class="row"><ol class="breadcrumb">
     <li><a href="menu.php?menu=0&page=1">Main menu</a></li>';
     recursiveBreadCrumb($id);
-    $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = " .$_GET['thread']);
+    $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = ?", $_GET['thread']);
     echo '<li class="active">'.$title['theme'].'</li>
       </ol></div>';
 
@@ -244,7 +248,7 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
    /* Die Funktion ruft sich selbst bis zum Hauptmenüpunkt auf, danach werden alle Menüpunkte vom hauptmenü aus angezeigt
       Implementierung war so am einfachsten da ansonsten zuvor der komplette Pfad berechnet werden müsste.
    */
-      $tempQuery = SQLQuery("SELECT PKID_menu, title, FK_menu FROM menu WHERE PKID_menu = ".$id);
+      $tempQuery = SQLQuery("SELECT PKID_menu, title, FK_menu FROM menu WHERE PKID_menu = 0", $id);
 
 //wenn kein Überpunkt mehr existiert kann aufgehört werden
       if($tempQuery['FK_menu']==NULL){
@@ -261,7 +265,7 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
 /* stellt das Thema des Threads dar */      
    function createThema(){
 
-      $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = ".$_GET['thread']);
+      $title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = 0", $_GET['thread']);
 
       echo "<h3>".$title['theme']."</h3>";
  }
@@ -271,7 +275,7 @@ Dies passiert nur wenn ein neuer Beitrag verfasst wurde da dessen ID unbekant is
 auf der letzten Seite dargestellt. 
 */       
    function getLastPage(){
-      $pageNumber = SQLQuery("SELECT COUNT(PKID_post) as cnt FROM post WHERE FK_thread = ".$_GET['thread']);
+      $pageNumber = SQLQuery("SELECT COUNT(PKID_post) as cnt FROM post WHERE FK_thread = 0", $_GET['thread']);
       return ceil($pageNumber['cnt'] / MAX_ENTRY_NUMBER);  
    }       
 

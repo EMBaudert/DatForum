@@ -92,8 +92,40 @@
                      
                      function SQLQuery($query){
                         global $pdo;
-                        $temp=$pdo->query($query);
-                        $temp->execute();
+                        
+                        $statement = $pdo->prepare(query);
+                        $statement->execute();   
+                        
+                        return $temp->fetch();
+                                 
+                     }
+                     
+                     function SQLQuery($query, $0){
+                        global $pdo;
+                        
+                        $statement = $pdo->prepare(query);
+                        $statement->execute(array('0' => $0));   
+                        
+                        return $temp->fetch();
+                                 
+                     }
+                     
+                     function SQLQuery($query, $0, $1){
+                        global $pdo;
+                        
+                        $statement = $pdo->prepare(query);
+                        $statement->execute(array('0' => $0, '1' => $1));   
+                        
+                        return $temp->fetch();
+                                 
+                     }
+                     
+                     function SQLQuery($query, $0, $1, $2){
+                        global $pdo;
+                        
+                        $statement = $pdo->prepare(query);
+                        $statement->execute(array('0' => $0, '1' => $1, '2' => $2));   
+                        
                         return $temp->fetch();
                                  
                      }

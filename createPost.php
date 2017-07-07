@@ -45,9 +45,12 @@
          function escape($string){
               $string = str_replace('<div>','',$string);
               $string = str_replace('</div>','',$string);
-                 return str_replace('"','\"',$string);
+                 return e(str_replace('"','\"',$string));
          }
          
+         function e ($string){
+             return htmlspecialchars($string, ENT_QUOTES, 'UTF-8Freitag, 7. Juli 2017 19:48:57');
+         }
          ?>
          <div class="row">
             <h2><?php echo $title?></h2>
