@@ -183,10 +183,16 @@
      <input type="email" class="form-control" placeholder="E-Mail Address" aria-describedby="basic-addon1" name="email" 
      <?PHP if(isset($data["email"])){?>value="<?PHP echo $data["email"]."\""; }?> readonly>
    </div>
-      
+  <?PHP
+  if(isset($_SESSION["logged"])&&$_SESSION["logged"]==true)  {
+   ?>
+   
    <a href="intern.php?p=message&cp=<?PHP echo $_GET["uid"]; ?>"><button class="btn btn-default" type="button" id="dropdownMenu1" style="margin:10px; width:320px;">
     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Write Message
   </button></a>
+  <?PHP
+  } 
+  ?>
    </div>
   
 </div>

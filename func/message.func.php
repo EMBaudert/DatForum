@@ -23,6 +23,7 @@ function getOther(){
 function getChatPartners($user){
   echo '<div class="list-group">';
    $activeChat=-1;
+   $ret=FALSE;
    if(isset($_GET["cp"])){
       $activeChat=$_GET["cp"];
    }
@@ -44,6 +45,7 @@ function getChatPartners($user){
             $unread[$partner]=0;
       }
       if(!isset($chatpartners[$partner])||$chatpartners[$partner]==0){
+         $ret=TRUE;
          $chatpartners[$partner]=1;
          $sql2 = "SELECT username FROM user WHERE PKID_user='".$partner."'";
          $tempuser = $pdo->query($sql2);
@@ -66,6 +68,7 @@ function getChatPartners($user){
       }
    }
    echo '</div>';
+   return $ret;
 }
 
 function getMessages($me,$you){
