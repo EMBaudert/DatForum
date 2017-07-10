@@ -36,8 +36,8 @@
 						<ul class="nav navbar-nav navbar-right">
                   
                      <?php
-                        const MAX_ENTRY_NUMBER = 2;
-                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
+                        const MAX_ENTRY_NUMBER = 2; 
+                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
                         
                      // if logged in showuser infos, otherwise the log in an dregister
                      if(isset($_SESSION['logged'])&&$_SESSION['logged']==true){
