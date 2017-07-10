@@ -38,7 +38,7 @@ $securequestion = substr($securequestion,1);
       <span class="input-group-addon">
         <input type="checkbox" name="readit" aria-label="...">
       </span>
-      <p>Ich habe die <a href="documents/Hinweise_zu_Richtlinien_und_Datenschutzbestimmungen.pdf" target="_blank" style="color:0x337bb7;">
+      <p>Ich habe die <a href="documents/Hinweise_zu_Richtlinien_und_Datenschutzbestimmungen.pdf" target="_blank" style="color:#ffac3a;">
                      Hinweise zu Richtlinien und Datenschutzbestimmungen </a> gelesen und akzeptiere Diese.</p>
     </div>
    <div class="input-group" style=" width:280px;margin:10px;">
