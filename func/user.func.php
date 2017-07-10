@@ -11,36 +11,59 @@ function checklogin($user,$pass){
 	if(isset($login["password"])&&$pass==$login["password"]){
       $_SESSION["PKID"]=$login["PKID_user"];
       $_SESSION["username"]=$user;
-		return TRUE;
+		return "1";
 	} 
 	else{
-		if(!isset($login["password"])){
-			echo "<p>Der Benutzername existiert nicht!</p>";
-		}else{
-			echo "<p>Falsches Passwort!</p>";
+		if(!isset($login["password"])){  
+      $error = '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The username doesn&apos;t exist.
+             </div>';
+		}else{ 
+      $_SESSION["username"]=$user;
+      $error = '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> You entered the wrong password.
+             </div>';
 		}
-		return FALSE;
+      
+		return "0".$error;
 	}
 }
 
 function checkpass(){
    $temppass = $_POST["password"];
 	if(!isset($temppass)||$temppass==""){
-      echo "<p>Bitte geben Sie ein Passwort ein!</p>";
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> Please enter a password.
+             </div>';
 		return FALSE;
 	}
    if($temppass!=$_POST["password2"]){
-      echo "<p>Die Passworte sind nicht gleich!</p>";
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The entered passwords aren&apos;t equal.
+             </div>';
       return FALSE;
    }
-   #Hier Konventionen für Passwörter
+   if(strlen($username)<6){
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The password should contain at least 6 characters.
+             </div>';     
+      return FALSE; 
+   }
 	return TRUE;
 }
 
 function checkusername(){
    $username=$_POST["username"];
 	if(!isset($username)||$username==""){
-      echo "<p>Bitte geben Sie einen Benutzernamen ein!</p>";
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> Please insert a username.
+             </div>';
 		return FALSE;
 	}
    $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
@@ -49,36 +72,69 @@ function checkusername(){
 	$tempuser->execute();
 	$register=$tempuser->fetch();
    if(isset($register["username"])){
-      echo "<p>Der Benutzername existiert schon!</p>";
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The username is already existing.
+             </div>';
       return FALSE;
    }
-   //Ab hier Konventionen für den Benutzernamen!
    
-   for ($i = 0; $i < strlen($username);)
-   {
-       if(substr($username, $i, 1)!=" "){
-            $_SESSION["username"]=$username;
-            return TRUE;
-       }
-       $i += 1;
+   if(!preg_match("/^[a-zA-Z0-9_]*$/",$username)){
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The username may only contain letters, numbers and "_".
+             </div>';     
+      return FALSE; 
    }
-   //Testet, ob ein Zeichen außer Leerzeichen im Username steht
-   echo "<p>Der Benutzername entspricht nicht den Konventionen!</p>";
-	return FALSE;
+   //Ab hier Konventionen für den Benutzernamen!
+   if(strlen($username)<6||strlen($username)>25){
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The username must have between 6 and 25 characters.
+             </div>';     
+      return FALSE; 
+   }
+   
+   $_SESSION["username"]=$username;
+	return TRUE;
+}
+
+function checkdata(){
+   if(isset($_POST["readit"])&&$_POST["readit"]=="on"){
+      return TRUE;
+   }
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> Please read and accept the terms and conditions.
+             </div>';
+   return FALSE;
 }
 
 function checkemail(){
 	$emailadress=$_POST["email"];
    if(!isset($emailadress)||$emailadress==""){
-      echo "<p>Bitte geben Sie eine E-Mail Adresse ein!</p>";
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> Please enter an E-Mail adress.
+             </div>';
 		return FALSE;
 	}
    
    if (filter_var($emailadress, FILTER_VALIDATE_EMAIL)) { 
+      if(strlen($emailadress)>50){
+         echo '<div class="alert alert-danger alert-dismissible" role="alert">
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <strong>Error!</strong> The entered E-Mail adress is to long. Max. 50 chars
+                </div>';     
+         return FALSE; 
+      }
       $_SESSION["email"]=$emailadress;
 	   return TRUE;
    }
-   echo "<p>Die eingegebene E-Mail Adresse entspricht nicht den Konventionen!</p>";
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The entered E-Mail is no E-Mail.
+             </div>';
    return FALSE;
    
    
@@ -106,38 +162,62 @@ function checkname(){
    $firstname=$_POST["firstname"];
    $secondname=$_POST["secondname"];
    if(!isset($firstname)){
-      echo "<p>Bitte geben Sie einen Vornamen ein!</p>";
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> Please enter a first name.
+             </div>';
       return FALSE;
+   }else if(!preg_match("/^[a-zA-Z][a-zA-Z ]*$/",$firstname)){
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> You didn\'t enter an accepted fist name.
+             </div>';
+      return FALSE;      
+   }
+   if(strlen($firstname)>25){
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The first name(s) can\'t contain more than 25 characters.
+             </div>';     
+      return FALSE; 
    }
    if(!isset($secondname)){
-      echo "<p>Bitte geben Sie einen Nachnamen ein!</p>";
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> Please enter a second name.
+             </div>';
       return FALSE;
+   }else if(!preg_match("/^[a-zA-Z]*$/",$secondname)){
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> You didn\'t enter an accepted second name.
+             </div>';
+      return FALSE;      
    }
-   //Ab hier Konventionen für den Namen!
+   if(strlen($firstname)>25){
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The second name can\'t contain more than 25 characters.
+             </div>';     
+      return FALSE; 
+   }
    
-   for ($i = 0; $i < strlen($firstname);)
-   {
-       if(substr($firstname, $i, 1)!=" "){
-            $_SESSION["firstname"]=$firstname;
-       }
-       $i += 1;
-   }
-   for ($i = 0; $i < strlen($secondname);)
-   {
-       if(substr($secondname, $i, 1)!=" "){
-            $_SESSION["secondname"]=$secondname;
-       }
-       $i += 1;
-   }
-   //Testet, ob ein Zeichen außer Leerzeichen im Namen steht
    if(!isset($_SESSION["firstname"])){
-       echo "<p>Dies ist kein Vorname!</p>";
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The entered first name wasn&apos;t accepted.
+             </div>';
        return FALSE;
    }
   if(!isset($_SESSION["secondname"])){
-       echo "<p>Dies ist kein Nachname!</p>";
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The entered second name wasn&apos;t accepted.
+             </div>';
        return FALSE;
    }
+   $_SESSION["firstname"]=$firstname;
+   $_SESSION["secondname"]=$secondname;
 	return TRUE;
 }
 
@@ -162,6 +242,7 @@ function checkCookieLogin(){
 	    $user=$tempuser->fetch();
        $passpart=substr($user["password"],0,20);
        if($_COOKIE["username"]==$user["username"]&&$_COOKIE["pspt"]==$passpart){
+         $_SESSION["username"]=$_COOKIE["username"];
          $_SESSION["logged"]=true;
          $_SESSION["PKID"]=$user["PKID_user"];
        }
@@ -191,6 +272,10 @@ function checksecquest($number){
    if(isset($_POST["secQuest"])&&$_POST["secQuest"]==$solution["answer"]){
       return TRUE;
    }
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The security question was wrong answered.
+             </div>';
    return FALSE;
 }
 

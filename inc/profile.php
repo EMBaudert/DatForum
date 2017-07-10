@@ -37,8 +37,16 @@
             $imageFileType = pathinfo(basename($_FILES['datei']['name']),PATHINFO_EXTENSION);
             $filename=$data["pb_path"];
             if(strlen($imageFileType)>1){
-               $filename="pic/pb_".$_SESSION["PKID"].".".$imageFileType;
-               move_uploaded_file($_FILES['datei']['tmp_name'], $filename);
+               if($imageFileType!="gif"){
+                  $imageFileType="png";
+               }
+               $picdata = getimagesize($_FILES['datei']['tmp_name']);
+               if($picdata[1]>$picdata[0]){
+                  echo '<script>alert("Das Profilbild darf nicht hoeher als breit sein!");</script>';
+               }else{
+                  $filename="pic/pb_".$_SESSION["PKID"].".".$imageFileType;
+                  move_uploaded_file($_FILES['datei']['tmp_name'], $filename);
+               }
             }
             #echo "<script>alert('Der Upload war erfolgreich!')</script>";
          	$sql = "UPDATE user SET firstname='".$_SESSION["firstname"]."', secondname='".$_SESSION["secondname"]."', email='".$_SESSION["email"]."', password='".$PASS."', pb_path='".$filename."', signature='".$_POST["signature"]."' WHERE PKID_user=".$_SESSION["PKID"];
@@ -66,8 +74,8 @@
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Profile Picture</span>
   
          <label class="btn btn-default" style="border-radius: 0px 5px 5px 0px;width:160px;">
-            Choose new file <input class="form-control" type="file" name="datei" style="display:none;" />
-         </label>
+            Choose new file <input id="fileToUpload" class="form-control" type="file" name="datei" style="display:none;" />
+         </label><span id="filechosen"></span>
     </div>
 <div class="form-group">
   <label for="comment">Signature:</label>
@@ -129,6 +137,15 @@
 
          
          </form>
+         <script>
+            $('#fileToUpload').click(function() {
+               //$('#fileToUpload').show();
+               $('#fileToUpload').change(function() {
+                        
+                        $('#filechosen').html("  <span class='glyphicon glyphicon-ok' aria-hidden='true'></span>");
+                    }); 
+               });
+         </script>
 <?PHP  
       }else{
 ?>
@@ -166,10 +183,16 @@
      <input type="email" class="form-control" placeholder="E-Mail Address" aria-describedby="basic-addon1" name="email" 
      <?PHP if(isset($data["email"])){?>value="<?PHP echo $data["email"]."\""; }?> readonly>
    </div>
-      
+  <?PHP
+  if(isset($_SESSION["logged"])&&$_SESSION["logged"]==true)  {
+   ?>
+   
    <a href="intern.php?p=message&cp=<?PHP echo $_GET["uid"]; ?>"><button class="btn btn-default" type="button" id="dropdownMenu1" style="margin:10px; width:320px;">
     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Write Message
   </button></a>
+  <?PHP
+  } 
+  ?>
    </div>
   
 </div>

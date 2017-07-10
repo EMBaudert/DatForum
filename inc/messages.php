@@ -6,7 +6,8 @@ require_once 'func/message.func.php';
 <div class="row">
  <div id="chatPartners" class="col-xs-5 col-sm-4 col-md-3 col-lg-3" style="min-width:130px;">
 <?PHP
-getChatPartners($_SESSION["PKID"]);
+if(isset($_SESSION["logged"])&&$_SESSION["logged"]=true){
+$hasPartners = getChatPartners($_SESSION["PKID"]);
 ?>
 </div>
                      <div class="col-xs-7 col-sm-8 col-md-9 col-lg-9">
@@ -54,19 +55,21 @@ getChatPartners($_SESSION["PKID"]);
         </div>
     </div>
     <?PHP
-     }else{
+     }else if($hasPartners){
      
-         echo '<h1 readonly>Please choose a chat!</h1>';
+         echo '<h1>Please choose a chat!</h1>';
          
-     }
+     }else{
+         echo '<h1>You have no active chats!</h1>';
+      }
+     
+   
+}else{
+   echo '<h1>Bitte melden Sie sich an!</h1>';
+}
      ?>
 </div>
 
    </div>
   
-<?PHP
-
-
-#foreach ($pdo->query($sql) as $row)
-?>
 
