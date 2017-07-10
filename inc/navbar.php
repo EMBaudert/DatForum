@@ -5,7 +5,7 @@
  if(!isset($_SESSION["logged"])){
    $retval=checkCookieLogin(); 
    if($retval&&!isset($_SESSION["logged"])){
-      addMessage("SystemOfADoom",$_COOKIE["username"],"Jemand hat versucht, über COOKIE-Manipulation Ihren Account zu hacken, wir konnten dies jedoch erfolgreich verhindern!");
+      addMessage("SystemOfADoom",$_COOKIE["username"],"Jemand hat versucht, Ã¼ber COOKIE-Manipulation Ihren Account zu hacken, wir konnten dies jedoch erfolgreich verhindern!");
    }
  }
   if(isset($_GET["p"])&&$_GET["p"]=="login" && isset($_POST["password"])&&substr($error=checklogin($_POST["username"],hash('sha512',$_POST["password"])),0,1)!="0"){
@@ -24,7 +24,7 @@
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
 					<div class="navbar-header">
-               <!-- für responsive, handy menu -->
+               <!-- fÃ¼r responsive, handy menu -->
 					  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -39,8 +39,8 @@
 						<ul class="nav navbar-nav navbar-right">
                   
                      <?php
-                     
-                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
+                        const MAX_ENTRY_NUMBER = 2; 
+                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
                         
                      // if logged in showuser infos, otherwise the log in an dregister
                      if(isset($_SESSION['logged'])&&$_SESSION['logged']==true){
