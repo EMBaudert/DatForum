@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
    <head>
      <meta charset="UTF-8">
-     <title>Summernote</title>
+     <title>Post bearbeiten</title>
      
      <!-- Das neueste kompilierte und minimierte CSS -->
       <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
@@ -11,13 +11,12 @@
       <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap-theme.min.css">
 
       <!-- Latest compiled and minified JavaScript -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="bootstrap/jquery-3.2.1.min.js"></script>
       <script src="bootstrap/less/dist/js/bootstrap.min.js" ></script>
      
-     <!-- include summernote css/js-->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
-     
+     <link rel="stylesheet" type="text/css" href="trix/trix.css">
+     <script type="text/javascript" src="trix/trix.js"></script>
+
      
    </head>
 
@@ -26,39 +25,48 @@
       
          <?php
             require_once('inc/navbar.php');
+            
+            $title;
+            if(isset($_GET['type'])){
+            if($_GET['type'] =='edit'){
+               $post = SQLQuery("SELECT * FROM post WHERE PKID_post =".$_GET['id']);
+               $title = 'Post bearbeiten';
+               echo '<script> var text= "'.escape($post['text']).'";</script>';
+            }else if($_GET['type']=='quote'){
+               $post = SQLQuery("SELECT * FROM post WHERE PKID_post =".$_GET['quoteid']);
+               $user = SQLQuery("SELECT * FROM user WHERE PKID_user =".$post['FK_user']);
+               $title = 'Post zitieren';
+               echo '<script> var text= "<blockquote>'.escape($post['text']).'<footer><cite title="'.escape($user['username']).'">'.escape($user['username']).'</cite></footer></blockquote>...";</script>';                     
+            }else if($_GET['type'] == 'new') {
+               $title = 'Post erstellen';
+               echo '<script> var text= "";</script>';
+            }
+         }
+         function escape($string){
+              $string = str_replace('<div>','',$string);
+              $string = str_replace('</div>','',$string);
+                 return e(str_replace('"','\"',$string));
+         }
+         
+         function e ($string){
+             return htmlspecialchars($string, ENT_QUOTES, 'UTF-8Freitag, 7. Juli 2017 19:48:57');
+         }
          ?>
          <div class="row">
-            <h2>Thread erstellen</h2>
+            <h2><?php echo $title?></h2>
          </div>
          <div class="row">
-            <div id="summernote">
-               <?php
-               if(isset($_GET['type'])){
-                  if($_GET['type'] =='edit'){
-                     $post = SQLQuery("SELECT * FROM post WHERE PKID_post =".$_GET['id']);
-                     echo '<p>'.$post['text'].'</p>';
-                  }else if($_GET['type']=='quote'){
-                     $post = SQLQuery("SELECT * FROM post WHERE PKID_post =".$_GET['quoteid']);
-                     $user = SQLQuery("SELECT * FROM user WHERE PKID_user =".$post['FK_user']);
-                     echo '<p><blockquote>'.$post['text'].'<footer><cite title="'.$user['username'].'">'.$user['username'].'</cite></footer></blockquote>...</p>';                     
-                  }else if($_GET['type'] == 'new') {
-                     echo '<p>...</p>';   
-                  }
-                  
-               }
-               
-               ?>
-            </div>
-            
-            <div class="btn-group pull-right" role="group">
+            <trix-editor id="trix"></trix-editor>
+         </div>
+         
+         <div class="row">
                <?php
                   if($_GET['type']=='edit'){
-                     echo '<a class ="btn btn-default" id="edit"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>';
+                     echo '<a class ="btn btn-default btn-textfield" id="edit"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>';
                   }else {
-                     echo '<a class ="btn btn-default" id="new"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>';                     
+                     echo '<a class ="btn btn-default btn-textfield" id="new"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>';                     
                   }
                 ?>
-            </div>
          </div>
          
          <?php
@@ -67,18 +75,26 @@
       </div>
      
       <script>
+      
+         
+         document.addEventListener("trix-initialize", function(event) {
+            var element = document.querySelector("trix-editor");
+            element.editor.insertString(text);
+          });
+      
+      
         $(document).ready(function() {
-            $('#summernote').summernote();
             var d = new Date();
+            
             
             //Button für neuen Post
             $('#new').button().click(function(){
-                  // Text wird gespeichert
-                  var markupStr = $('#summernote').summernote('code');
                   
+                  var text = $('#trix').val();
+            
                   //Einfügen in post wird erstellt
                   var query =  "INSERT INTO `post` (`PKID_post`, `FK_user`, `FK_thread`, `date`, `time`, `text`) VALUES (NULL, '"+getUrlVars()["creator"]+"', '"
-                  +getUrlVars()["id"]+"', '"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"', '"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()+"', '"+markupStr+"');";
+                  +getUrlVars()["id"]+"', '"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"', '"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()+"', '"+text+"');";
                   
                   //Post wird erstellt
                   var sql = {sql: query};
@@ -95,19 +111,19 @@
                   $.post("func/insertSQL.php",sql2);
                   
                   
-                  $("#summernote").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+getUrlVars()["id"]});
+                  $("#trix").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+getUrlVars()["id"]});
              });   
              
              //Button für editieren 
              $('#edit').button().click(function(){
                  // Text wird gespeichert
-                 var markupStr = $('#summernote').summernote('code');
-                  
+                 var text = $('#trix').val();
+                  var query = "UPDATE post SET text = '"+text+"' WHERE PKID_post = "+getUrlVars()["id"];
                   //Post wird erstellt
                   var sql = {sql: query};
                   //post wird aufgerufen
                   $.post("func/insertSQL.php",sql);
-                  $("#summernote").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+getUrlVars()["id"]});
+                  $("#trix").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+getUrlVars()["id"]});
              }); 
              
               function getUrlVars()
@@ -131,10 +147,6 @@
 
                    return vars;
                }
-             
-             
-               
-             
              
         });
         
