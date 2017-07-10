@@ -29,12 +29,12 @@
             $title;
             if(isset($_GET['type'])){
             if($_GET['type'] =='edit'){
-               $post = SQLQuery("SELECT * FROM post WHERE PKID_post =".$_GET['id']);
+               $post = SQLQuery1("SELECT * FROM post WHERE PKID_post = ?", $_GET['id']);
                $title = 'Post bearbeiten';
                echo '<script> var text= "'.escape($post['text']).'";</script>';
             }else if($_GET['type']=='quote'){
-               $post = SQLQuery("SELECT * FROM post WHERE PKID_post =".$_GET['quoteid']);
-               $user = SQLQuery("SELECT * FROM user WHERE PKID_user =".$post['FK_user']);
+               $post = SQLQuery("SELECT * FROM post WHERE PKID_post = ?", $_GET['quoteid']);
+               $user = SQLQuery("SELECT * FROM user WHERE PKID_user = ?", $post['FK_user']);
                $title = 'Post zitieren';
                echo '<script> var text= "<blockquote>'.escape($post['text']).'<footer><cite title="'.escape($user['username']).'">'.escape($user['username']).'</cite></footer></blockquote>...";</script>';                     
             }else if($_GET['type'] == 'new') {

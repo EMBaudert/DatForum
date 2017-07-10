@@ -15,8 +15,8 @@
    
    
    function createReport($post){
-      $user = SQLQuery("SELECT * FROM user WHERE PKID_user = ".$post['FK_user']);
-      $thread = SQLQuery("SELECT * FROM thread WHERE PKID_thread = ".$post['FK_thread']);
+      $user = SQLQuery1("SELECT * FROM user WHERE PKID_user = ?", $post['FK_user']);
+      $thread = SQLQuery1("SELECT * FROM thread WHERE PKID_thread = ?", $post['FK_thread']);
       echo '<li class="list-group-item">
                <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">

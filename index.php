@@ -46,7 +46,7 @@ require_once 'func/index.func.php';
                   </div>';
                      $d = getdate();
                //Meisten neue Kommentare (seit 2 Tagen)         
-               createTopPosts("Meist diskutiert","SELECT FK_thread, COUNT(*) FROM post WHERE date> '".$d['year']."-".$d['mon']."-".($d['mday']-2)."' GROUP BY FK_thread ORDER BY COUNT(*) DESC");
+               createTopPosts("Meist diskutiert","SELECT FK_thread, COUNT(*) FROM post WHERE date> '".$d['year']."-".$d['mon']."-".($d['mday']-5)."' GROUP BY FK_thread ORDER BY COUNT(*) DESC");
                // Meiste beträge generell
                createTopPosts("Meiste Beitr&auml;ge","SELECT FK_thread, COUNT(*) FROM post GROUP BY FK_thread ORDER BY COUNT(*) DESC");
                //Neueste Beiträge

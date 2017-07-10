@@ -164,7 +164,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
 //Erstellt die Breadcrumb navigation
       function createBreadcrumb($id){
          echo '<div class="row"><ol class="breadcrumb">
-         <li><a href=\"menu.php?menu=0&page=1\">Main menu</a></li>';
+         <li><a href="menu.php?menu=0&page=1">Main menu</a></li>';
          recursiveBreadCrumb($id,1);
          
          echo '</ol></div>';
