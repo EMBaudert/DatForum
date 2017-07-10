@@ -22,11 +22,16 @@
       
       echo '<div class="row">';
       
-      $i = -1;
-      $nextPost = 0;
-      foreach($pdo->query("SELECT * FROM post WHERE FK_user = ".$_SESSION['PKID']." ORDER BY FK_thread") as $row){
+      foreach($pdo->query("") as $row){
       
-         $thread = SQLQuery("SELECT * FROM thread WHERE PKID_thread = ".$row['FK_thread']);
+      
+      
+      $statement = $pdo->prepare("SELECT * FROM post WHERE FK_user = ? ORDER BY FK_thread");
+         $statement->execute(array('0' => $_SESSION['PKID']));
+      $i-1;
+      $nextPost = 0;
+      while ($row = $statement->fetch()) {
+         $thread = SQLQuery1("SELECT * FROM thread WHERE PKID_thread = ?", $row['FK_thread']);
       
          $text = $row['text'];
       
@@ -100,7 +105,7 @@
       function createPagination(){
          
    //getPagenumber
-   $pageNumber = SQLQuery("SELECT COUNT(DISTINCT FK_thread) as cnt FROM post WHERE FK_user = ".$_SESSION['PKID']); 
+   $pageNumber = SQLQuery1("SELECT COUNT(DISTINCT FK_thread) as cnt FROM post WHERE FK_user = ?", $_SESSION['PKID']); 
    
    echo '<nav aria-label="pagination">
       <ul class="pagination pull-right">';          

@@ -23,7 +23,7 @@ require_once 'func/reports.func.php';
    			<?php
             require_once 'inc/navbar.php';
             if(isset($_SESSION['PKID'])){
-               $user = SQLQuery("SELECT * FROM user WHERE PKID_user=".$_SESSION['PKID']);
+               $user = SQLQuery1("SELECT * FROM user WHERE PKID_user= ?", $_SESSION['PKID']);
                   if($user['usergroup']== 'admin' || $user['usergroup']== 'moderator' ){
                      createReportsOverview();
                   }else{

@@ -9,9 +9,11 @@
          <div class="panel-group">
             <div class="panel panel-default">
                <ul class="list-group">';
+               
+      $statement = $pdo->prepare("SELECT * FROM thread WHERE theme LIKE '%?%'");
+      $statement->execute(array('0' => $_GET['search']));
       $i=0;
-      foreach($pdo->query("SELECT * FROM thread WHERE theme LIKE '%".$_GET['search']."%'") as $row){
-
+      while ($row = $statement->fetch()) {
          
          if($i>= (($_GET['page']-1)*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
             createSearchPoint($row);
@@ -52,7 +54,7 @@
    function createPagination(){
          
    //GETPagenumber
-   $pageNumber = SQLQuery("SELECT COUNT(PKID_thread) as cnt FROM thread WHERE theme LIKE '%".$_GET['search']."%'"); 
+   $pageNumber = SQLQuery1("SELECT COUNT(PKID_thread) as cnt FROM thread WHERE theme LIKE '%?%'", $_GET['search']); 
         
    
     echo '<nav aria-label="pagination">

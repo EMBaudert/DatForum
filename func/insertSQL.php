@@ -4,7 +4,7 @@
       if($_POST['type']== 'newThread'){
 
          execute($_POST['sql']);
-         $id = SQLQuery("SELECT PKID_thread FROM thread WHERE theme='".$_POST['theme']."' AND FK_creator=".$_POST['creator']);
+         $id = SQLQuery2("SELECT PKID_thread FROM thread WHERE theme='?' AND FK_creator=?",$_POST['theme'],$_POST['creator']);
          echo $id['PKID_thread'];
          
       }else if($_POST['type']== 'report'){

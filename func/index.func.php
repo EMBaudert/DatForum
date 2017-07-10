@@ -6,20 +6,20 @@
       
       //$title = SQLQuery("SELECT theme FROM thread WHERE PKID_thread = ".$id);
       
-      $name = SQLQuery("SELECT * FROM user WHERE PKID_user = ".$id);
+      $name = SQLQuery1("SELECT * FROM user WHERE PKID_user = ?", $id);
 
       return $name['username'];
    }
 // prüft ob/wie viele ungelesene nachrichten vorhanden sind
    function checkMessages($id){
-      $messages = SQLQuery("SELECT unread_messages FROM user WHERE PKID_user=".$id);
+      $messages = SQLQuery1("SELECT unread_messages FROM user WHERE PKID_user= ?", $id);
       return $messages['unread_messages'];
    }
 
 //erstellt einen Thread in der Liste
    function createThreadEntry($PKID, $title, $creator){
          
-      $username = SQLQuery("SELECT username FROM user WHERE PKID_user = ".$creator);
+      $username = SQLQuery1("SELECT username FROM user WHERE PKID_user = ?", $creator);
             
       //zeigt Titel, erstellername und Anzahl der Posts an, bei sm und xs titel in eigener Anzeige
       echo '<li class="list-group-item">
@@ -35,7 +35,7 @@
 //gibt Anzazhl der Posts im thread zurück
    function getPostNumber($id){
             
-      $tempNr = SQLQuery("SELECT COUNT(PKID_post) as num FROM post WHERE FK_thread = ".$id);
+      $tempNr = SQLQuery1("SELECT COUNT(PKID_post) as num FROM post WHERE FK_thread = ?", $id);
       return $tempNr['num'];
    }
 
@@ -54,7 +54,7 @@
       $i=0;
       foreach ($pdo->query($sqlString) as $row) {
          //holt nötige Informationen zur threadID und  erstellt den Listeneintrag
-         $thread = SQLQuery("SELECT * FROM thread WHERE PKID_thread = ".$row['FK_thread']);      
+         $thread = SQLQuery1("SELECT * FROM thread WHERE PKID_thread = ?", $row['FK_thread']);      
          createThreadEntry($thread['PKID_thread'], $thread['theme'], $thread['FK_creator']); 
          //maximal 3 Einträge sollen angezeigt werden
          $i++;
