@@ -15,14 +15,25 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
                <h3>'.$upperMenuName['title'].'</h3>   
             </div>
             <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
-               if($param && isset($_SESSION['PKID'])){
-                  echo'<div class="btn-group" role="group">
-                           <a href="createThread.php?from=menu&id='.$_GET['menu'].'&creator='.$_SESSION['PKID'].'">
-                           <div type="button" class="btn btn-default">
-                              Neuer Beitrag
-                           </div>
-                           </a>
-                        </div>';  
+               if(isset($_SESSION['PKID'])){
+               $usergroup = SQLQuery1("SELECT usergroup FROM user WHERE PKID_user = ?", $_SESSION['PKID']);
+                  if($param){
+                     echo'<div class="btn-group" role="group">
+                              <a href="createThread.php?type=thread&id='.$_GET['menu'].'&creator='.$_SESSION['PKID'].'">
+                              <div type="button" class="btn btn-default">
+                                 Neuer Beitrag
+                              </div>
+                              </a>
+                           </div>';  
+                  }else if($usergroup['usergroup']=='admin'){
+                     echo'<div class="btn-group" role="group">
+                              <a href="createThread.php?type=menupoint&id='.$_GET['menu'].'&creator='.$_SESSION['PKID'].'">
+                              <div type="button" class="btn btn-default">
+                                 Neues Unterforum
+                              </div>
+                              </a>
+                           </div>'; 
+                  }
                }
             echo '</div>
             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">';
@@ -286,4 +297,16 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
                }
       }
 
+/* gibt die letzte Seite zurück, benötigt wenn menu.php mit page == last parameter aufgerufen wird.
+Dies passiert nur wenn ein neuer menüpunkt verfasst wird. Der letzte Beitrag wird aber immer 
+auf der letzten Seite dargestellt. 
+*/       
+   function getLastPage(){
+      if($_GET['menu']== 0){
+         $pageNumber = SQLQuery0("SELECT COUNT(PKID_menu) as cnt FROM menu WHERE FK_menu IS NULL");
+      }else{
+         $pageNumber = SQLQuery1("SELECT COUNT(PKID_menu) as cnt FROM menu WHERE FK_menu = ?", $_GET['menu']);
+      }
+      return ceil($pageNumber['cnt'] / MAX_ENTRY_NUMBER);  
+   }  
    ?>

@@ -30,14 +30,16 @@
             <h2>Thread erstellen</h2>
          </div>
          <div class="row">
-            <div class="input-group">
+            <div class="input-group margin-bottom">
                <span class="input-group-addon">Threadtitel</span>
                <input type="text" class="form-control" id="threadtitle" placeholder="" aria-describedby="threadtitle">
             </div>
          </div>
-         <div class="row">
-            <trix-editor id="trix"></trix-editor>
-         </div>
+         <?php if($_GET['type']== 'thread'){ ?>
+            <div class="row">
+               <trix-editor id="trix"></trix-editor>
+            </div>
+         <?php } ?>
          <div class="row">
             <a class ="btn btn-default btn-textfield pull-right" id="target"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>
          </div>
@@ -54,7 +56,7 @@
             
                var text = $('#trix').val();
                 var d = new Date();
-                if(getUrlVars()["from"] == "menu"){
+                if(getUrlVars()["type"] == "thread"){
                 
                      var query = {sql: "INSERT INTO `thread` (`PKID_thread`, `FK_menu`, `theme`, `FK_Creator`) VALUES (NULL, '"
                                        +getUrlVars()["id"]+"', '"+ $('#threadtitle').val() +"', '"+getUrlVars()["creator"]+"');", 
@@ -74,7 +76,27 @@
                      $.post("func/insertSQL.php", sql);
                      
 
-                } 
+                } else if(getUrlVars()["type"]=="menupoint"){
+                  var threads;
+                     var sql={
+                        type: "getThreads",
+                        fk: getUrlVars()["id"]
+                     }
+                     alert("before");
+                  $.post("func/insertSQL.php", sql, function(result){
+                     threads = result;
+                     alert(threads);
+                  });
+                  alert("after");
+                  var sql = {
+                     sql: "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, "+getUrlVars()["id"]+", '"+ $('#threadtitle').val() +"', '"+threads+"')"
+                  }
+                  $.post("func/insertSQL.php", sql);
+                  //$("#threadtitle").animate({"left":"+=100px"},function() {location.href = "menu.php?thread="+getUrlVars()["id"]+"&page=last"});
+                  if(threads){
+                     location.href = "menu.php?thread="+getUrlVars()["id"]+"&page=last";
+                  }
+                }
                 
              });    
              
@@ -107,7 +129,8 @@
                      var query = sql21 + String(result) + sql22;
                      var newStr= {sql: query};
                      $.post("func/insertSQL.php", newStr);
-                     $("#trix").animate({"left":"+=100px"},function() {location.href = "thread.php?thread="+result+"&page=1"});
+                     
+                     location.href = "thread.php?thread="+result+"&page=1";
                   
                   });
                   
