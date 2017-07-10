@@ -47,7 +47,7 @@ function checkpass(){
              </div>';
       return FALSE;
    }
-   if(strlen($username)<6){
+   if(strlen($temppass)<6){
       echo '<div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Error!</strong> The password should contain at least 6 characters.
@@ -167,7 +167,7 @@ function checkname(){
             <strong>Error!</strong> Please enter a first name.
              </div>';
       return FALSE;
-   }else if(!preg_match("/^[a-zA-Z][a-zA-Z ]*$/",$firstname)){
+   }else if(!preg_match("/^[A-Z][a-zA-Z ]*$/",$firstname)){
       echo '<div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Error!</strong> You didn\'t enter an accepted fist name.
@@ -202,7 +202,7 @@ function checkname(){
       return FALSE; 
    }
    
-   if(!isset($_SESSION["firstname"])){
+  /* if(!isset($_SESSION["firstname"])){
       echo '<div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Error!</strong> The entered first name wasn&apos;t accepted.
@@ -215,7 +215,7 @@ function checkname(){
             <strong>Error!</strong> The entered second name wasn&apos;t accepted.
              </div>';
        return FALSE;
-   }
+   }*/
    $_SESSION["firstname"]=$firstname;
    $_SESSION["secondname"]=$secondname;
 	return TRUE;
