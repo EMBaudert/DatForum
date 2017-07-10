@@ -41,9 +41,9 @@
                         
                      // if logged in showuser infos, otherwise the log in an dregister
                      if(isset($_SESSION['logged'])&&$_SESSION['logged']==true){
-                        $messages = SQLQuery("SELECT unread_messages FROM user WHERE PKID_user=".$_SESSION['PKID']);
-                        $reports = SQLQuery("SELECT COUNT(PKID_report) as 'cnt' FROM reports WHERE done=0");
-                        $usergroup = SQLQuery("SELECt usergroup FROM user WHERE PKID_user=".$_SESSION['PKID']);
+                        $messages = SQLQuery1("SELECT unread_messages FROM user WHERE PKID_user= ?", $_SESSION['PKID']);
+                        $reports = SQLQuery0("SELECT COUNT(PKID_report) as 'cnt' FROM reports WHERE done=0");
+                        $usergroup = SQLQuery1("SELECt usergroup FROM user WHERE PKID_user= ?", $_SESSION['PKID']);
                         //drop down mit Profile, Posts und Messages
                         
                         if($usergroup['usergroup']=='admin' || $usergroup['usergroup']=='moderator'){
@@ -90,43 +90,43 @@
    							     </li>';
                      }
                      
-                     function SQLQuery($query){
+                     function SQLQuery0($query){
                         global $pdo;
                         
-                        $statement = $pdo->prepare(query);
+                        $statement = $pdo->prepare($query);
                         $statement->execute();   
                         
-                        return $temp->fetch();
+                        return $statement->fetch();
                                  
                      }
                      
-                     function SQLQuery($query, $0){
+                     function SQLQuery1($query, $p0){
                         global $pdo;
                         
-                        $statement = $pdo->prepare(query);
-                        $statement->execute(array('0' => $0));   
+                        $statement = $pdo->prepare($query);
+                        $statement->execute(array('0' => $p0));   
                         
-                        return $temp->fetch();
+                        return $statement->fetch();
                                  
                      }
                      
-                     function SQLQuery($query, $0, $1){
+                     function SQLQuery2($query, $p0, $p1){
                         global $pdo;
                         
-                        $statement = $pdo->prepare(query);
-                        $statement->execute(array('0' => $0, '1' => $1));   
+                        $statement = $pdo->prepare($query);
+                        $statement->execute(array('0' => $p0, '1' => $p1));   
                         
-                        return $temp->fetch();
+                        return $statement->fetch();
                                  
                      }
                      
-                     function SQLQuery($query, $0, $1, $2){
+                     function SQLQuery3($query, $p0, $p1, $p2){
                         global $pdo;
                         
-                        $statement = $pdo->prepare(query);
-                        $statement->execute(array('0' => $0, '1' => $1, '2' => $2));   
+                        $statement = $pdo->prepare($query);
+                        $statement->execute(array('0' => $p0, '1' => $p1, '2' => $p2));   
                         
-                        return $temp->fetch();
+                        return $statement->fetch();
                                  
                      }
                      

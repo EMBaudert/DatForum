@@ -42,17 +42,17 @@
                $sqlString= "SELECT * FROM menu WHERE FK_menu IS NULL";
             }else{
                $sqlString = "SELECT * FROM menu WHERE FK_menu  = ".$_GET['menu'];
+
             }
-         
          //check if thread true, dann createThreadOverview()
-         $checkThread = SQLQuery("SELECT threads FROM menu WHERE PKID_menu = ". $_GET['menu']);
+         $checkThread = SQLQuery1("SELECT threads FROM menu WHERE PKID_menu = ?", $_GET['menu']);
          if($checkThread['threads']){
             create2ndRow(1);
             createThreadOverview($_GET['menu']);
             create2ndRow(1);
          }else {
             create2ndRow(0);
-            createMenu($sqlString);    
+            createMenu($sqlString,$_GET['menu']);    
             create2ndRow(0);     
          }
          include_once('inc/footer.html');

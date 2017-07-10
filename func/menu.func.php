@@ -6,7 +6,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
 //erstellt Zeile mit titel evtl. button und pagination
       function create2ndRow($param){
       
-      $upperMenuName = SQLQuery("SELECT * FROM menu WHERE PKID_menu = ". $_GET['menu']);
+      $upperMenuName = SQLQuery1("SELECT * FROM menu WHERE PKID_menu = ?", $_GET['menu']);
          /*marg-5-tb nötig für passenden Abstand 
          bei sm und xs bekommt der Titel eine eigene Zeile
          */
@@ -60,7 +60,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
 //erstellt obersten Menüpunkt um ins Overmenu zu navigieren   
       function createMenuPointBack(){
         
-        $upperMenu = SQLQuery("SELECT FK_menu FROM menu WHERE PKID_menu=".$_GET['menu']);;
+        $upperMenu = SQLQuery1("SELECT FK_menu FROM menu WHERE PKID_menu= ?", $_GET['menu']);;
          
          if($upperMenu['FK_menu']==NULL){
             $upperMenu['FK_menu']=0;
@@ -76,7 +76,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
       }
 
 // erstellt das ganze Menu, ruft createMenuPoint auf
-      function createMenu($sqlString) {
+      function createMenu($sqlString,$menu) {
          global $pdo;
          
          echo '<div class="row"><ul class="list-group">';
@@ -86,12 +86,19 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          }
          
          
-         $i=0;
-         foreach ($pdo->query($sqlString) as $row) {
+      if($menu == 0){
+         $statement = $pdo->prepare($sqlString);
+         $statement->execute();
+      }else{
+         $statement = $pdo->prepare($sqlString);
+         $statement->execute(array('0' => $_GET['menu']));
+      }
+      $i=0;
+      while ($row = $statement->fetch()) {
             
             if($i>= (($_GET['page']-1)*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
              
-               $number=SQLQuery("SELECT COUNT(FK_menu) as cnt FROM menu WHERE FK_menu = ".$row['PKID_menu']);
+               $number=SQLQuery1("SELECT COUNT(FK_menu) as cnt FROM menu WHERE FK_menu = ?", $row['PKID_menu']);
                createMenuPoint($row['title'],$number['cnt'], $row['PKID_menu'], $row['threads']);
             }
             $i++;            
@@ -102,7 +109,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
 // Gibt zurück wieviele Threads der Menupunkt hat
       function checkThread($PKID){
       
-         $temp= SQLQuery("SELECT COUNT(PKID_thread) as num FROM thread WHERE FK_menu = ".$PKID);
+         $temp= SQLQuery1("SELECT COUNT(PKID_thread) as num FROM thread WHERE FK_menu = ?", $PKID);
          return $temp['num'];
       }
 
@@ -114,16 +121,12 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          <ul class="list-group">';
          
          createMenuPointBack();
-         
-         
+
+         $statement = $pdo->prepare("SELECT * FROM thread WHERE FK_menu = ?");
+         $statement->execute(array('0' => $id));
          $i=0;
-;         foreach($pdo->query("SELECT * FROM thread WHERE FK_menu = ".$id) as $row){
-         
-     //    echo $i;
-      //   echo ($_GET['page']-1*MAX_ENTRY_NUMBER);
-        // echo ($_GET['page']*MAX_ENTRY_NUMBER);
-         
-         //if shows
+         while ($row = $statement->fetch()) {
+            //if shows
             if($i>= (($_GET['page']-1)*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
                createThreadEntry($row['PKID_thread'], $row['theme'], $row['FK_creator']); 
             }
@@ -138,7 +141,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
       function createThreadEntry($PKID, $title, $creator){
       
       
-         $username = SQLQuery("SELECT username FROM user WHERE PKID_user = ".$creator);
+         $username = SQLQuery1("SELECT username FROM user WHERE PKID_user = ?", $creator);
          
          echo '<li class="list-group-item">
                <div class="row">
@@ -154,36 +157,36 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
 // Gibt die Zahl der Posts in einem Thread zurück
       function getPostNumber($id){
          
-         $tempNr = SQLQuery("SELECT COUNT(PKID_post) as num FROM post WHERE FK_thread = ".$id);
+         $tempNr = SQLQuery1("SELECT COUNT(PKID_post) as num FROM post WHERE FK_thread = ?", $id);
          return $tempNr['num'];
       }
 
 //Erstellt die Breadcrumb navigation
       function createBreadcrumb($id){
-         echo "<div class=\"row\"><ol class=\"breadcrumb\">
-         <li><a href=\"menu.php?menu=0&page=1\">Main menu</a></li>";
+         echo '<div class="row"><ol class="breadcrumb">
+         <li><a href=\"menu.php?menu=0&page=1\">Main menu</a></li>';
          recursiveBreadCrumb($id,1);
          
-         echo "</ol></div>";
+         echo '</ol></div>';
          
       }
 
 //Erstellt einzelne Breadcrumb punkte
       function recursiveBreadCrumb($id, $first){
 
-         $tempQuery = SQLQuery("SELECT * FROM menu WHERE PKID_menu = ".$id);
+         $tempQuery = SQLQuery1("SELECT * FROM menu WHERE PKID_menu = ?", $id);
          
          if($tempQuery['FK_menu']==NULL){
-            echo "<li><a href=\"menu.php?menu=".$tempQuery['PKID_menu']."&page=1\">".$tempQuery['title']."</a></li>";
+            echo '<li><a href="menu.php?menu='.$tempQuery['PKID_menu'].'&page=1">'.$tempQuery['title'].'</a></li>';
             return;
          }
          
          recursiveBreadCrumb($tempQuery['FK_menu'],0);
          //If first
          if($first == 0){
-            echo "<li><a href=\"menu.php?menu=".$tempQuery['PKID_menu']."&page=1\">".$tempQuery['title']."</a></li>";
+            echo '<li><a href="menu.php?menu='.$tempQuery['PKID_menu'].'&page=1">'.$tempQuery['title'].'</a></li>';
          }else{
-            echo "<li class=\"active\">".$tempQuery['title']."</li>";
+            echo '<li class="active">'.$tempQuery['title'].'</li>';
          }
          
       }
@@ -194,17 +197,17 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
          //getPagenumber
          
          if($thread){
-            $pageNumber = SQLQuery("SELECT COUNT(PKID_thread) as cnt FROM thread WHERE FK_Menu = ".$_GET['menu']);
+            $pageNumber = SQLQuery1("SELECT COUNT(PKID_thread) as cnt FROM thread WHERE FK_Menu = ?", $_GET['menu']);
          }else{
             if($_GET['menu']==0){
-               $pageNumber = SQLQuery("SELECT COUNT(PKID_menu) as cnt FROM menu WHERE FK_menu IS NULL");
+               $pageNumber = SQLQuery0("SELECT COUNT(PKID_menu) as cnt FROM menu WHERE FK_menu IS NULL");
             }else{
-               $pageNumber = SQLQuery("SELECT COUNT(FK_menu) as cnt FROM menu WHERE FK_menu = ".$_GET['menu']);
+               $pageNumber = SQLQuery1("SELECT COUNT(FK_menu) as cnt FROM menu WHERE FK_menu = ?", $_GET['menu']);
             }
          }
     //     echo $pageNumber['cnt'];
-         echo "<nav aria-label=\"pagination\">
-               <ul class=\"pagination pull-right\">";          
+         echo '<nav aria-label="pagination">
+               <ul class="pagination pull-right">';          
          
             //calculate needed pages
             $pa = ceil($pageNumber['cnt'] / MAX_ENTRY_NUMBER);
