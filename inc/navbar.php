@@ -6,6 +6,7 @@
    $retval=checkCookieLogin(); 
    if($retval&&!isset($_SESSION["logged"])){
       addMessage("SystemOfADoom",$_COOKIE["username"],"Jemand hat versucht, über COOKIE-Manipulation Ihren Account zu hacken, wir konnten dies jedoch erfolgreich verhindern!");
+      forgetLogin();
    }
  }
   if(isset($_GET["p"])&&$_GET["p"]=="login" && isset($_POST["password"])&&substr($error=checklogin($_POST["username"],hash('sha512',$_POST["password"])),0,1)!="0"){
