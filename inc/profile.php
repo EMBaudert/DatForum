@@ -1,6 +1,6 @@
 <?PHP
    if(!isset($_GET["uid"])||!checkID($_GET["uid"])){
-      echo "<h1>Keine bekannte User-ID!</h1>";
+      echo '<div id="setTitle" style="display:none;">Profile</div><h1>Keine bekannte User-ID!</h1>';
    }else{
          $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
             
@@ -10,7 +10,8 @@
       	$user->execute();
       	$data=$user->fetch();
          
-        echo " <h1>".$data["username"]."'s Profile</h1> "; 
+        echo '<div id="setTitle" style="display:none;"> '.$data["username"].'\'s Profile</div> 
+        <h1>'.$data["username"].'\'s Profile</h1> '; 
       if(isset($_SESSION["logged"])&&$_SESSION["logged"]&&$_SESSION["PKID"]==$_GET["uid"]){
       
          $_SESSION["username"]=$data["username"];

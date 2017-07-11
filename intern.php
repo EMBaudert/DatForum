@@ -6,7 +6,7 @@ require_once 'func/menu.func.php';
 	<html>
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-			<title>DatForum - Intern</title>
+			<title id="pageTitle">DatForum</title>
 			<link rel="SHORTCUT ICON" href="layout/favicon.ico" />
 			<link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
 
@@ -38,7 +38,7 @@ require_once 'func/menu.func.php';
          <?PHP
          }
 				if(!isset($_GET["p"])){
-					echo "Keine bekannte Seite!";
+					echo '<div id="setTitle" style="display:none;">Interner Bereich</div>Keine bekannte Seite!';
 				}elseif($_GET["p"]=="login"){
 					if(!isset($_SESSION["logged"])||!$_SESSION["logged"]){
 						include 'inc/login.php';
@@ -102,7 +102,7 @@ require_once 'func/menu.func.php';
 				}elseif($_GET["p"]=="message"){
 					include 'inc/messages.php';
 				}else{
-					echo "Keine Ahnung, was hier passieren soll^^!";
+					echo '<div id="setTitle" style="display:none;">Interner Bereich</div>Keine Ahnung, was hier passieren soll^^!';
 				}
             if(isset($_SESSION["PKID"])){
                   echo '<div id="refresh" style="text-align: center;"></div>';
