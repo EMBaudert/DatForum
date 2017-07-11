@@ -4568,3 +4568,366 @@ InnoDB: Your database may be corrupt or you may have copied the InnoDB
 InnoDB: tablespace but not the InnoDB log files. See
 InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
 InnoDB: for more information.
+2017-07-10 12:14:52 2d24 InnoDB: Error: page 5 log sequence number 17543643
+InnoDB: is in the future! Current system log sequence number 17497333.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:14:52 2d24 InnoDB: Error: page 3 log sequence number 17538654
+InnoDB: is in the future! Current system log sequence number 17497333.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:14:52 2d24 InnoDB: Error: page 3 log sequence number 17645680
+InnoDB: is in the future! Current system log sequence number 17497333.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:14:58 2d24 InnoDB: Error: page 3 log sequence number 17631038
+InnoDB: is in the future! Current system log sequence number 17498220.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:14:58 2d24 InnoDB: Error: page 1 log sequence number 17515329
+InnoDB: is in the future! Current system log sequence number 17498220.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:14:58 2d24 InnoDB: Error: page 0 log sequence number 17516538
+InnoDB: is in the future! Current system log sequence number 17498220.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:14:58 2d24 InnoDB: Error: page 0 log sequence number 17635390
+InnoDB: is in the future! Current system log sequence number 17498220.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:14:58 2d24 InnoDB: Error: page 4 log sequence number 17628959
+InnoDB: is in the future! Current system log sequence number 17498220.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:14:58 2d24 InnoDB: Error: page 4 log sequence number 17642647
+InnoDB: is in the future! Current system log sequence number 17498220.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:15:35 2d24 InnoDB: Error: page 340 log sequence number 17553011
+InnoDB: is in the future! Current system log sequence number 17498220.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:15:35 2d24 InnoDB: Error: page 199 log sequence number 17553011
+InnoDB: is in the future! Current system log sequence number 17498991.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:15:58 2e80 InnoDB: Error: page 203 log sequence number 17612018
+InnoDB: is in the future! Current system log sequence number 17499369.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:15:58 2e80 InnoDB: Error: page 484 log sequence number 17630018
+InnoDB: is in the future! Current system log sequence number 17499369.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:16:21 2e80 InnoDB: Error: page 337 log sequence number 17612106
+InnoDB: is in the future! Current system log sequence number 17500382.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:16:21 2e80 InnoDB: Error: page 205 log sequence number 17612106
+InnoDB: is in the future! Current system log sequence number 17500565.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:16:39 2d24 InnoDB: Error: page 487 log sequence number 17637087
+InnoDB: is in the future! Current system log sequence number 17500666.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:16:39 2d24 InnoDB: Error: page 207 log sequence number 17637087
+InnoDB: is in the future! Current system log sequence number 17500843.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:16:53 2e80 InnoDB: Error: page 342 log sequence number 17612238
+InnoDB: is in the future! Current system log sequence number 17500942.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:16:53 2e80 InnoDB: Error: page 209 log sequence number 17612238
+InnoDB: is in the future! Current system log sequence number 17501103.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:20:58 2d24 InnoDB: Error: page 578 log sequence number 17612282
+InnoDB: is in the future! Current system log sequence number 17501220.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:20:58 2d24 InnoDB: Error: page 211 log sequence number 17612282
+InnoDB: is in the future! Current system log sequence number 17501991.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:22:25 2d24 InnoDB: Error: page 368 log sequence number 17618391
+InnoDB: is in the future! Current system log sequence number 17504913.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:22:52 2e80 InnoDB: Error: page 485 log sequence number 17622279
+InnoDB: is in the future! Current system log sequence number 17505658.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:22:52 2e80 InnoDB: Error: page 223 log sequence number 17622279
+InnoDB: is in the future! Current system log sequence number 17506798.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:23:55 2e80 InnoDB: Error: page 581 log sequence number 17644892
+InnoDB: is in the future! Current system log sequence number 17507660.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:23:55 2e80 InnoDB: Error: page 232 log sequence number 17644892
+InnoDB: is in the future! Current system log sequence number 17507778.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:24:35 2d24 InnoDB: Error: page 591 log sequence number 17630671
+InnoDB: is in the future! Current system log sequence number 17507893.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:24:35 2d24 InnoDB: Error: page 234 log sequence number 17630671
+InnoDB: is in the future! Current system log sequence number 17508041.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:25:23 2d24 InnoDB: Error: page 384 log sequence number 17518266
+InnoDB: is in the future! Current system log sequence number 17508140.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:25:23 c40 InnoDB: Error: page 237 log sequence number 17647520
+InnoDB: is in the future! Current system log sequence number 17508318.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:25:23 c40 InnoDB: Error: page 530 log sequence number 17647520
+InnoDB: is in the future! Current system log sequence number 17509313.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:25:23 c40 InnoDB: Error: page 492 log sequence number 17566640
+InnoDB: is in the future! Current system log sequence number 17509419.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:25:23 c40 InnoDB: Error: page 238 log sequence number 17566640
+InnoDB: is in the future! Current system log sequence number 17510321.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:25:33 2d24 InnoDB: Error: page 387 log sequence number 17647804
+InnoDB: is in the future! Current system log sequence number 17510441.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:25:57 2e80 InnoDB: Error: page 488 log sequence number 17648216
+InnoDB: is in the future! Current system log sequence number 17510606.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:25:57 2e80 InnoDB: Error: page 240 log sequence number 17648216
+InnoDB: is in the future! Current system log sequence number 17510714.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:25:57 c40 InnoDB: Error: page 531 log sequence number 17649396
+InnoDB: is in the future! Current system log sequence number 17510714.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:25:57 c40 InnoDB: Error: page 241 log sequence number 17649396
+InnoDB: is in the future! Current system log sequence number 17511068.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:25:57 2e80 InnoDB: Error: page 499 log sequence number 17568350
+InnoDB: is in the future! Current system log sequence number 17511160.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:25:57 c40 InnoDB: Error: page 542 log sequence number 17569040
+InnoDB: is in the future! Current system log sequence number 17511160.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:25:57 2e80 InnoDB: Error: page 242 log sequence number 17568350
+InnoDB: is in the future! Current system log sequence number 17511268.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:25:57 c40 InnoDB: Error: page 244 log sequence number 17569040
+InnoDB: is in the future! Current system log sequence number 17512186.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 2d24 InnoDB: Error: page 307 log sequence number 17632826
+InnoDB: is in the future! Current system log sequence number 17513563.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 c40 InnoDB: Error: page 520 log sequence number 17572008
+InnoDB: is in the future! Current system log sequence number 17517960.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 c40 InnoDB: Error: page 252 log sequence number 17572008
+InnoDB: is in the future! Current system log sequence number 17518278.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 c40 InnoDB: Error: page 535 log sequence number 17572178
+InnoDB: is in the future! Current system log sequence number 17518372.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 c40 InnoDB: Error: page 253 log sequence number 17572178
+InnoDB: is in the future! Current system log sequence number 17519458.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 2d24 InnoDB: Error: page 573 log sequence number 17572574
+InnoDB: is in the future! Current system log sequence number 17519552.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 2d24 InnoDB: Error: page 465 log sequence number 17529870
+InnoDB: is in the future! Current system log sequence number 17519698.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 2d24 InnoDB: Error: page 254 log sequence number 17572574
+InnoDB: is in the future! Current system log sequence number 17520210.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 2d24 InnoDB: Error: page 505 log sequence number 17572744
+InnoDB: is in the future! Current system log sequence number 17520311.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 2d24 InnoDB: Error: page 255 log sequence number 17572744
+InnoDB: is in the future! Current system log sequence number 17520611.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 2d24 InnoDB: Error: page 490 log sequence number 17573014
+InnoDB: is in the future! Current system log sequence number 17520728.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 2d24 InnoDB: Error: page 256 log sequence number 17573014
+InnoDB: is in the future! Current system log sequence number 17521810.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 2d24 InnoDB: Error: page 564 log sequence number 17573352
+InnoDB: is in the future! Current system log sequence number 17550616.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 2d24 InnoDB: Error: page 257 log sequence number 17573352
+InnoDB: is in the future! Current system log sequence number 17551244.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 2d24 InnoDB: Error: page 498 log sequence number 17573538
+InnoDB: is in the future! Current system log sequence number 17551355.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 2d24 InnoDB: Error: page 258 log sequence number 17573538
+InnoDB: is in the future! Current system log sequence number 17551668.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 12:27:12 2d24 InnoDB: Error: page 550 log sequence number 17573934
+InnoDB: is in the future! Current system log sequence number 17551769.
+InnoDB: Your database may be corrupt or you may have copied the InnoDB
+InnoDB: tablespace but not the InnoDB log files. See
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/forcing-innodb-recovery.html
+InnoDB: for more information.
+2017-07-10 14:41:49 15760 [Note] c:\xampp\mysql\bin\mysqld.exe: Normal shutdown
+
+2017-07-10 14:41:49 15760 [Note] Event Scheduler: Purging the queue. 0 events
+2017-07-10 14:41:49 17768 [Note] InnoDB: FTS optimize thread exiting.
+2017-07-10 14:41:49 15760 [Note] InnoDB: Starting shutdown...
+2017-07-10 14:41:50 15760 [Note] InnoDB: Waiting for page_cleaner to finish flushing of buffer pool
+2017-07-10 14:41:51 15760 [Note] InnoDB: Shutdown completed; log sequence number 17744105
+2017-07-10 14:41:51 15760 [Note] c:\xampp\mysql\bin\mysqld.exe: Shutdown complete
+

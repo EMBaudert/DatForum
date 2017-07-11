@@ -22,9 +22,8 @@
       <div class="container">
     
          <?php
-         
+    
          require_once 'inc/navbar.php';
-               
          $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
       
       
@@ -33,6 +32,9 @@
          }
          if(!isset($_GET['page'])){
             $_GET['page'] = "1";
+         }
+         if($_GET['page']=='last'){
+            $_GET['page'] = getLastPage();
          }
          createBreadcrumb($_GET['menu']);
      

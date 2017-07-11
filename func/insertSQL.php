@@ -13,11 +13,24 @@
          
       }else if($_POST['type']== 'reportdone'){
          execute($_POST['query1'].$_SESSION['PKID'].$_POST['query2']);
+      }else if($_POST['type']== 'getThreads'){
+         
+         if($_POST['fk'] ==0){
+            $statement = $pdo->prepare("SELECT threads FROM menu WHERE FK_menu IS NULL");
+            $statement->execute();   
+         
+         }else {
+            $statement = $pdo->prepare("SELECT threads FROM menu WHERE FK_menu = ?");
+            $statement->execute(array('0' => $_POST['fk']));   
+         
+         }          
+         $temp = $statement->fetch();
+         echo $temp['threads'];
       }
       
    }else{
-      //echo ($_POST['sql']);
       execute($_POST['sql']);
+      echo "fertig";
    }
       
       

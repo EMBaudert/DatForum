@@ -27,7 +27,7 @@ require_once 'func/index.func.php';
                echo '<div class="row"><h2> Hallo '.getUsername($_SESSION['PKID']);
                $msg_cnt = checkMessages($_SESSION['PKID']);
                if($msg_cnt > 0){
-                  echo ', du hast <a href="messages.php">'.$msg_cnt.' ungelesene Nachrichten!</a></h2>';
+                  echo ', du hast <a href="intern.php?P=message">'.$msg_cnt.' ungelesene Nachrichten!</a></h2>';
                }else{
                   echo ', schau dir ein paar aktuelle Beitr&auml;ge an!</h2></div>';
                }
