@@ -24,7 +24,7 @@
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                      <div class="btn-group pull-right" role="group">
-                        <a class ="btn btn-default" href="thread.php?thread='.$thread['PKID_thread'].'&post='.$post['FK_post'].'#'.$post['FK_post'].'">Occupy</a>
+                        <a class ="btn btn-default" href="forum.php?p=thread&thread='.$thread['PKID_thread'].'&post='.$post['FK_post'].'#'.$post['FK_post'].'">Occupy</a>
                         <a class ="btn btn-default" id="solved">Mark as solved</a>
                      </div>
                   </div>
