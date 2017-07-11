@@ -9,9 +9,8 @@
          <div class="panel-group">
             <div class="panel panel-default">
                <ul class="list-group">';
-               
       $statement = $pdo->prepare("SELECT * FROM thread WHERE theme LIKE '%?%'");
-      $statement->execute(array('0' => $_GET['search']));
+      $statement->execute(array('0' => $_POST['search']));
       $i=0;
       while ($row = $statement->fetch()) {
          
@@ -27,14 +26,14 @@
    }
    
    function createSearchPoint($row){
-       $search = stripos($row['theme'],$_GET['search']);
-        $strlen = strlen($_GET['search']);
+       $search = stripos($row['theme'],$_POST['search']);
+        $strlen = strlen($_POST['search']);
         $final = substr($row['theme'],$search, $strlen);
         
         
          $text = str_replace($final,'<b>'.$final.'</b>',$row['theme']);
          echo '<li class="list-group-item">
-            <a href="forum.php?p=thread&thread='.$row['PKID_thread'].'&page=1">'.$text.'</a>
+            <a href="thread.php?thread='.$row['PKID_thread'].'&page=1">'.$text.'</a>
          </li>';
    }
 
@@ -42,7 +41,7 @@
    
       echo '<div class="row marg-tb-5">
          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-            <h3>Suchergebnisse f&uuml;r '.$_GET['search'].'</h3>
+            <h3>Suchergebnisse f&uuml;r '.$_POST['search'].'</h3>
          </div>
          <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">'; 
             createPagination();
@@ -54,7 +53,7 @@
    function createPagination(){
          
    //GETPagenumber
-   $pageNumber = SQLQuery1("SELECT COUNT(PKID_thread) as cnt FROM thread WHERE theme LIKE '%?%'", $_GET['search']); 
+   $pageNumber = SQLQuery1("SELECT COUNT(PKID_thread) as cnt FROM thread WHERE theme LIKE '%?%'", $_POST['search']); 
         
    
     echo '<nav aria-label="pagination">
@@ -67,11 +66,11 @@
       if($_GET['page'] == 1){
                    echo '<li class="disabled"><a href=""><span aria-hidden="true">&laquo;</span></a></li>';
                }else{
-                  echo '<li><a href="forum.php?p=search&search='.$_GET['search'].'&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
+                  echo '<li><a href="search.php?search='.$_POST['search'].'&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
             }
             //if only one page is needed add this one custom
             if($pa == 0){
-               echo '<li class="active"><a href="forum.php?p=search&search='.$_GET['search'].'&page=1">1</a></li>';   
+               echo '<li class="active"><a href="search.php?search='.$_POST['search'].'&page=1">1</a></li>';   
             }
 
             if($pa > 5){
@@ -105,7 +104,7 @@
             if($_GET['page'] == ceil($pa) || $pa == 0){
                   echo '<li class="disabled"><span aria-hidden="true">&raquo;</span></li>';
                }else{
-                  echo '<li><a href="forum.php?p=search&search='.$_GET['search'].'&page='.($_GET['page']+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
+                  echo '<li><a href="search.php?search='.$_POST['search'].'&page='.($_GET['page']+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
             }
          
          echo '</ul></nav>';
@@ -114,9 +113,9 @@
       
    function createSingleMenuPoint($nr){
        if($_GET['page']==$nr){
-          echo '<li class="active"><a href="forum.php?p=search&search='.$_GET['search'].'&page='.$nr.'">'.$nr.'</a></li>';   
+          echo '<li class="active"><a href="search.php?search='.$_POST['search'].'&page='.$nr.'">'.$nr.'</a></li>';   
        }else{
-          echo '<li><a href="forum.php?p=search&search='.$_GET['search'].'&page='.$nr.'">'.$nr.'</a></li>';   
+          echo '<li><a href="search.php?search='.$_POST['search'].'&page='.$nr.'">'.$nr.'</a></li>';   
        }
    }
 

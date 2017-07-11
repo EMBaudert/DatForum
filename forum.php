@@ -37,6 +37,9 @@
             case 'menu';
                require 'inc/forum/menu.php';
                break;
+            case 'search';
+               require 'inc/forum/search.php';
+               break;
          }
   
          
