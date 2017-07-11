@@ -68,14 +68,14 @@
          <form action="intern.php?p=profile&uid=<?PHP echo $_SESSION["PKID"]; ?>" method="POST" enctype="multipart/form-data"><br />
 <div class="row">
    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"> 
-   <div align="left">
+   <div align="left" style="margin:10px;">
       <img title="Profilbild" src="<?PHP echo $data["pb_path"]; ?>" class="img-rounded" width="200px" />
    </div>
    <div class="input-group" style="margin:10px;">
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Profile Picture</span>
   
          <label class="btn btn-default" style="border-radius: 0px 5px 5px 0px;width:160px;">
-            Choose new file <input id="fileToUpload" class="form-control" type="file" name="datei" class="hide" />
+            Choose new file <input id="fileToUpload" class="hide form-control" type="file" name="datei" />
          </label><span id="filechosen"></span>
     </div>
 <div class="form-group">

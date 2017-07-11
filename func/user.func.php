@@ -54,6 +54,12 @@ function checkpass(){
              </div>';     
       return FALSE; 
    }
+   if(preg_match("/^[a-zA-Z0-9]*$/",$temppass)){
+      echo '<div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Warning!</strong> The entered password may not be sure.
+             </div>';  
+   }
 	return TRUE;
 }
 
@@ -79,10 +85,10 @@ function checkusername(){
       return FALSE;
    }
    
-   if(!preg_match("/^[a-zA-Z0-9_]*$/",$username)){
+   if(!preg_match("/^[a-zA-Z0-9_\-]*$/",$username)){
       echo '<div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Error!</strong> The username may only contain letters, numbers and "_".
+            <strong>Error!</strong> The username may only contain letters, numbers and "_" or "-".
              </div>';     
       return FALSE; 
    }
@@ -167,7 +173,7 @@ function checkname(){
             <strong>Error!</strong> Please enter a first name.
              </div>';
       return FALSE;
-   }else if(!preg_match("/^[A-Z][a-zA-Z ]*$/",$firstname)){
+   }else if(!preg_match("/^[A-Z][a-zA-Z \-]*$/",$firstname)){
       echo '<div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Error!</strong> You didn\'t enter an accepted fist name.
@@ -187,7 +193,7 @@ function checkname(){
             <strong>Error!</strong> Please enter a second name.
              </div>';
       return FALSE;
-   }else if(!preg_match("/^[a-zA-Z]*$/",$secondname)){
+   }else if(!preg_match("/^[a-zA-Z \-]*$/",$secondname)){
       echo '<div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Error!</strong> You didn\'t enter an accepted second name.
@@ -202,20 +208,6 @@ function checkname(){
       return FALSE; 
    }
    
-  /* if(!isset($_SESSION["firstname"])){
-      echo '<div class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Error!</strong> The entered first name wasn&apos;t accepted.
-             </div>';
-       return FALSE;
-   }
-  if(!isset($_SESSION["secondname"])){
-      echo '<div class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Error!</strong> The entered second name wasn&apos;t accepted.
-             </div>';
-       return FALSE;
-   }*/
    $_SESSION["firstname"]=$firstname;
    $_SESSION["secondname"]=$secondname;
 	return TRUE;
