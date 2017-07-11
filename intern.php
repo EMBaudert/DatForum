@@ -18,7 +18,9 @@ require_once 'func/menu.func.php';
          <!-- Latest compiled and minified JavaScript -->
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
          <script src="bootstrap/less/dist/js/bootstrap.min.js" ></script>
-      	
+      	<audio autoplay="true" loop="trueM" class="hide" controls>
+            <source src="inc/backgroundsong.mp3" type="audio/mpeg">
+         </audio>
 		</head>
 		<body> 
 			<div class="container">
@@ -38,7 +40,7 @@ require_once 'func/menu.func.php';
          <?PHP
          }
 				if(!isset($_GET["p"])){
-					echo '<div id="setTitle" style="display:none;">Interner Bereich</div>Keine bekannte Seite!';
+					echo '<div id="setTitle" class="hide">Interner Bereich</div>Keine bekannte Seite!';
 				}elseif($_GET["p"]=="login"){
 					if(!isset($_SESSION["logged"])||!$_SESSION["logged"]){
 						include 'inc/login.php';
@@ -102,7 +104,7 @@ require_once 'func/menu.func.php';
 				}elseif($_GET["p"]=="message"){
 					include 'inc/messages.php';
 				}else{
-					echo '<div id="setTitle" style="display:none;">Interner Bereich</div>Keine Ahnung, was hier passieren soll^^!';
+					echo '<div id="setTitle" class="hide">Interner Bereich</div>Keine Ahnung, was hier passieren soll^^!';
 				}
             if(isset($_SESSION["PKID"])){
                   echo '<div id="refresh" style="text-align: center;"></div>';
