@@ -18,7 +18,7 @@ require_once 'func/index.func.php';
          
 		</head>
 		<body>
-      <div id="setTitle" style="display:none;">Impressum</div>
+      <div id="setTitle" class="hide">Impressum</div>
 			<div class="container">
 			<?php
            require_once 'inc/navbar.php';

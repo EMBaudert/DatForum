@@ -1,6 +1,6 @@
 <?PHP
    if(!isset($_GET["uid"])||!checkID($_GET["uid"])){
-      echo '<div id="setTitle" style="display:none;">Profile</div><h1>Keine bekannte User-ID!</h1>';
+      echo '<div id="setTitle" class="hide">Profile</div><h1>Keine bekannte User-ID!</h1>';
    }else{
          $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
             
@@ -75,7 +75,7 @@
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Profile Picture</span>
   
          <label class="btn btn-default" style="border-radius: 0px 5px 5px 0px;width:160px;">
-            Choose new file <input id="fileToUpload" class="form-control" type="file" name="datei" style="display:none;" />
+            Choose new file <input id="fileToUpload" class="form-control" type="file" name="datei" class="hide" />
          </label><span id="filechosen"></span>
     </div>
 <div class="form-group">
