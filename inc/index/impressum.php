@@ -1,28 +1,4 @@
-<?PHP
-require_once 'func/index.func.php';
-?>
-<!DOCTYPE html>
-	<html>
-		<head>
-			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-			<title id="pageTitle">DatForum</title>
-			<link rel="SHORTCUT ICON" href="layout/favicon.ico" />
-         <!-- Das neueste kompilierte und minimierte CSS -->
-         <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
-
-         <!-- Optionales Theme -->
-         <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap-theme.min.css">
-         <!-- Latest compiled and minified JavaScript -->
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-         <script src="bootstrap/less/dist/js/bootstrap.min.js" ></script>
-         
-		</head>
-		<body>
-      <div id="setTitle" class="hide">Impressum</div>
-			<div class="container">
-			<?php
-           require_once 'inc/navbar.php';
-           ?>
+<div id="setTitle" class="hide">Impressum</div>
            <div class="row">
                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                   <h1>Impressum</h1>
@@ -45,10 +21,4 @@ require_once 'func/index.func.php';
                   <h4>*Kurs STG-TINF16D<br>Rotheb&uuml;hlplatz 41/1<br>D-70178 Stuttgart<br></h4>
                </div>
            </div>
-           <?PHP
-           include_once 'inc/footer.html';
-         ?>
-         </div>
-         
-		</body>
-	</html>
+       
