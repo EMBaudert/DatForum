@@ -5,7 +5,7 @@ require_once 'func/index.func.php';
 	<html>
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-			<title>DatForum - Impressum</title>
+			<title id="pageTitle">DatForum</title>
 			<link rel="SHORTCUT ICON" href="layout/favicon.ico" />
          <!-- Das neueste kompilierte und minimierte CSS -->
          <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
@@ -18,6 +18,7 @@ require_once 'func/index.func.php';
          
 		</head>
 		<body>
+      <div id="setTitle" style="display:none;">Impressum</div>
 			<div class="container">
 			<?php
            require_once 'inc/navbar.php';
@@ -35,7 +36,7 @@ require_once 'func/index.func.php';
                   <p>Aus Presserechtlichen Gr&uuml;nden betonen wir, dass wir keinerlei Einfluss auf von Nutzern erstellte Beitr&auml;ge
                      und verlinkte Seiten haben. Falls Ihnen unannehmliche Inhalte auffallen, melden Sie bitte die betreffenden Beitr&auml;ge
                      und unsere Moderatoren und Administratoren werden sich darum k&uuml;mmern.<br>
-                     Richtlinien und Hinweise zum Datenschutz entnehmen Sie bitte unseren <a href="documents/Hinweise_zu_Richtlinien_und_Datenschutzbestimmungen.pdf" target="_blank" onclick="alert('Fehler! Verweis nicht gefunden!');">
+                     Richtlinien und Hinweise zum Datenschutz entnehmen Sie bitte unseren <a href="documents/Hinweise_zu_Richtlinien_und_Datenschutzbestimmungen.pdf" target="_blank">
                      Hinweise zu Richtlinien und Datenschutzbestimmungen </a>.
                   </p>
                </div>

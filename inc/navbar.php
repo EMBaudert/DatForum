@@ -137,6 +137,15 @@
                                  
                      }
                      
+                     function SQLQuery4($query, $p0, $p1, $p2, $p3){
+                        global $pdo;
+                        
+                        $statement = $pdo->prepare($query);
+                        $statement->execute(array('0' => $p0, '1' => $p1, '2' => $p2, '3' => $p4));   
+                        
+                        return $statement->fetch();
+                                 
+                     }
                      
                      ?>
 						</ul>

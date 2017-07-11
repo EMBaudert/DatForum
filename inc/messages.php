@@ -2,7 +2,7 @@
 require_once 'func/message.func.php';
 ?>
   <link rel="stylesheet" href="layout/chat.css">
-  <title>DatForum &ndash; Messages</title>
+  <div id="setTitle" style="display:none;">Messages</div>
 <div class="row">
  <div id="chatPartners" class="col-xs-5 col-sm-4 col-md-3 col-lg-3" style="min-width:130px;">
 <?PHP

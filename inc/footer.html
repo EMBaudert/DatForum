@@ -1,12 +1,21 @@
+
+  <div class="container row">
 <script>
-window.onresize = function(){ if(768 >= $(window).width()){location.reload(); }}
- if ($(document).height() > $(window).height()||(2*$(document).height() > $(window).height()&&$(document).width() > $(window).width())) { 
+window.onresize = function(){window.location.href = window.location.href; }
+ if ($(document).height() > ($(window).height())) { 
     document.write('<div style="position:relative;top:0px;" class="row container footer">');
 } else if(768 > $(window).width()){
   document.write('<div style="position:absolute;width:'+$(window).width()+'px;bottom:0px;" class="row container footer">');
 } else{
   document.write('<div style="position:absolute;bottom:0px;" class="row container footer">');
 }
-</script>
-      <p>&copy; 2017 by <a href="impressum.php" style="color:white;">DatForumTeam</a></p>
+</script> 
+				
+      <p style="margin: 10px 5px;">&copy; 2017 by <a href="impressum.php" style="color:white;">DatForumTeam</a></p>
+			  </div>
       </div>
+      
+<script>
+if(document.getElementById("pageTitle")!=null&&document.getElementById("setTitle")!=null)
+document.getElementById("pageTitle").innerHTML="DatForum &ndash; "+document.getElementById("setTitle").innerHTML;
+</script>
