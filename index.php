@@ -40,7 +40,7 @@ require_once 'func/index.func.php';
                            Zum Forum
                         </div>
                         <div class="panel-body">
-                           <span class="glyphicon glyphicon-list"></span> <a href="menu.php">Zur &Uuml;bersicht</a>
+                           <span class="glyphicon glyphicon-list"></span> <a href="forum.php?p=menu">Zur &Uuml;bersicht</a>
                         </div>
                      </div>
                   </div>';

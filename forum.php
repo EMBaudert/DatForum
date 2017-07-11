@@ -1,7 +1,3 @@
-<?php
-   require 'func/thread.func.php';
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -26,17 +22,23 @@
          require 'inc/navbar.php';
          
          switch($_GET['p']){
-            case 'reports':
-               require 'inc/reports.php';
-               break;
             case 'postoverview':
-               require 'inc/postOverview.php';
+               require 'inc/forum/postOverview.php';
+               break;
+            case 'createThread':
+               require 'inc/forum/createThread.php';
                break;
             case 'createPost':
-               require 'inc/createPost.php';
+               require 'inc/forum/createPost.php';
                break;
-            case 'createPost':
-               require 'inc/createPost.php';
+            case 'thread';
+               require 'inc/forum/thread.php';
+               break;
+            case 'menu';
+               require 'inc/forum/menu.php';
+               break;
+            case 'search';
+               require 'inc/forum/search.php';
                break;
          }
   

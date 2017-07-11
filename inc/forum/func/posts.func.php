@@ -48,7 +48,7 @@
                        </div>
                        <div role="complementary" id="collapse'.$i.'" class="panel-collapse collapse">
                          <ul class="list-group">
-                           <li class="list-group-item"><a href="thread.php?thread='.$row['FK_thread'].'&post='.$row['PKID_post'].'#'.$row['PKID_post'].'">'.$text.'</a></li>';
+                           <li class="list-group-item"><a href="forum.php?p=thread&thread='.$row['FK_thread'].'&post='.$row['PKID_post'].'#'.$row['PKID_post'].'">'.$text.'</a></li>';
                }
             } else if($threadnumber != $row['FK_thread']){
                $i++;
@@ -67,11 +67,11 @@
                        </div>
                        <div role="complementary" id="collapse'.$i.'" class="panel-collapse collapse">
                          <ul class="list-group">
-                           <li class="list-group-item"><a href="thread.php?thread='.$row['FK_thread'].'&post='.$row['PKID_post'].'#'.$row['PKID_post'].'">'.$text.'</a></li>';
+                           <li class="list-group-item"><a href="forum.php?p=thread&thread='.$row['FK_thread'].'&post='.$row['PKID_post'].'#'.$row['PKID_post'].'">'.$text.'</a></li>';
                }
             }else {
                if($i>= (($_GET['page']-1)*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
-                  echo '<li class="list-group-item"><a href="thread.php?thread='.$row['FK_thread'].'&post='.$row['PKID_post'].'#'.$row['PKID_post'].'">'.$text.'</a></li>';
+                  echo '<li class="list-group-item"><a href="forum.php?p=thread&thread='.$row['FK_thread'].'&post='.$row['PKID_post'].'#'.$row['PKID_post'].'">'.$text.'</a></li>';
                }
             }
             $threadnumber = $row['FK_thread'];
@@ -117,11 +117,11 @@
       if($_GET['page'] == 1){
                   echo '<li class="disabled"><a href=""><span aria-hidden="true">&laquo;</span></a></li>';
                }else{
-                  echo '<li><a href="post.php?page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
+                  echo '<li><a href="forum.php?p=post&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
             }
             //if only one page is needed add this one custom
             if($pa == 0){
-               echo '<li class="active"><a href="post.php?page=1">1</a></li>';   
+               echo '<li class="active"><a href="forum.php?p=page&page=1">1</a></li>';   
             }
 
             if($pa > 5){
@@ -155,7 +155,7 @@
             if($_GET['page'] == ceil($pa) || $pa == 0){
                   echo '<li class="disabled"><span aria-hidden="true">&raquo;</span></li>';
                }else{
-                  echo '<li><a href="post.php?page='.($_GET['page']+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
+                  echo '<li><a href="forum.php?p=postpage='.($_GET['page']+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
             }
          
          echo '</ul></nav>';
@@ -164,9 +164,9 @@
       
    function createSingleMenuPoint($nr){
        if($_GET['page']==$nr){
-          echo '<li class="active"><a href="post.php?page='.$nr.'">'.$nr.'</a></li>';   
+          echo '<li class="active"><a href="forum.php?p=post&page='.$nr.'">'.$nr.'</a></li>';   
        }else{
-          echo '<li><a href="post.php?page='.$nr.'">'.$nr.'</a></li>';   
+          echo '<li><a href="forum.php?p=post&page='.$nr.'">'.$nr.'</a></li>';   
        }
    }
 
