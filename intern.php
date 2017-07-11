@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?PHP
 require_once 'func/user.func.php';
-require_once 'func/menu.func.php';
+require_once 'func/reports.func.php';
 ?>
 	<html>
 		<head>
@@ -43,7 +43,7 @@ require_once 'func/menu.func.php';
 					echo '<div id="setTitle" class="hide">Interner Bereich</div>Keine bekannte Seite!';
 				}elseif($_GET["p"]=="login"){
 					if(!isset($_SESSION["logged"])||!$_SESSION["logged"]){
-						include 'inc/login.php';
+						include 'inc/intern/login.php';
                   echo '<script type="text/javascript">
                                     function setunabled(){
                                        $(".buttonlogin").prop("disabled",true);
@@ -87,7 +87,7 @@ require_once 'func/menu.func.php';
 					if(isset($_SESSION["logged"])&&$_SESSION["logged"]){
 						echo "<h1>Sie sind schon registriert</h1>";
 					}elseif(!isset($_POST["submit"])||!checkusername()||!checkname()||!checkemail()||!checkpass()||!checkdata()||!checksecquest($_POST["questnumb"])){
-						include 'inc/register.php';							
+						include 'inc/intern/register.php';							
 					}else{
 						echo "<h1>Registrieren erfolgreich!</h1>";
 						newuser();
@@ -100,9 +100,11 @@ require_once 'func/menu.func.php';
                   echo '<meta http-equiv="refresh" content="0; URL='.$link.'" />';
 					}
 				}elseif($_GET["p"]=="profile"){
-					include 'inc/profile.php';
+					include 'inc/intern/profile.php';
 				}elseif($_GET["p"]=="message"){
-					include 'inc/messages.php';
+					include 'inc/intern/messages.php';
+				}elseif($_GET["p"]=="reports"){
+					include 'inc/intern/reports.php';
 				}else{
 					echo '<div id="setTitle" class="hide">Interner Bereich</div>Keine Ahnung, was hier passieren soll^^!';
 				}

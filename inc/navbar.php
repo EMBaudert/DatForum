@@ -52,7 +52,7 @@
                         
                         if($usergroup['usergroup']=='admin' || $usergroup['usergroup']=='moderator'){
                            echo '<li>
-                                    <a href="reports.php">Reports <span class="badge">'.$reports['cnt'].'</span></a> 
+                                    <a href="intern.php?p=reports">Reports <span class="badge">'.$reports['cnt'].'</span></a> 
                                  </li>';
                         }
                         
@@ -84,7 +84,7 @@
                               <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-plus-sign"></span> Register </a>
                               <ul class="dropdown-menu">
    									   <li class="dropdown-light">';
-                           include 'inc/register.php';
+                           include 'inc/intern/register.php';
                            echo '</li>
    								    </ul>
                            </li>
@@ -92,7 +92,7 @@
                               <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> Login </a>
                                  <ul class="dropdown-menu">
    									      <li class="dropdown-light">';
-                           include 'inc/login.php';
+                           include 'inc/intern/login.php';
                               echo '</li>
    								       </ul>
    							     </li>';
