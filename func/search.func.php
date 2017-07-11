@@ -34,7 +34,7 @@
         
          $text = str_replace($final,'<b>'.$final.'</b>',$row['theme']);
          echo '<li class="list-group-item">
-            <a href="thread.php?thread='.$row['PKID_thread'].'&page=1">'.$text.'</a>
+            <a href="forum.php?p=thread&thread='.$row['PKID_thread'].'&page=1">'.$text.'</a>
          </li>';
    }
 
@@ -67,11 +67,11 @@
       if($_GET['page'] == 1){
                    echo '<li class="disabled"><a href=""><span aria-hidden="true">&laquo;</span></a></li>';
                }else{
-                  echo '<li><a href="search.php?search='.$_GET['search'].'&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
+                  echo '<li><a href="forum.php?p=search&search='.$_GET['search'].'&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
             }
             //if only one page is needed add this one custom
             if($pa == 0){
-               echo '<li class="active"><a href="search.php?search='.$_GET['search'].'&page=1">1</a></li>';   
+               echo '<li class="active"><a href="forum.php?p=search&search='.$_GET['search'].'&page=1">1</a></li>';   
             }
 
             if($pa > 5){
@@ -105,7 +105,7 @@
             if($_GET['page'] == ceil($pa) || $pa == 0){
                   echo '<li class="disabled"><span aria-hidden="true">&raquo;</span></li>';
                }else{
-                  echo '<li><a href="search.php?search='.$_GET['search'].'&page='.($_GET['page']+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
+                  echo '<li><a href="forum.php?p=search&search='.$_GET['search'].'&page='.($_GET['page']+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
             }
          
          echo '</ul></nav>';
@@ -114,9 +114,9 @@
       
    function createSingleMenuPoint($nr){
        if($_GET['page']==$nr){
-          echo '<li class="active"><a href="search.php?search='.$_GET['search'].'&page='.$nr.'">'.$nr.'</a></li>';   
+          echo '<li class="active"><a href="forum.php?p=search&search='.$_GET['search'].'&page='.$nr.'">'.$nr.'</a></li>';   
        }else{
-          echo '<li><a href="search.php?search='.$_GET['search'].'&page='.$nr.'">'.$nr.'</a></li>';   
+          echo '<li><a href="forum.php?p=search&search='.$_GET['search'].'&page='.$nr.'">'.$nr.'</a></li>';   
        }
    }
 

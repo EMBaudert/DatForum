@@ -158,7 +158,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
                <div class="row">
                
                   <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"><span class="glyphicon glyphicon-file"></span><a href="forum.php?p=thread&thread='.$PKID.'&page=1"> '.$title.'</a></div>
-                  <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2"><span class="glyphicon glyphicon-user"></span> <a href="intern.php?p=user&user='.$creator.'">'.$username['username'].'</a></div>
+                  <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2"><span class="glyphicon glyphicon-user"></span> <a href="intern.php?p=profile&uid='.$creator.'">'.$username['username'].'</a></div>
                   <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2"><span class="glyphicon glyphicon-comment"></span> Beitr&auml;ge: '.getPostNumber($PKID).'</div>
                </div>
             </li>';
@@ -175,7 +175,7 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
 //Erstellt die Breadcrumb navigation
       function createBreadcrumb($id){
          echo '<div class="row"><ol class="breadcrumb">
-         <li><a href="forum.php?p=mfenu&menu=0&page=1">Main menu</a></li>';
+         <li><a href="fourm.php?p=menu&menu=0&page=1">Main menu</a></li>';
          recursiveBreadCrumb($id,1);
          
          echo '</ol></div>';
@@ -225,13 +225,13 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
 
             //Previous button, if page 1 is selected button gets deactivated
             if($_GET['page'] == 1){
-                  echo '<li class="disabled"><a href=""><span aria-hidden="true">&laquo;</span></a></li>';
+                  echo '<li class="disabled\"><a href=""><span aria-hidden="true">&laquo;</span></a></li>';
                }else{
                   echo '<li><a href="forum.php?p=menu&menu='.$_GET['menu'].'&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
             }
             //if only one page is needed add this one custom
             if($pa == 0){
-               echo '<li class="active"><a href="fourm.php?p=menu&menu='.$_GET['menu'].'&page=1">1</a></li>';   
+               echo '<li class="active"><a href="forum.php?p=menu&menu='.$_GET['menu'].'&page=1">1</a></li>';   
             }
 
             if($pa > 5){
