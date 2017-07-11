@@ -150,13 +150,15 @@
                      ?>
 						</ul>
                   <!-- Searchbar -->
-						<form class="navbar-form navbar-left" action="forum.php?p=search&page=1" method="POST">
+						<form class="navbar-form navbar-left" action="forum.php?p=search&page=1" method="GET">
 							<div class="input-group">
    								<input type="text" class="form-control" name="search" placeholder="Search">
 								<div class="input-group-btn">
 									<button class="btn btn-default" type="submit">
 										<i class="glyphicon glyphicon-search"></i>
 									</button>
+                           <input type="hidden" name="p" value="search">
+                           <input type="hidden" name="page" value="1">
 								</div>
 							</div>
 						</form>
