@@ -18,7 +18,9 @@ require_once 'func/menu.func.php';
          <!-- Latest compiled and minified JavaScript -->
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
          <script src="bootstrap/less/dist/js/bootstrap.min.js" ></script>
-      	
+      	<audio autoplay="true" loop="trueM" controls style="display:none;">
+            <source src="inc/backgroundsong.mp3" type="audio/mpeg">
+         </audio>
 		</head>
 		<body> 
 			<div class="container">
