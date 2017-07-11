@@ -11,7 +11,7 @@
       <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap-theme.min.css">
 
       <!-- Latest compiled and minified JavaScript -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="bootstrap/jquery-3.2.1.min.js"></script>
       <script src="bootstrap/less/dist/js/bootstrap.min.js" ></script>
      
      <link rel="stylesheet" type="text/css" href="trix/trix.css">
@@ -38,6 +38,10 @@
          <?php if($_GET['type']== 'thread'){ ?>
             <div class="row">
                <trix-editor id="trix"></trix-editor>
+            </div>
+         <?php } else if($_GET['type']=='menupoint'){ ?>
+            <div class="row">
+            
             </div>
          <?php } ?>
          <div class="row">
@@ -78,24 +82,31 @@
 
                 } else if(getUrlVars()["type"]=="menupoint"){
                   var threads;
-                     var sql={
-                        type: "getThreads",
-                        fk: getUrlVars()["id"]
-                     }
-                     alert("before");
+                  var sql={
+                     type: "getThreads",
+                     fk: getUrlVars()["id"]
+                  }
                   $.post("func/insertSQL.php", sql, function(result){
                      threads = result;
-                     alert(threads);
-                  });
-                  alert("after");
+                  });  
+                    var query;               
+                  if(getUrlVars()["id"] == 0){
+                     query = "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, NULL, '"+ $('#threadtitle').val() +"', '0')";
+                  }else {
+                     query = "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, "+getUrlVars()["id"]+", '"+ $('#threadtitle').val() +"', '"+threads+"')";
+                  }
+                  
+                  alert(query);
+                  
                   var sql = {
-                     sql: "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, "+getUrlVars()["id"]+", '"+ $('#threadtitle').val() +"', '"+threads+"')"
+                     sql: query
                   }
-                  $.post("func/insertSQL.php", sql);
-                  //$("#threadtitle").animate({"left":"+=100px"},function() {location.href = "menu.php?thread="+getUrlVars()["id"]+"&page=last"});
-                  if(threads){
-                     location.href = "menu.php?thread="+getUrlVars()["id"]+"&page=last";
-                  }
+                  var answer = $.post("func/insertSQL.php", sql);
+                  answer.done(function(){
+                     var url = "menu.php?menu="+getUrlVars()["id"]+"&page=last";
+                     $(location).attr('href',url);
+                  });
+                  
                 }
                 
              });    
@@ -130,7 +141,7 @@
                      var newStr= {sql: query};
                      $.post("func/insertSQL.php", newStr);
                      
-                     location.href = "thread.php?thread="+result+"&page=1";
+                     //location.href = "thread.php?thread="+result+"&page=1";
                   
                   });
                   
