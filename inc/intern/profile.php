@@ -50,7 +50,7 @@
                }
             }
             #echo "<script>alert('Der Upload war erfolgreich!')</script>";
-         	$sql = "UPDATE user SET firstname='".$_SESSION["firstname"]."', secondname='".$_SESSION["secondname"]."', email='".$_SESSION["email"]."', password='".$PASS."', pb_path='".$filename."', signature='".$_POST["signature"]."' WHERE PKID_user=".$_SESSION["PKID"];
+         	$sql = "UPDATE user SET firstname='".$_SESSION["firstname"]."', secondname='".$_SESSION["secondname"]."', email='".$_SESSION["email"]."', password='".$PASS."', pb_path='".$filename."', signature='".makeSecure($_POST["signature"])."' WHERE PKID_user=".$_SESSION["PKID"];
          	$statement = $pdo->prepare($sql);
          	$statement->execute();   
             header("Cache-Control: no-cache, must-revalidate");
