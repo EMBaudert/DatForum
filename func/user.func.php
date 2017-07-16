@@ -290,4 +290,31 @@ function selectsecquest(){
    return $quest."".$question[$quest];
 }
 
+function makeSecure($string){
+   $string=$string." ";
+   $newString=htmlentities($string);
+   $newString=specialCombos("[\*\*]","<b>","</b>",$newString);
+   return $newString;
+}
+
+function specialCombos($pattern,$startTo,$endTo,$string){
+   $temp=0;
+   while(preg_match($pattern,$string)){
+      switch($temp){
+         case '0':
+            $string = preg_replace($pattern,$startTo,$string,1);
+            $temp=1;
+            break;
+         case '1':
+            $string = preg_replace($pattern,$endTo,$string,1);
+            $temp=0;
+            break;
+      }
+   }
+   if($temp){
+      $string=$string.$endTo;
+   }
+   return $string;
+}
+
 ?>
