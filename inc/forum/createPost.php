@@ -1,6 +1,10 @@
 
+         <script type="text/javascript" src="inc/forum/script/createPost.js"></script>
+         <link rel="stylesheet" type="text/css" href="trix/trix.css">
+         <script type="text/javascript" src="trix/trix.js"></script>
+
+
          <?php
-         
             $title;
             if(isset($_GET['type'])){
             if($_GET['type'] =='edit'){
@@ -37,9 +41,9 @@
          <div class="row">
                <?php
                   if($_GET['type']=='edit'){
-                     echo '<a class ="btn btn-default btn-textfield" id="edit"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>';
+                     echo '<a class ="btn btn-default btn-textfield pull-right" id="edit"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>';
                   }else {
-                     echo '<a class ="btn btn-default btn-textfield" id="new"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>';                     
+                     echo '<a class ="btn btn-default btn-textfield pull-right" id="new"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>';                     
                   }
                 ?>
          </div>

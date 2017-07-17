@@ -99,7 +99,7 @@
                      }
                      
                      function SQLQuery0($query){
-                        global $pdo;
+                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
                         
                         $statement = $pdo->prepare($query);
                         $statement->execute();   
@@ -109,8 +109,7 @@
                      }
                      
                      function SQLQuery1($query, $p0){
-                        global $pdo;
-                        
+                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
                         $statement = $pdo->prepare($query);
                         $statement->execute(array('0' => $p0));   
                         
@@ -119,7 +118,7 @@
                      }
                      
                      function SQLQuery2($query, $p0, $p1){
-                        global $pdo;
+                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
                         
                         $statement = $pdo->prepare($query);
                         $statement->execute(array('0' => $p0, '1' => $p1));   
@@ -129,7 +128,7 @@
                      }
                      
                      function SQLQuery3($query, $p0, $p1, $p2){
-                        global $pdo;
+                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
                         
                         $statement = $pdo->prepare($query);
                         $statement->execute(array('0' => $p0, '1' => $p1, '2' => $p2));   
@@ -139,7 +138,7 @@
                      }
                      
                      function SQLQuery4($query, $p0, $p1, $p2, $p3){
-                        global $pdo;
+                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
                         
                         $statement = $pdo->prepare($query);
                         $statement->execute(array('0' => $p0, '1' => $p1, '2' => $p2, '3' => $p4));   
