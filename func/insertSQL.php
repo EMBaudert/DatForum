@@ -4,8 +4,9 @@
       if($_POST['type']== 'newThread'){
 
          execute($_POST['sql']);
-         $id = SQLQuery2("SELECT PKID_thread FROM thread WHERE theme='?' AND FK_creator=?",$_POST['theme'],$_POST['creator']);
+         $id = SQLQuery2("SELECT PKID_thread FROM thread WHERE theme= ? AND FK_creator= ? ",$_POST['theme'],$_POST['creator']);
          echo $id['PKID_thread'];
+         
          
       }else if($_POST['type']== 'report'){
          
@@ -47,6 +48,16 @@
          $temp->execute();
          return $temp->fetch();
       }
+      
+      function SQLQuery2($query, $p0, $p1){
+                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
+                        
+                        $statement = $pdo->prepare($query);
+                        $statement->execute(array('0' => $p0, '1' => $p1));   
+                        
+                        return $statement->fetch();
+                                 
+                     }
       
       
    
