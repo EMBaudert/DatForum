@@ -4995,3 +4995,12 @@ Version: '10.1.19-MariaDB'  socket: ''  port: 3306  mariadb.org binary distribut
 2017-07-14 14:24:12 6996 [ERROR] mysql.procs_priv: 1 client is using or hasn't closed the table properly
 2017-07-14 14:24:12 6996 [Note] c:\xampp\mysql\bin\mysqld.exe: ready for connections.
 Version: '10.1.19-MariaDB'  socket: ''  port: 3306  mariadb.org binary distribution
+2017-07-17 10:04:54 8936 [Note] c:\xampp\mysql\bin\mysqld.exe: Normal shutdown
+
+2017-07-17 10:04:54 8936 [Note] Event Scheduler: Purging the queue. 0 events
+2017-07-17 10:04:54 9632 [Note] InnoDB: FTS optimize thread exiting.
+2017-07-17 10:04:54 8936 [Note] InnoDB: Starting shutdown...
+2017-07-17 10:04:55 8936 [Note] InnoDB: Waiting for page_cleaner to finish flushing of buffer pool
+2017-07-17 10:04:56 8936 [Note] InnoDB: Shutdown completed; log sequence number 17796738
+2017-07-17 10:04:56 8936 [Note] c:\xampp\mysql\bin\mysqld.exe: Shutdown complete
+
