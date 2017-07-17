@@ -6,6 +6,7 @@
    $retval=checkCookieLogin(); 
    if($retval&&!isset($_SESSION["logged"])){
       addMessage("SystemOfADoom",$_COOKIE["username"],"Jemand hat versucht, über COOKIE-Manipulation Ihren Account zu hacken, wir konnten dies jedoch erfolgreich verhindern!");
+      forgetLogin();
    }
  }
   if(isset($_GET["p"])&&$_GET["p"]=="login" && isset($_POST["password"])&&substr($error=checklogin($_POST["username"],hash('sha512',$_POST["password"])),0,1)!="0"){
@@ -51,7 +52,7 @@
                         
                         if($usergroup['usergroup']=='admin' || $usergroup['usergroup']=='moderator'){
                            echo '<li>
-                                    <a href="reports.php">Reports <span class="badge">'.$reports['cnt'].'</span></a> 
+                                    <a href="intern.php?p=reports">Reports <span class="badge">'.$reports['cnt'].'</span></a> 
                                  </li>';
                         }
                         
@@ -83,7 +84,7 @@
                               <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-plus-sign"></span> Register </a>
                               <ul class="dropdown-menu">
    									   <li class="dropdown-light">';
-                           include 'inc/register.php';
+                           include 'inc/intern/register.php';
                            echo '</li>
    								    </ul>
                            </li>
@@ -91,14 +92,14 @@
                               <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> Login </a>
                                  <ul class="dropdown-menu">
    									      <li class="dropdown-light">';
-                           include 'inc/login.php';
+                           include 'inc/intern/login.php';
                               echo '</li>
    								       </ul>
    							     </li>';
                      }
                      
                      function SQLQuery0($query){
-                        global $pdo;
+                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
                         
                         $statement = $pdo->prepare($query);
                         $statement->execute();   
@@ -108,8 +109,7 @@
                      }
                      
                      function SQLQuery1($query, $p0){
-                        global $pdo;
-                        
+                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
                         $statement = $pdo->prepare($query);
                         $statement->execute(array('0' => $p0));   
                         
@@ -118,7 +118,7 @@
                      }
                      
                      function SQLQuery2($query, $p0, $p1){
-                        global $pdo;
+                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
                         
                         $statement = $pdo->prepare($query);
                         $statement->execute(array('0' => $p0, '1' => $p1));   
@@ -128,7 +128,7 @@
                      }
                      
                      function SQLQuery3($query, $p0, $p1, $p2){
-                        global $pdo;
+                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
                         
                         $statement = $pdo->prepare($query);
                         $statement->execute(array('0' => $p0, '1' => $p1, '2' => $p2));   
@@ -138,7 +138,7 @@
                      }
                      
                      function SQLQuery4($query, $p0, $p1, $p2, $p3){
-                        global $pdo;
+                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
                         
                         $statement = $pdo->prepare($query);
                         $statement->execute(array('0' => $p0, '1' => $p1, '2' => $p2, '3' => $p4));   
