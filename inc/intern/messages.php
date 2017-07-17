@@ -26,7 +26,7 @@ $hasPartners = getChatPartners($_SESSION["PKID"]);
     <div class="row">
              <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <span class="glyphicon glyphicon-comment"></span> Messages with <?PHP echo $other["username"]; ?>
+                    <span class="glyphicon glyphicon-comment"></span> Messages with <a style="color:white;" href="intern.php?p=profile&uid=<?PHP echo $_GET["cp"].'">'.$other["username"]; ?></a>
                     
                 </div>
                 <div class="panel-body" id="scrollable_chat">
@@ -50,6 +50,7 @@ $hasPartners = getChatPartners($_SESSION["PKID"]);
                         </span>
                       
                     </div>
+                    <small>**<b>Fett</b>**   --<u>Unterstrichen</u>--   __<i>Italic</i>__   ~~<s>Durchgestrichen</s>~~   ++Zeilenumbruch</small>
                      </form>
                 </div>
         </div>

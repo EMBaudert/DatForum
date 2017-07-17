@@ -80,7 +80,8 @@
     </div>
 <div class="form-group">
   <label for="comment">Signature:</label>
-  <textarea class="form-control" rows=5 cols=40 style="resize:none;max-width:350px;" name="signature" id="comment"><?PHP if(isset($data["signature"])){echo $data["signature"]; }?></textarea>
+  <textarea class="form-control" rows=5 cols=40 style="resize:none;max-width:350px;" name="signature" id="comment"><?PHP if(isset($data["signature"])){echo specialCombosBack($data["signature"]); }?></textarea>
+  <small>**<b>Fett</b>**   --<u>Unterstrichen</u>--   __<i>Italic</i>__   ~~<s>Durchgestrichen</s>~~   ++Zeilenumbruch</small>
 </div>
 
 </div>

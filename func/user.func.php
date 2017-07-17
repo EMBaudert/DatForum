@@ -294,7 +294,28 @@ function makeSecure($string){
    $string=$string." ";
    $newString=htmlentities($string);
    $newString=specialCombos("[\*\*]","<b>","</b>",$newString);
+   $newString=specialCombos("[\_\_]","<i>","</i>",$newString);
+   $newString=specialCombos("[\~\~]","<s>","</s>",$newString);
+   $newString=specialCombos("[\-\-]","<u>","</u>",$newString);
+   $newString=str_replace("++","<br>",$newString);
+   $newString=str_replace("&gt;&gt;","<li>",$newString);
+   $newString=str_replace("&lt;&lt;","</li>",$newString);
    return $newString;
+}
+
+function specialCombosBack($string){
+   $patterns=array("<b>","</b>");
+   $string=str_replace($patterns,"**",$string);
+   $patterns=array("<i>","</i>");
+   $string=str_replace($patterns,"__",$string);
+   $patterns=array("<s>","</s>");
+   $string=str_replace($patterns,"~~",$string);
+   $patterns=array("<u>","</u>");
+   $string=str_replace($patterns,"--",$string);
+   $string=str_replace("<br>","++",$string);
+   $string=str_replace("<li>",">>",$string);
+   $string=str_replace("</li>","<<",$string);
+   return $string;
 }
 
 function specialCombos($pattern,$startTo,$endTo,$string){

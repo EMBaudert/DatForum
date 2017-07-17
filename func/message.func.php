@@ -248,6 +248,7 @@ function addMessage($from,$to,$text){
 	$tempID->execute();
 	$ID=$tempID->fetch();
    $to=$ID["PKID_user"];
+   $text = makeSecure($text);
    
    $sql = "INSERT INTO messages (text,FK_from,FK_to,date,time) VALUES ('".$text."', '".$from."','".$to."', '".$date."','".$daytime."')";
 	$statement = $pdo->prepare($sql);
