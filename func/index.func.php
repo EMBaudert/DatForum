@@ -24,8 +24,8 @@
       //zeigt Titel, erstellername und Anzahl der Posts an, bei sm und xs titel in eigener Anzeige
       echo '<li class="list-group-item">
          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"><span class="glyphicon glyphicon-file"></span> <a href="thread.php?thread='.$PKID.'&page=1">'.$title.'</a></div>
-            <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2"><span class="glyphicon glyphicon-user"></span> <a href="user.php?user='.$creator.'">'.$username['username'].'</a></div>
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"><span class="glyphicon glyphicon-file"></span> <a href="forum.php?p=thread&thread='.$PKID.'&page=1">'.$title.'</a></div>
+            <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2"><span class="glyphicon glyphicon-user"></span> <a href="intern.php?p=profile&uid='.$creator.'">'.$username['username'].'</a></div>
             <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2"><span class="glyphicon glyphicon-comment"></span> Beitr&auml;ge: '.getPostNumber($PKID).'</div>
          </div>
          </li>';

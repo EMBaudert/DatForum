@@ -30,7 +30,7 @@ require_once 'func/reports.func.php';
                      echo '<h2>Error: Permission denied</h2>';
                   }
             }else{
-               echo '<h2>Error: You need to be logged in</2>';
+               echo '<h2>Error: You need to be logged in</h2>';
             }
             ?>
          </div>
