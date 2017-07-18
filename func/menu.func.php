@@ -225,8 +225,8 @@ Hier wird zwischen Thread und Menü unterschieden. Menüs haben eine andere Ansich
 
             //Previous button, if page 1 is selected button gets deactivated
             if($_GET['page'] == 1){
-                  echo '<li class="disabled\"><a href=""><span aria-hidden="true">&laquo;</span></a></li>';
-               }else{
+                  echo '<li class="disabled"><a href=""><span aria-hidden="true">&laquo;</span></a></li>';
+            }else{
                   echo '<li><a href="forum.php?p=menu&menu='.$_GET['menu'].'&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
             }
             //if only one page is needed add this one custom

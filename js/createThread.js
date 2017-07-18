@@ -2,6 +2,10 @@
 /* Setzt den richtig Radiobbutton auf selected
 	Blendet den Texteditor jeweils ein oder aus */
 //				$('#menupoint').prop('checked',true);
+
+
+
+               
 				$('input[type=radio][name=thread][value=thread]').prop('checked',true);
 	         $('#trixdiv').show();
 	         $('input[type=radio][name=thread]').on('change', function() {
@@ -16,9 +20,9 @@
 	         });
 /* Abschicken button gedrückt */
             $('#target').button().click(function(){
-            
                var text = $('#trix').val();
-					var d = new Date();
+					var d = new Date(Date.now());
+					alert("hey");
                if($('input[name=thread]:checked').val() == 'menupoint'){
                	
                	createMenuPoint(text, d);
@@ -36,22 +40,12 @@
                   theme: $('#threadtitle').val(),
                   creator: getUrlVars()["creator"]
                };
-               
                var query21 = "INSERT INTO `post` (`PKID_post`, `FK_user`, `FK_thread`, `date`, `time`, `text`) VALUES (NULL, '"+getUrlVars()["creator"]+"', '";
-               var query22 = "', '"+d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+"', '"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()+"', '"+text+"');";
+               var query22 = "', '"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"', '"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"', '"+text+"');";
 /* sendSQL adds post with correct ID */               
                sendSQL(query, query21, query22);
                      
-               //update number of posts
-               var query = "UPDATE user SET numberposts = numberposts+1 WHERE PKID_user = "+getUrlVars()["creator"];
-               var sql = {
-               	sql: query
-               }
-               var answer = $.post("func/insertSQL.php", sql);
-                  answer.done(function(){
-                     var url = "forum.php?p=menu&menu="+getUrlVars()["id"]+"&page=last";
-                     $(location).attr('href',url);
-               });
+               
              }
              
 /* Erstellt in der Datenbank einen Menüpunkt */
@@ -114,7 +108,22 @@
                   
                      var query = sql21 + String(result) + sql22;
                      var newStr= {sql: query};
-                     $.post("func/insertSQL.php", newStr);
+                     var answer = $.post("func/insertSQL.php", newStr);
+                     
+                     //wenn fertig ausgeführt, erhöhe zäler
+                     answer.done( function(){
+                     	//update number of posts
+               			var query = "UPDATE user SET numberposts = numberposts+1 WHERE PKID_user = "+getUrlVars()["creator"];
+			               var sql = {
+			               	sql: query
+			               }
+			               //wenn fertig ausgeführt geehe zu erstlltem post
+			               var answer = $.post("func/insertSQL.php", sql);
+			                  answer.done(function(){
+			                     var url = "forum.php?p=thread&thread="+String(result)+"&page=1";
+			                     $(location).attr('href',url);
+			               });
+                     });
                   
                   });
                   
