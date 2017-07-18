@@ -77,7 +77,9 @@
                   var sql = {
                      sql: query
                   }
-                  var answer = $.post("func/insertSQL.php", sql);
+                  var answer = $.post("func/insertSQL.php", sql, function(result) {
+                  	alert(reuslt);
+                  });
                   answer.done(function(){
                      var url = "forum.php?p=menu&menu="+getUrlVars()["id"]+"&page=last";
                      $(location).attr('href',url);

@@ -1,6 +1,7 @@
+       
          document.addEventListener("trix-initialize", function(event) {
             var element = document.querySelector("trix-editor");
-            element.editor.insertString(text);
+            	element.editor.insertString(text);
           });
       
       
@@ -12,11 +13,13 @@
             $('#new').button().click(function(){
                   
                   
-                  
                   var text = $('#trix').val();
                   
-                  if(/^\s+$/.test(word)){
-            			alert("drin");
+                  if(q='quote'){
+                  	text = quote + text;
+                  }
+                  
+                  if(text != ""){
 	                  //Einfügen in post wird erstellt
 	                  var query =  "INSERT INTO `post` (`PKID_post`, `FK_user`, `FK_thread`, `date`, `time`, `text`) VALUES (NULL, '"+getUrlVars()["creator"]+"', '"
 	                  +getUrlVars()["id"]+"', '"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"', '"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()+"', '"+text+"');";
@@ -46,7 +49,7 @@
              $('#edit').button().click(function(){
                  // Text wird gespeichert
                  	var text = $('#trix').val();
-                  if(/^\s+$/.test(word)){                 
+                  if(text != ""){                 
 							
 							var query = "UPDATE post SET text = '"+text+"' WHERE PKID_post = "+getUrlVars()["id"];
                  		//Post wird erstellt

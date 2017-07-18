@@ -1,3 +1,5 @@
+
+         <script type="text/javascript" src="js/thread.js"></script>
   
       <?php
          require 'func/thread.func.php';
