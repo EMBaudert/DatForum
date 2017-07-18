@@ -1,4 +1,5 @@
 
+         <script type="text/javascript" src="js/reports.js"></script>
 <?php
    if(isset($_SESSION['PKID'])){
       $user = SQLQuery1("SELECT * FROM user WHERE PKID_user= ?", $_SESSION['PKID']);

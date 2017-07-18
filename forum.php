@@ -43,6 +43,9 @@
             case 'search';
                require 'inc/forum/search.php';
                break;
+            case 'post':
+               require 'inc/forum/post.php';
+               break;
          }
   
          

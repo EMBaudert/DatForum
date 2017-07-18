@@ -56,7 +56,7 @@
                  		var sql = {sql: query};
 	                  //post wird aufgerufen
                  		$.post("func/insertSQL.php",sql);
-                 		$("#trix").animate({"left":"+=100px"},function() {location.href = "forum.php?p=thread&thread="+getUrlVars()["id"]});
+                 		$("#trix").animate({"left":"+=100px"},function() {location.href = "forum.php?p=thread&thread="+getUrlVars()["id"]+"&page=1"});
                  	}else{
                  		alert("Ung&uuml;ltige Eingabe!");
                  	}

@@ -1,6 +1,6 @@
 
          <?php
-            require 'func/post.func.php';
+            require 'func/posts.func.php';
             create2ndRow();
             createPostOverview();
          ?>

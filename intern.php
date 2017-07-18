@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<?PHP
-require_once 'func/user.func.php';
-require_once 'func/reports.func.php';
-?>
 	<html>
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -25,6 +21,8 @@ require_once 'func/reports.func.php';
 			<div class="container">
 			<?php
            
+require_once 'func/user.func.php';
+require_once 'func/reports.func.php';
             require_once 'inc/navbar.php';
             if(isset($_SESSION["PKID"])){
      ?>
