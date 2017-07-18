@@ -10,24 +10,13 @@
          //Meldung an SQL wenn 
             $('.report').button().click(function(){
             
-            alert(getUrlVars()['thread']);
             
                var reason = prompt("Bitte Grund angeben: ", "");
                
                var query1="INSERT INTO `reports` (`PKID_report`, `FK_user`, `FK_thread`, `FK_post`, `reason`, `done`, `doneby`) VALUES (NULL, "+$(this).attr("creator")+", '"+getUrlVars()['thread']+"', '"+$(this).attr("id")+"', '"+reason+"', '0', NULL)";
-               alert(query1);
                var sql = {
                	sql: query1
                }
-               
-              /* var queryPart1 = "INSERT INTO `reports` (`PKID_report`, `FK_user`, `reason`) VALUES (NULL, '";
-               var queryPart2 = "', '"+reason+"')";
-               
-               var sql = {
-                  type: 'report',
-                  query1: queryPart1,
-                  query2: queryPart2
-               } */
                
                var answer = $.post("func/insertSQL.php",sql);
                
@@ -38,15 +27,11 @@
             });
             
             $(".delete").click(function(){
-               	
                   var query = "DELETE FROM `post` WHERE `post`.`PKID_post` = "+$(this).attr("id");
-                  alert(query);
                   var sql = {
                      sql: query
                   }
-                  $.post("func/insertSQL.php",sql, function(result){
-                     alert(result);
-                  });
+                  $.post("func/insertSQL.php",sql);
             });
             
             
