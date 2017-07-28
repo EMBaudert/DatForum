@@ -66,7 +66,9 @@ $hasPartners = getChatPartners($_SESSION["PKID"]);
      
    
 }else{
-   echo '<h1>Bitte melden Sie sich an!</h1>';
+   echo '</div>
+         <div class="col-xs-7 col-sm-8 col-md-9 col-lg-9">
+         <h1>Please Login!</h1>';
 }
      ?>
 </div>
