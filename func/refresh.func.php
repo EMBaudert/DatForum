@@ -1,6 +1,6 @@
 <?PHP
+require_once 'prepareSQL.php';
 require_once 'message.func.php';
-
 $text="".time();
 $temp=0;
 if(isset($_GET["uid"])&&($temp=detectNewMessage($_GET["uid"]))){
