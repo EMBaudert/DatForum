@@ -88,7 +88,7 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
                   '.$post['text'].'
                </div>
                   <hr class="hr-postcontent-bot">
-               <div class="row">
+               <div class="row" style="margin-top: 10px">
                   <p>'.$user['signature'].'</p>
                </diV>
             </div>

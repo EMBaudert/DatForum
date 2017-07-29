@@ -259,7 +259,7 @@ function addMessage($from,$to,$text){
    $update = $pdo->prepare($sql);
   	$update->execute();
 
-   header('Location: '. $_SERVER['PHP_SELF'].'?p=message&cp='.$to);  
+   //header('Location: '. $_SERVER['PHP_SELF'].'?p=message&cp='.$to);  
    echo '<meta http-equiv="refresh" content="0; URL=intern.php?p=message&cp='.$to.'" />';
    return TRUE;
 }
