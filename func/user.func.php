@@ -1,13 +1,9 @@
 <?php
 
 function checklogin($user,$pass){
-	$pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
       
-	$sql = "SELECT * FROM user WHERE username='".$user."'";
-	
-	$temppass = $pdo->query($sql);
-	$temppass->execute();
-	$login=$temppass->fetch();
+	$sql = "SELECT * FROM user WHERE username=?";
+	$login=SQLQuery1($sql,$user);
 	if(isset($login["password"])&&$pass==$login["password"]){
       $_SESSION["PKID"]=$login["PKID_user"];
       $_SESSION["username"]=$user;
@@ -72,11 +68,8 @@ function checkusername(){
              </div>';
 		return FALSE;
 	}
-   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
-   $sql = "SELECT username FROM user WHERE username='".$username."'";
-	$tempuser = $pdo->query($sql);
-	$tempuser->execute();
-	$register=$tempuser->fetch();
+   $sql = "SELECT username FROM user WHERE username=?";
+	$register=SQLQuery1($sql,$username);
    if(isset($register["username"])){
       echo '<div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -157,10 +150,8 @@ function newuser(){
 	$sql = "INSERT INTO user (username, firstname, secondname, email, password) VALUES ('".$_SESSION["username"]."', '".$_SESSION["firstname"]."','".$_SESSION["secondname"]."','".$_SESSION["email"]."','".$PASS."')";
 	$statement = $pdo->prepare($sql);
 	$statement->execute();   
-   $sql = "SELECT PKID_user FROM user WHERE username='".$_SESSION["username"]."'";
-	$tempID = $pdo->query($sql);
-	$tempID->execute();
-	$ID=$tempID->fetch();
+   $sql = "SELECT PKID_user FROM user WHERE username=?";
+	$ID=SQLQuery1($sql,$_SESSION["username"]);
    $_SESSION["PKID"]=$ID["PKID_user"];
 }
 
@@ -214,11 +205,8 @@ function checkname(){
 }
 
 function checkID($ID){
-   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
-   $sql = "SELECT PKID_user FROM user WHERE PKID_user='".$ID."'";
-	$tempID = $pdo->query($sql);
-	$tempID->execute();
-	$existID=$tempID->fetch();
+   $sql = "SELECT PKID_user FROM user WHERE PKID_user=?";
+	$existID=SQLQuery1($sql,$ID);
    if(!isset($existID["PKID_user"])){
       return FALSE;
    }
@@ -227,11 +215,8 @@ function checkID($ID){
 
 function checkCookieLogin(){
    if(isset($_COOKIE["UID"])){
-       $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
-       $sql = "SELECT * FROM user WHERE PKID_user='".$_COOKIE["UID"]."'";
-	    $tempuser = $pdo->query($sql);
-	    $tempuser->execute();
-	    $user=$tempuser->fetch();
+       $sql = "SELECT * FROM user WHERE PKID_user=?";
+	    $user=SQLQuery1($sql,$_COOKIE["UID"]);
        $passpart=substr($user["password"],0,20);
        if($_COOKIE["username"]==$user["username"]&&$_COOKIE["pspt"]==$passpart){
          $_SESSION["username"]=$_COOKIE["username"];
@@ -256,11 +241,8 @@ function forgetLogin(){
 }
 
 function checksecquest($number){
-   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
-   $sql = "SELECT answer FROM security_questions WHERE PKID_question='".$number."'";
-   $tempquest = $pdo->query($sql);
-   $tempquest->execute();
-   $solution=$tempquest->fetch();
+   $sql = "SELECT answer FROM security_questions WHERE PKID_question=?";
+   $solution=SQLQuery1($sql,$number);
    if(isset($_POST["secQuest"])&&$_POST["secQuest"]==$solution["answer"]){
       return TRUE;
    }
@@ -291,7 +273,6 @@ function selectsecquest(){
 }
 
 function makeSecure($string){
-   $string=$string." ";
    $newString=htmlentities($string);
    $newString=specialCombos("[\*\*]","<b>","</b>",$newString);
    $newString=specialCombos("[\_\_]","<i>","</i>",$newString);

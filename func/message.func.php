@@ -9,11 +9,8 @@ function getOther(){
    if(isset($_SESSION["logged"])&&$_SESSION["logged"]==1){
       if(isset($_GET["cp"])){
          $retVal["PKID"]=$_GET["cp"];
-         $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
-         $sql = "SELECT username FROM user WHERE PKID_user='".$retVal["PKID"]."'";
-      	$tempuser = $pdo->query($sql);
-      	$tempuser->execute();
-      	$user=$tempuser->fetch();
+         $sql = "SELECT username FROM user WHERE PKID_user=?";
+      	$user=SQLQuery1($sql,$retVal["PKID"]);
          $retVal["username"]=$user["username"];
          return $retVal;
       }
@@ -47,10 +44,8 @@ function getChatPartners($user){
       if(!isset($chatpartners[$partner])||$chatpartners[$partner]==0){
          $ret=TRUE;
          $chatpartners[$partner]=1;
-         $sql2 = "SELECT username FROM user WHERE PKID_user='".$partner."'";
-         $tempuser = $pdo->query($sql2);
-	      $tempuser->execute();
-	      $partnername=$tempuser->fetch();
+         $sql2 = "SELECT username FROM user WHERE PKID_user=?";
+	      $partnername=SQLQuery1($sql2,$partner);
          echo '<a class="list-group-item';
          if($partner==$activeChat){
             echo ' active';
@@ -75,19 +70,15 @@ function getMessages($me,$you){
    date_default_timezone_set('Europe/Berlin');
    $date = date('Y-m-d', time());
    $text="";
-   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
-   $sql = "SELECT * FROM user WHERE username='".$me."'";
-	$tempID = $pdo->query($sql);
-	$tempID->execute();
-	$meID=$tempID->fetch();
+   $sql = "SELECT * FROM user WHERE username=?";
+	$meID=SQLQuery1($sql,$me);
    $from=$meID["PKID_user"];
    $newUnreadMessages = $meID["unread_messages"];
-   $sql = "SELECT * FROM user WHERE username='".$you."'";
-	$tempID = $pdo->query($sql);
-	$tempID->execute();
-	$youID=$tempID->fetch();
+   $sql = "SELECT * FROM user WHERE username=?";
+	$youID=SQLQuery1($sql,$you);
    $to=$youID["PKID_user"];
    $sql = "SELECT * FROM messages WHERE FK_to='".$to."' AND FK_from='".$from."' OR FK_to='".$from."' AND FK_from='".$to."'";
+                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
    foreach($pdo->query($sql) as $row){
       if($row["FK_from"]==$from){
          $text .= '<li class="right clearfix"><span class="chat-img pull-right">
@@ -149,11 +140,8 @@ function getMessages($me,$you){
 }
 
 function detectNewMessage($user){
-   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
-   $sql = "SELECT unread_messages FROM user WHERE PKID_user='".$user."'";
-	$tempUnread = $pdo->query($sql);
-	$tempUnread->execute();
-	$unread=$tempUnread->fetch();
+   $sql = "SELECT unread_messages FROM user WHERE PKID_user=?";
+	$unread=SQLQuery1($sql,$user);
    #echo $unread["unread_messages"];
    if($unread["unread_messages"]!=0){
       $sql = "SELECT * FROM messages WHERE FK_to='".$user."' AND unread='1' ORDER BY PKID_message DESC";
@@ -184,7 +172,6 @@ function detectNewMessage($user){
 }
 
 function getLatestMessage($user){
-   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
    $sql = "SELECT * FROM messages WHERE FK_to='".$user."' AND unread='1' ORDER BY PKID_message DESC";
    $count=0;
    $text="";
@@ -234,19 +221,15 @@ function getLatestMessage($user){
 }
 
 function addMessage($from,$to,$text){
+   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
    date_default_timezone_set('Europe/Berlin');
    $date = date('Y-m-d', time());
    $daytime = date('H:i:s', time());
-   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
-   $sql = "SELECT PKID_user FROM user WHERE username='".$from."'";
-	$tempID = $pdo->query($sql);
-	$tempID->execute();
-	$ID=$tempID->fetch();
+   $sql = "SELECT PKID_user FROM user WHERE username=?";
+	$ID=SQLQuery1($sql,$from);
    $from=$ID["PKID_user"];
-   $sql = "SELECT PKID_user,unread_messages FROM user WHERE username='".$to."'";
-	$tempID = $pdo->query($sql);
-	$tempID->execute();
-	$ID=$tempID->fetch();
+   $sql = "SELECT PKID_user,unread_messages FROM user WHERE username=?";
+	$ID=SQLQuery1($sql,$to);
    $to=$ID["PKID_user"];
    $text = makeSecure($text);
    

@@ -2,13 +2,10 @@
    if(!isset($_GET["uid"])||!checkID($_GET["uid"])){
       echo '<div id="setTitle" class="hide">Profile</div><h1>Keine bekannte User-ID!</h1>';
    }else{
-         $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
             
-      	$sql = "SELECT * FROM user WHERE PKID_user='".$_GET["uid"]."'";
+      	$sql = "SELECT * FROM user WHERE PKID_user=?";
       	
-      	$user = $pdo->query($sql);
-      	$user->execute();
-      	$data=$user->fetch();
+      	$data=SQLQuery1($sql,$_GET["uid"]);
          
         echo '<div id="setTitle" style="display:none;"> '.$data["username"].'\'s Profile</div> 
         <h1>'.$data["username"].'\'s Profile</h1> '; 
@@ -56,11 +53,8 @@
             header("Cache-Control: no-cache, must-revalidate");
          }
             
-      	$sql = "SELECT * FROM user WHERE PKID_user='".$_SESSION["PKID"]."'";
-      	
-      	$user = $pdo->query($sql);
-      	$user->execute();
-      	$data=$user->fetch();
+      	$sql = "SELECT * FROM user WHERE PKID_user=?";
+      	$data=SQLQuery1($sql,$_SESSION["PKID"]);
          
 ?>
 
