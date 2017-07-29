@@ -1,6 +1,6 @@
 <?php	
  session_start();
- require_once 'func/prepareSQL.php';
+ require_once 'func/prepareSQL.func.php';
  require_once 'func/user.func.php';
  require_once 'func/message.func.php';
  if(!isset($_SESSION["logged"])){

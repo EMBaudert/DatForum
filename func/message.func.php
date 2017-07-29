@@ -140,6 +140,7 @@ function getMessages($me,$you){
 }
 
 function detectNewMessage($user){
+   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
    $sql = "SELECT unread_messages FROM user WHERE PKID_user=?";
 	$unread=SQLQuery1($sql,$user);
    #echo $unread["unread_messages"];
@@ -240,9 +241,8 @@ function addMessage($from,$to,$text){
    $newUnreadMessages = 1+$ID["unread_messages"];
    $sql = "UPDATE user SET unread_messages='".$newUnreadMessages."' WHERE PKID_user='".$to."'";
    $update = $pdo->prepare($sql);
-  	$update->execute();
-
-   //header('Location: '. $_SERVER['PHP_SELF'].'?p=message&cp='.$to);  
+   $update->execute();
+  
    echo '<meta http-equiv="refresh" content="0; URL=intern.php?p=message&cp='.$to.'" />';
    return TRUE;
 }
