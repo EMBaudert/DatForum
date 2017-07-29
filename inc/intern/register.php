@@ -12,6 +12,14 @@ $securequestion = substr($securequestion,1);
      <?PHP if(isset($_SESSION["username"])){ echo 'value="'.$_SESSION["username"].'"'; }?>>
    </div> 
    <div class="input-group" style="margin:10px;">
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Password</span>
+     <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" name="password">
+   </div>
+   <div class="input-group" style="margin:10px;">
+     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Password</span>
+     <input type="password" class="form-control" placeholder="Repeat Password" aria-describedby="basic-addon1" name="password2">
+   </div>
+   <div class="input-group" style="margin:10px;">
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">First Name(s)</span>
      <input type="text" class="form-control" placeholder="First Name(s)" aria-describedby="basic-addon1" name="firstname" 
      <?PHP if(isset($_POST["firstname"])){ echo 'value="'.$_POST["firstname"].'"'; }?>>
@@ -25,14 +33,6 @@ $securequestion = substr($securequestion,1);
      <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">E-Mail</span>
      <input type="text" class="form-control" placeholder="E-Mail Address" aria-describedby="basic-addon1" name="email" 
      <?PHP if(isset($_POST["email"])){ echo 'value="'.$_POST["email"].'"'; }?>>
-   </div>
-   <div class="input-group" style="margin:10px;">
-     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Password</span>
-     <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" name="password">
-   </div>
-   <div class="input-group" style="margin:10px;">
-     <span class="input-group-addon" id="basic-addon1" style="width:120px;text-align:left;">Password</span>
-     <input type="password" class="form-control" placeholder="Repeat Password" aria-describedby="basic-addon1" name="password2">
    </div>
     <div class="input-group" style=" width:280px;margin:10px;">
       <span class="input-group-addon">

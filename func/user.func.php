@@ -73,7 +73,7 @@ function checkusername(){
    if(isset($register["username"])){
       echo '<div class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Error!</strong> The username is already existing.
+            <strong>Error!</strong> The username is already in use.
              </div>';
       return FALSE;
    }
@@ -118,6 +118,15 @@ function checkemail(){
              </div>';
 		return FALSE;
 	}
+   $sql = "SELECT email FROM user WHERE email=?";
+	$register=SQLQuery1($sql,$emailadress);
+   if(isset($register["email"])){
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> The E-Mail is already in use.
+             </div>';
+      return FALSE;
+   }
    
    if (filter_var($emailadress, FILTER_VALIDATE_EMAIL)) { 
       if(strlen($emailadress)>50){
