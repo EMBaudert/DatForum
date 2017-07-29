@@ -241,8 +241,8 @@ function addMessage($from,$to,$text){
    $newUnreadMessages = 1+$ID["unread_messages"];
    $sql = "UPDATE user SET unread_messages='".$newUnreadMessages."' WHERE PKID_user='".$to."'";
    $update = $pdo->prepare($sql);
-  	$update->execute();
-
+   $update->execute();
+  
    echo '<meta http-equiv="refresh" content="0; URL=intern.php?p=message&cp='.$to.'" />';
    return TRUE;
 }

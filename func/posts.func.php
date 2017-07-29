@@ -8,7 +8,7 @@
          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">';
         echo ' </div>
          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">'; 
-            createPagination();
+            //createPagination();
          echo '</div>
             </div>';
    }
@@ -22,13 +22,10 @@
       
       echo '<div class="row">';
       
-      foreach($pdo->query("") as $row){
-      
-      
       
       $statement = $pdo->prepare("SELECT * FROM post WHERE FK_user = ? ORDER BY FK_thread");
          $statement->execute(array('0' => $_SESSION['PKID']));
-      $i-1;
+      $i=-1;
       $nextPost = 0;
       while ($row = $statement->fetch()) {
          $thread = SQLQuery1("SELECT * FROM thread WHERE PKID_thread = ?", $row['FK_thread']);
@@ -169,8 +166,5 @@
           echo '<li><a href="forum.php?p=post&page='.$nr.'">'.$nr.'</a></li>';   
        }
    }
-
-
-
 
 ?>
