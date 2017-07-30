@@ -1,3 +1,8 @@
+<!--
+Diese Seite wird immer aufgerufen, sobald der Nutzer Javascript deaktiviert hat, da unsere Seite ohne Javascript nicht funktioniert.
+Sobald man Javascript aktiviert hat, kommt man auf die letzte Seite, auf der man war, als Javascript deaktiviert wurde.
+-->
+
 <!DOCTYPE html>
 	<html>
 		<head>
@@ -20,7 +25,7 @@
             <h2>Bitte aktivieren Sie JavaScript um diese Seite sehen zu k&ouml;nnen!</h2>
             <?PHP
             session_start();
-            if(isset($_SESSION["url"])){
+            if(isset($_SESSION["url"])){        #In der Session-Variable "url" wird die aktuelle Seite gespeichert. Dies ermöglicht es dem Nutzer, sich einzuloggen und wieder auf die aktuelle Seite zu gelangen.
                echo '<a href="'.$_SESSION["url"].'">Zur&uuml;ck</a>';
             }else{
                echo '<a href="../index.php">Zur&uuml;ck</a>';

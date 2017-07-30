@@ -1,8 +1,12 @@
 <?PHP
+
+#Die Registrieungsseite wird in der Navbar included und kann auch aufgerufen werden
+
 require_once 'func/user.func.php';
-$securequestion = selectsecquest();
-$securenumber = substr($securequestion,0,1);
-$securequestion = substr($securequestion,1);
+$securequestion = selectsecquest();             #Die Rückgabe der securequestion enthält
+$securenumber = substr($securequestion,0,1);    #An der ersten Stelle die Nummer der Frage
+$securequestion = substr($securequestion,1);    #Danach die Textfrage
+                                                #Mit den Daten, die bereits eingegeben wurden, wird das Formular vorausgefüllt
 ?>
 <form action="intern.php?p=register" method="POST">
 <div style="width:300px;">

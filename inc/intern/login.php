@@ -1,3 +1,6 @@
+<!--
+Die Login Seite wird in der Navbar included oder kann auch als Seite aufgerufen werden
+-->
 <form action="intern.php?p=login" method="POST">
 <div style="width:300px;">
    <div class="input-group" style="margin:10px;">
