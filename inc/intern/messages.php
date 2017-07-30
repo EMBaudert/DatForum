@@ -4,7 +4,7 @@ require_once 'func/message.func.php';
   <link rel="stylesheet" href="layout/chat.css">
   <div id="setTitle" class="hide">Messages</div>
 <div class="row">
- <div id="chatPartners" class="col-xs-5 col-sm-4 col-md-3 col-lg-3" style="min-width:130px;">
+ <div class="col-xs-5 col-sm-4 col-md-3 col-lg-3" style="min-width:130px;">
 <?PHP
 if(isset($_SESSION["logged"])&&$_SESSION["logged"]=true){
 echo '<div class="list-group" id="chatPartners">';

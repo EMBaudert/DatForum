@@ -55,11 +55,22 @@ function getChatPartners($user){
          $ret.= '<span class="badge" id="newMessages'.$partner.'"></span>';
          $ret.= '</a>';
       }
+      $allunread=0;
       foreach($unread as $partner => $value){
          if($unread[$partner]!=0){
-           $ret.= '<script>document.getElementById("newMessages'.$partner.'").innerHTML = '.$value.'</script>';
+            $allunread+=$unread[$partner];
+            $ret.= '<script>document.getElementById("newMessages'.$partner.'").innerHTML = '.$value.'</script>';
          }
       }
+      $ret.= '<script>
+                  if(document.getElementById("menuMessages")!=null&&parseInt(document.getElementById("menuMessages").innerHTML)!='.$allunread.'){    
+                     document.getElementById("menuMessages").innerHTML = "<span class=\"badge\">'.$allunread.'</span>";
+                     }
+                  if(0=='.$allunread.'){
+                     document.getElementById("menuMessages").innerHTML = "";
+                  }
+                  
+         </script>';
    }
    return $ret;
 }
@@ -125,10 +136,9 @@ function getMessages($me,$you){
             echo '<script>document.getElementById("newMessages'.$to.'").innerHTML = "";
                   document.getElementById("newMessages'.$to.'").class = "";';
             if (--$meID["unread_messages"]==0){
-            echo 'document.getElementById("menuMessages").innerHTML = "";
-                  document.getElementById("menuMessages").class = "";</script>';
+            echo 'document.getElementById("menuMessages").innerHTML = "";</script>';
             } else {
-            echo 'document.getElementById("menuMessages").innerHTML = '.$meID["unread_messages"].';</script>';
+            echo 'document.getElementById("menuMessages").innerHTML = "<span class=\"badge\">'.$meID["unread_messages"].'</span>";</script>';
             }
          }
       }
