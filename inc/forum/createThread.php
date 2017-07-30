@@ -21,23 +21,25 @@
                <h2>Thread erstellen</h2>
             </div>
             <?PHP
-               if($_GET['type'] == 'menupoint'){ // &$admin == true){
+            //Wenn ein Menüpunkt hinzugefügt wird, das passende Formular anzeigen
+               if($_GET['type'] == 'menupoint'){
                   ?>
                   <div class="row">
                         <h3>Men&uuml;punkt f&uuml;r weitere Men&uuml;punkte oder f&uuml;r Threads?</h3>
                         <label class="radio-inline"><input type="radio" name="thread" value="thread"> Thread </label>
                         <label class="radio-inline"><input type="radio" name="thread" value="menupoint" id="menupoint"> Men&uuml;punkt </label>
                   </div>
-                  <div class="row">
-                     <div class="input-group margin-bottom">
+                  <div class="row inputfield">
+                     <div class="input-group">
                         <span class="input-group-addon">Men&uuml;titel</span>
                         <input type="text" class="form-control" id="threadtitle" placeholder="" aria-describedby="threadtitle">
                      </div>
                   </div>
-                  <div class="row">
+                  <div class="row margin-bottom">
                      <a class ="btn btn-default btn-textfield pull-right" id="addMenupoint"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>
                   </div>
                   <?PHP
+            //Bei einem Thread der erstellt wird, Editor plus formfeld für titel
                }else{
                   ?>
                   <div class="row">
@@ -46,21 +48,18 @@
                         <input type="text" class="form-control" id="threadtitle" placeholder="" aria-describedby="threadtitle">
                      </div>
                   </div>
-                  <div class="row" id="ckdiv">
-                     <!-- <trix-editor id="trix"></trix-editor> -->
+                  <div class="row">
                      <form>
                         <textarea name="editor1" id="editor1" rows="10" cols="80">
-                            This is my textarea to be replaced with CKEditor.
+                        
                         </textarea>
                         <script>
-                            // Replace the <textarea id="editor1"> with a CKEditor
-                            // instance, using default configuration.
                             CKEDITOR.replace( 'editor1' );
                         </script>
                      </form>
                   </div>
                   
-                  <div class="row">
+                  <div class="row placeholder">
                      <a class ="btn btn-default btn-textfield pull-right" id="target"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>
                   </div>
                   

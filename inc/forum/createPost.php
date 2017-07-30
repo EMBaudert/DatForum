@@ -3,10 +3,17 @@
 
          <script src="ckeditor/ckeditor.js"></script>
 
+         <!-- macht die rechte untere Ecke des editors eckig  -->
+         <style>
+            .cke{
+               border-radius:4px 4px 0px 4px;
+            }
+         </style>
          
 
          <?php
          
+         //Zum verfassen muss man angemeldet sein
          if(isset($_SESSION['PKID'])){
          
          //userid wird später noch benötigt, lässt sich so nicht so einfach abändern wie in der Browserzeile
@@ -33,22 +40,14 @@
           }else {
                echo '<row><h2>Bitte anmelden!</h2></row>';
             }
+            //maskiert scripttags
             function escape($string){
-                 $string = str_replace('<div>','',$string);
-                 $string = str_replace('</div>','',$string);
                   $string = str_replace('<script>','CrossSiteScripting detected. Is blocked now!',$string);
                   return $string;
-                    //return e(str_replace('"','\"',$string));
-            }
-            
-            function e ($string){
-            
-                return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
             }
             
             
-         ?>
-         <?php if(isset($_SESSION['PKID'])){ ?>
+         if(isset($_SESSION['PKID'])){ ?>
          <div class="row">
             <h2><?php echo $title?></h2>
          </div>
@@ -64,7 +63,7 @@
                </form>
             </div>
             
-            <div class="row">
+            <div class="row placeholder">
                   <?php
                      if($_GET['type']=='edit'){
                         echo '<a class ="btn btn-default btn-textfield pull-right" id="edit"><span class="glyphicon glyphicon-envelope"></span> Abschicken!</a>';
@@ -73,4 +72,5 @@
                      }
                    ?>
             </div>
+            
          <?php } ?>

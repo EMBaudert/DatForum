@@ -1,5 +1,8 @@
 <?php
-         $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
+   
+   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
+   
+   //if fängt spezialfälle ab ansonsten wird ganz normal die Query ausgefühtz
    if(isset($_POST['type'])){
       if($_POST['type']== 'newThread'){
 
@@ -37,14 +40,14 @@
       }
       
       function SQLQuery2($query, $p0, $p1){
-                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
+         $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
                         
-                        $statement = $pdo->prepare($query);
-                        $statement->execute(array('0' => $p0, '1' => $p1));   
+         $statement = $pdo->prepare($query);
+         $statement->execute(array('0' => $p0, '1' => $p1));   
                         
-                        return $statement->fetch();
+         return $statement->fetch();
                                  
-                     }
+      }
       
       
    

@@ -1,7 +1,13 @@
 
-         <script type="text/javascript" src="js/reports.js"></script>
+<script type="text/javascript" src="js/reports.js"></script>
 <?php
+
+   //Wenn der nutzer angemeldet ist wird siene Berechtigung überprüft
    if(isset($_SESSION['PKID'])){
+   
+   echo '<script> var userID = '.$_SESSION['PKID'].';</script>';      
+   
+      //nur moderatoren und administratoren können reports anschauen
       $user = SQLQuery1("SELECT * FROM user WHERE PKID_user= ?", $_SESSION['PKID']);
          if($user['usergroup']== 'admin' || $user['usergroup']== 'moderator' ){
             createReportsOverview();
@@ -12,26 +18,3 @@
       echo '<h2>Error: You need to be logged in</h2>';
    }
 ?>
-
-<script>
-   $(document).ready(function(){
-      $('#solved').button().click(function(){
-         if (confirm('Erledigt?')) {
-              var query1part = "UPDATE `reports` SET `done` = 1, `doneby` = '"; 
-              var query2part = "' WHERE `reports`.`PKID_report` = 1 ";
-              var sql = {
-                  type: 'reportdone',
-                  query1: query1part,
-                  query2: query2part
-               }
-               
-               $.post("func/insertSQL.php",sql, function(result){
-               
-               });
-               
-              }
-         
-      });            
-   });
-</script>
-

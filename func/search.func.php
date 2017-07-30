@@ -1,9 +1,10 @@
 <?php
 
+/*sucht und gibt alle Ergebnisse an
+   sucht im Titel nach Eingabe im Text an beliebiger Stelle
+*/
    function createSearchOverview(){
       global $pdo;
-      
-      
       
       echo '<div class="row">
          <div class="panel-group">
@@ -21,9 +22,9 @@
       }
       
       echo '</ul></div></div></div>';
-      
    }
    
+   /* erstellt einen einzelnen Menüpunkt */
    function createSearchPoint($row){
        $search = stripos($row['theme'],$_GET['search']);
         $strlen = strlen($_GET['search']);
@@ -36,6 +37,7 @@
          </li>';
    }
 
+//erstellt "2nd row", inklusive pagination
    function create2ndRow(){
    
       echo '<div class="row marg-tb-5">
@@ -49,6 +51,7 @@
                
    }
       
+//erstellt pagination
    function createPagination(){
          
    //GETPagenumber
@@ -109,7 +112,7 @@
          echo '</ul></nav>';
          
       }
-      
+//erstellt einzelnun Punkt der Pagination
    function createSingleMenuPoint($nr){
        if($_GET['page']==$nr){
           echo '<li class="active"><a href="forum.php?p=search&search='.$_GET['search'].'&page='.$nr.'">'.$nr.'</a></li>';   

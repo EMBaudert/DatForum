@@ -6,14 +6,15 @@
          }*/
       
          $(document).ready(function() {
-         $.each($(".profile-picture"), function() {
-	         var id= $(this).attr('id');
-				var height = $(this).height();
-				var divid = "#div"+id;
-			   $(divid).css('min-height', height);
-			});
          
-         //Meldung an SQL wenn 
+         	/* setzt die Höhe im Contentblock passend zum Profilbild */
+	         $.each($(".profile-picture"), function() {
+		         var id= $(this).attr('id');
+					var height = $(this).height();
+					var divid = "#div"+id;
+				   $(divid).css('min-height', height);
+				});
+          
             $('#report').button().click(function(){
                var reason = prompt("Bitte Grund angeben: ", "");
                

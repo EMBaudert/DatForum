@@ -1,5 +1,6 @@
 <?php
 
+//zeigt titel und pagination an
    function create2ndRow(){
       echo '<div class="row marg-tb-5">
          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -13,28 +14,26 @@
             </div>';
    }
 
+//erstellt die Übersicht über alle Posts
    function createPostOverview(){
       global $pdo;
-      
-      
       $threadnumber = 0;
-      
-      
       echo '<div class="row">';
       
+      //ruft für alle posts auf
       foreach($pdo->query("") as $row){
-      
-      
       
       $statement = $pdo->prepare("SELECT * FROM post WHERE FK_user = ? ORDER BY FK_thread");
          $statement->execute(array('0' => $_SESSION['PKID']));
       $i-1;
       $nextPost = 0;
+      //läuft durch alle Posts, erstellt eine neue Liste wenn die IDs nicht mehr übereinstimmen
       while ($row = $statement->fetch()) {
          $thread = SQLQuery1("SELECT * FROM thread WHERE PKID_thread = ?", $row['FK_thread']);
       
          $text = $row['text'];
       
+      //erstellt erste Listenübersicht in einer Seite
             if($nextPost == ($_GET['page']-1)*MAX_ENTRY_NUMBER){
                $nextPost++;
                $i++;
@@ -50,6 +49,7 @@
                          <ul class="list-group">
                            <li class="list-group-item"><a href="forum.php?p=thread&thread='.$row['FK_thread'].'&post='.$row['PKID_post'].'#'.$row['PKID_post'].'">'.$text.'</a></li>';
                }
+               //erstellt weitere Listenübersichten in der Seite
             } else if($threadnumber != $row['FK_thread']){
                $i++;
                $nextPost++;
@@ -69,6 +69,7 @@
                          <ul class="list-group">
                            <li class="list-group-item"><a href="forum.php?p=thread&thread='.$row['FK_thread'].'&post='.$row['PKID_post'].'#'.$row['PKID_post'].'">'.$text.'</a></li>';
                }
+               //erstellt einen Listeneintrag
             }else {
                if($i>= (($_GET['page']-1)*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
                   echo '<li class="list-group-item"><a href="forum.php?p=thread&thread='.$row['FK_thread'].'&post='.$row['PKID_post'].'#'.$row['PKID_post'].'">'.$text.'</a></li>';
@@ -82,26 +83,7 @@
       
    }
    
-   function cut_str($row){
-      if(strlen($row['text']) > 250){
-            $text = substr($row['text'],0,250)."...";
-            if(strpos($text, '<cite>')!== false & strpos($text, '</cite>') === false){
-               $text = $text.'</cite></footer></blockquote>';
-            }else if(strpos($text, '<footer>')!== false & strpos($text, '</footer>') === false){
-               $text = $text.'</footer></blockquote>';
-            }else if(strpos($text, '<blockquote>')!== false & strpos($text, '</blockquote>') === false){
-               $text = $text.'</blockquote>';
-            }
-            if(strpos($text, '<a')!== false & strpos($text, '</a>') === false){
-               $text = $text.'</a>';
-            }
-         }else{
-            $text = $row['text'];
-         }
-      
-         return "<p>".$text."</p>";
-   }
-   
+   //erstellt Pagination
       function createPagination(){
          
    //getPagenumber
@@ -162,6 +144,7 @@
          
       }
       
+//erstellt einzelen paginationpoint
    function createSingleMenuPoint($nr){
        if($_GET['page']==$nr){
           echo '<li class="active"><a href="forum.php?p=post&page='.$nr.'">'.$nr.'</a></li>';   
