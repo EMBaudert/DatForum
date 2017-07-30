@@ -1,5 +1,3 @@
-
-         <script type="text/javascript" src="js/thread.js"></script>
   
       <?php
          require 'func/thread.func.php';
@@ -8,7 +6,7 @@
       Die Anzahl geteilt durch die maximale anzahl an Beiträgen + ien kleiner Zusatz (um geraden zahlen zu entgehen)
       ergibt die Zahl der Seite*/
          if(isset($_GET['post'])){
-            $postNumber = SQLQuery2("SELECT COUNT(PKID_post) as cnt FROM post WHERE FK_thread = 0 AND PKID_post < 1",$_GET['thread'],$_GET['post']); 
+            $postNumber = SQLQuery2("SELECT COUNT(PKID_post) as cnt FROM post WHERE FK_thread = ? AND PKID_post < ?",$_GET['thread'],$_GET['post']);
             $_GET['page'] = ceil(($postNumber['cnt']/ MAX_ENTRY_NUMBER)+0.00001);
             
          }else if(!isset($_GET['page'])){
