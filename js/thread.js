@@ -1,4 +1,4 @@
-<script>
+
 /* Damit die Signatur bei jedem Post am unteren Ende des divs ist, auch wenn der content wenig inhalt hat 
          for(var i = 0; i<$('.contentdiv').length; i++){
             var height = $('#image'+i).height();
@@ -6,6 +6,12 @@
          }*/
       
          $(document).ready(function() {
+         $.each($(".profile-picture"), function() {
+	         var id= $(this).attr('id');
+				var height = $(this).height();
+				var divid = "#div"+id;
+			   $(divid).css('min-height', height);
+			});
          
          //Meldung an SQL wenn 
             $('#report').button().click(function(){
@@ -40,5 +46,3 @@
             
          });
 
-
-</script>

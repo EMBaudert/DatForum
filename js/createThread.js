@@ -2,6 +2,8 @@
 
 
 			$(document).ready(function() {
+			
+			
 /* Setzt den richtig Radiobbutton auf selected
 	Blendet den Texteditor jeweils ein oder aus */
 //				$('#menupoint').prop('checked',true);
@@ -23,16 +25,26 @@
             
 	            var text = CKEDITOR.instances.editor1.getData();
                text = replaceUmlaut(text);
-               
-					var d = new Date(Date.now());
-               if($('input[name=thread]:checked').val() == 'menupoint'){
-               	
-               	createMenuPoint(text, d);
-               } else { 
+               if(!/^\s/g.test(text)){
+						var d = new Date(Date.now());
 						createThread(text, d);
-               }
-                
-             });    
+                }else{
+	                alert("Ung\u00fcltige Eingabe!");
+                }
+             });
+             
+             $('#addMenupoint').button().click(function(){
+					var text = $('#threadtitle').val();
+               text = replaceUmlaut(text);
+               if(!/^\s/g.test(text)){
+						var d = new Date(Date.now());
+						createMenuPoint(text, d);
+                }else{
+	                alert("Ung\u00fcltige Eingabe!");
+                }
+             
+             
+             });
              
 /* Erstellt in der Datenbank einen Thread */
              function createThread(text, d){
@@ -50,23 +62,20 @@
              
 /* Erstellt in der Datenbank einen Menüpunkt */
              function createMenuPoint(texxt, d){
-             	var threads;
-                  var sql={
-                     type: "getThreads",
-                     fk: getUrlVars()["id"]
-                  }
-                  $.post("func/insertSQL.php", sql, function(result){
-                     threads = result;
-                  });  
-                  
-                  if($('#menupoint'))
-                    var query;               
-                  if(getUrlVars()["id"] == 0){
-                     query = "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, NULL, '"+ $('#threadtitle').val() +"', '0')";
+             
+                  if($('input[name=thread]:checked').val() == 'menupoint'){
+                  	if(getUrlVars()["id"]==0){
+                  		query = "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, NULL, '"+ $('#threadtitle').val() +"', '0')";	
+                  	}else {
+                  		query = "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, "+getUrlVars()["id"]+", '"+ $('#threadtitle').val() +"', '0')";	
+                  	}
                   }else {
-                     query = "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, "+getUrlVars()["id"]+", '"+ $('#threadtitle').val() +"', '"+threads+"')";
+                  	if(getUrlVars()["id"]==0){
+	                     query = "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, NULL, '"+ $('#threadtitle').val() +"', '1')";
+	                  }else {
+	                  	query = "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, "+getUrlVars()["id"]+", '"+ $('#threadtitle').val() +"', '1')";	
+	                  }
                   }
-                  
                   
                   var sql = {
                      sql: query

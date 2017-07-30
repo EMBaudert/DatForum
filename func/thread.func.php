@@ -58,7 +58,7 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
                   if(isset($_SESSION['PKID']) && $_SESSION['PKID'] != $user['PKID_user']){
                      echo '<a class="btn btn-default btn-xs margin-bot" href="intern.php?p=message&cp='.$user['PKID_user'].'"><span class="glyphicon glyphicon-envelope"></span> Nachricht</a>';
                   }
-                  echo '<img alt="Profilbild von '.$user['username'].'" src="'.$user['pb_path'].'" id="image'.$j.'" class="profile-picture">
+                  echo '<img alt="Profilbild von '.$user['username'].'" src="'.$user['pb_path'].'" id="'.$j.'" class="profile-picture">
                </div>
                
 <!-- Anzeige für sm und xs, Name, gruppe und Nachrichten links, rechts das Bild -->
@@ -139,7 +139,7 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
          <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
             <h3>'.$title['theme'].'</h3>
          </div>
-         
+         <div id="setTitle" class="hide">'.$title['theme'].'</div>
       <!-- Zeigt Button für neuen thread nur wenn man angemeldet ist  -->
          <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
          if(isset($_SESSION['logged'])){

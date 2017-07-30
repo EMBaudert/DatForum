@@ -1,5 +1,5 @@
 
-         <?php
+                 <?php
             require 'func/menu.func.php';
       
       
