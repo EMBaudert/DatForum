@@ -26,7 +26,7 @@
          
          switch($_GET['p']){
             case 'postoverview':
-               require 'inc/forum/postOverview.php';
+               require 'inc/forum/post.php';
                break;
             case 'createThread':
                require 'inc/forum/createThread.php';

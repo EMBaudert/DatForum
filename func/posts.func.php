@@ -82,7 +82,7 @@
             echo '</ul></div></div></div>';
       
    }
-   
+   }
    //erstellt Pagination
       function createPagination(){
          
@@ -152,8 +152,5 @@
           echo '<li><a href="forum.php?p=post&page='.$nr.'">'.$nr.'</a></li>';   
        }
    }
-
-
-
 
 ?>
