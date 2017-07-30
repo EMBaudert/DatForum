@@ -1,5 +1,6 @@
 <?php
 
+  
 
 /* Erstallt den rahmen für die posts und lässt jeden Post erstellen */
    function createPostOverview(){
@@ -33,7 +34,7 @@
    function createPost($post, $j){
          
       $user = SQLQuery1("SELECT * FROM user WHERE PKID_user = ?", $post['FK_user']);
-      $title = SQLQuery1("SELECT theme FROM thread WHERE PKID_thread = ?", $post['FK_thread']);
+      $title = SQLQuery1("SELECT theme, PKID_thread FROM thread WHERE PKID_thread = ?", $post['FK_thread']);
 
 /* einzelner post */
       
@@ -88,7 +89,7 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
                   '.$post['text'].'
                </div>
                   <hr class="hr-postcontent-bot">
-               <div class="row" style="margin-top: 10px">
+               <div class="row">
                   <p>'.$user['signature'].'</p>
                </diV>
             </div>
@@ -104,16 +105,18 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
       /* Wenn der Beitrag vom angemeldeten nutzer ist, kann er dn Text editieren */
                   $usergroup = SQLQuery1("SELECT * FROM user WHERE PKID_user = ?", $_SESSION['PKID']);
 					    if($user['PKID_user'] == $_SESSION["PKID"]){
-                     echo  '<a class ="btn btn-default" href="forum.php?p=createPost&type=edit&id='.$post['PKID_post'].'&creator='.$_SESSION['PKID'].'"><span class="glyphicon glyphicon-edit"></span> Edit</a>';	
+                     echo  '<a class ="btn btn-default" href="forum.php?p=createPost&type=edit&threadid='.$_GET['thread'].'&id='.$post['PKID_post'].'"><span class="glyphicon glyphicon-edit"></span> Edit</a>';	
                    }
       /* Wenn der Nutzer Moderator oder admin ist kann er einene Beitrag direkt löschen, ansonsten kann der Beitrag gemeldet werden */
                    if($usergroup['usergroup']=='admin' || $usergroup['usergroup']== 'moderator'){
                      echo '<a class ="btn btn-default delete" id="'.$post['PKID_post'].'"><span class="glyphicon glyphicon-edit"></span> L&ouml;schen</a>';
                    }else {
-                     echo  '<a class ="btn btn-default report" id="'.$post['PKID_post'].'" creator="'.$_SESSION['PKID'].'"><span class="glyphicon glyphicon-edit"></span> Melden</a>';
+                     echo  '<a class ="btn btn-default" id="report"><span class="glyphicon glyphicon-edit"></span> Melden</a>';
                    }
       /* Button zum zitieren des beitrags*/
-                   echo '<a class ="btn btn-default" href="forum.php?p=createPost&type=quote&id='.$_GET['thread'].'&quoteid='.$post['PKID_post'].'&creator='.$_SESSION['PKID'].'"><span class="glyphicon glyphicon-bullhorn"></span> Zitieren</a>';
+                   echo '<a class ="btn btn-default" href="forum.php?p=createPost&type=quote&threadid='.$_GET['thread'].'&id='.$_GET['thread'].'&quoteid='.$post['PKID_post'].'"><span class="glyphicon glyphicon-bullhorn"></span> Zitieren</a>
+                   ';
+                   
                }
 					    
                echo '</div>
@@ -140,11 +143,11 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
       <!-- Zeigt Button für neuen thread nur wenn man angemeldet ist  -->
          <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
          if(isset($_SESSION['logged'])){
-      echo '<a class="btn-default" href="forum.php?p=createPost&type=new&id='.$_GET['thread'].'&creator='.$_SESSION['PKID'].'">
-               <div type="button" class="btn btn-default">
+         
+      echo '<a class="btn btn-default" href="forum.php?p=createPost&type=new&threadid='.$_GET['thread'].'">
                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neuer Beitrag
-               </div>
-            </a>';
+            </a>
+            ';
          }
    echo ' </div>
          <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">'; 

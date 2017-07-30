@@ -1,34 +1,25 @@
-       
-         document.addEventListener("trix-initialize", function(event) {
-            var element = document.querySelector("trix-editor");
-            	element.editor.insertString(text);
-          });
-      
+         
       
         $(document).ready(function() {
             var d = new Date();
             
+            CKEDITOR.instances.editor1.setData(text);
             
             //Button für neuen Post
             $('#new').button().click(function(){
                   
+                  var text = CKEDITOR.instances.editor1.getData();
+                  text = replaceUmlaut(text);
+                  //if(/^\s+$/.test(word)){
                   
-                  var text = $('#trix').val();
-                  
-                  if(q='quote'){
-                  	text = quote + text;
-                  }
-                  
-                  if(text != ""){
 	                  //Einfügen in post wird erstellt
-	                  var query =  "INSERT INTO `post` (`PKID_post`, `FK_user`, `FK_thread`, `date`, `time`, `text`) VALUES (NULL, '"+getUrlVars()["creator"]+"', '"
-	                  +getUrlVars()["id"]+"', '"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"', '"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()+"', '"+text+"');";
+	                  var query =  "INSERT INTO `post` (`PKID_post`, `FK_user`, `FK_thread`, `date`, `time`, `text`) VALUES (NULL, '"+user+"', '"
+	                  +getUrlVars()["threadid"]+"', '"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"', '"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()+"', '"+text+"');";
 	                  
 	                  //Post wird erstellt
 	                  var sql = {sql: query};
 	                  
 	                  //post wird aufgerufen
-	                  
 	                  $.post("func/insertSQL.php",sql);
 	                  
 	                  //update number of posts
@@ -36,34 +27,43 @@
 	                  var sql2= {
 	                     sql:  query
 	                  };
-	                  $.post("func/insertSQL.php",sql2);
-	                  
-	                  
-	                  $("#trix").animate({"left":"+=100px"},function() {location.href = "forum.php?p=thread&thread="+getUrlVars()["id"]});
-                  }else{
+	                  var answer = $.post("func/insertSQL.php",sql2);
+
+	              		answer.done(function(){
+			                  location.href = "forum.php?p=thread&thread="+getUrlVars()["threadid"];	                     
+		               });
+   	                  
+                  /*}else{
                   	alert("Ungueltige Eingabe!");
-                  }
+                  }*/
              });   
              
              //Button für editieren 
              $('#edit').button().click(function(){
                  // Text wird gespeichert
-                 	var text = $('#trix').val();
-                  if(text != ""){                 
+                 	
+                 	var text = CKEDITOR.instances.editor1.getData();
+                  text = replaceUmlaut(text);
+                  //if(/^\s+$/.test(word)){      
 							
 							var query = "UPDATE post SET text = '"+text+"' WHERE PKID_post = "+getUrlVars()["id"];
                  		//Post wird erstellt
                  		var sql = {sql: query};
 	                  //post wird aufgerufen
-                 		$.post("func/insertSQL.php",sql);
-                 		$("#trix").animate({"left":"+=100px"},function() {location.href = "forum.php?p=thread&thread="+getUrlVars()["id"]+"&page=1"});
-                 	}else{
+	                  var answer = $.post("func/insertSQL.php",sql);
+                 		
+                 		answer.done(function(){
+		                  location.href = "forum.php?p=thread&thread="+getUrlVars()["threadid"]+"&post="+getUrlVars()["id"];	                     
+	                  });
+                 		
+
+                 		
+                 	/*}else{
                  		alert("Ung&uuml;ltige Eingabe!");
-                 	}
+                 	}*/
              }); 
              
-              function getUrlVars()
-               {
+             function getUrlVars(){
                    var vars = [], hash;
                    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
                    for(var i = 0; i < hashes.length; i++)
@@ -82,7 +82,19 @@
                    }
 
                    return vars;
-               }
+             }
+             
+             function replaceUmlaut(str){
+             	str.replace(/\u00e4/, "&auml;");
+					str.replace(/\u00c4/, "&Auml;");
+             	str.replace(/\u00d6/, "&Ouml;");
+             	str.replace(/\u00f6/, "&ouml;");
+             	str.replace(/\u00dc/, "&Uuml;");
+             	str.replace(/\u00fc/, "&uuml;");
+             	str.replace(/\u00fc/, "&szlig;");
+             	
+             	return str;
+             }
              
         });
         

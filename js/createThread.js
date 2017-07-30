@@ -1,28 +1,30 @@
-        $(document).ready(function() {
+
+
+
+			$(document).ready(function() {
 /* Setzt den richtig Radiobbutton auf selected
 	Blendet den Texteditor jeweils ein oder aus */
 //				$('#menupoint').prop('checked',true);
-
-
-
-               
 				$('input[type=radio][name=thread][value=thread]').prop('checked',true);
-	         $('#trixdiv').show();
+	         $('#ckdiv').show();
 	         $('input[type=radio][name=thread]').on('change', function() {
 	         switch($(this).val()) {
 	             case 'thread':
-	                 $('#trixdiv').show();
+	                 $('#ckdiv').show();
 	                 break;
 	             case 'menupoint':
-	                 $('#trixdiv').hide();
+	                 $('#ckdiv').hide();
 	                 break;
 	             }
 	         });
+	         
 /* Abschicken button gedrückt */
             $('#target').button().click(function(){
-               var text = $('#trix').val();
+            
+	            var text = CKEDITOR.instances.editor1.getData();
+               text = replaceUmlaut(text);
+               
 					var d = new Date(Date.now());
-					alert("hey");
                if($('input[name=thread]:checked').val() == 'menupoint'){
                	
                	createMenuPoint(text, d);
@@ -44,8 +46,6 @@
                var query22 = "', '"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"', '"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"', '"+text+"');";
 /* sendSQL adds post with correct ID */               
                sendSQL(query, query21, query22);
-                     
-               
              }
              
 /* Erstellt in der Datenbank einen Menüpunkt */
@@ -71,9 +71,7 @@
                   var sql = {
                      sql: query
                   }
-                  var answer = $.post("func/insertSQL.php", sql, function(result) {
-                  	alert(reuslt);
-                  });
+                  var answer = $.post("func/insertSQL.php", sql);
                   answer.done(function(){
                      var url = "forum.php?p=menu&menu="+getUrlVars()["id"]+"&page=last";
                      $(location).attr('href',url);
@@ -128,6 +126,18 @@
                   });
                   
                }
+               
+               function replaceUmlaut(str){
+	             	str.replace(/\u00e4/, "&auml;");
+						str.replace(/\u00c4/, "&Auml;");
+	             	str.replace(/\u00d6/, "&Ouml;");
+	             	str.replace(/\u00f6/, "&ouml;");
+	             	str.replace(/\u00dc/, "&Uuml;");
+	             	str.replace(/\u00fc/, "&uuml;");
+	             	str.replace(/\u00fc/, "&szlig;");
+	             	
+	             	return str;
+             	}
              
              
         });
