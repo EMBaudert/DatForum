@@ -24,18 +24,7 @@
 require_once 'func/user.func.php';
 require_once 'func/reports.func.php';
             require_once 'inc/navbar.php';
-            if(isset($_SESSION["PKID"])){
-     ?>
-     <script type="text/javascript">
-            $(document).ready(function(){
-               $('#refresh').load("func/refresh.func.php?uid=<?PHP if(isset($_SESSION["PKID"])) {echo $_SESSION["PKID"];} if(isset($_GET["p"])){echo '&p='.$_GET["p"];} ?>");
-               var refreshId = setInterval(function(){
-                  $('#refresh').load("func/refresh.func.php?uid=<?PHP if(isset($_SESSION["PKID"])) {echo $_SESSION["PKID"];} if(isset($_GET["p"])){echo '&p='.$_GET["p"];} if(isset($_GET["cp"])){echo '&cp='.$_GET["cp"];} ?>");
-               }, 1000);
-            });
-         </script>
-         <?PHP
-         }
+            
 				if(!isset($_GET["p"])){
 					echo '<div id="setTitle" class="hide">Interner Bereich</div>Keine bekannte Seite!';
 				}elseif($_GET["p"]=="login"){
