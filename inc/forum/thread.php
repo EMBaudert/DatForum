@@ -1,5 +1,9 @@
   
+  
+  
+  
       <?php
+         echo '<script type="text/javascript" src="js/thread.js"></script>';
          require 'func/thread.func.php';
    /* Wenn post gesetzt ist, soll die seite mit genau diesem post angezeigt werden.
       diese Seite wird berechnet durch die anzahl an Einträgen die vorher waren (erkennbar durch kleinere PKID).

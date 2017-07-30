@@ -10,11 +10,17 @@
                   
                   var text = CKEDITOR.instances.editor1.getData();
                   text = replaceUmlaut(text);
-                  //if(/^\s+$/.test(word)){
+                  if(!/<p>(&nbsp;)*<\/p>/g.test(text)){
+                  
+                  var time = "'"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"'";
+                  
+                  alert(time);
                   
 	                  //Einfügen in post wird erstellt
 	                  var query =  "INSERT INTO `post` (`PKID_post`, `FK_user`, `FK_thread`, `date`, `time`, `text`) VALUES (NULL, '"+user+"', '"
-	                  +getUrlVars()["threadid"]+"', '"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"', '"+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds()+"', '"+text+"');";
+	                  +getUrlVars()["threadid"]+"', '"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"', "+time+", '"+text+"');";
+	                  
+	                  alert(query);
 	                  
 	                  //Post wird erstellt
 	                  var sql = {sql: query};
@@ -32,19 +38,18 @@
 	              		answer.done(function(){
 			                  location.href = "forum.php?p=thread&thread="+getUrlVars()["threadid"];	                     
 		               });
-   	                  
-                  /*}else{
-                  	alert("Ungueltige Eingabe!");
-                  }*/
+                  }else{
+                  	alert("Ung\u00fcltige Eingabe!");
+                  }
              });   
-             
+  		
              //Button für editieren 
              $('#edit').button().click(function(){
                  // Text wird gespeichert
                  	
                  	var text = CKEDITOR.instances.editor1.getData();
                   text = replaceUmlaut(text);
-                  //if(/^\s+$/.test(word)){      
+                  if(!/<p>(&nbsp;)*<\/p>/g.test(text)){   
 							
 							var query = "UPDATE post SET text = '"+text+"' WHERE PKID_post = "+getUrlVars()["id"];
                  		//Post wird erstellt
@@ -58,9 +63,9 @@
                  		
 
                  		
-                 	/*}else{
-                 		alert("Ung&uuml;ltige Eingabe!");
-                 	}*/
+                 	}else{
+                 		alert("Ung\u00fcltige Eingabe!");
+                 	}
              }); 
              
              function getUrlVars(){

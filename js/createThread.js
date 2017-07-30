@@ -1,48 +1,50 @@
 
 
-
-			$(document).ready(function() {
-/* Setzt den richtig Radiobbutton auf selected
-	Blendet den Texteditor jeweils ein oder aus */
-//				$('#menupoint').prop('checked',true);
+	$(document).ready(function() {
+			
+			
+/* Setzt den richtig Radiobbutton auf selected */
 				$('input[type=radio][name=thread][value=thread]').prop('checked',true);
-	         $('#ckdiv').show();
-	         $('input[type=radio][name=thread]').on('change', function() {
-	         switch($(this).val()) {
-	             case 'thread':
-	                 $('#ckdiv').show();
-	                 break;
-	             case 'menupoint':
-	                 $('#ckdiv').hide();
-	                 break;
-	             }
-	         });
 	         
 /* Abschicken button gedrückt */
             $('#target').button().click(function(){
             
 	            var text = CKEDITOR.instances.editor1.getData();
                text = replaceUmlaut(text);
-               
-					var d = new Date(Date.now());
-               if($('input[name=thread]:checked').val() == 'menupoint'){
-               	
-               	createMenuPoint(text, d);
-               } else { 
+               //überprüft auf leere Eingaben
+               if(!/^\s/g.test(text)){
+						var d = new Date(Date.now());
 						createThread(text, d);
-               }
-                
-             });    
+                }else{
+	                alert("Ung\u00fcltige Eingabe!");
+                }
+             });
+             
+             $('#addMenupoint').button().click(function(){
+					var text = $('#threadtitle').val();
+               text = replaceUmlaut(text);
+               //überprüft auf leere eingaben
+               if(!/^\s/g.test(text)){
+						var d = new Date(Date.now());
+						createMenuPoint(text, d);
+                }else{
+	                alert("Ung\u00fcltige Eingabe!");
+                }
+             
+             
+             });
              
 /* Erstellt in der Datenbank einen Thread */
              function createThread(text, d){
              	var query = {sql: "INSERT INTO `thread` (`PKID_thread`, `FK_menu`, `theme`, `FK_Creator`) VALUES (NULL, '"
-               	+getUrlVars()["id"]+"', '"+ $('#threadtitle').val() +"', '"+getUrlVars()["creator"]+"');", 
+               	+getUrlVars()["id"]+"', '"+ $('#threadtitle').val() +"', '"+userID+"');", 
                   type: "newThread",
                   theme: $('#threadtitle').val(),
-                  creator: getUrlVars()["creator"]
+                  creator: userID
                };
-               var query21 = "INSERT INTO `post` (`PKID_post`, `FK_user`, `FK_thread`, `date`, `time`, `text`) VALUES (NULL, '"+getUrlVars()["creator"]+"', '";
+               
+               //In der Php wird das SQL-Statement mit den letzten daten Fertiggestellt.
+               var query21 = "INSERT INTO `post` (`PKID_post`, `FK_user`, `FK_thread`, `date`, `time`, `text`) VALUES (NULL, '"+userID+"', '";
                var query22 = "', '"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"', '"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"', '"+text+"');";
 /* sendSQL adds post with correct ID */               
                sendSQL(query, query21, query22);
@@ -50,23 +52,23 @@
              
 /* Erstellt in der Datenbank einen Menüpunkt */
              function createMenuPoint(texxt, d){
-             	var threads;
-                  var sql={
-                     type: "getThreads",
-                     fk: getUrlVars()["id"]
-                  }
-                  $.post("func/insertSQL.php", sql, function(result){
-                     threads = result;
-                  });  
-                  
-                  if($('#menupoint'))
-                    var query;               
-                  if(getUrlVars()["id"] == 0){
-                     query = "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, NULL, '"+ $('#threadtitle').val() +"', '0')";
+             
+             /*abhängig vom Radiobutton wird der passende Parameter übergeben
+             	In der Datenbank ist festgelegt ob der menüpunkt weitere Menüpunkte beihnaltet oder Threads
+             */
+                  if($('input[name=thread]:checked').val() == 'menupoint'){
+                  	if(getUrlVars()["id"]==0){
+                  		query = "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, NULL, '"+ $('#threadtitle').val() +"', '0')";	
+                  	}else {
+                  		query = "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, "+getUrlVars()["id"]+", '"+ $('#threadtitle').val() +"', '0')";	
+                  	}
                   }else {
-                     query = "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, "+getUrlVars()["id"]+", '"+ $('#threadtitle').val() +"', '"+threads+"')";
+                  	if(getUrlVars()["id"]==0){
+	                     query = "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, NULL, '"+ $('#threadtitle').val() +"', '1')";
+	                  }else {
+	                  	query = "INSERT INTO `menu` (`PKID_menu`, `FK_menu`, `title`, `threads`) VALUES (NULL, "+getUrlVars()["id"]+", '"+ $('#threadtitle').val() +"', '1')";	
+	                  }
                   }
-                  
                   
                   var sql = {
                      sql: query
@@ -78,6 +80,7 @@
                   });
              }
              
+             //liest parameter aus URL aus
               function getUrlVars()
                {
                    var vars = [], hash;
@@ -111,7 +114,7 @@
                      //wenn fertig ausgeführt, erhöhe zäler
                      answer.done( function(){
                      	//update number of posts
-               			var query = "UPDATE user SET numberposts = numberposts+1 WHERE PKID_user = "+getUrlVars()["creator"];
+               			var query = "UPDATE user SET numberposts = numberposts+1 WHERE PKID_user = "+userID;
 			               var sql = {
 			               	sql: query
 			               }
@@ -126,6 +129,7 @@
                   });
                   
                }
+               
                
                function replaceUmlaut(str){
 	             	str.replace(/\u00e4/, "&auml;");

@@ -1,5 +1,8 @@
 <?php
-         $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
+   
+   $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
+   
+   //if fängt spezialfälle ab ansonsten wird ganz normal die Query ausgefühtz
    if(isset($_POST['type'])){
       if($_POST['type']== 'newThread'){
 
@@ -14,19 +17,6 @@
          
       }else if($_POST['type']== 'reportdone'){
          execute($_POST['query1'].$_SESSION['PKID'].$_POST['query2']);
-      }else if($_POST['type']== 'getThreads'){
-         
-         if($_POST['fk'] ==0){
-            $statement = $pdo->prepare("SELECT threads FROM menu WHERE FK_menu IS NULL");
-            $statement->execute();   
-         
-         }else {
-            $statement = $pdo->prepare("SELECT threads FROM menu WHERE FK_menu = ?");
-            $statement->execute(array('0' => $_POST['fk']));   
-         
-         }          
-         $temp = $statement->fetch();
-         echo $temp['threads'];
       }
       
    }else{
@@ -50,14 +40,14 @@
       }
       
       function SQLQuery2($query, $p0, $p1){
-                        $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
+         $pdo = new PDO('mysql:host=localhost;dbname=forum', 'root', ''); 
                         
-                        $statement = $pdo->prepare($query);
-                        $statement->execute(array('0' => $p0, '1' => $p1));   
+         $statement = $pdo->prepare($query);
+         $statement->execute(array('0' => $p0, '1' => $p1));   
                         
-                        return $statement->fetch();
+         return $statement->fetch();
                                  
-                     }
+      }
       
       
    

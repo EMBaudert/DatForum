@@ -1,11 +1,11 @@
 
 $(document).ready(function() {
 
+
 	$('.solved').button().click(function(){
-		var query = "DELETE FROM reports WHERE PKID_report = " + $(this).attr("id");
-		
-		alert(query);
-		
+	/* setzt done auf 1 (--> erledigt) und fügt den Benutzer der das bearbeitet hat hinzu*/
+		var query = "UPDATE `reports` SET `done` = '1', `doneby` = '"+userID+"' WHERE `reports`.`PKID_report` = "+$(this).attr("id"); 
+				
 		var sql = {
 			sql: query
 		}
@@ -13,7 +13,7 @@ $(document).ready(function() {
       var answer = $.post("func/insertSQL.php",sql);
       
       answer.done(function() {
-      	location.refresh;
+      	location.reload();
       });
 	});    
 });

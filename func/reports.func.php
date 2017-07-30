@@ -1,8 +1,7 @@
 
-
-
 <?php
 
+//erstellt den reportsoverview
    function createReportsOverview(){
       global $pdo;
    
@@ -17,6 +16,7 @@
    }
    
    
+//   erstellt einen eintrag in der Liste 
    function createReport($post){
       $user = SQLQuery1("SELECT * FROM user WHERE PKID_user = ?", $post['FK_user']);
       $thread = SQLQuery1("SELECT * FROM thread WHERE PKID_thread = ?", $post['FK_thread']);
