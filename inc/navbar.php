@@ -1,24 +1,29 @@
-<?php	
+<?php
+
+#In der Navbar werden neben den Navigationselementen auch wichtige Funktionen übernommen, die am Anfang eines Dokuments nötig sind
+	
  session_start();
  require_once 'func/prepareSQL.func.php';
  require_once 'func/user.func.php';
  require_once 'func/message.func.php';
- if(!isset($_SESSION["logged"])){
-   $retval=checkCookieLogin(); 
-   if($retval&&!isset($_SESSION["logged"])){
+ if(!isset($_SESSION["logged"])){               #Dieser Block ist nur nötig, wenn man nciht angemeldet ist
+   $retval=checkCookieLogin();                  #Schauen, ob der Login gespeichert wurde
+   if($retval&&!isset($_SESSION["logged"])){    #Wenn Cookies vorhanden sind, aber nicht korrekt kombiniert sind, wurden die Cookies manipuliert, also wird eine Nachricht an den betroffenen Nutzer gesendet
       addMessage("SystemOfADoom",$_COOKIE["username"],"Jemand hat versucht, über COOKIE-Manipulation Ihren Account zu hacken, wir konnten dies jedoch erfolgreich verhindern!");
-      forgetLogin();
+      forgetLogin();                            #Und danach die Cookies wieder gelöscht
    }
  }
+ #Hier wird geprüft, ob der Nutzer sich anmelden will und ob die Daten korrekt sind
   if(isset($_GET["p"])&&$_GET["p"]=="login" && isset($_POST["password"])&&substr($error=checklogin($_POST["username"],hash('sha512',$_POST["password"])),0,1)!="0"){
 						$_SESSION["logged"]=TRUE;
-						if(isset($_POST["remember"])){
+						if(isset($_POST["remember"])){ #Wenn der Login gespeichert werden soll, werden die Cookies gesetzt
                      rememberLogin($_POST["username"],substr(hash('sha512',$_POST["password"]),0,20));
-		            }else if(isset($_COOKIE["UID"])){
+		            }else if(isset($_COOKIE["UID"])){ #Sonst werden mögliche Cookies gelöscht
                      forgetLogin();
 		            }
             }
 ?>
+<!-- Da für unsere Seite Javascript benötigt wird, wird ein browser ohne Javascript nicht zugelassen: -->
 <noscript>
   <META HTTP-EQUIV="Refresh" CONTENT="0;URL=errors/noJS.php">
 </noscript>
