@@ -1,5 +1,6 @@
 <?php
 
+  
 
 /* Erstallt den rahmen für die posts und lässt jeden Post erstellen */
    function createPostOverview(){
@@ -33,7 +34,7 @@
    function createPost($post, $j){
          
       $user = SQLQuery1("SELECT * FROM user WHERE PKID_user = ?", $post['FK_user']);
-      $title = SQLQuery1("SELECT theme FROM thread WHERE PKID_thread = ?", $post['FK_thread']);
+      $title = SQLQuery1("SELECT theme, PKID_thread FROM thread WHERE PKID_thread = ?", $post['FK_thread']);
 
 /* einzelner post */
       
@@ -57,7 +58,7 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
                   if(isset($_SESSION['PKID']) && $_SESSION['PKID'] != $user['PKID_user']){
                      echo '<a class="btn btn-default btn-xs margin-bot" href="intern.php?p=message&cp='.$user['PKID_user'].'"><span class="glyphicon glyphicon-envelope"></span> Nachricht</a>';
                   }
-                  echo '<img alt="Profilbild von '.$user['username'].'" src="'.$user['pb_path'].'" id="image'.$j.'" class="profile-picture">
+                  echo '<img alt="Profilbild von '.$user['username'].'" src="'.$user['pb_path'].'" id="'.$j.'" class="profile-picture">
                </div>
                
 <!-- Anzeige für sm und xs, Name, gruppe und Nachrichten links, rechts das Bild -->
@@ -104,7 +105,7 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
       /* Wenn der Beitrag vom angemeldeten nutzer ist, kann er dn Text editieren */
                   $usergroup = SQLQuery1("SELECT * FROM user WHERE PKID_user = ?", $_SESSION['PKID']);
 					    if($user['PKID_user'] == $_SESSION["PKID"]){
-                     echo  '<a class ="btn btn-default" href="createPost.php?type=edit&id='.$post['PKID_post'].'"><span class="glyphicon glyphicon-edit"></span> Edit</a>';	
+                     echo  '<a class ="btn btn-default" href="forum.php?p=createPost&type=edit&threadid='.$_GET['thread'].'&id='.$post['PKID_post'].'"><span class="glyphicon glyphicon-edit"></span> Edit</a>';	
                    }
       /* Wenn der Nutzer Moderator oder admin ist kann er einene Beitrag direkt löschen, ansonsten kann der Beitrag gemeldet werden */
                    if($usergroup['usergroup']=='admin' || $usergroup['usergroup']== 'moderator'){
@@ -113,7 +114,9 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
                      echo  '<a class ="btn btn-default" id="report"><span class="glyphicon glyphicon-edit"></span> Melden</a>';
                    }
       /* Button zum zitieren des beitrags*/
-                   echo '<a class ="btn btn-default" href="createPost.php?type=quote&id='.$_GET['thread'].'&quoteid='.$post['PKID_post'].'"><span class="glyphicon glyphicon-bullhorn"></span> Zitieren</a>';
+                   echo '<a class ="btn btn-default" href="forum.php?p=createPost&type=quote&threadid='.$_GET['thread'].'&id='.$_GET['thread'].'&quoteid='.$post['PKID_post'].'"><span class="glyphicon glyphicon-bullhorn"></span> Zitieren</a>
+                   ';
+                   
                }
 					    
                echo '</div>
@@ -136,15 +139,15 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
          <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
             <h3>'.$title['theme'].'</h3>
          </div>
-         
+         <div id="setTitle" class="hide">'.$title['theme'].'</div>
       <!-- Zeigt Button für neuen thread nur wenn man angemeldet ist  -->
          <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">';
          if(isset($_SESSION['logged'])){
-      echo '<a class="btn-default" href="createPost.php?type=new&id='.$_GET['thread'].'&creator='.$_SESSION['PKID'].'">
-               <div type="button" class="btn btn-default">
+         
+      echo '<a class="btn btn-default" href="forum.php?p=createPost&type=new&threadid='.$_GET['thread'].'">
                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neuer Beitrag
-               </div>
-            </a>';
+            </a>
+            ';
          }
    echo ' </div>
          <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">'; 
@@ -169,12 +172,12 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
       if($_GET['page'] == 1){
          echo '<li class="disabled"><a href=""><span aria-hidden="true">&laquo;</span></a></li>';
       }else{
-         echo '<li><a href="thread.php?thread='.$_GET['thread'].'&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
+         echo '<li><a href="forum.php?p=thread&thread='.$_GET['thread'].'&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
       }
       
    //Wenn die Maximale Seitenanzahl 0 ergibt, soll trotzdem die Pagination mit einer Seite angezeigt werden.
       if($pa == 0){
-         echo '<li class="active"><a href="thread.php?thread='.$_GET['thread'].'&page=1">1</a></li>';   
+         echo '<li class="active"><a href="forum.php?p=thread&thread='.$_GET['thread'].'&page=1">1</a></li>';   
       }
 
    /*bei mehr als 5 einträgen wird der erste Beitrag und der letze Beitrag immer angezeigt.
@@ -212,7 +215,7 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
       if($_GET['page'] == ceil($pa) || $pa == 0){
          echo '<li class="disabled"><span aria-hidden="true">&raquo;</span></li>';
       }else{
-         echo '<li><a href="thread.php?thread='.$_GET['thread'].'&page='.($_GET['page']+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
+         echo '<li><a href="forum.php?p=thread&thread='.$_GET['thread'].'&page='.($_GET['page']+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
       }
          
       echo '</ul></nav>';
@@ -223,9 +226,9 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
    function createSingleMenuPoint($nr){
       /* wenn die Seite aktiv ist, bekommt sie die entsprechende Klasse */
        if($_GET['page']==$nr){
-          echo '<li class="active"><a href="thread.php?thread='.$_GET['thread'].'&page='.$nr.'">'.$nr.'</a></li>';   
+          echo '<li class="active"><a href="forum.php?p=thread&thread='.$_GET['thread'].'&page='.$nr.'">'.$nr.'</a></li>';   
        }else{
-          echo '<li><a href="thread.php?thread='.$_GET['thread'].'&page='.$nr.'">'.$nr.'</a></li>';   
+          echo '<li><a href="forum.php?p=thread&thread='.$_GET['thread'].'&page='.$nr.'">'.$nr.'</a></li>';   
        }
    }
       
@@ -234,7 +237,7 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
    
    /* die function gibt das Mainmenu sowie die hauptstruktur, beginnt dann allerdings sich rekursiv aufzubauen, bis zum Menuepunkt vor dem aktuellen */
     echo '<div class="row"><ol class="breadcrumb">
-    <li><a href="menu.php?menu=0&page=1">Main menu</a></li>';
+    <li><a href="forum.php?p=menu&menu=0&page=1">Main menu</a></li>';
     recursiveBreadCrumb($id);
     $title = SQLQuery1("SELECT theme FROM thread WHERE PKID_thread = ?", $_GET['thread']);
     echo '<li class="active">'.$title['theme'].'</li>
@@ -252,13 +255,13 @@ echo  '<div class="panel panel-primary" id="'.$post['PKID_post'].'">
 
 //wenn kein Überpunkt mehr existiert kann aufgehört werden
       if($tempQuery['FK_menu']==NULL){
-         echo '<li><a href="menu.php?menu='.$tempQuery['PKID_menu'].'&page=1">'.$tempQuery['title'].'</a></li>';
+         echo '<li><a href="forum.php?p=menu&menu='.$tempQuery['PKID_menu'].'&page=1">'.$tempQuery['title'].'</a></li>';
          return;
       }
       
       recursiveBreadCrumb($tempQuery['FK_menu']);
    //nach dem obersten Menüpunkt wird nun vom Hauptmenü aus der Pfad immer weiter dargestellt
-      echo '<li><a href="menu.php?menu='.$tempQuery['PKID_menu'].'&page=1">'.$tempQuery['title'].'</a></li>';
+      echo '<li><a href="forum.php?p=menu&menu='.$tempQuery['PKID_menu'].'&page=1">'.$tempQuery['title'].'</a></li>';
 
    }
    

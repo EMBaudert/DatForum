@@ -1,20 +1,19 @@
 <?php
 
+/*sucht und gibt alle Ergebnisse an
+   sucht im Titel nach Eingabe im Text an beliebiger Stelle
+*/
    function createSearchOverview(){
       global $pdo;
-      
-      
       
       echo '<div class="row">
          <div class="panel-group">
             <div class="panel panel-default">
                <ul class="list-group">';
-               
-      $statement = $pdo->prepare("SELECT * FROM thread WHERE theme LIKE '%?%'");
-      $statement->execute(array('0' => $_GET['search']));
+      $statement = $pdo->prepare("SELECT * FROM thread WHERE theme LIKE '%".$_GET['search']."%'");
+      $statement->execute();
       $i=0;
       while ($row = $statement->fetch()) {
-         
          if($i>= (($_GET['page']-1)*MAX_ENTRY_NUMBER)&& $i< ($_GET['page']*MAX_ENTRY_NUMBER)){
             createSearchPoint($row);
          } 
@@ -23,9 +22,9 @@
       }
       
       echo '</ul></div></div></div>';
-      
    }
    
+   /* erstellt einen einzelnen Menüpunkt */
    function createSearchPoint($row){
        $search = stripos($row['theme'],$_GET['search']);
         $strlen = strlen($_GET['search']);
@@ -34,10 +33,11 @@
         
          $text = str_replace($final,'<b>'.$final.'</b>',$row['theme']);
          echo '<li class="list-group-item">
-            <a href="thread.php?thread='.$row['PKID_thread'].'&page=1">'.$text.'</a>
+            <a href="forum.php?p=thread&thread='.$row['PKID_thread'].'&page=1">'.$text.'</a>
          </li>';
    }
 
+//erstellt "2nd row", inklusive pagination
    function create2ndRow(){
    
       echo '<div class="row marg-tb-5">
@@ -51,6 +51,7 @@
                
    }
       
+//erstellt pagination
    function createPagination(){
          
    //GETPagenumber
@@ -67,11 +68,11 @@
       if($_GET['page'] == 1){
                    echo '<li class="disabled"><a href=""><span aria-hidden="true">&laquo;</span></a></li>';
                }else{
-                  echo '<li><a href="search.php?search='.$_GET['search'].'&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
+                  echo '<li><a href="forum.php?p=search&search='.$_GET['search'].'&page='.($_GET['page']-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
             }
             //if only one page is needed add this one custom
             if($pa == 0){
-               echo '<li class="active"><a href="search.php?search='.$_GET['search'].'&page=1">1</a></li>';   
+               echo '<li class="active"><a href="forum.php?psearch&search='.$_GET['search'].'&page=1">1</a></li>';   
             }
 
             if($pa > 5){
@@ -105,18 +106,18 @@
             if($_GET['page'] == ceil($pa) || $pa == 0){
                   echo '<li class="disabled"><span aria-hidden="true">&raquo;</span></li>';
                }else{
-                  echo '<li><a href="search.php?search='.$_GET['search'].'&page='.($_GET['page']+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
+                  echo '<li><a href="forum.php?p=search&search='.$_GET['search'].'&page='.($_GET['page']+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
             }
          
          echo '</ul></nav>';
          
       }
-      
+//erstellt einzelnun Punkt der Pagination
    function createSingleMenuPoint($nr){
        if($_GET['page']==$nr){
-          echo '<li class="active"><a href="search.php?search='.$_GET['search'].'&page='.$nr.'">'.$nr.'</a></li>';   
+          echo '<li class="active"><a href="forum.php?p=search&search='.$_GET['search'].'&page='.$nr.'">'.$nr.'</a></li>';   
        }else{
-          echo '<li><a href="search.php?search='.$_GET['search'].'&page='.$nr.'">'.$nr.'</a></li>';   
+          echo '<li><a href="forum.php?p=search&search='.$_GET['search'].'&page='.$nr.'">'.$nr.'</a></li>';   
        }
    }
 

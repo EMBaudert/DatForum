@@ -1,22 +1,29 @@
-<?php	
+<?php
+
+#In der Navbar werden neben den Navigationselementen auch wichtige Funktionen übernommen, die am Anfang eines Dokuments nötig sind
+	
  session_start();
+ require_once 'func/prepareSQL.func.php';
  require_once 'func/user.func.php';
  require_once 'func/message.func.php';
- if(!isset($_SESSION["logged"])){
-   $retval=checkCookieLogin(); 
-   if($retval&&!isset($_SESSION["logged"])){
+ if(!isset($_SESSION["logged"])){               #Dieser Block ist nur nötig, wenn man nciht angemeldet ist
+   $retval=checkCookieLogin();                  #Schauen, ob der Login gespeichert wurde
+   if($retval&&!isset($_SESSION["logged"])){    #Wenn Cookies vorhanden sind, aber nicht korrekt kombiniert sind, wurden die Cookies manipuliert, also wird eine Nachricht an den betroffenen Nutzer gesendet
       addMessage("SystemOfADoom",$_COOKIE["username"],"Jemand hat versucht, über COOKIE-Manipulation Ihren Account zu hacken, wir konnten dies jedoch erfolgreich verhindern!");
+      forgetLogin();                            #Und danach die Cookies wieder gelöscht
    }
  }
+ #Hier wird geprüft, ob der Nutzer sich anmelden will und ob die Daten korrekt sind
   if(isset($_GET["p"])&&$_GET["p"]=="login" && isset($_POST["password"])&&substr($error=checklogin($_POST["username"],hash('sha512',$_POST["password"])),0,1)!="0"){
 						$_SESSION["logged"]=TRUE;
-						if(isset($_POST["remember"])){
+						if(isset($_POST["remember"])){ #Wenn der Login gespeichert werden soll, werden die Cookies gesetzt
                      rememberLogin($_POST["username"],substr(hash('sha512',$_POST["password"]),0,20));
-		            }else if(isset($_COOKIE["UID"])){
+		            }else if(isset($_COOKIE["UID"])){ #Sonst werden mögliche Cookies gelöscht
                      forgetLogin();
 		            }
             }
 ?>
+<!-- Da für unsere Seite Javascript benötigt wird, wird ein browser ohne Javascript nicht zugelassen: -->
 <noscript>
   <META HTTP-EQUIV="Refresh" CONTENT="0;URL=errors/noJS.php">
 </noscript>
@@ -30,7 +37,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>                        
 					  </button>
-					  <a class="navbar-brand" href="menu.php?menu=0&page=1">Forum</a>
+					  <a class="navbar-brand" href="forum.php?p=menu&menu=0&page=1">Forum</a>
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
@@ -51,7 +58,7 @@
                         
                         if($usergroup['usergroup']=='admin' || $usergroup['usergroup']=='moderator'){
                            echo '<li>
-                                    <a href="reports.php">Reports <span class="badge">'.$reports['cnt'].'</span></a> 
+                                    <a href="intern.php?p=reports">Reports <span class="badge">'.$reports['cnt'].'</span></a> 
                                  </li>';
                         }
                         
@@ -61,7 +68,6 @@
                            </a>
       							<ul class="dropdown-menu">
          						   <li><a href="intern.php?p=profile&uid='.$_SESSION['PKID'].'">Profile</a></li>
-         							<li><a href="#">Posts</a></li>
                               <li><a href="intern.php?p=message">Messages ';
                               //Wenn ungelesene nachrichten vorhanden sind iwrd die anzahl angezeigt
                               echo '<span id="menuMessages">';
@@ -83,7 +89,7 @@
                               <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-plus-sign"></span> Register </a>
                               <ul class="dropdown-menu">
    									   <li class="dropdown-light">';
-                           include 'inc/register.php';
+                           include 'inc/intern/register.php';
                            echo '</li>
    								    </ul>
                            </li>
@@ -91,72 +97,26 @@
                               <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> Login </a>
                                  <ul class="dropdown-menu">
    									      <li class="dropdown-light">';
-                           include 'inc/login.php';
+                           include 'inc/intern/login.php';
                               echo '</li>
    								       </ul>
    							     </li>';
                      }
                      
-                     function SQLQuery0($query){
-                        global $pdo;
-                        
-                        $statement = $pdo->prepare($query);
-                        $statement->execute();   
-                        
-                        return $statement->fetch();
-                                 
-                     }
                      
-                     function SQLQuery1($query, $p0){
-                        global $pdo;
-                        
-                        $statement = $pdo->prepare($query);
-                        $statement->execute(array('0' => $p0));   
-                        
-                        return $statement->fetch();
-                                 
-                     }
-                     
-                     function SQLQuery2($query, $p0, $p1){
-                        global $pdo;
-                        
-                        $statement = $pdo->prepare($query);
-                        $statement->execute(array('0' => $p0, '1' => $p1));   
-                        
-                        return $statement->fetch();
-                                 
-                     }
-                     
-                     function SQLQuery3($query, $p0, $p1, $p2){
-                        global $pdo;
-                        
-                        $statement = $pdo->prepare($query);
-                        $statement->execute(array('0' => $p0, '1' => $p1, '2' => $p2));   
-                        
-                        return $statement->fetch();
-                                 
-                     }
-                     
-                     function SQLQuery4($query, $p0, $p1, $p2, $p3){
-                        global $pdo;
-                        
-                        $statement = $pdo->prepare($query);
-                        $statement->execute(array('0' => $p0, '1' => $p1, '2' => $p2, '3' => $p4));   
-                        
-                        return $statement->fetch();
-                                 
-                     }
                      
                      ?>
 						</ul>
                   <!-- Searchbar -->
-						<form class="navbar-form navbar-left">
+						<form class="navbar-form navbar-left" action="forum.php?p=search&page=1" method="GET">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search">
+   								<input type="text" class="form-control" name="search" placeholder="Search">
 								<div class="input-group-btn">
 									<button class="btn btn-default" type="submit">
 										<i class="glyphicon glyphicon-search"></i>
 									</button>
+                           <input type="hidden" name="p" value="search">
+                           <input type="hidden" name="page" value="1">
 								</div>
 							</div>
 						</form>
