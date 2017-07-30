@@ -1,10 +1,13 @@
-
+<!-- Der Footer des Forums -->
   <div class="row">
 <div class="footer">
       <p style="position:relative; top:10px; margin: 10px 15px;">&copy; 2017 by <a href="index.php?p=impr" style="color:white;">DatForumTeam</a></p>
 			  </div>
       </div>
       
+<!--   Damit der Titel dynamisch geladen werden kann, ist auf jeder seite ein versteckter Tag mit der ID "setTitle"
+      und dieser enthält den Titel für die aktuelle Seite. An dieser stelle hier wird dann der Inhalt dieses Tags ausgelesen und 
+      an die richtige Stelle im Quellcode gesetzt, sodass der Seitentitel angezeigt werden kann   -->
 <script>
 if(document.getElementById("pageTitle")!=null&&document.getElementById("setTitle")!=null)
 document.getElementById("pageTitle").innerHTML="DatForum &ndash; "+document.getElementById("setTitle").innerHTML;

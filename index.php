@@ -5,7 +5,7 @@ require_once 'func/index.func.php';
 	<html>
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-			<title id="pageTitle">DatForum</title>
+			<title id="pageTitle">DatForum</title>    <!-- Titel wird im footer gesetzt -->
 			<link rel="SHORTCUT ICON" href="layout/favicon.ico" />
          <!-- Das neueste kompilierte und minimierte CSS -->
          <link rel="stylesheet" href="bootstrap/less/dist/css/bootstrap.min.css">
@@ -24,7 +24,7 @@ require_once 'func/index.func.php';
 			<div class="container">
 			<?php
            require_once 'inc/navbar.php';
-           
+           #Je nachdem, welche Seite gewünscht ist, wird die entsprechende geladen
            if(!isset($_GET["p"])){
 					include 'inc/index/index.php';
 				}elseif($_GET["p"]=="impr"){
