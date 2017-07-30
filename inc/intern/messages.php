@@ -7,8 +7,23 @@ require_once 'func/message.func.php';
  <div id="chatPartners" class="col-xs-5 col-sm-4 col-md-3 col-lg-3" style="min-width:130px;">
 <?PHP
 if(isset($_SESSION["logged"])&&$_SESSION["logged"]=true){
+echo '<div class="list-group" id="chatPartners">';
 $hasPartners = getChatPartners($_SESSION["PKID"]);
+echo $hasPartners;
+echo '</div>';
 ?>
+  <script type="text/javascript">
+            $(document).ready(function(){
+               $('#chatPartners').load("func/liveChatPartners.func.php?uid=<?PHP if(isset($_SESSION["PKID"])) {echo $_SESSION["PKID"];} if(isset($_GET["p"])){echo '&p='.$_GET["p"];} if(isset($_GET["cp"])){echo '&cp='.$_GET["cp"];} ?>");
+               $('#activeChat').load("func/refresh.func.php?uid=<?PHP if(isset($_SESSION["PKID"])) {echo $_SESSION["PKID"];} if(isset($_GET["p"])){echo '&p='.$_GET["p"];} if(isset($_GET["cp"])){echo '&cp='.$_GET["cp"];} ?>");
+               var refreshId = setInterval(function(){
+                  $('#chatPartners').load("func/liveChatPartners.func.php?uid=<?PHP if(isset($_SESSION["PKID"])) {echo $_SESSION["PKID"];} if(isset($_GET["p"])){echo '&p='.$_GET["p"];} if(isset($_GET["cp"])){echo '&cp='.$_GET["cp"];} ?>");
+               }, 1000);
+               var refreshId2 = setInterval(function(){
+                  $('#activeChat').load("func/refresh.func.php?uid=<?PHP if(isset($_SESSION["PKID"])) {echo $_SESSION["PKID"];} if(isset($_GET["p"])){echo '&p='.$_GET["p"];} if(isset($_GET["cp"])){echo '&cp='.$_GET["cp"];} ?>");
+               }, 1000);
+            });
+         </script>
 </div>
                      <div class="col-xs-7 col-sm-8 col-md-9 col-lg-9">
                      <?PHP
@@ -30,7 +45,7 @@ $hasPartners = getChatPartners($_SESSION["PKID"]);
                     
                 </div>
                 <div class="panel-body" id="scrollable_chat">
-                    <ul class="chat">
+                    <ul class="chat" id="activeChat">
                     <?PHP echo $text; ?>
                         
                     </ul>

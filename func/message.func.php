@@ -18,9 +18,9 @@ function getOther(){
 }
 
 function getChatPartners($user){
-  echo '<div class="list-group">';
+   $ret= '';
    $activeChat=-1;
-   $ret=FALSE;
+   //$ret=FALSE;
    if(isset($_GET["cp"])){
       $activeChat=$_GET["cp"];
    }
@@ -42,27 +42,25 @@ function getChatPartners($user){
             $unread[$partner]=0;
       }
       if(!isset($chatpartners[$partner])||$chatpartners[$partner]==0){
-         $ret=TRUE;
          $chatpartners[$partner]=1;
          $sql2 = "SELECT username FROM user WHERE PKID_user=?";
 	      $partnername=SQLQuery1($sql2,$partner);
-         echo '<a class="list-group-item';
+         $ret.= '<a class="list-group-item';
          if($partner==$activeChat){
-            echo ' active';
+            $ret.= ' active';
          }else{
-            echo '" href="intern.php?p=message&cp='.$partner;
+            $ret.= '" href="intern.php?p=message&cp='.$partner;
          }
-         echo '">'.$partnername["username"];
-         echo '<span class="badge" id="newMessages'.$partner.'"></span>';
-         echo '</a>';
+         $ret.= '">'.$partnername["username"];
+         $ret.= '<span class="badge" id="newMessages'.$partner.'"></span>';
+         $ret.= '</a>';
       }
       foreach($unread as $partner => $value){
          if($unread[$partner]!=0){
-           echo '<script>document.getElementById("newMessages'.$partner.'").innerHTML = '.$value.'</script>';
+           $ret.= '<script>document.getElementById("newMessages'.$partner.'").innerHTML = '.$value.'</script>';
          }
       }
    }
-   echo '</div>';
    return $ret;
 }
 
@@ -154,7 +152,15 @@ function detectNewMessage($user){
          }
          $count[$row["FK_from"]]++;
    	}
-      foreach($count as $key => $value){
+      $chatPartners = getChatPartners($user);
+      echo '<script>if(document.getElementById("chatPartners")!=null){
+                     if(document.getElementById("menuMessages").innerHTML!='.$unread["unread_messages"].'){
+                        var partners = \''.$chatPartners.'\';
+                        document.getElementById("chatPartners").innerHTML = \''.$chatPartners.'\';
+                        document.getElementById("menuMessages").innerHTML = "<span class=\"badge\">'.$unread["unread_messages"].'</span>";
+                     }
+                  }</script>';
+     /* foreach($count as $key => $value){
          if($value!=0){
             echo '<script>if(document.getElementById("newMessages'.$key.'")!=null){
                      document.getElementById("newMessages'.$key.'").innerHTML = "'.$value.'";
@@ -167,7 +173,7 @@ function detectNewMessage($user){
                   }</script>';
          }
          
-      }
+      }*/
    }
    return $unread["unread_messages"];   
 }
@@ -234,15 +240,22 @@ function addMessage($from,$to,$text){
    $to=$ID["PKID_user"];
    $text = makeSecure($text);
    
-   $sql = "INSERT INTO messages (text,FK_from,FK_to,date,time) VALUES ('".$text."', '".$from."','".$to."', '".$date."','".$daytime."')";
-	$statement = $pdo->prepare($sql);
-	$statement->execute();
-   
-   $newUnreadMessages = 1+$ID["unread_messages"];
-   $sql = "UPDATE user SET unread_messages='".$newUnreadMessages."' WHERE PKID_user='".$to."'";
-   $update = $pdo->prepare($sql);
-   $update->execute();
   
+   if($from!=$to){
+      $sql = "INSERT INTO messages (text,FK_from,FK_to,date,time) VALUES ('".$text."', '".$from."','".$to."', '".$date."','".$daytime."')";
+   	$statement = $pdo->prepare($sql);
+   	$statement->execute();
+      $newUnreadMessages = 1+$ID["unread_messages"];
+      $sql = "UPDATE user SET unread_messages='".$newUnreadMessages."' WHERE PKID_user='".$to."'";
+      $update = $pdo->prepare($sql);
+     	$update->execute();
+   }else{
+      $sql = "INSERT INTO messages (text,FK_from,FK_to,date,time,unread) VALUES ('".$text."', '".$from."','".$to."', '".$date."','".$daytime."','0')";
+   	$statement = $pdo->prepare($sql);
+   	$statement->execute();
+   }
+   
+
    echo '<meta http-equiv="refresh" content="0; URL=intern.php?p=message&cp='.$to.'" />';
    return TRUE;
 }
